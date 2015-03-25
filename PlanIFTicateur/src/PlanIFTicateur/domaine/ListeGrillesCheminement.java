@@ -5,7 +5,10 @@
  */
 package PlanIFTicateur.domaine;
 
+import PlanIFTicateur.domaine.activite.Activite;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -23,6 +26,11 @@ public class ListeGrillesCheminement {
         return grillesCheminement;
     }
     
-    
-    
+    public List<Activite> activitesAuMemeHoraire (Activite activite){
+       List<Activite> activitesAuMemeHoraire = new ArrayList();
+       grillesCheminement.stream().forEach((grilleCheminement) -> {
+           activitesAuMemeHoraire.addAll(grilleCheminement.activitesAuMemeHoraire(activite));
+        });
+       return activitesAuMemeHoraire.stream().collect(Collectors.toList());
+    }
 }

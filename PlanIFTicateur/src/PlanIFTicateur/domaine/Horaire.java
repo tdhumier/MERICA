@@ -8,7 +8,7 @@ import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.conflit.Conflit;
 import PlanIFTicateur.domaine.conflit.ConflitCheminement;
 import PlanIFTicateur.domaine.conflit.ConflitHoraire;
-import java.util.Optional;
+import java.util.List;
 /**
  *
  * @author Alexandre
@@ -40,13 +40,9 @@ public class Horaire
             Conflit conflitHoraire = new ConflitHoraire(activite);
             listeConflits.ajouterConflit(conflitHoraire);
         }
-        for(GrilleCheminement grilleCheminement : grillesCheminement.getGrillesCheminement()){
-            Optional<Activite> autreActivite = grilleCheminement.activitePresente(activite);
-            if(autreActivite.isPresent()){
-                Conflit conflitCheminement = new ConflitCheminement(activite,autreActivite.get());
-                listeConflits.ajouterConflit(conflitCheminement);
-                break;
-            }
-        }
+        List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
+        activitesConflitCheminement.stream().map((activiteEnConflit) -> new ConflitCheminement(activite, activiteEnConflit)).forEach((conflitCheminement) -> {
+            listeConflits.ajouterConflit(conflitCheminement);
+        });
     }
 }
