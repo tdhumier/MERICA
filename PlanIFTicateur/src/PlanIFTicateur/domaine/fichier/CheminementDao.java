@@ -6,6 +6,7 @@
 package PlanIFTicateur.domaine.fichier;
 
 import PlanIFTicateur.domaine.GrilleCheminement;
+import PlanIFTicateur.domaine.activite.Activite;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,38 +18,41 @@ import java.util.List;
 public class CheminementDao {
     
     private LecteurCsv lecteurCsv;
+    private File file;
     
     public CheminementDao(File file) {
+        this.file = file;
         this.lecteurCsv = new LecteurCsv(file);
     }
     
-    public List<GrilleCheminement> importerFichier(File fichier) { 
+    public List<GrilleCheminement> importerFichier(File fichier, ArrayList<Activite> activites) { // retourne une liste des grilles de cheminements complète contenue dans le fichier .CHE
         
         List<GrilleCheminement> grilles = new ArrayList<>();
         List<String[]> data = lecteurCsv.getData();
         
         for(String[] oneData : data) {
-            GrilleCheminement grille = formaterGrille(oneData);
+            GrilleCheminement grille = formaterGrille(oneData, activites);
             grilles.add(grille);
         }
 
         return grilles;
     }
     
-    private GrilleCheminement formaterGrille(String[] tab) {
+    private GrilleCheminement formaterGrille(String[] tab, ArrayList<Activite> activites) { // retourne la grille de cheminement formatée
+        ActiviteDao activiteDao = new ActiviteDao(file);
+        
         GrilleCheminement grille = new GrilleCheminement();
-        ArrayList<String> listeActivites = new ArrayList<>();
+        ArrayList<Activite> listeActivites = new ArrayList<>();
         Integer taille = tab.length;
     
         for (int i = 3; i <= taille ; i++ ){
-        
-            listeActivites.add(tab[i]);
+            listeActivites.add(activiteDao.getActiviteByCode(tab[i], activites));
         }
 
         grille.setNomProgramme(tab[0]);
         grille.setVersion(tab[1]);
         grille.setSession(tab[2]);
-        //grille.setListeActivite(listeActivites);
+        grille.setListeActivite(listeActivites);
     
         return grille;
     }

@@ -26,7 +26,9 @@ public class ActiviteDao {
         this.lecteurCsv = new LecteurCsv(file);
     }
     
-    public ArrayList<Activite> importerFichier(File fichier) {  // retourne une liste des activités
+    public void importerFichier(File fichier) {  // retourne une liste des activités présentes dans le fichier .COU
+        
+        CheminementDao cheminementDao = new CheminementDao(fichier);
         
         ArrayList<Activite> activites = new ArrayList<>();
         List<String[]> data = lecteurCsv.getData();
@@ -36,11 +38,11 @@ public class ActiviteDao {
             activites.add(activite);
         }
         
-        return activites;
+        cheminementDao.importerFichier(fichier,activites);
         
     }
     
-    private Activite formaterActivite(String[] tab) {
+    private Activite formaterActivite(String[] tab) {  // Retourne une activité formatée à parir d'une ligne du CSV
         
         Activite activite = null;
         
@@ -58,6 +60,17 @@ public class ActiviteDao {
         }
         
         return activite;
+    }
+    
+    public Activite getActiviteByCode(String code, ArrayList<Activite> activites){
+        
+        for (Activite activite : activites) {
+            if(activite.getCode().equals(code)){
+                return activite;
+            }
+        }
+        
+        return null;
     }
     
 }
