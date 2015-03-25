@@ -15,25 +15,34 @@ public class CoursClasse extends Activite
     private String type;
     
     
-    public CoursClasse(int idActivite,
+    public CoursClasse(
                   String code,
-                  float duree,
-                  int jour,
-                  float heureDebut,
+                  String section,
+                  String titre,
                   String professeur,
+                  String type,
+                  float duree,
                   float heureDebutMin,
                   float heureDebutMax,
-                  float heureFinMax)
+                  float heureFinMin,
+                  float heureFinMax,
+                  int jour,
+                  float heureDebut
+                  )
     {
-         super(idActivite,
-              code, 
-              duree,
-              jour,
-              heureDebut,
+         super(code,
+              section,
+              titre,
               professeur,
+              type,
+              duree,
               heureDebutMin,
               heureDebutMax,
-              heureFinMax);
+              heureFinMin,
+              heureFinMax,
+              jour,
+              heureDebut
+              );
        
         this.type = "CoursClasse";
         this.couleur = Color.RED; 

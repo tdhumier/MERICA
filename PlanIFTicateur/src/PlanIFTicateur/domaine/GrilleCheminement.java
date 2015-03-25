@@ -24,6 +24,22 @@ public class GrilleCheminement
         return nomProgramme;
     }
 
+    public void setNomProgramme(String nomProgramme) {
+        this.nomProgramme = nomProgramme;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public void setListeActivite(ArrayList<Activite> listeActivite) {
+        this.listeActivite = listeActivite;
+    }
+
     public String getVersion() {
         return version;
     }

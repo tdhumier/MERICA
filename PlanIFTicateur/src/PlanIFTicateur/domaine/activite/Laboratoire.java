@@ -15,29 +15,39 @@ public class Laboratoire extends Activite
     protected Color couleur;
     private String type;
     
-    public Laboratoire(int idActivite,
-                  String code,
-                  float duree,
-                  int jour,
-                  float heureDebut,
+    public Laboratoire(String code,
+                  String section,
+                  String titre,
                   String professeur,
+                  String type,
+                  float duree,
                   float heureDebutMin,
                   float heureDebutMax,
-                  float heureFinMax)
+                  float heureFinMin,
+                  float heureFinMax,
+                  int jour,
+                  float heureDebut
+                  )
     {
-        super(idActivite,
-              code, 
-              duree,
-              jour,
-              heureDebut,
+         super(code,
+              section,
+              titre,
               professeur,
+              type,
+              duree,
               heureDebutMin,
               heureDebutMax,
-              heureFinMax);
-       
+              heureFinMin,
+              heureFinMax,
+              jour,
+              heureDebut
+              );
+         
         this.type = "Laboratoire";
         this.couleur = Color.GREEN;
     }
+
+   
     
     
     public Color getCouleur()

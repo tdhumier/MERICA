@@ -15,29 +15,39 @@ public class CoursDistance extends Activite
     private String type;
     
     
-    public CoursDistance(int idActivite,
-                  String code,
-                  float duree,
-                  int jour,
-                  float heureDebut,
+    public CoursDistance(String code,
+                  String section,
+                  String titre,
                   String professeur,
+                  String type,
+                  float duree,
                   float heureDebutMin,
                   float heureDebutMax,
-                  float heureFinMax)
+                  float heureFinMin,
+                  float heureFinMax,
+                  int jour,
+                  float heureDebut
+                  )
     {
-         super(idActivite,
-              code, 
-              duree,
-              jour,
-              heureDebut,
+         super(code,
+              section,
+              titre,
               professeur,
+              type,
+              duree,
               heureDebutMin,
               heureDebutMax,
-              heureFinMax);
+              heureFinMin,
+              heureFinMax,
+              jour,
+              heureDebut
+              );
        
         this.type = "CoursDistance";
         this.couleur = Color.ORANGE; 
     }
+
+    
     
         public Color getCouleur()
     {

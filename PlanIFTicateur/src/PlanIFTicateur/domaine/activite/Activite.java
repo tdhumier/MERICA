@@ -15,34 +15,42 @@ public abstract class Activite
 {
   private int idActivite;
   private String code;
+ 
   private float duree;
   private int jour;
   private float heureDebut;
   private String professeur;
   private float heureDebutMin;
   private float heureDebutMax;
+  private float heureFinMin;
   private float heureFinMax;
+  private String section;
+  private String titre;
 
-  public Activite(int idActivite,
-                  String code,
-                  float duree,
-                  int jour,
-                  float heureDebut,
+  public Activite(String code,
+                  String section,
+                  String titre,
                   String professeur,
+                  String type,
+                  float duree,
                   float heureDebutMin,
                   float heureDebutMax,
-                  float heureFinMax)
+                  float heureFinMin,
+                  float heureFinMax,
+                  int jour,
+                  float heureDebut)
   {
-      this.idActivite = idActivite;
       this.code = code;
-      this.duree = duree;
-      this.jour = jour;
-      this.heureDebut = heureDebut;
+      this.section = section;
+      this.titre = titre;
       this.professeur = professeur;
+      this.duree = duree;
       this.heureDebutMin = heureDebutMin;
       this.heureDebutMax = heureDebutMax;
+      this.heureFinMin = heureFinMin;
       this.heureFinMax = heureFinMax;
-     
+      this.jour = jour;
+      this.heureDebut = heureDebut;
   }
 
     public int getIdActivite() {
