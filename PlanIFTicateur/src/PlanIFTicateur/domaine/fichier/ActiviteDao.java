@@ -22,13 +22,35 @@ public class ActiviteDao {
     
     private LecteurCsv lecteurCsv;
     
+    public void chargementFichier(String adresseActivite){ // Lancer la récupération des données à partir de l'emplacement du fichier .COU passé en string
+        File fichierActivite = new File(adresseActivite);
+        
+        String adresseCheminement = adresseActivite.substring(0, adresseActivite.length()-4)+".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
+        File fichierCheminement = new File(adresseCheminement);
+        
+        importerFichier(fichierActivite,fichierCheminement);
+    }
+    
+   
+    
     public ActiviteDao(File file) {
         this.lecteurCsv = new LecteurCsv(file);
     }
     
-    public void importerFichier(File fichier) {  // retourne une liste des activités présentes dans le fichier .COU
+    public Activite getActiviteByCode(String code, ArrayList<Activite> activites){
         
-        CheminementDao cheminementDao = new CheminementDao(fichier);
+        for (Activite activite : activites) {
+            if(activite.getCode().equals(code)){
+                return activite;
+            }
+        }
+        
+        return null;
+    }
+    
+    private void importerFichier(File fichierActivite,File fichierCheminement) {  // retourne une liste des activités présentes dans le fichier .COU
+        
+        CheminementDao cheminementDao = new CheminementDao(fichierActivite);
         
         ArrayList<Activite> activites = new ArrayList<>();
         List<String[]> data = lecteurCsv.getData();
@@ -38,7 +60,7 @@ public class ActiviteDao {
             activites.add(activite);
         }
         
-        cheminementDao.importerFichier(fichier,activites);
+        cheminementDao.importerFichier(fichierCheminement,activites);
         
     }
     
@@ -61,16 +83,6 @@ public class ActiviteDao {
         
         return activite;
     }
-    
-    public Activite getActiviteByCode(String code, ArrayList<Activite> activites){
-        
-        for (Activite activite : activites) {
-            if(activite.getCode().equals(code)){
-                return activite;
-            }
-        }
-        
-        return null;
-    }
+  
     
 }

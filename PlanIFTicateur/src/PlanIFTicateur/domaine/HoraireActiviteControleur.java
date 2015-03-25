@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package PlanIFTicateur.domaine;
-import PlanIFTicateur.domaine.Horaire;
 import PlanIFTicateur.domaine.activite.Activite;
 import java.util.List;
 import java.awt.Point;

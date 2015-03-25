@@ -20,10 +20,7 @@ import java.util.logging.Logger;
  */
 public class CsvFileHelper {
     
-    public static File getF(String adresseFichier) {
-        File file = new File(adresseFichier);
-        return file;
-    }
+    
     
     public static List<String> readFile(File file) {
 
