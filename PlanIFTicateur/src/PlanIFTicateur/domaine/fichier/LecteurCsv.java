@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LecteurCsv {
     
-    public final static char SEPARATOR = ',';
+    public final static char SEPARATOR = ';';
 
     private File file;
     private List<String> lignes;

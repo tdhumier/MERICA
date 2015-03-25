@@ -27,6 +27,8 @@ public class CheminementDao {
     
     public List<GrilleCheminement> importerFichier(File fichier, ArrayList<Activite> activites) { // retourne une liste des grilles de cheminements complète contenue dans le fichier .CHE
         
+        System.out.println("Dans CheminementDao / ImporterFichier");
+        
         List<GrilleCheminement> grilles = new ArrayList<>();
         List<String[]> data = lecteurCsv.getData();
         
@@ -39,13 +41,16 @@ public class CheminementDao {
     }
     
     private GrilleCheminement formaterGrille(String[] tab, ArrayList<Activite> activites) { // retourne la grille de cheminement formatée
+        
+        System.out.println("Dans CheminementDao / formaterGrille");
+        
         ActiviteDao activiteDao = new ActiviteDao(file);
         
         GrilleCheminement grille = new GrilleCheminement();
         ArrayList<Activite> listeActivites = new ArrayList<>();
         Integer taille = tab.length;
     
-        for (int i = 3; i <= taille ; i++ ){
+        for (int i = 3; i < taille ; i++ ){
             listeActivites.add(activiteDao.getActiviteByCode(tab[i], activites));
         }
 

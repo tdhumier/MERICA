@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
+import PlanIFTicateur.domaine.GrilleCheminement;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.CoursClasse;
 import PlanIFTicateur.domaine.activite.CoursDistance;
@@ -22,16 +23,6 @@ public class ActiviteDao {
     
     private LecteurCsv lecteurCsv;
     
-    public void chargementFichier(String adresseActivite){ // Lancer la récupération des données à partir de l'emplacement du fichier .COU passé en string
-        File fichierActivite = new File(adresseActivite);
-        
-        String adresseCheminement = adresseActivite.substring(0, adresseActivite.length()-4)+".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
-        File fichierCheminement = new File(adresseCheminement);
-        
-        importerFichier(fichierActivite,fichierCheminement);
-    }
-    
-   
     
     public ActiviteDao(File file) {
         this.lecteurCsv = new LecteurCsv(file);
@@ -48,7 +39,10 @@ public class ActiviteDao {
         return null;
     }
     
-    private void importerFichier(File fichierActivite,File fichierCheminement) {  // retourne une liste des activités présentes dans le fichier .COU
+    public List<GrilleCheminement> importerFichier(File fichierActivite,File fichierCheminement) {  // retourne une liste des activités présentes dans le fichier .COU
+        
+        
+        System.out.println("Dans ActiviteDao / ImporterFichier");
         
         CheminementDao cheminementDao = new CheminementDao(fichierActivite);
         
@@ -60,11 +54,25 @@ public class ActiviteDao {
             activites.add(activite);
         }
         
-        cheminementDao.importerFichier(fichierCheminement,activites);
+        return cheminementDao.importerFichier(fichierCheminement,activites);
         
     }
     
     private Activite formaterActivite(String[] tab) {  // Retourne une activité formatée à parir d'une ligne du CSV
+        
+        System.out.println("Dans ActiviteDao / formaterActivite");
+        System.out.println(tab[0]);
+        System.out.println(tab[1]);
+        System.out.println(tab[2]);
+        System.out.println(tab[3]);
+        System.out.println(tab[4]);
+        System.out.println(tab[5]);
+        System.out.println(tab[6]);
+        System.out.println(tab[7]);
+        System.out.println(tab[8]);
+        System.out.println(tab[9]);
+        System.out.println(tab[10]);
+        System.out.println(tab[11]);
         
         Activite activite = null;
         
