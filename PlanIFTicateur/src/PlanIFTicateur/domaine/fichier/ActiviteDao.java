@@ -39,7 +39,7 @@ public class ActiviteDao {
         return null;
     }
     
-    public List<GrilleCheminement> importerFichier(File fichierActivite,File fichierCheminement) {  // retourne une liste des activités présentes dans le fichier .COU
+    public List<GrilleCheminement> importerActivites(File fichierActivite,File fichierCheminement) {  // retourne une liste des activités présentes dans le fichier .COU
         
         
         System.out.println("Dans ActiviteDao / ImporterFichier");
