@@ -22,27 +22,27 @@ public class CsvFileHelper {
     
     
     
-    public static List<String> readFile(File file) {
+    public static List<String> lecteurFichier(File fichier) {
 
-        List<String> result = new ArrayList<>();
-        FileReader fr;
+        List<String> resultat = new ArrayList<>();
+        FileReader lecteur;
         
         try {
-            fr = new FileReader(file);
+            lecteur = new FileReader(fichier);
         
-            BufferedReader br = new BufferedReader(fr);
+            BufferedReader buffer = new BufferedReader(lecteur);
 
-            for (String line = br.readLine(); line != null; line = br.readLine()) {
-                result.add(line);
+            for (String line = buffer.readLine(); line != null; line = buffer.readLine()) {
+                resultat.add(line);
             }
         
-            br.close();
-            fr.close();
+            buffer.close();
+            lecteur.close();
             
         } catch (IOException ex) {
             Logger.getLogger(CsvFileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return result;
+        return resultat;
     }
 }

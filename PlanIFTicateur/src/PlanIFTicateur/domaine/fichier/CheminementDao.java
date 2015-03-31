@@ -18,10 +18,10 @@ import java.util.List;
 public class CheminementDao {
     
     private LecteurCsv lecteurCsv;
-    private File file;
+    private File fichier;
     
     public CheminementDao(File file) {
-        this.file = file;
+        this.fichier = file;
         this.lecteurCsv = new LecteurCsv(file);
     }
     
@@ -30,10 +30,10 @@ public class CheminementDao {
         System.out.println("Dans CheminementDao / ImporterFichier");
         
         List<GrilleCheminement> grilles = new ArrayList<>();
-        List<String[]> data = lecteurCsv.getData();
+        List<String[]> donnees = lecteurCsv.getData();
         
-        for(String[] oneData : data) {
-            GrilleCheminement grille = formaterGrille(oneData, activites);
+        for(String[] donnee : donnees) {
+            GrilleCheminement grille = formaterGrille(donnee, activites);
             grilles.add(grille);
         }
 
@@ -44,7 +44,7 @@ public class CheminementDao {
         
         System.out.println("Dans CheminementDao / formaterGrille");
         
-        ActiviteDao activiteDao = new ActiviteDao(file);
+        ActiviteDao activiteDao = new ActiviteDao(fichier);
         
         GrilleCheminement grille = new GrilleCheminement();
         ArrayList<Activite> listeActivites = new ArrayList<>();

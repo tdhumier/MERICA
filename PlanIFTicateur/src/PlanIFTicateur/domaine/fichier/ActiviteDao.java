@@ -47,10 +47,10 @@ public class ActiviteDao {
         CheminementDao cheminementDao = new CheminementDao(fichierActivite);
         
         ArrayList<Activite> activites = new ArrayList<>();
-        List<String[]> data = lecteurCsv.getData();
+        List<String[]> donnees = lecteurCsv.getData();
         
-        for(String[] oneData : data) {
-            Activite activite = formaterActivite(oneData);
+        for(String[] donnee : donnees) {
+            Activite activite = formaterActivite(donnee);
             activites.add(activite);
         }
         

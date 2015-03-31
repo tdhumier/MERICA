@@ -19,15 +19,15 @@ public class LecteurCsv {
     
     public final static List<Character> SEPARATEURS = Collections.unmodifiableList(new ArrayList<Character>(Arrays.asList(',', ';', '\t', '|')));
 
-    private File file;
+    private File fichier;
     private List<String> lignes;
-    private List<String[] > data;
+    private List<String[] > donnees;
     
     private LecteurCsv() {
     }
 
     public LecteurCsv(File file) {
-        this.file = file;
+        this.fichier = file;
 
         // Init
         init();
@@ -51,7 +51,7 @@ public class LecteurCsv {
             }
         }
 
-        return null;
+        return 0;
     }
 
     public int compterSeperateurs(String ligne, char separateur) { // Permet de compter le nombre d'occurence d'un séparateur sur une ligne
@@ -67,7 +67,7 @@ public class LecteurCsv {
     }
 
     private void init() {
-        lignes = CsvFileHelper.readFile(file);
+        lignes = CsvFileHelper.lecteurFichier(fichier);
         char meilleurSeparateur = choisirMeilleurSeparateur(); // Choix du meilleur séparateur
        
         if (meilleurSeparateur == 0){ // Si on ne trouve pas de meilleure séparateur
@@ -76,19 +76,19 @@ public class LecteurCsv {
         
         lignes.remove(0); // Retire la ligne contenant les titres
 
-        data = new ArrayList<>();
+        donnees = new ArrayList<>();
         
         String separateur = new Character(meilleurSeparateur).toString();
         
         for (String ligne : lignes) {
                   
             String[] oneData = ligne.split(separateur);
-            data.add(oneData);
+            donnees.add(oneData);
            
         }
     }
     
     public List<String[]> getData() {
-        return data;
+        return donnees;
     }
 }
