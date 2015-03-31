@@ -14,7 +14,7 @@ import java.io.File;
  */
 public class GestionnaireFichier {
     
-    public ListeGrillesCheminement chargementFichier(String adresseActivite){ // Lancer la récupération des données à partir de l'emplacement du fichier .COU passé en string
+    public ListeGrillesCheminement getListeGrillesCheminement(String adresseActivite){ // Lancer la récupération des données à partir de l'emplacement du fichier .COU passé en string
         
         System.out.println("Dans GestionnaireFichier / ChargementFichier");
         
