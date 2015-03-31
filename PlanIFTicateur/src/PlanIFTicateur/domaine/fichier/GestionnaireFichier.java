@@ -25,7 +25,7 @@ public class GestionnaireFichier {
         String adresseCheminement = adresseActivite.substring(0, adresseActivite.length()-4)+".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
         File fichierCheminement = new File(adresseCheminement);
         
-        return (ListeGrillesCheminement) activiteDao.importerActivites(fichierActivite,fichierCheminement);
+        return new ListeGrillesCheminement(activiteDao.importerActivites(fichierActivite,fichierCheminement));
     }
     
     public ListeActivites getListeActivites(String adresseActivite){
@@ -36,7 +36,7 @@ public class GestionnaireFichier {
         ActiviteDao activiteDao = new ActiviteDao(fichierActivite);
         
         
-        return (ListeActivites) activiteDao.importerActivites(fichierActivite);
+        return new ListeActivites (activiteDao.importerActivites(fichierActivite));
     }
     
 }
