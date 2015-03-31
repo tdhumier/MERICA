@@ -16,13 +16,13 @@ public abstract class Activite
   private int idActivite;
   private String code;
  
-  private float duree;
+  private double duree;
   private int jour;
-  private float heureDebut;
+  private double heureDebut;
   private String professeur;
-  private float heureDebutMin;
-  private float heureDebutMax;
-  private float heureFinMax;
+  private double heureDebutMin;
+  private double heureDebutMax;
+  private double heureFinMax;
   private String section;
   private String titre;
 
@@ -31,12 +31,12 @@ public abstract class Activite
                   String titre,
                   String professeur,
                   String type,
-                  float duree,
-                  float heureDebutMin,
-                  float heureDebutMax,
-                  float heureFinMax,
+                  double duree,
+                  double heureDebutMin,
+                  double heureDebutMax,
+                  double heureFinMax,
                   int jour,
-                  float heureDebut)
+                  double heureDebut)
   {
       this.code = code;
       this.section = section;
@@ -66,7 +66,7 @@ public abstract class Activite
         this.code = code;
     }
 
-    public float getDuree() {
+    public double getDuree() {
         return duree;
     }
 
@@ -82,7 +82,7 @@ public abstract class Activite
         this.jour = jour;
     }
 
-    public float getHeureDebut() {
+    public double getHeureDebut() {
         return heureDebut;
     }
 
@@ -98,7 +98,7 @@ public abstract class Activite
         this.professeur = professeur;
     }
 
-    public float getHeureDebutMin() {
+    public double getHeureDebutMin() {
         return heureDebutMin;
     }
 
@@ -106,7 +106,7 @@ public abstract class Activite
         this.heureDebutMin = heureDebutMin;
     }
 
-    public float getHeureDebutMax() {
+    public double getHeureDebutMax() {
         return heureDebutMax;
     }
 
@@ -114,7 +114,7 @@ public abstract class Activite
         this.heureDebutMax = heureDebutMax;
     }
 
-    public float getHeureFinMax() {
+    public double getHeureFinMax() {
         return heureFinMax;
     }
 

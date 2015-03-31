@@ -11,49 +11,22 @@ import java.awt.Color;
  *
  * @author Alexandre
  */
-public class CoursHorsDep extends Activite
-{
+public class CoursHorsDep extends Activite {
+
     private Color couleur;
     private String type;
-    
-    
-    public CoursHorsDep(String code,
-                  String section,
-                  String titre,
-                  String professeur,
-                  String type,
-                  float duree,
-                  float heureDebutMin,
-                  float heureDebutMax,
-                  float heureFinMax,
-                  int jour,
-                  float heureDebut
-                  )
-    {
-         super(code,
-              section,
-              titre,
-              professeur,
-              type,
-              duree,
-              heureDebutMin,
-              heureDebutMax,
-              heureFinMax,
-              jour,
-              heureDebut
-              );
-       
+
+    public CoursHorsDep(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureDebutMax, double heureFinMax, int jour, double heureDebut) {
+        super(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
         this.type = "CoursHorsDep";
-        this.couleur = Color.GRAY; 
+        this.couleur = Color.GRAY;
     }
 
-    
-        public Color getCouleur()
-    {
+    public Color getCouleur() {
         return couleur;
     }
-    public String getType()
-    {
+
+    public String getType() {
         return type;
     }
 }

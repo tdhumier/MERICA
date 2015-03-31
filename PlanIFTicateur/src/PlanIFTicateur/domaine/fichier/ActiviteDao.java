@@ -5,7 +5,7 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import PlanIFTicateur.domaine.GrilleCheminement;
+import PlanIFTicateur.domaine.ListeActivites;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.CoursClasse;
 import PlanIFTicateur.domaine.activite.CoursDistance;
@@ -20,65 +20,38 @@ import java.util.List;
  * @author martindeligny1
  */
 public class ActiviteDao {
-    
+
     private LecteurCsv lecteurCsv;
-    
-    
+
     public ActiviteDao(File file) {
         this.lecteurCsv = new LecteurCsv(file);
     }
-    
-    public Activite getActiviteByCode(String code, ArrayList<Activite> activites){
-        
-        for (Activite activite : activites) {
-            if(activite.getCode().equals(code)){
-                return activite;
-            }
-        }
-        
-        return null;
-    }
-    
-    public List<GrilleCheminement> importerFichier(File fichierActivite,File fichierCheminement) {  // retourne une liste des activités présentes dans le fichier .COU
-        
-        
-        System.out.println("Dans ActiviteDao / ImporterFichier");
-        
-        CheminementDao cheminementDao = new CheminementDao(fichierActivite);
-        
+
+    ListeActivites importerActivites() {
         ArrayList<Activite> activites = new ArrayList<>();
         List<String[]> donnees = lecteurCsv.getData();
-        
-        for(String[] donnee : donnees) {
-            Activite activite = formaterActivite(donnee);
+        donnees.stream().map((donnee) -> formaterActivite(donnee)).forEach((activite) -> {
             activites.add(activite);
-        }
-        
-        return cheminementDao.importerFichier(fichierCheminement,activites);
-        
+        });
+        return new ListeActivites(activites);
     }
-    
+
     private Activite formaterActivite(String[] tab) {  // Retourne une activité formatée à parir d'une ligne du CSV
-        
+
         System.out.println("Dans ActiviteDao / formaterActivite");
-        
+
         Activite activite = null;
-        
-        if(tab[4].equals("Classe")){
-            activite = new CoursClasse(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
+        System.out.println("Longueur tab :" + tab.length);
+        if (tab[4].equals("Classe")) {
+            activite = new CoursClasse(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
+        } else if (tab[4].equals("Distance")) {
+            activite = new CoursDistance(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
+        } else if (tab[4].equals("HorsDep")) {
+            activite = new CoursHorsDep(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
+        } else if (tab[4].equals("Laboratoire")) {
+            activite = new Laboratoire(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
         }
-        else if(tab[4].equals("Distance")){
-            activite = new CoursDistance(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
-        }
-        else if(tab[4].equals("HorsDep")){
-            activite = new CoursHorsDep(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
-        }
-        else if(tab[4].equals("Laboratoire")){
-            activite = new Laboratoire(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
-        }
-        
+
         return activite;
     }
-  
-    
 }

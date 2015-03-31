@@ -22,4 +22,13 @@ public class ListeActivites
     public List<Activite> getListeActivites() {
         return listeActivites;
     }
+    
+    public Activite getActiviteByCode (String code){
+        for (Activite activite : listeActivites) {
+            if(activite.getCode().equals(code)){
+                return activite;
+            }
+        }
+        return null;
+    }
 }

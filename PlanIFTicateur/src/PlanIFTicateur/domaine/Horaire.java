@@ -24,6 +24,14 @@ public class Horaire
     public ListeActivites getListeActivite() {
         return listeActivite;
     }
+
+    public void setListeActivite(ListeActivites listeActivite) {
+        this.listeActivite = listeActivite;
+    }
+
+    public void setGrillesCheminement(ListeGrillesCheminement grillesCheminement) {
+        this.grillesCheminement = grillesCheminement;
+    }
     
     public void genererAutomatiquement()
     {
