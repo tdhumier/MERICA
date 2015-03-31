@@ -22,7 +22,6 @@ public abstract class Activite
   private String professeur;
   private float heureDebutMin;
   private float heureDebutMax;
-  private float heureFinMin;
   private float heureFinMax;
   private String section;
   private String titre;
@@ -35,7 +34,6 @@ public abstract class Activite
                   float duree,
                   float heureDebutMin,
                   float heureDebutMax,
-                  float heureFinMin,
                   float heureFinMax,
                   int jour,
                   float heureDebut)
@@ -47,7 +45,6 @@ public abstract class Activite
       this.duree = duree;
       this.heureDebutMin = heureDebutMin;
       this.heureDebutMax = heureDebutMax;
-      this.heureFinMin = heureFinMin;
       this.heureFinMax = heureFinMax;
       this.jour = jour;
       this.heureDebut = heureDebut;

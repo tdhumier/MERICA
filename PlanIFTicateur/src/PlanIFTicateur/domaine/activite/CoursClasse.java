@@ -24,7 +24,6 @@ public class CoursClasse extends Activite
                   float duree,
                   float heureDebutMin,
                   float heureDebutMax,
-                  float heureFinMin,
                   float heureFinMax,
                   int jour,
                   float heureDebut
@@ -38,7 +37,6 @@ public class CoursClasse extends Activite
               duree,
               heureDebutMin,
               heureDebutMax,
-              heureFinMin,
               heureFinMax,
               jour,
               heureDebut

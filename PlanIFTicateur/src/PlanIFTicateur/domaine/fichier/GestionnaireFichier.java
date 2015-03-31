@@ -5,9 +5,8 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import PlanIFTicateur.domaine.GrilleCheminement;
+import PlanIFTicateur.domaine.ListeGrillesCheminement;
 import java.io.File;
-import java.util.List;
 
 /**
  *
@@ -15,7 +14,7 @@ import java.util.List;
  */
 public class GestionnaireFichier {
     
-    public List<GrilleCheminement> chargementFichier(String adresseActivite){ // Lancer la récupération des données à partir de l'emplacement du fichier .COU passé en string
+    public ListeGrillesCheminement chargementFichier(String adresseActivite){ // Lancer la récupération des données à partir de l'emplacement du fichier .COU passé en string
         
         System.out.println("Dans GestionnaireFichier / ChargementFichier");
         
@@ -25,7 +24,7 @@ public class GestionnaireFichier {
         String adresseCheminement = adresseActivite.substring(0, adresseActivite.length()-4)+".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
         File fichierCheminement = new File(adresseCheminement);
         
-        return activiteDao.importerFichier(fichierActivite,fichierCheminement);
+        return (ListeGrillesCheminement) activiteDao.importerFichier(fichierActivite,fichierCheminement);
     }
     
 }

@@ -61,32 +61,20 @@ public class ActiviteDao {
     private Activite formaterActivite(String[] tab) {  // Retourne une activité formatée à parir d'une ligne du CSV
         
         System.out.println("Dans ActiviteDao / formaterActivite");
-        System.out.println(tab[0]);
-        System.out.println(tab[1]);
-        System.out.println(tab[2]);
-        System.out.println(tab[3]);
-        System.out.println(tab[4]);
-        System.out.println(tab[5]);
-        System.out.println(tab[6]);
-        System.out.println(tab[7]);
-        System.out.println(tab[8]);
-        System.out.println(tab[9]);
-        System.out.println(tab[10]);
-        System.out.println(tab[11]);
         
         Activite activite = null;
         
         if(tab[4].equals("Classe")){
-            activite = new CoursClasse(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Float.valueOf(tab[9]),Integer.parseInt(tab[10]),Float.valueOf(tab[11]));
+            activite = new CoursClasse(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
         }
         else if(tab[4].equals("Distance")){
-            activite = new CoursDistance(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Float.valueOf(tab[9]),Integer.parseInt(tab[10]),Float.valueOf(tab[11]));
+            activite = new CoursDistance(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
         }
         else if(tab[4].equals("HorsDep")){
-            activite = new CoursHorsDep(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Float.valueOf(tab[9]),Integer.parseInt(tab[10]),Float.valueOf(tab[11]));
+            activite = new CoursHorsDep(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
         }
         else if(tab[4].equals("Laboratoire")){
-            activite = new Laboratoire(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Float.valueOf(tab[9]),Integer.parseInt(tab[10]),Float.valueOf(tab[11]));
+            activite = new Laboratoire(tab[0],tab[1],tab[2],tab[3],tab[4],Float.valueOf(tab[5]),Float.valueOf(tab[6]),Float.valueOf(tab[7]),Float.valueOf(tab[8]),Integer.parseInt(tab[9]),Float.valueOf(tab[10]));
         }
         
         return activite;
