@@ -5,50 +5,49 @@
  */
 package PlanIFTicateur.domaine.activite;
 
-
 import java.awt.Color;
+
 /**
  *
  * @author Alexandre
  */
-public abstract class Activite 
-{
-  private int idActivite;
-  private String code;
- 
-  private double duree;
-  private int jour;
-  private double heureDebut;
-  private String professeur;
-  private double heureDebutMin;
-  private double heureDebutMax;
-  private double heureFinMax;
-  private String section;
-  private String titre;
+public abstract class Activite {
 
-  public Activite(String code,
-                  String section,
-                  String titre,
-                  String professeur,
-                  String type,
-                  double duree,
-                  double heureDebutMin,
-                  double heureDebutMax,
-                  double heureFinMax,
-                  int jour,
-                  double heureDebut)
-  {
-      this.code = code;
-      this.section = section;
-      this.titre = titre;
-      this.professeur = professeur;
-      this.duree = duree;
-      this.heureDebutMin = heureDebutMin;
-      this.heureDebutMax = heureDebutMax;
-      this.heureFinMax = heureFinMax;
-      this.jour = jour;
-      this.heureDebut = heureDebut;
-  }
+    private int idActivite;
+    private String code;
+
+    private double duree;
+    private int jour;
+    private double heureDebut;
+    private String professeur;
+    private double heureDebutMin;
+    private double heureDebutMax;
+    private double heureFinMax;
+    private String section;
+    private String titre;
+
+    public Activite(String code,
+            String section,
+            String titre,
+            String professeur,
+            String type,
+            double duree,
+            double heureDebutMin,
+            double heureDebutMax,
+            double heureFinMax,
+            int jour,
+            double heureDebut) {
+        this.code = code;
+        this.section = section;
+        this.titre = titre;
+        this.professeur = professeur;
+        this.duree = duree;
+        this.heureDebutMin = heureDebutMin;
+        this.heureDebutMax = heureDebutMax;
+        this.heureFinMax = heureFinMax;
+        this.jour = jour;
+        this.heureDebut = heureDebut;
+    }
 
     public int getIdActivite() {
         return idActivite;
@@ -122,24 +121,26 @@ public abstract class Activite
         this.heureFinMax = heureFinMax;
     }
 
-  /*
-    Methode abstraite obligatoire dans les differentes sortes d'activite.
-    */
-  public abstract Color getCouleur();
-  public abstract String getType();
-  
-  public void deplacerActivite(Activite activite)
-  {
-      
-  }
-  
-  public boolean horaireValide()
-  {
-      return !(getHeureDebut() < getHeureDebutMin()||getHeureDebut() > getHeureDebutMax()||(getHeureDebut() + getDuree()) > getHeureFinMax());
-  }
-  
-  public boolean memeHoraire(Activite autreActivite){
-      return (getJour() == autreActivite.getJour()&&(getHeureDebut() == autreActivite.getHeureDebut() || (getHeureDebut() > autreActivite.getHeureDebut()&& getHeureDebut()<(autreActivite.getHeureDebut() + autreActivite.getDuree())) || (getHeureDebut() > autreActivite.getHeureDebut()&& (getHeureDebut() + getDuree())> (autreActivite.getHeureDebut() + autreActivite.getDuree()))));
-  }
-}
+    /*
+     Methode abstraite obligatoire dans les differentes sortes d'activite.
+     */
+    public abstract Color getCouleur();
 
+    public abstract String getType();
+
+    public void deplacerActivite(Activite activite) {
+
+    }
+
+    public boolean horaireValide() {
+        return !(getHeureDebut() < getHeureDebutMin() || getHeureDebut() > getHeureDebutMax() || (getHeureDebut() + getDuree()) > getHeureFinMax());
+    }
+
+    public boolean memeHoraire(Activite autreActivite) {
+        return (getJour() == autreActivite.getJour() && (getHeureDebut() == autreActivite.getHeureDebut() || (getHeureDebut() > autreActivite.getHeureDebut() && getHeureDebut() < (autreActivite.getHeureDebut() + autreActivite.getDuree())) || (getHeureDebut() > autreActivite.getHeureDebut() && (getHeureDebut() + getDuree()) > (autreActivite.getHeureDebut() + autreActivite.getDuree()))));
+    }
+
+    public boolean isAssignee() {
+        return (jour != 0 && heureDebut != 0.0d);
+    }
+}
