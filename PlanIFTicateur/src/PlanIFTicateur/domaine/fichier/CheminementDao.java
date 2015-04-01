@@ -47,7 +47,6 @@ public class CheminementDao {
         for (int i = 3; i < taille; i++) {
             listeActivites.add(activites.getActiviteByCode(tab[i]));
         }
-
         grille.setNomProgramme(tab[0]);
         grille.setVersion(tab[1]);
         grille.setSession(tab[2]);

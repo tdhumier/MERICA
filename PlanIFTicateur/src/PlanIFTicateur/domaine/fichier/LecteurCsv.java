@@ -21,6 +21,7 @@ public class LecteurCsv {
 
     private File fichier;
     private List<String> lignes;
+    private List<String> lignesImport;
     private List<String[]> donnees;
 
     private LecteurCsv() {
@@ -75,10 +76,28 @@ public class LecteurCsv {
     }
 
     private void init() {
-        lignes = CsvFileHelper.lecteurFichier(fichier);
-        char meilleurSeparateur = choisirMeilleurSeparateur(); // Choix du meilleur séparateur
+        lignesImport = CsvFileHelper.lecteurFichier(fichier);
 
+        lignes = new ArrayList<String>();
+
+        // Nettoyage des lignes
+        for (String ligne : lignesImport) {
+
+            ligne = ligne.trim();
+
+            if (ligne.length() == 0) {
+                continue;
+            }
+
+            if (ligne.startsWith("#")) {
+                continue;
+            }
+
+            lignes.add(ligne);
+        }
         lignes.remove(0); // Retire la ligne contenant les titres
+
+        char meilleurSeparateur = choisirMeilleurSeparateur(); // Choix du meilleur séparateur
 
         donnees = new ArrayList<>();
 
