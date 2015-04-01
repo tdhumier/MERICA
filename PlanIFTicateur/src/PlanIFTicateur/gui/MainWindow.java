@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.gui;
 
+import PlanIFTicateur.domaine.HoraireActiviteControleur;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -21,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public Dimension coordonnePanelInformation;
     public Dimension coordonnePanelOption;
+    private HoraireActiviteControleur horaireActiviteControleur;
 
     public Dimension getCoordonnePanelInformation() {
         return coordonnePanelInformation;
@@ -36,6 +38,8 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         coordonnePanelInformation = new Dimension(screenSize.width * 2 / 7, screenSize.height);
         coordonnePanelOption = new Dimension(screenSize.width, screenSize.height / 5);
+
+        horaireActiviteControleur = new HoraireActiviteControleur();
 
         initComponents();
         addWindowListener(new WindowAdapter() {
@@ -238,7 +242,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
-            System.out.println(fichier.getAbsolutePath());
+            horaireActiviteControleur.importerFichiers(fichier.getAbsolutePath());
         }
     }//GEN-LAST:event_menuItemNouveauActionPerformed
 
