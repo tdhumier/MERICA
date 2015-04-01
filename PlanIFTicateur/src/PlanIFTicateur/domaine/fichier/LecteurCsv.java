@@ -16,13 +16,13 @@ import java.util.List;
  * @author martindeligny1
  */
 public class LecteurCsv {
-    
+
     public final static List<Character> SEPARATEURS = Collections.unmodifiableList(new ArrayList<Character>(Arrays.asList(',', ';', '\t', '|')));
 
     private File fichier;
     private List<String> lignes;
-    private List<String[] > donnees;
-    
+    private List<String[]> donnees;
+
     private LecteurCsv() {
     }
 
@@ -32,17 +32,25 @@ public class LecteurCsv {
         // Init
         init();
     }
-    
+
     public Character choisirMeilleurSeparateur() {
+
+        Character separateurMajorite = ';';
+        int occurenceSeparateurMajorite = 0;
 
         for (Character separateur : SEPARATEURS) {
             final String ligneTitre = lignes.get(0);
             final String ligne1 = lignes.get(1);
 
-            final int nbSeparateurLigneTitre = compterSeperateurs(ligneTitre, separateur); 
+            final int nbSeparateurLigneTitre = compterSeperateurs(ligneTitre, separateur);
             final int nbSeparateurLigne1 = compterSeperateurs(ligne1, separateur);
 
-            if (nbSeparateurLigneTitre == 0 || nbSeparateurLigne1 == 0) { 
+            if (occurenceSeparateurMajorite < nbSeparateurLigneTitre) {
+                occurenceSeparateurMajorite = nbSeparateurLigneTitre;
+                separateurMajorite = separateur;
+            }
+
+            if (nbSeparateurLigneTitre == 0 || nbSeparateurLigne1 == 0) {
                 continue;
             }
 
@@ -51,7 +59,7 @@ public class LecteurCsv {
             }
         }
 
-        return 0;
+        return separateurMajorite;
     }
 
     public int compterSeperateurs(String ligne, char separateur) { // Permet de compter le nombre d'occurence d'un séparateur sur une ligne
@@ -69,25 +77,21 @@ public class LecteurCsv {
     private void init() {
         lignes = CsvFileHelper.lecteurFichier(fichier);
         char meilleurSeparateur = choisirMeilleurSeparateur(); // Choix du meilleur séparateur
-       
-        if (meilleurSeparateur == 0){ // Si on ne trouve pas de meilleure séparateur
-            meilleurSeparateur = ';';
-        }
-        
+
         lignes.remove(0); // Retire la ligne contenant les titres
 
         donnees = new ArrayList<>();
-        
+
         String separateur = new Character(meilleurSeparateur).toString();
-        
+
         for (String ligne : lignes) {
-                  
+
             String[] oneData = ligne.split(separateur);
             donnees.add(oneData);
-           
+
         }
     }
-    
+
     public List<String[]> getData() {
         return donnees;
     }

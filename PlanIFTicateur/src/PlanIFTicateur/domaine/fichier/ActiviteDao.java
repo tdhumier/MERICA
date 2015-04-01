@@ -42,14 +42,41 @@ public class ActiviteDao {
 
         Activite activite = null;
         System.out.println("Longueur tab :" + tab.length);
-        if (tab[4].equals("Classe")) {
-            activite = new CoursClasse(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
-        } else if (tab[4].equals("Distance")) {
-            activite = new CoursDistance(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
-        } else if (tab[4].equals("HorsDep")) {
-            activite = new CoursHorsDep(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
-        } else if (tab[4].equals("Laboratoire")) {
-            activite = new Laboratoire(tab[0], tab[1], tab[2], tab[3], tab[4], Double.parseDouble(tab[5]), Double.parseDouble(tab[6]), Double.parseDouble(tab[7]), Double.parseDouble(tab[8]), Integer.parseInt(tab[9]), Double.parseDouble(tab[10]));
+
+        String code = tab[0];
+        String section = tab[1];
+        String titre = tab[2];
+        String professeur = tab[3];
+        String type = tab[4];
+        double duree = Double.parseDouble(tab[5]);
+        double heureDebutMin = Double.parseDouble(tab[6]);
+        double heureDebutMax = Double.parseDouble(tab[7]);
+        double heureFinMax = Double.parseDouble(tab[8]);
+        int jour = 0;
+        if (tab[9] != null) {
+            jour = Integer.parseInt(tab[9]);
+        }
+        double heureDebut = 0;
+        if (tab[10] != null) {
+            heureDebut = Double.parseDouble(tab[10]);
+        }
+
+        switch (type) {
+            case "Classe":
+                activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                break;
+            case "Distance":
+                activite = new CoursDistance(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                break;
+            case "HorsDep":
+                activite = new CoursHorsDep(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                break;
+            case "Laboratoire":
+                activite = new Laboratoire(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                break;
+            default:
+                activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                break;
         }
 
         return activite;
