@@ -9,44 +9,41 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Alexandre
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public Dimension coordonnePanelInformation;
     public Dimension coordonnePanelOption;
-   
-    
-     public Dimension getCoordonnePanelInformation()
-    {
+
+    public Dimension getCoordonnePanelInformation() {
         return coordonnePanelInformation;
     }
-    public void setCoordonnePanelInformation(int a, int b)
-    {
-        coordonnePanelInformation = new Dimension(a/4,b);
+
+    public void setCoordonnePanelInformation(int a, int b) {
+        coordonnePanelInformation = new Dimension(a / 4, b);
     }
-    
+
     /**
      * Creates new form PlanIFTicateur
      */
     public MainWindow() {
-        coordonnePanelInformation = new Dimension(screenSize.width*2/7, screenSize.height);
-        coordonnePanelOption = new Dimension(screenSize.width, screenSize.height/5);
-        
+        coordonnePanelInformation = new Dimension(screenSize.width * 2 / 7, screenSize.height);
+        coordonnePanelOption = new Dimension(screenSize.width, screenSize.height / 5);
+
         initComponents();
         addWindowListener(new WindowAdapter() {
-        public void windowOpened(WindowEvent e) {
-    setExtendedState(MAXIMIZED_BOTH);
-}
-});
+            public void windowOpened(WindowEvent e) {
+                setExtendedState(MAXIMIZED_BOTH);
+            }
+        });
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,8 +233,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuItemNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNouveauActionPerformed
+        JFileChooser dialogue = new JFileChooser(new File("/"));
+        File fichier;
 
-      
+        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            fichier = dialogue.getSelectedFile();
+            System.out.println(fichier.getAbsolutePath());
+        }
     }//GEN-LAST:event_menuItemNouveauActionPerformed
 
     private void menuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemQuitterActionPerformed
@@ -246,10 +248,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemQuitterActionPerformed
 
     private void menuItemEcraserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEcraserActionPerformed
-        
+
     }//GEN-LAST:event_menuItemEcraserActionPerformed
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -257,7 +258,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
