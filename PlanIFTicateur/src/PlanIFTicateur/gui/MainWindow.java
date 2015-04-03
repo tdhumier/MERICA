@@ -10,44 +10,48 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import javax.swing.JFileChooser;
-
 /**
  *
  * @author Alexandre
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public Dimension coordonnePanelInformation;
     public Dimension coordonnePanelOption;
-    private HoraireActiviteControleur horaireActiviteControleur;
-
-    public Dimension getCoordonnePanelInformation() {
+    
+    public HoraireActiviteControleur controleur;
+   
+    
+     public Dimension getCoordonnePanelInformation()
+    {
         return coordonnePanelInformation;
     }
-
-    public void setCoordonnePanelInformation(int a, int b) {
-        coordonnePanelInformation = new Dimension(a / 4, b);
+    public void setCoordonnePanelInformation(int a, int b)
+    {
+        coordonnePanelInformation = new Dimension(a/4,b);
     }
-
+    
     /**
      * Creates new form PlanIFTicateur
      */
     public MainWindow() {
-        coordonnePanelInformation = new Dimension(screenSize.width * 2 / 7, screenSize.height);
-        coordonnePanelOption = new Dimension(screenSize.width, screenSize.height / 5);
-
-        horaireActiviteControleur = new HoraireActiviteControleur();
-
+        
+        controleur = new HoraireActiviteControleur();
+        coordonnePanelInformation = new Dimension(screenSize.width*2/7, screenSize.height);
+        coordonnePanelOption = new Dimension(screenSize.width, screenSize.height/5);
+        
         initComponents();
         addWindowListener(new WindowAdapter() {
-            public void windowOpened(WindowEvent e) {
-                setExtendedState(MAXIMIZED_BOTH);
-            }
-        });
+        public void windowOpened(WindowEvent e) {
+    setExtendedState(MAXIMIZED_BOTH);
+}
+});
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +72,9 @@ public class MainWindow extends javax.swing.JFrame {
         panelPrincipale = new javax.swing.JPanel();
         panelOption = new javax.swing.JPanel();
         panelGrille = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        scrollPaneGrille = new javax.swing.JScrollPane();
+        drawingPanel = new PlanIFTicateur.gui.DrawingPanel(this);
         menuOption = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItemNouveau = new javax.swing.JMenuItem();
@@ -136,7 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
         panelOption.setLayout(panelOptionLayout);
         panelOptionLayout.setHorizontalGroup(
             panelOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 465, Short.MAX_VALUE)
         );
         panelOptionLayout.setVerticalGroup(
             panelOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,24 +151,25 @@ public class MainWindow extends javax.swing.JFrame {
 
         panelPrincipale.add(panelOption, java.awt.BorderLayout.PAGE_END);
 
-        jLabel2.setText("Grille de cours");
+        panelGrille.setLayout(new java.awt.BorderLayout(25, 25));
 
-        javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
-        panelGrille.setLayout(panelGrilleLayout);
-        panelGrilleLayout.setHorizontalGroup(
-            panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGrilleLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel2)
-                .addContainerGap(875, Short.MAX_VALUE))
+        jLabel3.setText("jLabel3");
+        panelGrille.add(jLabel3, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout drawingPanelLayout = new javax.swing.GroupLayout(drawingPanel);
+        drawingPanel.setLayout(drawingPanelLayout);
+        drawingPanelLayout.setHorizontalGroup(
+            drawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
-        panelGrilleLayout.setVerticalGroup(
-            panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGrilleLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
-                .addContainerGap(387, Short.MAX_VALUE))
+        drawingPanelLayout.setVerticalGroup(
+            drawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
         );
+
+        scrollPaneGrille.setViewportView(drawingPanel);
+
+        panelGrille.add(scrollPaneGrille, java.awt.BorderLayout.CENTER);
 
         panelPrincipale.add(panelGrille, java.awt.BorderLayout.CENTER);
 
@@ -237,13 +244,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuItemNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNouveauActionPerformed
-        JFileChooser dialogue = new JFileChooser(new File("/"));
-        File fichier;
 
-        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            fichier = dialogue.getSelectedFile();
-            horaireActiviteControleur.importerFichiers(fichier.getAbsolutePath());
-        }
+      
     }//GEN-LAST:event_menuItemNouveauActionPerformed
 
     private void menuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemQuitterActionPerformed
@@ -252,9 +254,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemQuitterActionPerformed
 
     private void menuItemEcraserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEcraserActionPerformed
-
+        
     }//GEN-LAST:event_menuItemEcraserActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -262,7 +265,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -292,8 +295,9 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private PlanIFTicateur.gui.DrawingPanel drawingPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -315,5 +319,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelInformation;
     private javax.swing.JPanel panelOption;
     private javax.swing.JPanel panelPrincipale;
+    private javax.swing.JScrollPane scrollPaneGrille;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,7 +24,7 @@ public class ListeActivites {
     public List<Activite> getListeActivites() {
         return listeActivites;
     }
-
+	
     public Activite getActiviteByCode(String code) {
         for (Activite activite : listeActivites) {
             if (activite.getCode().equals(code)) {
@@ -34,7 +34,18 @@ public class ListeActivites {
         return null;
     }
 
-    public List<Activite> getActivitesNonAssignees() {
+        public List<Activite> getActivitesNonAssignees() {
         return listeActivites.stream().filter(x -> !x.isAssignee()).collect(Collectors.toList());
     }
+
+    public Activite getActivite(int i)
+    {
+        return listeActivites.get(i);
+    }
+    
+    public int size()
+    {
+        return listeActivites.size();
+    }
+    
 }
