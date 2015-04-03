@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.gui;
 
+import PlanIFTicateur.domaine.HoraireActiviteControleur;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -19,6 +20,8 @@ public class MainWindow extends javax.swing.JFrame {
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public Dimension coordonnePanelInformation;
     public Dimension coordonnePanelOption;
+    
+    public HoraireActiviteControleur controleur;
    
     
      public Dimension getCoordonnePanelInformation()
@@ -34,6 +37,8 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form PlanIFTicateur
      */
     public MainWindow() {
+        
+        controleur = new HoraireActiviteControleur();
         coordonnePanelInformation = new Dimension(screenSize.width*2/7, screenSize.height);
         coordonnePanelOption = new Dimension(screenSize.width, screenSize.height/5);
         
@@ -67,7 +72,9 @@ public class MainWindow extends javax.swing.JFrame {
         panelPrincipale = new javax.swing.JPanel();
         panelOption = new javax.swing.JPanel();
         panelGrille = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        scrollPaneGrille = new javax.swing.JScrollPane();
+        drawingPanel = new PlanIFTicateur.gui.DrawingPanel(this);
         menuOption = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItemNouveau = new javax.swing.JMenuItem();
@@ -135,7 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
         panelOption.setLayout(panelOptionLayout);
         panelOptionLayout.setHorizontalGroup(
             panelOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 465, Short.MAX_VALUE)
         );
         panelOptionLayout.setVerticalGroup(
             panelOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,24 +151,25 @@ public class MainWindow extends javax.swing.JFrame {
 
         panelPrincipale.add(panelOption, java.awt.BorderLayout.PAGE_END);
 
-        jLabel2.setText("Grille de cours");
+        panelGrille.setLayout(new java.awt.BorderLayout(25, 25));
 
-        javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
-        panelGrille.setLayout(panelGrilleLayout);
-        panelGrilleLayout.setHorizontalGroup(
-            panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGrilleLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel2)
-                .addContainerGap(875, Short.MAX_VALUE))
+        jLabel3.setText("jLabel3");
+        panelGrille.add(jLabel3, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout drawingPanelLayout = new javax.swing.GroupLayout(drawingPanel);
+        drawingPanel.setLayout(drawingPanelLayout);
+        drawingPanelLayout.setHorizontalGroup(
+            drawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
-        panelGrilleLayout.setVerticalGroup(
-            panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGrilleLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
-                .addContainerGap(387, Short.MAX_VALUE))
+        drawingPanelLayout.setVerticalGroup(
+            drawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
         );
+
+        scrollPaneGrille.setViewportView(drawingPanel);
+
+        panelGrille.add(scrollPaneGrille, java.awt.BorderLayout.CENTER);
 
         panelPrincipale.add(panelGrille, java.awt.BorderLayout.CENTER);
 
@@ -287,8 +295,9 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private PlanIFTicateur.gui.DrawingPanel drawingPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -310,5 +319,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelInformation;
     private javax.swing.JPanel panelOption;
     private javax.swing.JPanel panelPrincipale;
+    private javax.swing.JScrollPane scrollPaneGrille;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package PlanIFTicateur.gui;
+import PlanIFTicateur.drawing.HoraireDrawer;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.Serializable;
@@ -33,16 +34,19 @@ public class DrawingPanel extends JPanel implements Serializable
         setPreferredSize(new Dimension(width/2,height/2));
         setVisible(true);
         
-        initialDimension = new Dimension(width/2, height/2);
+        initialDimension = new Dimension((int) width*2/3-(((int)width*2/3)%50) + 1, 1000);
     }
     
-    protected void paintComponenet(Graphics g)
+    @Override
+    protected void paintComponent(Graphics g)
     {
-        if(mainWindow != null)
-        {
+        
+            if(mainWindow != null)
+            {
             super.paintComponent(g);
-            //PAS FINI
-        }
+            HoraireDrawer mainDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
+            mainDrawer.draw(g);
+            }
     }
     public MainWindow getMainWindow()
     {

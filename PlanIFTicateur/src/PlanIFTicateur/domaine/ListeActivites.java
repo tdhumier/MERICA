@@ -22,4 +22,15 @@ public class ListeActivites
     public List<Activite> getListeActivites() {
         return listeActivites;
     }
+    
+    public Activite getActivite(int i)
+    {
+        return listeActivites.get(i);
+    }
+    
+    public int size()
+    {
+        return listeActivites.size();
+    }
+    
 }
