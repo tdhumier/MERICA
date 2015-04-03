@@ -17,7 +17,8 @@ public class CoursClasse extends Activite
     public CoursClasse(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureDebutMax, double heureFinMax, int jour, double heureDebut) {
         super(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
         this.type = "CoursClasse";
-        this.couleur = Color.RED; 
+        this.couleur = Color.RED;
+        int i = 0;
     }
     
     public Color getCouleur()
