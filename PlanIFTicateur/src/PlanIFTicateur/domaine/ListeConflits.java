@@ -6,6 +6,7 @@
 package PlanIFTicateur.domaine;
 
 import PlanIFTicateur.domaine.conflit.Conflit;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,18 +14,14 @@ import java.util.List;
  * @author tristandhumieres
  */
 public class ListeConflits {
-    
-    private List<Conflit> listeConflits ;
-    
-    public ListeConflits(List<Conflit> listeConflits){
-        this.listeConflits = listeConflits;
-    }
+
+    private List<Conflit> listeConflits = new ArrayList<>();
 
     public List<Conflit> getListeConflits() {
         return listeConflits;
     }
-    
-    public void ajouterConflit(Conflit conflit){
+
+    public void ajouterConflit(Conflit conflit) {
         listeConflits.add(conflit);
     }
 }

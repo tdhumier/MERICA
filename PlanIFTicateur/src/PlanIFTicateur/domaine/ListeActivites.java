@@ -6,6 +6,7 @@
 package PlanIFTicateur.domaine;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,16 +16,19 @@ import java.util.stream.Collectors;
  */
 public class ListeActivites {
 
-    private List<Activite> listeActivites;
+    private List<Activite> listeActivites = new ArrayList<>();
 
     public ListeActivites(List<Activite> listeActivites) {
         this.listeActivites = listeActivites;
     }
 
+    ListeActivites() {
+    }
+
     public List<Activite> getListeActivites() {
         return listeActivites;
     }
-	
+
     public Activite getActiviteByCode(String code) {
         for (Activite activite : listeActivites) {
             if (activite.getCode().equals(code)) {
@@ -34,18 +38,7 @@ public class ListeActivites {
         return null;
     }
 
-        public List<Activite> getActivitesNonAssignees() {
+    public List<Activite> getActivitesNonAssignees() {
         return listeActivites.stream().filter(x -> !x.isAssignee()).collect(Collectors.toList());
     }
-
-    public Activite getActivite(int i)
-    {
-        return listeActivites.get(i);
-    }
-    
-    public int size()
-    {
-        return listeActivites.size();
-    }
-    
 }

@@ -4,22 +4,29 @@
  * and open the template in the editor.
  */
 package PlanIFTicateur.domaine;
+
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.conflit.Conflit;
 import PlanIFTicateur.domaine.conflit.ConflitCheminement;
 import PlanIFTicateur.domaine.conflit.ConflitHoraire;
 import java.util.List;
+
 /**
  *
  * @author Alexandre
  */
-public class Horaire
-{
-  
+public class Horaire {
+
     private boolean valide;
     private ListeActivites listeActivite;
     private ListeGrillesCheminement grillesCheminement;
     private ListeConflits listeConflits;
+
+    public Horaire() {
+        this.listeActivite = new ListeActivites();
+        this.grillesCheminement = new ListeGrillesCheminement();
+        this.listeConflits = new ListeConflits();
+    }
 
     public ListeActivites getListeActivite() {
         return listeActivite;
@@ -32,19 +39,17 @@ public class Horaire
     public void setGrillesCheminement(ListeGrillesCheminement grillesCheminement) {
         this.grillesCheminement = grillesCheminement;
     }
-    
-    public void genererAutomatiquement()
-    {
-        
+
+    public void genererAutomatiquement() {
+
     }
-    public void deplacerActivite(Activite activite)
-    {
-        
+
+    public void deplacerActivite(Activite activite) {
+
     }
-    
-    public void verifierHoraireActivite(Activite activite)
-    {
-        if(!activite.horaireValide()){
+
+    public void verifierHoraireActivite(Activite activite) {
+        if (!activite.horaireValide()) {
             Conflit conflitHoraire = new ConflitHoraire(activite);
             listeConflits.ajouterConflit(conflitHoraire);
         }

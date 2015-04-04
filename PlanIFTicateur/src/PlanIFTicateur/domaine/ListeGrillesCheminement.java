@@ -15,22 +15,25 @@ import java.util.stream.Collectors;
  * @author tristandhumieres
  */
 public class ListeGrillesCheminement {
-    
-    List<GrilleCheminement> grillesCheminement;
 
-    public ListeGrillesCheminement(List<GrilleCheminement> grillesCheminement) {
-        this.grillesCheminement = grillesCheminement;
+    List<GrilleCheminement> grillesCheminement = new ArrayList<>();
+
+    public ListeGrillesCheminement(List<GrilleCheminement> grilleCheminements) {
+        this.grillesCheminement = grilleCheminements;
+    }
+
+    ListeGrillesCheminement() {
     }
 
     public List<GrilleCheminement> getGrillesCheminement() {
         return grillesCheminement;
     }
-    
-    public List<Activite> activitesAuMemeHoraire (Activite activite){
-       List<Activite> activitesAuMemeHoraire = new ArrayList();
-       grillesCheminement.stream().forEach((grilleCheminement) -> {
-           activitesAuMemeHoraire.addAll(grilleCheminement.activitesAuMemeHoraire(activite));
+
+    public List<Activite> activitesAuMemeHoraire(Activite activite) {
+        List<Activite> activitesAuMemeHoraire = new ArrayList();
+        grillesCheminement.stream().forEach((grilleCheminement) -> {
+            activitesAuMemeHoraire.addAll(grilleCheminement.activitesAuMemeHoraire(activite));
         });
-       return activitesAuMemeHoraire.stream().collect(Collectors.toList());
+        return activitesAuMemeHoraire.stream().collect(Collectors.toList());
     }
 }
