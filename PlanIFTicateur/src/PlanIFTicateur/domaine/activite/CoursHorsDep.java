@@ -16,8 +16,8 @@ public class CoursHorsDep extends Activite {
     private Color couleur;
     private String type;
 
-    public CoursHorsDep(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureDebutMax, double heureFinMax, int jour, double heureDebut) {
-        super(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+    public CoursHorsDep(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
+        super(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
         this.type = "CoursHorsDep";
         this.couleur = Color.GRAY;
     }

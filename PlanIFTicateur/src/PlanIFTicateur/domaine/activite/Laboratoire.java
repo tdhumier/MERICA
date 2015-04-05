@@ -16,8 +16,8 @@ public class Laboratoire extends Activite {
     private Color couleur;
     private String type;
 
-    public Laboratoire(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureDebutMax, double heureFinMax, int jour, double heureDebut) {
-        super(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+    public Laboratoire(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
+        super(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
         this.type = "Laboratoire";
         this.couleur = Color.GREEN;
     }

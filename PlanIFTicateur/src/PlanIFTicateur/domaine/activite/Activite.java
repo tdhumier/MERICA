@@ -21,7 +21,6 @@ public abstract class Activite {
     private double heureDebut;
     private String professeur;
     private double heureDebutMin;
-    private double heureDebutMax;
     private double heureFinMax;
     private String section;
     private String titre;
@@ -33,7 +32,6 @@ public abstract class Activite {
             String type,
             double duree,
             double heureDebutMin,
-            double heureDebutMax,
             double heureFinMax,
             int jour,
             double heureDebut) {
@@ -43,7 +41,6 @@ public abstract class Activite {
         this.professeur = professeur;
         this.duree = duree;
         this.heureDebutMin = heureDebutMin;
-        this.heureDebutMax = heureDebutMax;
         this.heureFinMax = heureFinMax;
         this.jour = jour;
         this.heureDebut = heureDebut;
@@ -105,14 +102,6 @@ public abstract class Activite {
         this.heureDebutMin = heureDebutMin;
     }
 
-    public double getHeureDebutMax() {
-        return heureDebutMax;
-    }
-
-    public void setHeureDebutMax(float heureDebutMax) {
-        this.heureDebutMax = heureDebutMax;
-    }
-
     public double getHeureFinMax() {
         return heureFinMax;
     }
@@ -133,7 +122,9 @@ public abstract class Activite {
     }
 
     public boolean horaireValide() {
-        return !(getHeureDebut() < getHeureDebutMin() || getHeureDebut() > getHeureDebutMax() || (getHeureDebut() + getDuree()) > getHeureFinMax());
+
+        //return !(getHeureDebut() < getHeureDebutMin() || getHeureDebut() > getHeureDebutMax() || (getHeureDebut() + getDuree()) > getHeureFinMax());
+        return false;
     }
 
     public boolean memeHoraire(Activite autreActivite) {
