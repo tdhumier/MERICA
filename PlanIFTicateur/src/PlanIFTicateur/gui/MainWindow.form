@@ -11,10 +11,13 @@
             <Property name="text" type="java.lang.String" value="Fichier"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="nouveauMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nouveau"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nouveauMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
@@ -140,9 +143,9 @@
                     </DimensionLayout>
                   </Layout>
                 </Container>
-                <Container class="PlanIFTicateur.gui.ListeActivitesPanel" name="listeActivitesPanel">
+                <Container class="PlanIFTicateur.gui.RightPanel" name="listeActivitesPanel">
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.ListeActivitesPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.RightPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

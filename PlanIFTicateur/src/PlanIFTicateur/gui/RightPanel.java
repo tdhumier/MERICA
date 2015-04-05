@@ -15,15 +15,15 @@ import javax.swing.border.BevelBorder;
  *
  * @author tristandhumieres
  */
-public class ListeActivitesPanel extends JPanel implements Serializable {
+public class RightPanel extends JPanel implements Serializable {
 
     private MainWindow mainWindow;
     private JLabel labelListeActivites;
 
-    public ListeActivitesPanel() {
+    public RightPanel() {
     }
 
-    public ListeActivitesPanel(MainWindow mainWindow) {
+    public RightPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         buildUp();
     }

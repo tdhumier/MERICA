@@ -9,6 +9,8 @@ import PlanIFTicateur.domaine.HoraireActiviteControleur;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -49,11 +51,11 @@ public class MainWindow extends javax.swing.JFrame {
         mainScrollPane = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
         horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
-        listeActivitesPanel = new PlanIFTicateur.gui.ListeActivitesPanel(this);
+        listeActivitesPanel = new PlanIFTicateur.gui.RightPanel(this);
         bottomPanel = new PlanIFTicateur.gui.BottomPanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        nouveauMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -99,8 +101,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("Fichier");
 
-        jMenuItem1.setText("Nouveau");
-        jMenu1.add(jMenuItem1);
+        nouveauMenuItem.setText("Nouveau");
+        nouveauMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nouveauMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(nouveauMenuItem);
         jMenu1.add(jSeparator1);
 
         jMenuItem2.setText("Sauvegarder");
@@ -134,6 +141,15 @@ public class MainWindow extends javax.swing.JFrame {
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentAdded
+
+    private void nouveauMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauMenuItemActionPerformed
+        JFileChooser dialogue = new JFileChooser(new File("/"));
+        File fichier;
+        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            fichier = dialogue.getSelectedFile();
+            controleur.importerFichiers(fichier.getAbsolutePath());
+        }
+    }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +197,6 @@ public class MainWindow extends javax.swing.JFrame {
     private PlanIFTicateur.gui.HorairePanel horairePanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -189,9 +204,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToggleButton jToggleButton1;
     private java.awt.List list1;
-    private PlanIFTicateur.gui.ListeActivitesPanel listeActivitesPanel;
+    private PlanIFTicateur.gui.RightPanel listeActivitesPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
+    private javax.swing.JMenuItem nouveauMenuItem;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }
