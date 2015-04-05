@@ -28,10 +28,10 @@ public class HorairePanel extends JPanel implements Serializable {
         this.mainWindow = mainWindow;
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         int height = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
-        setPreferredSize(new Dimension(width * 2 / 3, (int) (height * 0.7)));
+        setPreferredSize(new Dimension((int) (width * 0.7), (int) (height * 0.7)));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
         setVisible(true);
-        initialDimension = new Dimension(width * 2 / 3, (int) (height * 0.7));
+        initialDimension = new Dimension((int) (width * 0.7), (int) (height * 0.7));
     }
 
     @Override

@@ -50,9 +50,9 @@ public class MainWindow extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         mainScrollPane = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
-        horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
-        listeActivitesPanel = new PlanIFTicateur.gui.RightPanel(this);
         bottomPanel = new PlanIFTicateur.gui.BottomPanel(this);
+        rightPanel = new PlanIFTicateur.gui.RightPanel(this);
+        horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         nouveauMenuItem = new javax.swing.JMenuItem();
@@ -80,20 +80,38 @@ public class MainWindow extends javax.swing.JFrame {
 
         panel.setLayout(new java.awt.BorderLayout());
 
+        bottomPanel.setPreferredSize(new java.awt.Dimension(1000, 30));
+        panel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
+
+        rightPanel.setPreferredSize(new java.awt.Dimension(300, 244));
+
+        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
+        rightPanel.setLayout(rightPanelLayout);
+        rightPanelLayout.setHorizontalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        rightPanelLayout.setVerticalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 274, Short.MAX_VALUE)
+        );
+
+        panel.add(rightPanel, java.awt.BorderLayout.EAST);
+
+        horairePanel.setPreferredSize(new java.awt.Dimension(700, 244));
+
         javax.swing.GroupLayout horairePanelLayout = new javax.swing.GroupLayout(horairePanel);
         horairePanel.setLayout(horairePanelLayout);
         horairePanelLayout.setHorizontalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 274, Short.MAX_VALUE)
         );
 
-        panel.add(horairePanel, java.awt.BorderLayout.WEST);
-        panel.add(listeActivitesPanel, java.awt.BorderLayout.EAST);
-        panel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
+        panel.add(horairePanel, java.awt.BorderLayout.CENTER);
 
         mainScrollPane.setViewportView(panel);
 
@@ -128,11 +146,11 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
         );
 
         pack();
@@ -204,10 +222,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToggleButton jToggleButton1;
     private java.awt.List list1;
-    private PlanIFTicateur.gui.RightPanel listeActivitesPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JMenuItem nouveauMenuItem;
     private javax.swing.JPanel panel;
+    private PlanIFTicateur.gui.RightPanel rightPanel;
     // End of variables declaration//GEN-END:variables
 }
