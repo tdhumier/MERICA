@@ -51,14 +51,14 @@ public class ActiviteDao {
         double duree = Double.parseDouble(tab[5]);
         double heureDebutMin = Double.parseDouble(tab[6]);
         double heureDebutMax = Double.parseDouble(tab[7]);
-        double heureFinMax = Double.parseDouble(tab[8]);
+        double heureFinMax = 0.0;
         int jour = 0;
-        if (tab[9] != null) {
-            jour = Integer.parseInt(tab[9]);
+        if (tab[8] != null) {
+            jour = Integer.parseInt(tab[8]);
         }
         double heureDebut = 0;
-        if (tab[10] != null) {
-            heureDebut = Double.parseDouble(tab[10]);
+        if (tab[9] != null) {
+            heureDebut = Double.parseDouble(tab[9]);
         }
 
         switch (type) {

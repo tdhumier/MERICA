@@ -39,7 +39,7 @@ public class HoraireDrawer {
         for (int x = 100; x < largeur; x += initialDimension.width / 30) {
             g.drawLine(x, initialDimension.height / 47, x, hauteur);
         }
-        for (int y = 50; y < hauteur; y += initialDimension.height / 47) {
+        for (int y = 0; y < hauteur; y += initialDimension.height / 47) {
             g.drawLine(100, y, largeur, y);
         }
     }
@@ -50,7 +50,8 @@ public class HoraireDrawer {
             Activite activite = activites.get(i);
             Color couleur = activite.getCouleur();
             g.setColor(couleur);
-            g.fillOval((int) activite.getHeureDebut(), (int) activite.getJour(), (int) activite.getDuree(), 50);
+            //g.fillOval((int) activite.getHeureDebut(), (int) activite.getJour(), (int) activite.getDuree(), 50);
+            g.drawRect((int) activite.getHeureDebut(), (int) activite.getJour(), 80, 50);
         }
     }
 }

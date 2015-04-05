@@ -6,43 +6,26 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.HoraireActiviteControleur;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import javax.swing.JFileChooser;
 
 /**
  *
- * @author Alexandre
+ * @author tristandhumieres
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public Dimension coordonnePanelInformation;
-    public Dimension coordonnePanelOption;
-
     public HoraireActiviteControleur controleur;
 
-    public Dimension getCoordonnePanelInformation() {
-        return coordonnePanelInformation;
-    }
-
-    public void setCoordonnePanelInformation(int a, int b) {
-        coordonnePanelInformation = new Dimension(a / 4, b);
-    }
-
     /**
-     * Creates new form PlanIFTicateur
+     * Creates new form MainWindow
      */
     public MainWindow() {
 
         controleur = new HoraireActiviteControleur();
-        coordonnePanelInformation = new Dimension(screenSize.width * 2 / 7, screenSize.height);
-        coordonnePanelOption = new Dimension(screenSize.width, screenSize.height / 5);
-
         initComponents();
+
         addWindowListener(new WindowAdapter() {
             public void windowOpened(WindowEvent e) {
                 setExtendedState(MAXIMIZED_BOTH);
@@ -59,209 +42,107 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelFenetre = new javax.swing.JPanel();
-        panelInformation = new javax.swing.JPanel();
-        panelAutre = new javax.swing.JPanel();
-        panelActivite = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listeCours = new javax.swing.JList();
-        panelPrincipale = new javax.swing.JPanel();
-        panelOption = new javax.swing.JPanel();
-        panelGrille = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        scrollPaneGrille = new javax.swing.JScrollPane();
-        drawingPanel = new PlanIFTicateur.gui.DrawingPanel(this);
-        menuOption = new javax.swing.JMenuBar();
+        mainPanel = new javax.swing.JPanel();
+        buttonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
+        jToggleButton1 = new javax.swing.JToggleButton();
+        mainScrollPane = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
+        horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
+        listeActivitesPanel = new PlanIFTicateur.gui.ListeActivitesPanel(this);
+        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        menuItemNouveau = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        menuItemEcraser = new javax.swing.JMenuItem();
-        menuItemSauvegarder = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        menuItemQuitter = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(204, 0, 0));
-        getContentPane().setLayout(new java.awt.BorderLayout(25, 25));
-
-        panelFenetre.setBackground(new java.awt.Color(204, 0, 0));
-        panelFenetre.setLayout(new java.awt.BorderLayout(25, 25));
-
-        panelInformation.setBackground(new java.awt.Color(0, 0, 153));
-        panelInformation.setPreferredSize(getCoordonnePanelInformation());
-        panelInformation.setLayout(new java.awt.BorderLayout(25, 25));
-
-        panelAutre.setPreferredSize(coordonnePanelOption);
-
-        javax.swing.GroupLayout panelAutreLayout = new javax.swing.GroupLayout(panelAutre);
-        panelAutre.setLayout(panelAutreLayout);
-        panelAutreLayout.setHorizontalGroup(
-            panelAutreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panelAutreLayout.setVerticalGroup(
-            panelAutreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panelInformation.add(panelAutre, java.awt.BorderLayout.PAGE_END);
-
-        panelActivite.setLayout(new javax.swing.BoxLayout(panelActivite, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel1.setText("Liste de Cours (LABEL À CHANGER)");
-        panelActivite.add(jLabel1);
-
-        listeCours.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                formComponentAdded(evt);
+            }
         });
-        listeCours.setPreferredSize(new java.awt.Dimension(200, 0));
-        jScrollPane1.setViewportView(listeCours);
 
-        panelActivite.add(jScrollPane1);
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
-        panelInformation.add(panelActivite, java.awt.BorderLayout.WEST);
+        buttonTopPanel.setPreferredSize(new java.awt.Dimension(567, 35));
 
-        panelFenetre.add(panelInformation, java.awt.BorderLayout.LINE_END);
+        jToggleButton1.setText("Validation Automatique");
+        buttonTopPanel.add(jToggleButton1);
 
-        panelPrincipale.setBackground(new java.awt.Color(0, 153, 0));
-        panelPrincipale.setLayout(new java.awt.BorderLayout(25, 25));
+        mainPanel.add(buttonTopPanel, java.awt.BorderLayout.NORTH);
 
-        panelOption.setPreferredSize(coordonnePanelOption);
+        panel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout panelOptionLayout = new javax.swing.GroupLayout(panelOption);
-        panelOption.setLayout(panelOptionLayout);
-        panelOptionLayout.setHorizontalGroup(
-            panelOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+        javax.swing.GroupLayout horairePanelLayout = new javax.swing.GroupLayout(horairePanel);
+        horairePanel.setLayout(horairePanelLayout);
+        horairePanelLayout.setHorizontalGroup(
+            horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
         );
-        panelOptionLayout.setVerticalGroup(
-            panelOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        horairePanelLayout.setVerticalGroup(
+            horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
-        panelPrincipale.add(panelOption, java.awt.BorderLayout.PAGE_END);
+        panel.add(horairePanel, java.awt.BorderLayout.WEST);
 
-        panelGrille.setLayout(new java.awt.BorderLayout(25, 25));
-
-        jLabel3.setText("jLabel3");
-        panelGrille.add(jLabel3, java.awt.BorderLayout.PAGE_START);
-
-        javax.swing.GroupLayout drawingPanelLayout = new javax.swing.GroupLayout(drawingPanel);
-        drawingPanel.setLayout(drawingPanelLayout);
-        drawingPanelLayout.setHorizontalGroup(
-            drawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+        javax.swing.GroupLayout listeActivitesPanelLayout = new javax.swing.GroupLayout(listeActivitesPanel);
+        listeActivitesPanel.setLayout(listeActivitesPanelLayout);
+        listeActivitesPanelLayout.setHorizontalGroup(
+            listeActivitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 259, Short.MAX_VALUE)
         );
-        drawingPanelLayout.setVerticalGroup(
-            drawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
+        listeActivitesPanelLayout.setVerticalGroup(
+            listeActivitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
-        scrollPaneGrille.setViewportView(drawingPanel);
+        panel.add(listeActivitesPanel, java.awt.BorderLayout.EAST);
 
-        panelGrille.add(scrollPaneGrille, java.awt.BorderLayout.CENTER);
+        mainScrollPane.setViewportView(panel);
 
-        panelPrincipale.add(panelGrille, java.awt.BorderLayout.CENTER);
-
-        panelFenetre.add(panelPrincipale, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(panelFenetre, java.awt.BorderLayout.CENTER);
-
-        menuOption.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        menuOption.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        menuOption.setPreferredSize(new java.awt.Dimension(180, 40));
+        mainPanel.add(mainScrollPane, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Fichier");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        menuItemNouveau.setText("Nouveau");
-        menuItemNouveau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemNouveauActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menuItemNouveau);
+        jMenuItem1.setText("Nouveau");
+        jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator1);
 
-        menuItemEcraser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemEcraser.setText("Sauvegarde");
-        menuItemEcraser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemEcraserActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menuItemEcraser);
+        jMenuItem2.setText("Sauvegarder");
+        jMenu1.add(jMenuItem2);
 
-        menuItemSauvegarder.setText("Sauvegarder sous");
-        jMenu1.add(menuItemSauvegarder);
+        jMenuItem3.setText("Sauvegarder Sous");
+        jMenu1.add(jMenuItem3);
         jMenu1.add(jSeparator2);
 
-        menuItemQuitter.setText("Quitter");
-        menuItemQuitter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemQuitterActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menuItemQuitter);
+        jMenuItem4.setText("Quitter");
+        jMenu1.add(jMenuItem4);
 
-        menuOption.add(jMenu1);
+        jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Option");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuOption.add(jMenu2);
-        menuOption.add(jMenu3);
+        setJMenuBar(jMenuBar1);
 
-        jMenu4.setText("Windows");
-        jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jMenuItem1.setText("Statistique");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem1);
-
-        menuOption.add(jMenu4);
-
-        setJMenuBar(menuOption);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void menuItemNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNouveauActionPerformed
-
-        JFileChooser dialogue = new JFileChooser(new File("/"));
-        File fichier;
-
-        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            fichier = dialogue.getSelectedFile();
-            System.out.println(fichier.getAbsolutePath());
-            controleur.importerFichiers(fichier.getAbsolutePath());
-            drawingPanel.repaint();
-        }
-
-    }//GEN-LAST:event_menuItemNouveauActionPerformed
-
-    private void menuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemQuitterActionPerformed
-
-        System.exit(0);
-    }//GEN-LAST:event_menuItemQuitterActionPerformed
-
-    private void menuItemEcraserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEcraserActionPerformed
-
-    }//GEN-LAST:event_menuItemEcraserActionPerformed
+    }//GEN-LAST:event_formComponentAdded
 
     /**
      * @param args the command line arguments
@@ -277,18 +158,22 @@ public class MainWindow extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -300,30 +185,20 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private PlanIFTicateur.gui.DrawingPanel drawingPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel buttonTopPanel;
+    private PlanIFTicateur.gui.HorairePanel horairePanel;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JList listeCours;
-    private javax.swing.JMenuItem menuItemEcraser;
-    private javax.swing.JMenuItem menuItemNouveau;
-    private javax.swing.JMenuItem menuItemQuitter;
-    private javax.swing.JMenuItem menuItemSauvegarder;
-    private javax.swing.JMenuBar menuOption;
-    private javax.swing.JPanel panelActivite;
-    private javax.swing.JPanel panelAutre;
-    private javax.swing.JPanel panelFenetre;
-    private javax.swing.JPanel panelGrille;
-    private javax.swing.JPanel panelInformation;
-    private javax.swing.JPanel panelOption;
-    private javax.swing.JPanel panelPrincipale;
-    private javax.swing.JScrollPane scrollPaneGrille;
+    private javax.swing.JToggleButton jToggleButton1;
+    private PlanIFTicateur.gui.ListeActivitesPanel listeActivitesPanel;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JScrollPane mainScrollPane;
+    private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }
