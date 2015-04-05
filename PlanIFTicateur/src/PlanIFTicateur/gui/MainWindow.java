@@ -42,6 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        list1 = new java.awt.List();
         mainPanel = new javax.swing.JPanel();
         buttonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
         jToggleButton1 = new javax.swing.JToggleButton();
@@ -49,6 +50,7 @@ public class MainWindow extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
         listeActivitesPanel = new PlanIFTicateur.gui.ListeActivitesPanel(this);
+        bottomPanel = new PlanIFTicateur.gui.BottomPanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -84,11 +86,12 @@ public class MainWindow extends javax.swing.JFrame {
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panel.add(horairePanel, java.awt.BorderLayout.WEST);
         panel.add(listeActivitesPanel, java.awt.BorderLayout.EAST);
+        panel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
         mainScrollPane.setViewportView(panel);
 
@@ -122,7 +125,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -173,6 +176,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private PlanIFTicateur.gui.BottomPanel bottomPanel;
     private javax.swing.JPanel buttonTopPanel;
     private PlanIFTicateur.gui.HorairePanel horairePanel;
     private javax.swing.JMenu jMenu1;
@@ -184,6 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToggleButton jToggleButton1;
+    private java.awt.List list1;
     private PlanIFTicateur.gui.ListeActivitesPanel listeActivitesPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
