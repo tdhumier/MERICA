@@ -50,32 +50,31 @@ public class ActiviteDao {
         String type = tab[4];
         double duree = Double.parseDouble(tab[5]);
         double heureDebutMin = Double.parseDouble(tab[6]);
-        double heureDebutMax = Double.parseDouble(tab[7]);
-        double heureFinMax = Double.parseDouble(tab[8]);
+        double heureFinMax = Double.parseDouble(tab[7]);
         int jour = 0;
-        if (tab[9] != null) {
-            jour = Integer.parseInt(tab[9]);
+        if (tab[8] != null || !tab[8].equals("")) {
+            jour = Integer.parseInt(tab[8]);
         }
         double heureDebut = 0;
-        if (tab[10] != null) {
-            heureDebut = Double.parseDouble(tab[10]);
+        if (tab[9] != null || !tab[9].equals("")) {
+            heureDebut = Double.parseDouble(tab[9]);
         }
 
         switch (type) {
             case "Classe":
-                activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
             case "Distance":
-                activite = new CoursDistance(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                activite = new CoursDistance(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
             case "HorsDep":
-                activite = new CoursHorsDep(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                activite = new CoursHorsDep(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
             case "Laboratoire":
-                activite = new Laboratoire(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                activite = new Laboratoire(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
             default:
-                activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureDebutMax, heureFinMax, jour, heureDebut);
+                activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
         }
 
