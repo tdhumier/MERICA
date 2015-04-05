@@ -18,10 +18,7 @@ import javax.swing.border.BevelBorder;
 public class ListeActivitesPanel extends JPanel implements Serializable {
 
     private MainWindow mainWindow;
-
-    public ListeActivitesPanel() {
-        buildUp();
-    }
+    private JLabel labelListeActivites;
 
     public ListeActivitesPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -33,7 +30,7 @@ public class ListeActivitesPanel extends JPanel implements Serializable {
         int height = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
         setPreferredSize(new Dimension((int) (width * 0.32), (int) (height * 0.3)));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
-        JLabel labelListeActivites = new JLabel("Liste Activites");
+        labelListeActivites = new JLabel("Liste Activites");
         labelListeActivites.setVisible(true);
         add(labelListeActivites);
 

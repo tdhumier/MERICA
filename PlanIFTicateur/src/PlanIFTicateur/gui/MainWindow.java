@@ -88,18 +88,6 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         panel.add(horairePanel, java.awt.BorderLayout.WEST);
-
-        javax.swing.GroupLayout listeActivitesPanelLayout = new javax.swing.GroupLayout(listeActivitesPanel);
-        listeActivitesPanel.setLayout(listeActivitesPanelLayout);
-        listeActivitesPanelLayout.setHorizontalGroup(
-            listeActivitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 259, Short.MAX_VALUE)
-        );
-        listeActivitesPanelLayout.setVerticalGroup(
-            listeActivitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
-        );
-
         panel.add(listeActivitesPanel, java.awt.BorderLayout.EAST);
 
         mainScrollPane.setViewportView(panel);
