@@ -29,6 +29,10 @@ public class ListeActivites {
         return listeActivites;
     }
 
+    public int getTailleListeActivites() {
+        return listeActivites.size();
+    }
+
     public Activite getActiviteByCode(String code) {
         for (Activite activite : listeActivites) {
             if (activite.getCode().equals(code)) {
@@ -36,6 +40,16 @@ public class ListeActivites {
             }
         }
         return null;
+    }
+
+    public List<Activite> getActivitesByJour(int jour) {
+        List<Activite> activites = new ArrayList<>();
+        for (Activite activite : listeActivites) {
+            if (activite.getJour() == jour) {
+                activites.add(activite);
+            }
+        }
+        return activites;
     }
 
     public List<Activite> getActivitesNonAssignees() {
