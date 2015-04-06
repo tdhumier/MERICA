@@ -17,10 +17,22 @@ import javax.swing.ListCellRenderer;
  */
 public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activite> {
 
+    public ActiviteRenderer() {
+        setOpaque(true);
+    }
+
     @Override
     public Component getListCellRendererComponent(JList<? extends Activite> list, Activite activite, int index, boolean isSelected, boolean cellHasFocus) {
 
         setText(activite.getCode());
+
+        if (isSelected) {
+            setBackground(list.getSelectionBackground());
+            setForeground(list.getSelectionForeground());
+        } else {
+            setBackground(list.getBackground());
+            setForeground(list.getForeground());
+        }
 
         return this;
     }

@@ -11,10 +11,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Vector;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 
 /**
@@ -27,7 +28,8 @@ public class RightPanel extends JPanel implements Serializable {
     private JPanel listeActivitesPanel;
     private JPanel detailsActivitePanel;
     private JLabel listeActivitesLabel;
-    private JList listeActivites;
+    private JList<Activite> listeActivites;
+    DefaultListModel<Activite> listModel;
     private JLabel detailsActiviteLabel;
 
     public RightPanel() {
@@ -52,12 +54,15 @@ public class RightPanel extends JPanel implements Serializable {
 
         listeActivitesPanel.add(listeActivitesLabel, BorderLayout.NORTH);
 
-        List<Activite> activites = mainWindow.controleur.getActiviteListe();
-        listeActivites = new JList(new Vector(activites));
-        listeActivites.setVisibleRowCount(10);
+        List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
+        listModel = new DefaultListModel<>();
+        for (Activite activite : activites) {
+            listModel.addElement(activite);
+        }
+        listeActivites = new JList(listModel);
         listeActivites.setCellRenderer(new ActiviteRenderer());
 
-        listeActivitesPanel.add(listeActivites, BorderLayout.CENTER);
+        listeActivitesPanel.add(new JScrollPane(listeActivites), BorderLayout.CENTER);
         add(listeActivitesPanel);
 
         detailsActivitePanel = new JPanel();
@@ -71,7 +76,9 @@ public class RightPanel extends JPanel implements Serializable {
     }
 
     public void miseAjourListe() {
-        List<Activite> activites = mainWindow.controleur.getActiviteListe();
-        listeActivites.setListData(new Vector(activites));
+        List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
+        activites.stream().forEach((activite) -> {
+            listModel.addElement(activite);
+        });
     }
 }
