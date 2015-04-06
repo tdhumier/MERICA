@@ -57,6 +57,14 @@ public abstract class Activite {
     public String getCode() {
         return code;
     }
+    public String getTitre()
+    {
+        return titre;
+    }
+    public void setTitre(String titre)
+    {
+        this.titre = titre;
+    }
 
     public void setCode(String code) {
         this.code = code;
