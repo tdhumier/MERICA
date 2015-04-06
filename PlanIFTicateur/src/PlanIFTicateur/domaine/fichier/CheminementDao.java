@@ -9,7 +9,6 @@ import PlanIFTicateur.domaine.GrilleCheminement;
 import PlanIFTicateur.domaine.ListeActivites;
 import PlanIFTicateur.domaine.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.activite.Activite;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +19,9 @@ import java.util.List;
 public class CheminementDao {
 
     private LecteurCsv lecteurCsv;
-    private File fichier;
+    private String fichier;
 
-    public CheminementDao(File file) {
+    public CheminementDao(String file) {
         this.fichier = file;
         this.lecteurCsv = new LecteurCsv(file);
     }
