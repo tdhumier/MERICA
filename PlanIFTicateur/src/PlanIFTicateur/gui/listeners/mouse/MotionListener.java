@@ -70,12 +70,12 @@ public class MotionListener implements MouseMotionListener {
             System.out.println(jour);
             System.out.println(heure);
             mainWindow.bottomPanel.afficherJourHeure(jour + ", " + heure);
-            mainWindow.bottomPanel.revalidate();
+            //mainWindow.bottomPanel.revalidate();
             mainWindow.bottomPanel.repaint();
         } else {
             System.out.println("out");
             mainWindow.bottomPanel.afficherJourHeure("");
-            mainWindow.bottomPanel.revalidate();
+            //mainWindow.bottomPanel.revalidate();
             mainWindow.bottomPanel.repaint();
         }
 

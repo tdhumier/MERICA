@@ -32,7 +32,7 @@ public class BottomPanel extends JPanel implements Serializable {
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension(width, 30));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
-        labelBottomPanel = new JLabel("e");
+        labelBottomPanel = new JLabel("");
         add(labelBottomPanel);
         setVisible(true);
     }
