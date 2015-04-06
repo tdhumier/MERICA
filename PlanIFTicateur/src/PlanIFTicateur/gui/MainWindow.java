@@ -152,7 +152,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- 
+
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentAdded
@@ -163,10 +163,6 @@ public class MainWindow extends javax.swing.JFrame {
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
             controleur.importerFichiers(fichier.getAbsolutePath());
-            horairePanel.repaint();
-            rightPanel.miseAjourListe();
-            rightPanel.revalidate();
-            rightPanel.repaint();
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
@@ -229,9 +225,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JMenuItem nouveauMenuItem;
     private javax.swing.JPanel panel;
-    private PlanIFTicateur.gui.RightPanel rightPanel;
+    public PlanIFTicateur.gui.RightPanel rightPanel;
     // End of variables declaration//GEN-END:variables
-   
-    
-  
+
+
+
 }

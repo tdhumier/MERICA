@@ -6,7 +6,6 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -22,19 +21,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
+
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -43,6 +38,7 @@ import javax.swing.event.ListSelectionListener;
 public class RightPanel extends JPanel implements Serializable {
 
     private MainWindow mainWindow;
+
     private JPanel listeActivitesPanel;
     private JLabel listeActivitesLabel;
     private JList<Activite> listeActivites;
@@ -63,15 +59,20 @@ public class RightPanel extends JPanel implements Serializable {
     private JLabel finMaxLabel;
     private JLabel jourLabel;
     private JLabel heureLabel;
-    
+
     DragSource dragSource = null;
-    
+
+
+    private ListeActivitesPanel listeActivitesPanel;
+    private DetailsActivitePanel detailsActivitePanel;
+    private StatistiquesPanel statistiquesPanel;
+
     public RightPanel() {
     }
 
     public RightPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        
+
         buildUp();
     }
 
@@ -82,10 +83,11 @@ public class RightPanel extends JPanel implements Serializable {
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
         setLayout(new GridLayout(0, 1));
 
+
         listeActivitesPanel = new JPanel();
         listeActivitesPanel.setLayout(new BorderLayout());
         listeActivitesLabel = new JLabel("Liste Activites");
-         
+
 
         listeActivitesPanel.add(listeActivitesLabel, BorderLayout.NORTH);
 
@@ -96,11 +98,11 @@ public class RightPanel extends JPanel implements Serializable {
         }
         listeActivites = new JList(listModel);
         listeActivites.setCellRenderer(new ActiviteRenderer());
-        
+
         listeActivites.setDragEnabled(true);
-        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
-       
-        
+        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+
 
         listeActivites.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -111,63 +113,35 @@ public class RightPanel extends JPanel implements Serializable {
         listeActivites.addMouseListener(new MouseAdapter()
         {
              public void mousePressed(MouseEvent mouseEvent)
-            { 
+            {
                 if(mouseEvent.getButton() == MouseEvent.BUTTON1)
                 {
-                   
+
                 }
             }
         });
-        
-        
-      
-        
+
+
+
+
 
         listeActivitesPanel.add(new JScrollPane(listeActivites), BorderLayout.CENTER);
+
+        listeActivitesPanel = new ListeActivitesPanel(mainWindow);
+
         add(listeActivitesPanel);
 
-        rightCenterPanel = new JPanel(new BorderLayout());
+        detailsActivitePanel = new DetailsActivitePanel(mainWindow);
 
-        detailsActiviteLabel = new JLabel("\t Détails Activité \n\n");
-        detailsActiviteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(detailsActivitePanel);
 
-        detailsActivitePanel = new JPanel(new GridLayout(10, 1));
+        statistiquesPanel = new StatistiquesPanel(mainWindow);
 
-        codeLabel = new JLabel("Code activité : ");
-        sectionLabel = new JLabel("Section : ");
-        titreLabel = new JLabel("Titre : ");
-        profLabel = new JLabel("Professeur : ");
-        typeLabel = new JLabel("Type : ");
-        dureeLabel = new JLabel("Durée : ");
-        debutMinLabel = new JLabel("Début minimal possible : ");
-        finMaxLabel = new JLabel("Fin maximal possible : ");
-        jourLabel = new JLabel("Jour : ");
-        heureLabel = new JLabel("Heure  : ");
-
-        detailsActivitePanel.add(codeLabel);
-        detailsActivitePanel.add(titreLabel);
-        detailsActivitePanel.add(sectionLabel);
-        detailsActivitePanel.add(profLabel);
-        detailsActivitePanel.add(typeLabel);
-        detailsActivitePanel.add(dureeLabel);
-        detailsActivitePanel.add(debutMinLabel);
-        detailsActivitePanel.add(finMaxLabel);
-        detailsActivitePanel.add(jourLabel);
-        detailsActivitePanel.add(heureLabel);
-
-        rightCenterPanel.add(detailsActiviteLabel, BorderLayout.PAGE_START);
-        rightCenterPanel.add(detailsActivitePanel, BorderLayout.CENTER);
-
-        add(rightCenterPanel);
-
-        statistiquePanel = new JPanel();
-        statistiqueLabel = new JLabel("Statistiques");
-        statistiquePanel.add(statistiqueLabel);
-
-        add(statistiquePanel);
+        add(statistiquesPanel);
 
         setVisible(true);
     }
+
 
     public void miseAjourListe() {
         List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
@@ -197,5 +171,11 @@ public class RightPanel extends JPanel implements Serializable {
         return JourModes[i + 1];
     }
 
- 
+
+
+    public void updateDetailsActivitePanel(Activite activite) {
+        detailsActivitePanel.updateLabel(activite);
+        detailsActivitePanel.repaint();
+    }
+
 }

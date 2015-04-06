@@ -66,16 +66,10 @@ public class MotionListener implements MouseMotionListener {
         }
 
         if (x > xo && x < (initialDimension.width * 28 + 80) && y > yo && y < (initialDimension.height * 48 + 20)) {
-            System.out.println("case : " + xCase + "," + yCase);
-            System.out.println(jour);
-            System.out.println(heure);
             mainWindow.bottomPanel.afficherJourHeure(jour + ", " + heure);
-            //mainWindow.bottomPanel.revalidate();
             mainWindow.bottomPanel.repaint();
         } else {
-            System.out.println("out");
             mainWindow.bottomPanel.afficherJourHeure("");
-            //mainWindow.bottomPanel.revalidate();
             mainWindow.bottomPanel.repaint();
         }
 
