@@ -33,6 +33,7 @@ public class HoraireDrawer {
     public void draw(Graphics g) {
         drawGrille(g);
         drawActivites(g);
+        //disableCases(g, new CoursClasse("NTM", "ZZZZ", "Supertest", "JoeyStarr", "Cours en classe", 3.0, 11.50, 17.50, 4, 12.50));
     }
 
     public void drawGrille(Graphics g) {
@@ -102,5 +103,31 @@ public class HoraireDrawer {
         g2.fill(new Rectangle.Double(x, y, x1, hauteurCase));
         g2.setColor(Color.black);
         g2.drawString(activite.getCode(), (int) (x + (activite.getDuree() - 1) * largeurCase), y + hauteurCase - 4);
+    }
+
+    private void disableCases(Graphics g, Activite activite) { // grise les cases qui ne respectent pas les contraintes
+        int largeurCase = initialDimension.width;
+        int hauteurCase = initialDimension.height;
+        double heureDebutMinTest = activite.getHeureDebutMin();
+        double heureFinMaxTest = activite.getHeureFinMax();
+        int caseDebutMin;
+        int caseFinMax;
+
+        if ((int) heureDebutMinTest == heureDebutMinTest) {
+            caseDebutMin = ((int) heureDebutMinTest - 8) * 2 + 1;
+        } else {
+            caseDebutMin = ((int) heureDebutMinTest - 8) * 2 + 2;
+        }
+
+        if ((int) heureFinMaxTest == heureFinMaxTest) {
+            caseFinMax = ((int) heureFinMaxTest - 8) * 2;
+        } else {
+            caseFinMax = ((int) heureFinMaxTest - 8) * 2 + 1;
+        }
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.LIGHT_GRAY);
+        g2.fillRect(80, 20, largeurCase * (caseDebutMin - 1), hauteurCase * 48);
+        g2.fillRect(80 + caseFinMax * largeurCase, 20, largeurCase * (28 - caseFinMax), hauteurCase * 48);
     }
 }
