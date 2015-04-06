@@ -5,11 +5,11 @@
  */
 package PlanIFTicateur.domaine;
 
-
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,8 +19,7 @@ import java.util.List;
 public class HoraireActiviteControleur {
 
     private Horaire horaire;
-   
-   
+    private List<HoraireControleurObserveur> observers;
 
     public enum ActiviteModes {
 
@@ -33,6 +32,7 @@ public class HoraireActiviteControleur {
 
     public HoraireActiviteControleur() {
         horaire = new Horaire();
+        observers = new LinkedList<>();
     }
 
     public void deplacerActivite(int idActivite, Point mousePoint) {
@@ -53,6 +53,7 @@ public class HoraireActiviteControleur {
         ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites);
         horaire.setListeActivite(listeActivites);
         horaire.setGrillesCheminement(listeGrillesCheminement);
+        notifyObserversForUpdatedItems();
     }
 
     public List<Activite> getActivitesNonAssignees() {
@@ -63,4 +64,13 @@ public class HoraireActiviteControleur {
         return horaire.getStatistiques().getNbCoursSemaine(horaire);
     }
 
+    public void registerObserver(HoraireControleurObserveur newListener) {
+        observers.add(newListener);
+    }
+
+    public void notifyObserversForUpdatedItems() {
+        for (HoraireControleurObserveur observer : observers) {
+            observer.notifyUpdatedItems();
+        }
+    }
 }
