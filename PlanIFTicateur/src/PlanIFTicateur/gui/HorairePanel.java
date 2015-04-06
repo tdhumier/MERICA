@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.drawing.HoraireDrawer;
+import PlanIFTicateur.gui.listeners.mouse.MotionListener;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -25,13 +26,19 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
     public HorairePanel() {
     }
 
+    public Dimension getInitialDimension() {
+        return this.initialDimension;
+    }
+
     public HorairePanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension((int) (width * 0.7), 800));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
         setVisible(true);
-        initialDimension = new Dimension((int) (width * 0.7), 800);
+        int largeurCase = (int) (width * 0.7 - 90) / 28;
+        int hauteurCase = (int) 770 / 48;
+        initialDimension = new Dimension(largeurCase, hauteurCase);
         System.out.println("width: " + initialDimension.width);
     }
 
@@ -42,7 +49,7 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
             HoraireDrawer horaireDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
             horaireDrawer.draw(g);
         }
-        this.addMouseMotionListener(this);
+        this.addMouseMotionListener(new MotionListener(mainWindow));
     }
 
     @Override
@@ -51,52 +58,6 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
-        int largeurCase = (int) (initialDimension.width - 90) / 28;
-        int hauteurCase = (int) (initialDimension.height - 30) / 48;
-        int x = e.getX();
-        int y = e.getY();
-        int xo = 80;
-        int yo = 20;
-        int xCase = (x - xo) / largeurCase + 1;
-        int yCase = (y - yo) / hauteurCase + 1;
-        int heureCase = ((xCase - 1) / 2) + 8;
-        String jour = "";
-        String heure;
-        if (xCase % 2 == 0) {
-            int heureCaseBefore = heureCase;
-            heureCase++;
-            heure = heureCaseBefore + "h30-" + heureCase + "h00";
-        } else {
-            heure = heureCase + "h00-" + heureCase + "h30";
-        }
-
-        if ((yCase - 1) / 8 == 0) {
-            jour = "Lundi";
-        }
-        if ((yCase - 1) / 8 == 1) {
-            jour = "Mardi";
-        }
-        if ((yCase - 1) / 8 == 2) {
-            jour = "Mercredi";
-        }
-        if ((yCase - 1) / 8 == 3) {
-            jour = "Jeudi";
-        }
-        if ((yCase - 1) / 8 == 4) {
-            jour = "Vendredi";
-        }
-        if ((yCase - 1) / 8 == 5) {
-            jour = "Samedi";
-        }
-
-        if (x > xo && x < (initialDimension.width - 20) && y > yo && y < (initialDimension.height - 10)) {
-            System.out.println("case : " + xCase + "," + yCase);
-            System.out.println(jour);
-            System.out.println(heure);
-        } else {
-            System.out.println("out");
-        }
 
     }
 

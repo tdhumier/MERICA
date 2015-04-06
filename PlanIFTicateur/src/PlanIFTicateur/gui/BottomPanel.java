@@ -32,9 +32,13 @@ public class BottomPanel extends JPanel implements Serializable {
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension(width, 30));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
-        labelBottomPanel = new JLabel("Barre d'état");
+        labelBottomPanel = new JLabel("e");
         add(labelBottomPanel);
         setVisible(true);
+    }
+
+    public void afficherJourHeure(String s) {
+        labelBottomPanel.setText(s);
     }
 
 }

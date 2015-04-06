@@ -35,8 +35,8 @@ public class HoraireDrawer {
     }
 
     public void drawGrille(Graphics g) {
-        int largeurCase = (int) (initialDimension.width - 90) / 28;
-        int hauteurCase = (int) (initialDimension.height - 30) / 48;
+        int largeurCase = initialDimension.width;
+        int hauteurCase = initialDimension.height;
         g.setColor(Color.LIGHT_GRAY);
 
         Graphics2D g2 = (Graphics2D) g;

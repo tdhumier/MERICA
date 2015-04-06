@@ -54,7 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         rightPanel = new PlanIFTicateur.gui.RightPanel(this);
         horaireScrollPane = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        horairePanel1 = new PlanIFTicateur.gui.HorairePanel(this);
+        horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         nouveauMenuItem = new javax.swing.JMenuItem();
@@ -92,18 +92,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout horairePanel1Layout = new javax.swing.GroupLayout(horairePanel1);
-        horairePanel1.setLayout(horairePanel1Layout);
-        horairePanel1Layout.setHorizontalGroup(
-            horairePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout horairePanelLayout = new javax.swing.GroupLayout(horairePanel);
+        horairePanel.setLayout(horairePanelLayout);
+        horairePanelLayout.setHorizontalGroup(
+            horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 696, Short.MAX_VALUE)
         );
-        horairePanel1Layout.setVerticalGroup(
-            horairePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        horairePanelLayout.setVerticalGroup(
+            horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 270, Short.MAX_VALUE)
         );
 
-        jPanel1.add(horairePanel1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(horairePanel, java.awt.BorderLayout.CENTER);
 
         horaireScrollPane.setViewportView(jPanel1);
 
@@ -209,9 +209,9 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private PlanIFTicateur.gui.BottomPanel bottomPanel;
+    public PlanIFTicateur.gui.BottomPanel bottomPanel;
     private javax.swing.JPanel buttonTopPanel;
-    private PlanIFTicateur.gui.HorairePanel horairePanel1;
+    public PlanIFTicateur.gui.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
