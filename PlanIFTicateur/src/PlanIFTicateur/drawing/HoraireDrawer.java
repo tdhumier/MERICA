@@ -80,8 +80,8 @@ public class HoraireDrawer {
     }
 
     private void drawActivite(Graphics g, Activite activite) {
-        int largeurCase = (int) (initialDimension.width - 90) / 28;
-        int hauteurCase = (int) (initialDimension.height - 30) / 48;
+        int largeurCase = initialDimension.width;
+        int hauteurCase = initialDimension.height;
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(activite.getCouleur());
         int x = (int) (largeurCase * ((activite.getHeureDebut() - 8) * 2) + 80);
