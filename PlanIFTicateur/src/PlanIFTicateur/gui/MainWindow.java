@@ -212,7 +212,7 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private PlanIFTicateur.gui.BottomPanel bottomPanel;
     private javax.swing.JPanel buttonTopPanel;
-    private PlanIFTicateur.gui.HorairePanel horairePanel;
+    public PlanIFTicateur.gui.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
