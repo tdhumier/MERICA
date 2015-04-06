@@ -13,13 +13,13 @@ import java.awt.Color;
  */
 public class CoursHorsDep extends Activite {
 
-    private Color couleur;
+    private Color couleur = new Color(0, 0, 255, 50);
     private String type;
 
     public CoursHorsDep(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
         super(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
         this.type = "CoursHorsDep";
-        this.couleur = Color.GRAY;
+        this.couleur = couleur;
     }
 
     public Color getCouleur() {

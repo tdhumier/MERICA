@@ -12,10 +12,12 @@ import java.awt.GridLayout;
 import java.io.Serializable;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 /**
@@ -31,6 +33,7 @@ public class RightPanel extends JPanel implements Serializable {
     DefaultListModel<Activite> listModel;
     private JPanel detailsActivitePanel;
     private JLabel detailsActiviteLabel;
+    private JPanel rightCenterPanel;
     private JPanel statistiquePanel;
     private JLabel statistiqueLabel;
 
@@ -74,16 +77,21 @@ public class RightPanel extends JPanel implements Serializable {
         listeActivites = new JList(listModel);
         listeActivites.setCellRenderer(new ActiviteRenderer());
 
+        
+        
+        
+        
         listeActivitesPanel.add(new JScrollPane(listeActivites), BorderLayout.CENTER);
         add(listeActivitesPanel);
 
-        detailsActivitePanel = new JPanel();
+        rightCenterPanel = new JPanel(new BorderLayout());
 
-        detailsActiviteLabel = new JLabel("Détails Activité");
-        detailsActivitePanel.add(detailsActiviteLabel);
-      
+        detailsActiviteLabel = new JLabel("\t Détails Activité \n\n");
+        detailsActiviteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+       
+        detailsActivitePanel = new JPanel(new GridLayout(10,1));   
         
-        codeLabel = new JLabel("Code de l'activité : ");
+        codeLabel = new JLabel("Code activité : ");
         sectionLabel = new JLabel("Section : ");
         titreLabel = new JLabel("Titre : ");
         profLabel = new JLabel("Professeur : ");
@@ -94,12 +102,22 @@ public class RightPanel extends JPanel implements Serializable {
         jourLabel = new JLabel("Jour : ");
         heureLabel = new JLabel("Heure  : ");
         
+        detailsActivitePanel.add( codeLabel);
+        detailsActivitePanel.add(sectionLabel);
+        detailsActivitePanel.add(titreLabel);
+        detailsActivitePanel.add(profLabel); 
+        detailsActivitePanel.add(typeLabel);
+        detailsActivitePanel.add(dureeLabel);
+        detailsActivitePanel.add(debutMinLabel);
+        detailsActivitePanel.add(finMaxLabel);
+        detailsActivitePanel.add( jourLabel);
+        detailsActivitePanel.add(heureLabel);
+                   
+        rightCenterPanel.add(detailsActiviteLabel, BorderLayout.PAGE_START);
+        rightCenterPanel.add(detailsActivitePanel, BorderLayout.CENTER);
         
-        
-        
-        
-        add(detailsActivitePanel);
-        
+        add(rightCenterPanel);
+      
         
         
 
