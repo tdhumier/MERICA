@@ -55,10 +55,10 @@ public class DetailsActivitePanel extends JPanel {
         profLabel = new JLabel("Professeur : ");
         typeLabel = new JLabel("Type : ");
         dureeLabel = new JLabel("Durée : ");
-        debutMinLabel = new JLabel("Début minimal possible : ");
-        finMaxLabel = new JLabel("Fin maximal possible : ");
-        jourLabel = new JLabel("Jour : ");
-        heureLabel = new JLabel("Heure  : ");
+        debutMinLabel = new JLabel("Début au plus tôt : ");
+        finMaxLabel = new JLabel("Fin au plus tard : ");
+        jourLabel = new JLabel("");
+        heureLabel = new JLabel("");
 
         detailsActivitePanel.add(codeLabel);
         detailsActivitePanel.add(titreLabel);
@@ -76,17 +76,51 @@ public class DetailsActivitePanel extends JPanel {
     }
 
     public void updateLabel(Activite activite) {
+        String duree;
+        String debutMin;
+        String finMax;
+        String debut = "";
+        double testDuree = activite.getDuree();
+        double testDebutMin = activite.getHeureDebutMin();
+        double testFinMax = activite.getHeureFinMax();
+        if (activite.getHeureDebut() != 0) {
+            double testDebut = activite.getHeureDebut();
+            if ((int) testDebut == testDebut) {
+                debut = String.valueOf((int) testDebut) + "h";
+            } else {
+                debut = String.valueOf((int) testDebut) + "h30";
+            }
+        }
+
+        if ((int) testDuree == testDuree) {
+            duree = String.valueOf((int) testDuree) + "h";
+        } else {
+            duree = String.valueOf((int) testDuree) + "h30";
+        }
+
+        if ((int) testDebutMin == testDebutMin) {
+            debutMin = String.valueOf((int) testDebutMin) + "h";
+        } else {
+            debutMin = String.valueOf((int) testDebutMin) + "h30";
+        }
+
+        if ((int) testFinMax == testFinMax) {
+            finMax = String.valueOf((int) testFinMax) + "h";
+        } else {
+            finMax = String.valueOf((int) testFinMax) + "h20";
+        }
+
         codeLabel.setText("Code activité : " + activite.getCode());
         sectionLabel.setText("Section : " + activite.getSection());
         titreLabel.setText("Titre : " + activite.getTitre());
         profLabel.setText("Professeur : " + activite.getProfesseur());
         typeLabel.setText("Type : " + activite.getType());
-        dureeLabel.setText("Durée : " + activite.getDuree() + "heures");
-        debutMinLabel.setText("Début minimal possible : " + activite.getHeureDebutMin() + " heures");
-        finMaxLabel.setText("Fin maximal possible : " + activite.getHeureFinMax() + " heures");
+        dureeLabel.setText("Durée : " + duree);
+        debutMinLabel.setText("Début au plus tôt : " + debutMin);
+        finMaxLabel.setText("Fin au plus tard : " + finMax);
         if (activite.getJour() != 0 || activite.getHeureDebut() != 0) {
             jourLabel.setText("Jour : " + getNomJour(activite.getJour()));
-            heureLabel.setText("Heure  : " + activite.getHeureDebut());
+            heureLabel.setText("Heure  : " + debut);
         }
     }
 

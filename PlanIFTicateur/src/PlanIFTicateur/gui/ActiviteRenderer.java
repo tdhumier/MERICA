@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import java.awt.Color;
 import java.awt.Component;
 import java.text.Normalizer;
 import javax.swing.JLabel;
@@ -27,26 +28,21 @@ public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activit
 
         String texteActivite = "";
         activite.setCode(activite.getCode().toUpperCase());
-        texteActivite += activite.getCode() + "   " + activite.getTitre()+ "   (" + activite.getType() + ")";
+        texteActivite += activite.getCode() + "   " + activite.getTitre() + "   (" + activite.getType() + ")";
         texteActivite = Normalizer.normalize(texteActivite, Normalizer.Form.NFD);
         setText(texteActivite);
         setBackground(activite.getCouleur());
-        
 
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
         } else {
             setBackground(activite.getCouleur());
-         
+            setForeground(Color.BLACK);
+
         }
 
         return this;
     }
-    
-  
-    
-    
-    
-    
+
 }
