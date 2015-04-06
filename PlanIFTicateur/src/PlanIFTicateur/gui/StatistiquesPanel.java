@@ -7,9 +7,7 @@ package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import java.awt.GridLayout;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -41,13 +39,10 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
     @Override
     public void notifyUpdatedItems() {
 
-        HashMap nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
-        Set cles = nbCoursParJour.keySet();
-        Iterator it = cles.iterator();
-        while (it.hasNext()) {
-            Object jour = it.next(); // tu peux typer plus finement ici
-            Object nbCours = nbCoursParJour.get(jour); // tu peux typer plus finement ici
-            JLabel statistiqueNbCoursParJourLabel = new JLabel(jour + " : " + nbCours + " cours");
+        ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
+        String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+        for (int i = 0; i < 6; i++) {
+            JLabel statistiqueNbCoursParJourLabel = new JLabel(jourModes[i] + " : " + nbCoursParJour.get(i) + " cours");
             add(statistiqueNbCoursParJourLabel);
         }
 
