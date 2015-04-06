@@ -5,7 +5,6 @@
  */
 package PlanIFTicateur;
 
-
 /**
  *
  * @author Alexandre
@@ -17,8 +16,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       PlanIFTicateur.gui.MainWindow mainWindow = new PlanIFTicateur.gui.MainWindow();
-       mainWindow.setVisible(true);
+        PlanIFTicateur.gui.MainWindow mainWindow = new PlanIFTicateur.gui.MainWindow();
+        mainWindow.setVisible(true);
     }
-    
+
 }
