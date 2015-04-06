@@ -52,7 +52,9 @@ public class MainWindow extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         bottomPanel = new PlanIFTicateur.gui.BottomPanel(this);
         rightPanel = new PlanIFTicateur.gui.RightPanel(this);
-        horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
+        horaireScrollPane = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        horairePanel1 = new PlanIFTicateur.gui.HorairePanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         nouveauMenuItem = new javax.swing.JMenuItem();
@@ -86,20 +88,26 @@ public class MainWindow extends javax.swing.JFrame {
         rightPanel.setPreferredSize(new java.awt.Dimension(300, 244));
         panel.add(rightPanel, java.awt.BorderLayout.EAST);
 
-        horairePanel.setPreferredSize(new java.awt.Dimension(700, 244));
+        horaireScrollPane.setPreferredSize(new java.awt.Dimension(700, 244));
 
-        javax.swing.GroupLayout horairePanelLayout = new javax.swing.GroupLayout(horairePanel);
-        horairePanel.setLayout(horairePanelLayout);
-        horairePanelLayout.setHorizontalGroup(
-            horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout horairePanel1Layout = new javax.swing.GroupLayout(horairePanel1);
+        horairePanel1.setLayout(horairePanel1Layout);
+        horairePanel1Layout.setHorizontalGroup(
+            horairePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 696, Short.MAX_VALUE)
         );
-        horairePanelLayout.setVerticalGroup(
-            horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+        horairePanel1Layout.setVerticalGroup(
+            horairePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
 
-        panel.add(horairePanel, java.awt.BorderLayout.CENTER);
+        jPanel1.add(horairePanel1, java.awt.BorderLayout.CENTER);
+
+        horaireScrollPane.setViewportView(jPanel1);
+
+        panel.add(horaireScrollPane, java.awt.BorderLayout.CENTER);
 
         mainScrollPane.setViewportView(panel);
 
@@ -138,7 +146,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -203,12 +211,14 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private PlanIFTicateur.gui.BottomPanel bottomPanel;
     private javax.swing.JPanel buttonTopPanel;
-    private PlanIFTicateur.gui.HorairePanel horairePanel;
+    private PlanIFTicateur.gui.HorairePanel horairePanel1;
+    private javax.swing.JScrollPane horaireScrollPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToggleButton jToggleButton1;

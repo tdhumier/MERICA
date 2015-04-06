@@ -26,14 +26,15 @@ public class RightPanel extends JPanel implements Serializable {
 
     private MainWindow mainWindow;
     private JPanel listeActivitesPanel;
-    private JPanel detailsActivitePanel;
     private JLabel listeActivitesLabel;
     private JList<Activite> listeActivites;
     DefaultListModel<Activite> listModel;
+    private JPanel detailsActivitePanel;
     private JLabel detailsActiviteLabel;
+    private JPanel statistiquePanel;
+    private JLabel statistiqueLabel;
 
     public RightPanel() {
-        buildUp();
     }
 
     public RightPanel(MainWindow mainWindow) {
@@ -72,12 +73,18 @@ public class RightPanel extends JPanel implements Serializable {
 
         add(detailsActivitePanel);
 
+        statistiquePanel = new JPanel();
+        statistiqueLabel = new JLabel("Statistiques");
+        statistiquePanel.add(statistiqueLabel);
+
+        add(statistiquePanel);
+
         setVisible(true);
     }
 
     public void miseAjourListe() {
         List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
-        activites.stream().forEach((activite) -> {
+        activites.stream().filter((activite) -> (!listModel.contains(activite))).forEach((activite) -> {
             listModel.addElement(activite);
         });
     }
