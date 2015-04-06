@@ -20,7 +20,7 @@ public class CoursClasse extends Activite {
 
     public CoursClasse(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
         super(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
-        this.type = "CoursClasse";
+        this.type = "Cours en Classe";
         this.couleur = couleur;
         int i = 0;
     }

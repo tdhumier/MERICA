@@ -18,7 +18,7 @@ public class CoursDistance extends Activite {
 
     public CoursDistance(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
         super(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
-        this.type = "CoursDistance";
+        this.type = "Cours à Distance";
         this.couleur = couleur;
     }
 

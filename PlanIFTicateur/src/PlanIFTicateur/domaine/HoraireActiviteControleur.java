@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.domaine;
 
+
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Point;
@@ -18,6 +19,8 @@ import java.util.List;
 public class HoraireActiviteControleur {
 
     private Horaire horaire;
+   
+   
 
     public enum ActiviteModes {
 
