@@ -84,18 +84,6 @@ public class MainWindow extends javax.swing.JFrame {
         panel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
         rightPanel.setPreferredSize(new java.awt.Dimension(300, 244));
-
-        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
-        rightPanel.setLayout(rightPanelLayout);
-        rightPanelLayout.setHorizontalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        rightPanelLayout.setVerticalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
-        );
-
         panel.add(rightPanel, java.awt.BorderLayout.EAST);
 
         horairePanel.setPreferredSize(new java.awt.Dimension(700, 244));
@@ -166,6 +154,9 @@ public class MainWindow extends javax.swing.JFrame {
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
             controleur.importerFichiers(fichier.getAbsolutePath());
+            rightPanel.miseAjourListe();
+            rightPanel.revalidate();
+            rightPanel.repaint();
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
