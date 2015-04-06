@@ -11,7 +11,6 @@ import PlanIFTicateur.domaine.activite.CoursClasse;
 import PlanIFTicateur.domaine.activite.CoursDistance;
 import PlanIFTicateur.domaine.activite.CoursHorsDep;
 import PlanIFTicateur.domaine.activite.Laboratoire;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class ActiviteDao {
 
     private LecteurCsv lecteurCsv;
 
-    public ActiviteDao(File file) {
+    public ActiviteDao(String file) {
         this.lecteurCsv = new LecteurCsv(file);
     }
 
@@ -38,10 +37,7 @@ public class ActiviteDao {
 
     private Activite formaterActivite(String[] tab) {  // Retourne une activité formatée à parir d'une ligne du CSV
 
-        System.out.println("Dans ActiviteDao / formaterActivite");
-
         Activite activite = null;
-        System.out.println("Longueur tab :" + tab.length);
 
         String code = tab[0];
         String section = tab[1];

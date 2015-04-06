@@ -6,9 +6,9 @@
 package PlanIFTicateur.domaine.fichier;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,26 +19,23 @@ import java.util.logging.Logger;
  * @author martindeligny1
  */
 public class CsvFileHelper {
-    
-    
-    
-    public static List<String> lecteurFichier(File fichier) {
+
+    public static List<String> lecteurFichier(String fichier) {
 
         List<String> resultat = new ArrayList<>();
-        FileReader lecteur;
-        
+
         try {
-            lecteur = new FileReader(fichier);
-        
-            BufferedReader buffer = new BufferedReader(lecteur);
+
+            BufferedReader buffer = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(fichier), "cp850")); // décodage avec profil cp850 : latin
 
             for (String line = buffer.readLine(); line != null; line = buffer.readLine()) {
                 resultat.add(line);
             }
-        
+
             buffer.close();
-            lecteur.close();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(CsvFileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -7,7 +7,6 @@ package PlanIFTicateur.domaine.fichier;
 
 import PlanIFTicateur.domaine.ListeActivites;
 import PlanIFTicateur.domaine.ListeGrillesCheminement;
-import java.io.File;
 
 /**
  *
@@ -15,22 +14,20 @@ import java.io.File;
  */
 public class GestionnaireFichier {
 
-    private String addresseFichierCOU;
+    private String adresseFichierCOU;
 
-    public GestionnaireFichier(String addresseFichierCOU) {
-        this.addresseFichierCOU = addresseFichierCOU;
+    public GestionnaireFichier(String adresseFichierCOU) {
+        this.adresseFichierCOU = adresseFichierCOU;
     }
 
     public ListeActivites getListeActivites() {
-        File fichierActivite = new File(addresseFichierCOU);
-        ActiviteDao activiteDao = new ActiviteDao(fichierActivite);
+        ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
         return activiteDao.importerActivites();
     }
 
     public ListeGrillesCheminement getGrillesCheminement(ListeActivites listeActivites) {
-        String adresseCheminement = addresseFichierCOU.substring(0, addresseFichierCOU.length() - 4) + ".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
-        File fichierCheminement = new File(adresseCheminement);
-        CheminementDao cheminementDao = new CheminementDao(fichierCheminement);
+        String adresseCheminement = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
+        CheminementDao cheminementDao = new CheminementDao(adresseCheminement);
         return cheminementDao.importerGrillesCheminement(listeActivites);
     }
 }

@@ -5,7 +5,6 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +18,7 @@ public class LecteurCsv {
 
     public final static List<Character> SEPARATEURS = Collections.unmodifiableList(new ArrayList<Character>(Arrays.asList(',', ';', '\t', '|')));
 
-    private File fichier;
+    private String adresseFichier;
     private List<String> lignes;
     private List<String> lignesImport;
     private List<String[]> donnees;
@@ -27,8 +26,8 @@ public class LecteurCsv {
     private LecteurCsv() {
     }
 
-    public LecteurCsv(File file) {
-        this.fichier = file;
+    public LecteurCsv(String file) {
+        this.adresseFichier = file;
 
         // Init
         init();
@@ -76,7 +75,7 @@ public class LecteurCsv {
     }
 
     private void init() {
-        lignesImport = CsvFileHelper.lecteurFichier(fichier);
+        lignesImport = CsvFileHelper.lecteurFichier(adresseFichier);
 
         lignes = new ArrayList<String>();
 
