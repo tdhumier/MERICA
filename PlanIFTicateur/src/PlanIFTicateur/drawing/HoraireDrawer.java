@@ -32,15 +32,20 @@ public class HoraireDrawer {
     }
 
     public void drawGrille(Graphics g) {
-        int largeur = initialDimension.width;
-        int hauteur = initialDimension.height;
-
+        int largeurCase = (int) (initialDimension.width - 90) / 28;
+        int hauteurCase = (int) (initialDimension.height - 30) / 48;
         g.setColor(Color.LIGHT_GRAY);
-        for (int x = 100; x < largeur; x += initialDimension.width / 30) {
-            g.drawLine(x, initialDimension.height / 47, x, hauteur);
+
+        for (int x = 0; x <= 28; x++) {
+            g.drawLine(x * largeurCase + 80, 20, x * largeurCase + 80, hauteurCase * 48 + 20);
         }
-        for (int y = 0; y < hauteur; y += initialDimension.height / 47) {
-            g.drawLine(100, y, largeur, y);
+
+        for (int y = 0; y <= 48; y++) {
+            g.drawLine(80, y * hauteurCase + 20, largeurCase * 28 + 80, y * hauteurCase + 20);
+        }
+        //g.drawLine(largeur - 10, 10, largeur - 10, hauteur - 10);
+        for (int i = 8; i <= 22; i++) {
+            g.drawString(i + "h", 70 + 2 * largeurCase * (i - 8), 15);
         }
     }
 
@@ -50,7 +55,7 @@ public class HoraireDrawer {
             Activite activite = activites.get(i);
             Color couleur = activite.getCouleur();
             g.setColor(couleur);
-            //g.fillOval((int) activite.getHeureDebut(), (int) activite.getJour(), (int) activite.getDuree(), 50);
+
             g.drawRect((int) activite.getHeureDebut(), (int) activite.getJour(), 80, 50);
         }
     }
