@@ -8,6 +8,7 @@ package PlanIFTicateur.domaine;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Point;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -53,6 +54,10 @@ public class HoraireActiviteControleur {
 
     public List<Activite> getActivitesNonAssignees() {
         return horaire.getListeActivite().getActivitesNonAssignees();
+    }
+
+    public HashMap getNbCoursSemaine() {
+        return horaire.getStatistiques().getNbCoursSemaine(horaire);
     }
 
 }
