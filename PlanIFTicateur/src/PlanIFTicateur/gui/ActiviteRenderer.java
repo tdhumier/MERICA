@@ -7,6 +7,7 @@ package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.activite.Activite;
 import java.awt.Component;
+import java.text.Normalizer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -24,7 +25,12 @@ public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activit
     @Override
     public Component getListCellRendererComponent(JList<? extends Activite> list, Activite activite, int index, boolean isSelected, boolean cellHasFocus) {
 
-        setText(activite.getCode());
+        String texteActivite = "";
+        activite.setCode(activite.getCode().toUpperCase());
+        texteActivite += activite.getCode() + "   " + activite.getTitre()+ "   (" + activite.getType() + ")";
+        texteActivite = Normalizer.normalize(texteActivite, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        setText(texteActivite);
+        
 
         if (isSelected) {
             setBackground(list.getSelectionBackground());
@@ -36,4 +42,8 @@ public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activit
 
         return this;
     }
+    
+    
+    
+    
 }

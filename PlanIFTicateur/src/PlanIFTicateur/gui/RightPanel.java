@@ -34,6 +34,17 @@ public class RightPanel extends JPanel implements Serializable {
     private JPanel statistiquePanel;
     private JLabel statistiqueLabel;
 
+    private JLabel codeLabel;
+    private JLabel sectionLabel;
+    private JLabel titreLabel;
+    private JLabel profLabel;
+    private JLabel typeLabel;
+    private JLabel dureeLabel;
+    private JLabel debutMinLabel;
+    private JLabel finMaxLabel;
+    private JLabel jourLabel;
+    private JLabel heureLabel;
+    
     public RightPanel() {
     }
 
@@ -70,8 +81,27 @@ public class RightPanel extends JPanel implements Serializable {
 
         detailsActiviteLabel = new JLabel("Détails Activité");
         detailsActivitePanel.add(detailsActiviteLabel);
-
+      
+        
+        codeLabel = new JLabel("Code de l'activité : ");
+        sectionLabel = new JLabel("Section : ");
+        titreLabel = new JLabel("Titre : ");
+        profLabel = new JLabel("Professeur : ");
+        typeLabel = new JLabel("Type : ");
+        dureeLabel = new JLabel("Durée : ");
+        debutMinLabel = new JLabel("Début minimal possible : ");
+        finMaxLabel = new JLabel("Fin maximal possible :");
+        jourLabel = new JLabel("Jour : ");
+        heureLabel = new JLabel("Heure  : ");
+        
+        
+        
+        
+        
         add(detailsActivitePanel);
+        
+        
+        
 
         statistiquePanel = new JPanel();
         statistiqueLabel = new JLabel("Statistiques");
@@ -82,6 +112,8 @@ public class RightPanel extends JPanel implements Serializable {
         setVisible(true);
     }
 
+    
+    
     public void miseAjourListe() {
         List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
         activites.stream().filter((activite) -> (!listModel.contains(activite))).forEach((activite) -> {
