@@ -6,8 +6,7 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.domaine.activite.CoursClasse;
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.Serializable;
@@ -48,19 +47,17 @@ public class RightPanel extends JPanel implements Serializable {
         setLayout(new GridLayout(0, 1));
 
         listeActivitesPanel = new JPanel();
+        listeActivitesPanel.setLayout(new BorderLayout());
         listeActivitesLabel = new JLabel("Liste Activites");
-        listeActivitesPanel.setBackground(Color.red);
-        listeActivitesPanel.add(listeActivitesLabel);
+
+        listeActivitesPanel.add(listeActivitesLabel, BorderLayout.NORTH);
 
         List<Activite> activites = mainWindow.controleur.getActiviteListe();
-        System.out.println(activites.toString());
-        CoursClasse coursClasse = new CoursClasse("glo-2004", "A", "Génie Logiciel", "JG", "Classe", 3.0, 8.5, 14.5, 1, 1.0);
-        activites.add(coursClasse);
         listeActivites = new JList(new Vector(activites));
         listeActivites.setVisibleRowCount(10);
         listeActivites.setCellRenderer(new ActiviteRenderer());
 
-        listeActivitesPanel.add(listeActivites);
+        listeActivitesPanel.add(listeActivites, BorderLayout.CENTER);
         add(listeActivitesPanel);
 
         detailsActivitePanel = new JPanel();
