@@ -5,12 +5,11 @@
  */
 package PlanIFTicateur.gui;
 
+import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.drawing.HoraireDrawer;
 import PlanIFTicateur.gui.listeners.mouse.MotionListener;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
@@ -18,7 +17,7 @@ import javax.swing.border.BevelBorder;
  *
  * @author tristandhumieres
  */
-public class HorairePanel extends JPanel implements MouseMotionListener {
+public class HorairePanel extends JPanel implements HoraireControleurObserveur {
 
     private Dimension initialDimension;
     private MainWindow mainWindow;
@@ -35,11 +34,12 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension((int) (width * 0.7), 800));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
-        setVisible(true);
         int largeurCase = (int) (width * 0.7 - 90) / 28;
         int hauteurCase = (int) 770 / 48;
         initialDimension = new Dimension(largeurCase, hauteurCase);
-        System.out.println("width: " + initialDimension.width);
+        mainWindow.controleur.registerObserver(this);
+        setVisible(true);
+
     }
 
     @Override
@@ -53,12 +53,7 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
+    public void notifyUpdatedItems() {
+        repaint();
     }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
 }
