@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class HoraireDrawer {
 
     public void draw(Graphics g) {
         drawGrille(g);
-        drawActivite(g);
+        drawActivites(g);
     }
 
     public void drawGrille(Graphics g) {
@@ -63,7 +64,6 @@ public class HoraireDrawer {
             } else {
                 g2.drawLine(80, y * hauteurCase + 20, largeurCase * 28 + 80, y * hauteurCase + 20);
             }
-
         }
 
         //Affiche les heures
@@ -72,14 +72,23 @@ public class HoraireDrawer {
         }
     }
 
-    public void drawActivite(Graphics g) {
-        List<Activite> activites = controleur.getActiviteListe();
+    public void drawActivites(Graphics g) {
+        List<Activite> activites = controleur.getActivitesAssignees();
         for (int i = 0; i < activites.size(); i++) {
-            Activite activite = activites.get(i);
-            Color couleur = activite.getCouleur();
-            g.setColor(couleur);
-
-            g.drawRect((int) activite.getHeureDebut(), (int) activite.getJour(), 80, 50);
+            drawActivite(g, activites.get(i));
         }
+    }
+
+    private void drawActivite(Graphics g, Activite activite) {
+        int largeurCase = (int) (initialDimension.width - 90) / 28;
+        int hauteurCase = (int) (initialDimension.height - 30) / 48;
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(activite.getCouleur());
+        int x = (int) (largeurCase * ((activite.getHeureDebut() - 8) * 2) + 80);
+        int y = hauteurCase * (activite.getJour() - 1) * 8 + 20;
+        int x1 = (int) (largeurCase * activite.getDuree() * 2);
+        g2.fill(new Rectangle.Double(x, y, x1, hauteurCase));
+        g2.setColor(Color.black);
+        g2.drawString(activite.getCode(), (int) (x + (activite.getDuree() - 1) * largeurCase), y + hauteurCase - 4);
     }
 }

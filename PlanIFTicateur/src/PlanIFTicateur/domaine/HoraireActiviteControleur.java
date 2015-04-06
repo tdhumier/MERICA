@@ -36,8 +36,8 @@ public class HoraireActiviteControleur {
 
     }
 
-    public List<Activite> getActiviteListe() {
-        return horaire.getListeActivite().getListeActivites();
+    public List<Activite> getActivitesAssignees() {
+        return horaire.getListeActivite().getActiviteAssignees();
     }
 
     public int getNombreActivite() {

@@ -55,4 +55,8 @@ public class ListeActivites {
     public List<Activite> getActivitesNonAssignees() {
         return listeActivites.stream().filter(x -> !x.isAssignee()).collect(Collectors.toList());
     }
+
+    public List<Activite> getActiviteAssignees() {
+        return listeActivites.stream().filter(x -> x.isAssignee()).collect(Collectors.toList());
+    }
 }
