@@ -60,10 +60,10 @@ public class ActiviteDao {
             case "Classe":
                 activite = new CoursClasse(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
-            case "Distance":
+            case "À distance":
                 activite = new CoursDistance(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
-            case "HorsDep":
+            case "Hors département":
                 activite = new CoursHorsDep(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
                 break;
             case "Laboratoire":
