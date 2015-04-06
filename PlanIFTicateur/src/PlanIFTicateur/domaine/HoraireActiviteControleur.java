@@ -51,4 +51,8 @@ public class HoraireActiviteControleur {
         horaire.setGrillesCheminement(listeGrillesCheminement);
     }
 
+    public List<Activite> getActivitesNonAssignees() {
+        return horaire.getListeActivite().getActivitesNonAssignees();
+    }
+
 }
