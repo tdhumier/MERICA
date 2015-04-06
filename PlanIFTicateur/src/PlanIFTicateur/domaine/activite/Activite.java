@@ -57,25 +57,22 @@ public abstract class Activite {
     public String getCode() {
         return code;
     }
+    public void setCode(String code)
+    {
+        this.code = code;
+    }
+    
     public String getTitre()
     {
         return titre;
-    }
-    public void setTitre(String titre)
-    {
-        this.titre = titre;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public double getDuree() {
         return duree;
     }
-
-    public void setDuree(float duree) {
-        this.duree = duree;
+    public String getSection()
+    {
+        return section;
     }
 
     public int getJour() {
@@ -96,10 +93,6 @@ public abstract class Activite {
 
     public String getProfesseur() {
         return professeur;
-    }
-
-    public void setProfesseur(String professeur) {
-        this.professeur = professeur;
     }
 
     public double getHeureDebutMin() {

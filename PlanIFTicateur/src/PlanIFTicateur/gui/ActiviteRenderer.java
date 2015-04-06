@@ -28,20 +28,23 @@ public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activit
         String texteActivite = "";
         activite.setCode(activite.getCode().toUpperCase());
         texteActivite += activite.getCode() + "   " + activite.getTitre()+ "   (" + activite.getType() + ")";
-        texteActivite = Normalizer.normalize(texteActivite, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        texteActivite = Normalizer.normalize(texteActivite, Normalizer.Form.NFD);
         setText(texteActivite);
+        setBackground(activite.getCouleur());
         
 
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
         } else {
-            setBackground(list.getBackground());
-            setForeground(list.getForeground());
+            setBackground(activite.getCouleur());
+         
         }
 
         return this;
     }
+    
+  
     
     
     

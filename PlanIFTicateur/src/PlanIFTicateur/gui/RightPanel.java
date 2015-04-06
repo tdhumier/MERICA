@@ -9,14 +9,25 @@ import PlanIFTicateur.domaine.activite.Activite;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.TransferHandler;
+
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -31,6 +42,7 @@ public class RightPanel extends JPanel implements Serializable {
     DefaultListModel<Activite> listModel;
     private JPanel detailsActivitePanel;
     private JLabel detailsActiviteLabel;
+    private JPanel rightCenterPanel;
     private JPanel statistiquePanel;
     private JLabel statistiqueLabel;
 
@@ -73,33 +85,60 @@ public class RightPanel extends JPanel implements Serializable {
         }
         listeActivites = new JList(listModel);
         listeActivites.setCellRenderer(new ActiviteRenderer());
-
+       
+        
+        
+        listeActivites.addListSelectionListener(new ListSelectionListener()
+                {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                modifierLabel(listeActivites.getSelectedValue());
+            }
+                });
+        
+        listeActivites.setDragEnabled(true);
+        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listeActivites.setTransferHandler(new ListTransferHandler());
+        
+        
+        
         listeActivitesPanel.add(new JScrollPane(listeActivites), BorderLayout.CENTER);
         add(listeActivitesPanel);
 
-        detailsActivitePanel = new JPanel();
+        rightCenterPanel = new JPanel(new BorderLayout());
 
-        detailsActiviteLabel = new JLabel("Détails Activité");
-        detailsActivitePanel.add(detailsActiviteLabel);
-      
+        detailsActiviteLabel = new JLabel("\t Détails Activité \n\n");
+        detailsActiviteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+       
+        detailsActivitePanel = new JPanel(new GridLayout(10,1));   
         
-        codeLabel = new JLabel("Code de l'activité : ");
+        codeLabel = new JLabel("Code activité : ");
         sectionLabel = new JLabel("Section : ");
         titreLabel = new JLabel("Titre : ");
         profLabel = new JLabel("Professeur : ");
         typeLabel = new JLabel("Type : ");
         dureeLabel = new JLabel("Durée : ");
         debutMinLabel = new JLabel("Début minimal possible : ");
-        finMaxLabel = new JLabel("Fin maximal possible :");
+        finMaxLabel = new JLabel("Fin maximal possible : ");
         jourLabel = new JLabel("Jour : ");
         heureLabel = new JLabel("Heure  : ");
         
+        detailsActivitePanel.add( codeLabel);
+        detailsActivitePanel.add(titreLabel);
+        detailsActivitePanel.add(sectionLabel);
+        detailsActivitePanel.add(profLabel); 
+        detailsActivitePanel.add(typeLabel);
+        detailsActivitePanel.add(dureeLabel);
+        detailsActivitePanel.add(debutMinLabel);
+        detailsActivitePanel.add(finMaxLabel);
+        detailsActivitePanel.add( jourLabel);
+        detailsActivitePanel.add(heureLabel);
+                   
+        rightCenterPanel.add(detailsActiviteLabel, BorderLayout.PAGE_START);
+        rightCenterPanel.add(detailsActivitePanel, BorderLayout.CENTER);
         
-        
-        
-        
-        add(detailsActivitePanel);
-        
+        add(rightCenterPanel);
+      
         
         
 
@@ -120,4 +159,28 @@ public class RightPanel extends JPanel implements Serializable {
             listModel.addElement(activite);
         });
     }
+    
+    public void modifierLabel(Activite activite)
+    {
+        codeLabel.setText("Code activité : " + activite.getCode());
+        sectionLabel.setText("Section : " + activite.getSection());
+        titreLabel.setText("Titre : " + activite.getTitre());
+        profLabel.setText("Professeur : " + activite.getProfesseur());
+        typeLabel.setText("Type : " + activite.getType());
+        dureeLabel.setText("Durée : " + activite.getDuree() + "heures");
+        debutMinLabel.setText("Début minimal possible : " + activite.getHeureDebutMin() + " heures");
+        finMaxLabel.setText("Fin maximal possible : " + activite.getHeureFinMax() + " heures");
+        if(activite.getJour() != 0 || activite.getHeureDebut() != 0)
+        {
+            jourLabel.setText("Jour : " + getNomJour(activite.getJour()));
+            heureLabel.setText("Heure  : " + activite.getHeureDebut());
+        }
+    }
+    public String getNomJour(int i)
+    {
+        String[] JourModes= {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+      
+        return JourModes[i+1];
+    }
+    
 }
