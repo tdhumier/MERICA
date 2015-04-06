@@ -45,20 +45,24 @@ public class HoraireDrawer {
 
         //Dessine les lignes verticale
         for (int x = 0; x <= 28; x++) {
+            g2.setColor(Color.LIGHT_GRAY);
             g2.setStroke(s);
             if (x % 2 == 0) {
+                g2.setColor(Color.GRAY);
                 g2.setStroke(new BasicStroke(2));
             }
             g2.drawLine(x * largeurCase + 80, 20, x * largeurCase + 80, hauteurCase * 48 + 20);
         }
-
+        g2.setColor(Color.GRAY);
         g2.setStroke(new BasicStroke(2));
         g2.drawLine(10, 20, 10, hauteurCase * 48 + 20);
 
         //Dessine les lignes horizontale
         for (int y = 0; y <= 48; y++) {
+            g2.setColor(Color.LIGHT_GRAY);
             g2.setStroke(s);
             if (y % 8 == 0) {
+                g2.setColor(Color.GRAY);
                 g2.setStroke(new BasicStroke(2));
                 g2.drawLine(10, y * hauteurCase + 20, largeurCase * 28 + 80, y * hauteurCase + 20);
             } else {
@@ -68,7 +72,15 @@ public class HoraireDrawer {
 
         //Affiche les heures
         for (int i = 8; i <= 22; i++) {
+            g2.setColor(Color.GRAY);
             g2.drawString(i + "h", 70 + 2 * largeurCase * (i - 8), 15);
+        }
+
+        //Affiche les jours
+        for (int i = 0; i < 6; i++) {
+            String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+            g2.setColor(Color.GRAY);
+            g2.drawString(jourModes[i], 20, 90 + i * hauteurCase * 8);
         }
     }
 
