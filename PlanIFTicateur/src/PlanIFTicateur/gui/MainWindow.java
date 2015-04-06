@@ -152,6 +152,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+ 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentAdded
@@ -230,4 +231,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panel;
     private PlanIFTicateur.gui.RightPanel rightPanel;
     // End of variables declaration//GEN-END:variables
+   
+    
+  
 }

@@ -9,6 +9,8 @@ import PlanIFTicateur.drawing.HoraireDrawer;
 import PlanIFTicateur.gui.listeners.mouse.MotionListener;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
@@ -24,6 +26,7 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
     private MainWindow mainWindow;
 
     public HorairePanel() {
+    
     }
 
     public Dimension getInitialDimension() {
@@ -51,6 +54,9 @@ public class HorairePanel extends JPanel implements MouseMotionListener {
         }
         this.addMouseMotionListener(new MotionListener(mainWindow));
     }
+    
+    
+    
 
     @Override
     public void mouseDragged(MouseEvent e) {

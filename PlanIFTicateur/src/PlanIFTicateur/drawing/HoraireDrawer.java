@@ -38,6 +38,10 @@ public class HoraireDrawer {
     public void drawGrille(Graphics g) {
         int largeurCase = initialDimension.width;
         int hauteurCase = initialDimension.height;
+        
+        g.setColor(Color.WHITE);
+        g.fillRect(10, 20, largeurCase*28+70, hauteurCase*48);
+        
         g.setColor(Color.LIGHT_GRAY);
 
         Graphics2D g2 = (Graphics2D) g;
@@ -78,17 +82,18 @@ public class HoraireDrawer {
             drawActivite(g, activites.get(i));
         }
     }
-
+    
+    
     private void drawActivite(Graphics g, Activite activite) {
         int largeurCase = initialDimension.width;
         int hauteurCase = initialDimension.height;
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(activite.getCouleur());
+        g2.setColor(new Color(activite.getCouleur().getRed(),activite.getCouleur().getGreen(),activite.getCouleur().getBlue(), 200));
         int x = (int) (largeurCase * ((activite.getHeureDebut() - 8) * 2) + 80);
         int y = hauteurCase * (activite.getJour() - 1) * 8 + 20;
         int x1 = (int) (largeurCase * activite.getDuree() * 2);
         g2.fill(new Rectangle.Double(x, y, x1, hauteurCase));
         g2.setColor(Color.black);
-        g2.drawString(activite.getCode(), (int) (x + (activite.getDuree() - 1) * largeurCase), y + hauteurCase - 4);
+        g2.drawString(activite.getCode().toUpperCase(), (int) (x + (activite.getDuree() - 1) * largeurCase), y + hauteurCase - 4);
     }
 }
