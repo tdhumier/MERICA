@@ -21,15 +21,22 @@ public class Horaire {
     private ListeActivites listeActivite;
     private ListeGrillesCheminement grillesCheminement;
     private ListeConflits listeConflits;
+    private Statistique statistique;
 
     public Horaire() {
         this.listeActivite = new ListeActivites();
         this.grillesCheminement = new ListeGrillesCheminement();
         this.listeConflits = new ListeConflits();
+        this.statistique = new Statistique();
+
     }
 
     public ListeActivites getListeActivite() {
         return listeActivite;
+    }
+
+    public Statistique getStatistiques() {
+        return statistique;
     }
 
     public void setListeActivite(ListeActivites listeActivite) {
