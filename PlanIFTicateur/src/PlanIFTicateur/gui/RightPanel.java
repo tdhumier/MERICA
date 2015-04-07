@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.Serializable;
@@ -19,7 +20,7 @@ import javax.swing.border.BevelBorder;
 public class RightPanel extends JPanel implements Serializable {
 
     private MainWindow mainWindow;
-    private ListeActivitesPanel listeActivitesPanel;
+    protected ListeActivitesPanel listeActivitesPanel;
     private DetailsActivitePanel detailsActivitePanel;
     private StatistiquesPanel statistiquesPanel;
 
@@ -55,5 +56,9 @@ public class RightPanel extends JPanel implements Serializable {
     public void updateDetailsActivitePanel(Activite activite) {
         detailsActivitePanel.updateLabel(activite);
         detailsActivitePanel.repaint();
+    }
+    public ListeActivitesPanel getListeActivitesPanel()
+    {
+        return listeActivitesPanel;
     }
 }

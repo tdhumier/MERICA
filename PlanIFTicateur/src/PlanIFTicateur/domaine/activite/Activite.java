@@ -186,6 +186,10 @@ public abstract class Activite {
         this.point.y = dimension.height * (getJour() - 1) * 8 + 20;
     }
 
+    public void setPoint(Point point) {
+        this.point = point;
+    }
+
     public void deplacerActivite(Point point, double heure, int jour) {
         this.point = point;
         this.heureDebut = heure;

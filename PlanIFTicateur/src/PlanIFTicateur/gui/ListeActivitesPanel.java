@@ -8,15 +8,19 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
-import PlanIFTicateur.gui.listeners.mouse.MySecondMouseHandleListener;
+import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.BorderLayout;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.TransferHandler;
 
 /**
  *
@@ -28,6 +32,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
     private JLabel listeActivitesLabel;
     private JList<Activite> listeActivites;
     DefaultListModel<Activite> listModel;
+    TransferHandler th;
 
     public ListeActivitesPanel() {
     }
@@ -36,17 +41,13 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         this.mainWindow = mainWindow;
         mainWindow.controleur.registerObserver(this);
         buildUp();
+
     }
 
     private void buildUp() {
 
         setLayout(new BorderLayout());
         listeActivitesLabel = new JLabel("Liste Activites");
-
-        //C'est ici que ça ce passe
-        MySecondMouseHandleListener mouseHandleListener = new MySecondMouseHandleListener();
-        listeActivitesLabel.addMouseListener(mouseHandleListener);
-        listeActivitesLabel.addMouseMotionListener(mouseHandleListener);
 
         add(listeActivitesLabel, BorderLayout.NORTH);
 
@@ -61,8 +62,26 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         listeActivites.addListSelectionListener(new ListeSelectionListener(mainWindow));
-        listeActivites.setDragEnabled(true);
+
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
+
+        listeActivites.setDragEnabled(true);
+        listeActivites.addMouseListener(new ListActiviteMouseListener(mainWindow));
+
+    }
+
+    private class ExportTransferHandler extends TransferHandler {
+
+        @Override
+        public int getSourceActions(JComponent c) {
+            return TransferHandler.MOVE;
+        }
+
+        @Override
+        protected Transferable createTransferable(JComponent c) {
+            return new StringSelection(listeActivites.getSelectedValue().getCode());
+        }
+
     }
 
     @Override
@@ -72,4 +91,9 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
             listModel.addElement(activite);
         });
     }
+
+    public JList<Activite> getListeActivites() {
+        return listeActivites;
+    }
+
 }
