@@ -40,13 +40,11 @@ public class CheminementDao {
         GrilleCheminement grille = new GrilleCheminement();
         ArrayList<Activite> listeActivites = new ArrayList<>();
         Integer taille = tab.length;
-
         for (int i = 3; i < taille; i++) {
             if (activites.getActiviteByCode(tab[i]) != null) {
                 listeActivites.add(activites.getActiviteByCode(tab[i]));
             }
         }
-
         grille.setNomProgramme(tab[0]);
         grille.setVersion(tab[1]);
         grille.setSession(tab[2]);

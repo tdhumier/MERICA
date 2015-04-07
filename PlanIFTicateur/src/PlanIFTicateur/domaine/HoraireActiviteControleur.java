@@ -78,10 +78,6 @@ public class HoraireActiviteControleur {
         return activites;
     }
 
-    public int getNombreActivite() {
-        return horaire.getListeActivite().getListeActivites().size();
-    }
-
     public void importerFichiers(String path, Dimension dimension) {
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         ListeActivites listeActivites = gestionnaireFichier.getListeActivites();
@@ -118,6 +114,7 @@ public class HoraireActiviteControleur {
     }
 
     public void setActiviteSelectionnee(Activite activite, Boolean state) {
+        horaire.getListeActivite().setActivitesANonSlectionnee();
         activite.setIsSelected(state);
     }
 

@@ -48,10 +48,6 @@ public class Horaire {
         this.grillesCheminement = grillesCheminement;
     }
 
-    public void genererAutomatiquement() {
-
-    }
-
     public void deplacerActivite(Activite activite, int x, int y) {
         activite.deplacerActivite(x, y);
     }
@@ -77,16 +73,8 @@ public class Horaire {
     }
 
     public void verifierHoraireActivite(Activite activite) {
-        /*if (!activite.horaireValide()) {
-         this.valide = false;
-         Conflit conflitHoraire = new ConflitHoraire(activite);
-         listeConflits.ajouterConflit(conflitHoraire);
-         }*/
         List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
         this.valide = !(!activite.horaireValide() || !activitesConflitCheminement.isEmpty());
-        /*activitesConflitCheminement.stream().map((activiteEnConflit) -> new ConflitCheminement(activite, activiteEnConflit)).forEach((conflitCheminement) -> {
-         listeConflits.ajouterConflit(conflitCheminement);
-         });*/
     }
 
     public boolean estValide() {

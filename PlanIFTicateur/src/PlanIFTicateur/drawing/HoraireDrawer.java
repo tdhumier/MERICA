@@ -90,7 +90,9 @@ public class HoraireDrawer {
     public void drawActivites(Graphics g) {
         List<Activite> activites = mainWindow.controleur.getActivitesAssignees();
         for (int i = 0; i < activites.size(); i++) {
-            drawActivite(g, activites.get(i));
+            if (activites.get(i).getPoint().x != 0) {
+                drawActivite(g, activites.get(i));
+            }
             if (activites.get(i).isSelected()) {
                 drawSelection(g, activites.get(i));
             }
@@ -107,7 +109,9 @@ public class HoraireDrawer {
 
     private void drawSelection(Graphics g, Activite activite) {
         g.setColor(Color.YELLOW);
-        g.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
+        if (activite.getPoint().x != 0) {
+            g.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
+        }
         if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) {
             disableCases(g, activite);
         }

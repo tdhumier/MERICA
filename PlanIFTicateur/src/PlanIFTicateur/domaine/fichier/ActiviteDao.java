@@ -51,7 +51,7 @@ public class ActiviteDao {
         if (tab.length > 8) {
             jour = Integer.parseInt(tab[8]);
         }
-        double heureDebut = 0;
+        double heureDebut = 0.0d;
         if (tab.length > 9) {
             heureDebut = Double.parseDouble(tab[9]);
         }

@@ -80,4 +80,10 @@ public class ListeActivites {
     public Optional<Activite> getActiviteSelectionnee() {
         return listeActivites.stream().filter(x -> x.isSelected()).findFirst();
     }
+
+    public void setActivitesANonSlectionnee() {
+        listeActivites.stream().forEach((activite) -> {
+            activite.setIsSelected(false);
+        });
+    }
 }

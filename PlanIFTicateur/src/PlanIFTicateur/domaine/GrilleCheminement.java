@@ -63,7 +63,7 @@ public class GrilleCheminement {
     }
 
     public boolean activitePresente(Activite activite) {
-        return listeActivite.stream().filter(x -> x.equals(x)).findFirst().isPresent();
+        return listeActivite.stream().filter(x -> x.equals(activite)).findFirst().isPresent();
     }
 
     public List<Activite> activitesAuMemeHoraire(Activite activite) {

@@ -39,9 +39,9 @@ public class ListeGrillesCheminement {
 
     public List<Activite> activitesCheminementsDejaALHoraire(Activite activite) {
         List<Activite> activitesCheminement = new ArrayList<>();
-        grillesCheminement.stream().forEach((grilleCheminement) -> {
+        for (GrilleCheminement grilleCheminement : grillesCheminement) {
             activitesCheminement.addAll(grilleCheminement.activitesCheminementDejaAlHoraire(activite));
-        });
+        }
         return activitesCheminement;
     }
 }

@@ -145,7 +145,15 @@ public abstract class Activite {
     }
 
     public boolean memeHoraire(Activite autreActivite) {
-        return (getJour() == autreActivite.getJour() && (getHeureDebut() == autreActivite.getHeureDebut() || (getHeureDebut() > autreActivite.getHeureDebut() && getHeureDebut() < (autreActivite.getHeureDebut() + autreActivite.getDuree())) || (getHeureDebut() > autreActivite.getHeureDebut() && (getHeureDebut() + getDuree()) > (autreActivite.getHeureDebut() + autreActivite.getDuree()))));
+        if (autreActivite.isAssignee() && getJour() == autreActivite.getJour()) {
+            if ((getHeureDebut() + getDuree()) > autreActivite.getHeureDebut() && getHeureDebut() < autreActivite.getHeureDebut()) {
+                return true;
+            } else {
+                return (autreActivite.getHeureDebut() + autreActivite.getDuree()) > getHeureDebut() && autreActivite.getHeureDebut() < getHeureDebut();
+            }
+        } else {
+            return false;
+        }
     }
 
     public boolean isAssignee() {
