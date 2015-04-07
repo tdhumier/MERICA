@@ -59,6 +59,11 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
+    public void unasignActivite(Activite activite) {
+        horaire.resetPosition(activite);
+        notifyObserversForUpdatedItems();
+    }
+
     public Optional<Activite> getActiviteSelectionnee() {
         return horaire.getListeActivite().getActiviteSelectionnee();
     }
