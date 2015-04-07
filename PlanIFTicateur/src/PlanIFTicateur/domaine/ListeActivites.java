@@ -37,14 +37,19 @@ public class ListeActivites {
     }
 
     public Activite getActiviteByCode(String code) {
+        Activite act = null;
         for (Activite activite : listeActivites) {
             if (activite.getCode().equals(code)) {
-                return activite;
-            } else {
-                return new CoursHorsDep(code, "NC", "NC", "NC", "NC", 3, 8, 22, 0, 0.0d);
+                act = activite;
             }
         }
-        return null;
+        if (act == null) {
+            Activite coursHorsDep = new CoursHorsDep(code, "NC", "NC", "NC", "NC", 3, 8, 22, 0, 0.0d);
+            listeActivites.add(coursHorsDep);
+            act = coursHorsDep;
+        }
+
+        return act;
     }
 
     public List<Activite> getActivitesByJour(int jour) {
