@@ -130,10 +130,16 @@ public class HoraireDrawer {
             while (keySetIterator.hasNext()) {
                 Integer key = keySetIterator.next();
                 int jour = key;
-                double heureDebut = source.get(key).get(0);
+                double heureDebutTest = source.get(key).get(0);
+                int caseDebut;
+                if ((int) heureDebutTest == heureDebutTest) {
+                    caseDebut = ((int) heureDebutTest - 8) * 2 * largeurCase;
+                } else {
+                    caseDebut = (((int) heureDebutTest - 8) * 2 + 1) * largeurCase;
+                }
                 double duree = source.get(key).get(1);
 
-                g2.fillRect(80 + ((int) heureDebut - 8) * 2 * largeurCase, 20 + (jour - 1) * 8 * hauteurCase, (int) duree * 2 * largeurCase, 8 * hauteurCase);
+                g2.fillRect(80 + caseDebut, 20 + (jour - 1) * 8 * hauteurCase, (int) duree * 2 * largeurCase, 8 * hauteurCase);
             }
         }
 
