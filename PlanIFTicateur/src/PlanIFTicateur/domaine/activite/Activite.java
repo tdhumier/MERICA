@@ -104,7 +104,7 @@ public abstract class Activite {
         return heureDebut;
     }
 
-    public void setHeureDebut(float heureDebut) {
+    public void setHeureDebut(double heureDebut) {
         this.heureDebut = heureDebut;
     }
 

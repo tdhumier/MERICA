@@ -96,7 +96,11 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
             Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
             if (activite.isPresent() && getHeure(x) != 0.0d && getJour(y) != 0) {
                 Point point = new Point(getXPosition(x), getYPosition(y));
-                mainWindow.controleur.deplacerActivite(activite.get(), point, getHeure(x), getJour(y));
+                if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) {
+                    mainWindow.controleur.deplacerActiviteAvecVerification(activite.get(), point, getHeure(x), getJour(y), mainWindow.horairePanel.getInitialDimension());
+                } else {
+                    mainWindow.controleur.deplacerActivite(activite.get(), point, getHeure(x), getJour(y));
+                }
             } else if (activite.isPresent()) {
                 mainWindow.controleur.resetPosition(activite.get(), mainWindow.horairePanel.getInitialDimension());
             }

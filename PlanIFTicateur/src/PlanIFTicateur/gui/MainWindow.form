@@ -100,10 +100,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+            <Component class="javax.swing.JToggleButton" name="verificationAutoBoutton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Validation Automatique"/>
+                <Property name="text" type="java.lang.String" value="V&#xe9;rification Automatique"/>
               </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="verificationAutoBouttonStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verificationAutoBouttonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

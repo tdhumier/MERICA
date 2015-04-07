@@ -6,9 +6,8 @@
 package PlanIFTicateur.domaine;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.domaine.conflit.Conflit;
-import PlanIFTicateur.domaine.conflit.ConflitCheminement;
-import PlanIFTicateur.domaine.conflit.ConflitHoraire;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,19 +52,48 @@ public class Horaire {
 
     }
 
-    public void deplacerActivite(Activite activite) {
+    public void deplacerActivite(Activite activite, int x, int y) {
+        activite.deplacerActivite(x, y);
+    }
 
+    public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
+        activite.deplacerActivite(point, heure, jour);
+    }
+
+    public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
+        double oldHeure = activite.getHeureDebut();
+        int oldJour = activite.getJour();
+        activite.setHeureDebut(heure);
+        activite.setJour(jour);
+        verifierHoraireActivite(activite);
+        if (this.estValide()) {
+            activite.deplacerActivite(point.x, point.y);
+        } else {
+            activite.setHeureDebut(oldHeure);
+            activite.setJour(oldJour);
+            resetPosition(activite, dimension);
+        }
     }
 
     public void verifierHoraireActivite(Activite activite) {
-        if (!activite.horaireValide()) {
-            Conflit conflitHoraire = new ConflitHoraire(activite);
-            listeConflits.ajouterConflit(conflitHoraire);
-        }
+        /*if (!activite.horaireValide()) {
+         this.valide = false;
+         Conflit conflitHoraire = new ConflitHoraire(activite);
+         listeConflits.ajouterConflit(conflitHoraire);
+         }*/
         List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
-        activitesConflitCheminement.stream().map((activiteEnConflit) -> new ConflitCheminement(activite, activiteEnConflit)).forEach((conflitCheminement) -> {
-            listeConflits.ajouterConflit(conflitCheminement);
-        });
+        if (!activite.horaireValide() || !activitesConflitCheminement.isEmpty()) {
+            this.valide = false;
+        } else {
+            this.valide = true;
+        }
+        /*activitesConflitCheminement.stream().map((activiteEnConflit) -> new ConflitCheminement(activite, activiteEnConflit)).forEach((conflitCheminement) -> {
+         listeConflits.ajouterConflit(conflitCheminement);
+         });*/
+    }
+
+    public boolean estValide() {
+        return this.valide;
     }
 
     public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
@@ -78,5 +106,9 @@ public class Horaire {
             result.put(item.getJour(), liste);
         });
         return result;
+    }
+
+    public void resetPosition(Activite activite, Dimension dimension) {
+        activite.setPoint(dimension);
     }
 }

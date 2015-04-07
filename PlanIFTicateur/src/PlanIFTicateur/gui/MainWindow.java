@@ -11,6 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -19,12 +20,18 @@ import javax.swing.JFileChooser;
 public class MainWindow extends javax.swing.JFrame {
 
     public HoraireActiviteControleur controleur;
+    private VerificationMode verificationMode;
+
+    public enum VerificationMode {
+
+        CHECKED, UNCHECKED
+    }
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
-
+        this.verificationMode = VerificationMode.UNCHECKED;
         controleur = new HoraireActiviteControleur();
         initComponents();
 
@@ -33,6 +40,10 @@ public class MainWindow extends javax.swing.JFrame {
                 setExtendedState(MAXIMIZED_BOTH);
             }
         });
+    }
+
+    public VerificationMode getVerificationMode() {
+        return verificationMode;
     }
 
     /**
@@ -47,7 +58,7 @@ public class MainWindow extends javax.swing.JFrame {
         list1 = new java.awt.List();
         mainPanel = new javax.swing.JPanel();
         buttonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
-        jToggleButton1 = new javax.swing.JToggleButton();
+        verificationAutoBoutton = new javax.swing.JToggleButton();
         mainScrollPane = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
         bottomPanel = new PlanIFTicateur.gui.BottomPanel(this);
@@ -75,8 +86,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         buttonTopPanel.setPreferredSize(new java.awt.Dimension(567, 35));
 
-        jToggleButton1.setText("Validation Automatique");
-        buttonTopPanel.add(jToggleButton1);
+        verificationAutoBoutton.setText("Vérification Automatique");
+        verificationAutoBoutton.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                verificationAutoBouttonStateChanged(evt);
+            }
+        });
+        verificationAutoBoutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verificationAutoBouttonActionPerformed(evt);
+            }
+        });
+        buttonTopPanel.add(verificationAutoBoutton);
 
         mainPanel.add(buttonTopPanel, java.awt.BorderLayout.NORTH);
 
@@ -166,6 +187,20 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
+    private void verificationAutoBouttonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_verificationAutoBouttonStateChanged
+
+    }//GEN-LAST:event_verificationAutoBouttonStateChanged
+
+    private void verificationAutoBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationAutoBouttonActionPerformed
+        JToggleButton boutton = (JToggleButton) evt.getSource();
+        if (boutton.isSelected()) {
+            this.verificationMode = VerificationMode.CHECKED;
+        } else {
+            this.verificationMode = VerificationMode.UNCHECKED;
+        }
+        System.out.println(this.verificationMode.toString());
+    }//GEN-LAST:event_verificationAutoBouttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -219,12 +254,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JToggleButton jToggleButton1;
     private java.awt.List list1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JMenuItem nouveauMenuItem;
     private javax.swing.JPanel panel;
     public PlanIFTicateur.gui.RightPanel rightPanel;
+    private javax.swing.JToggleButton verificationAutoBoutton;
     // End of variables declaration//GEN-END:variables
 }

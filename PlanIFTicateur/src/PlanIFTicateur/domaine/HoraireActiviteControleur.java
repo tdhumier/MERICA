@@ -39,17 +39,22 @@ public class HoraireActiviteControleur {
     }
 
     public void deplacerActivite(Activite activite, int x, int y) {
-        activite.deplacerActivite(x, y);
+        horaire.deplacerActivite(activite, x, y);
         notifyObserversForUpdatedItems();
     }
 
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
-        activite.deplacerActivite(point, heure, jour);
+        horaire.deplacerActivite(activite, point, heure, jour);
+        notifyObserversForUpdatedItems();
+    }
+
+    public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
+        horaire.deplacerActiviteAvecVerification(activite, point, heure, jour, dimension);
         notifyObserversForUpdatedItems();
     }
 
     public void resetPosition(Activite activite, Dimension dimension) {
-        activite.setPoint(dimension);
+        horaire.resetPosition(activite, dimension);
         notifyObserversForUpdatedItems();
     }
 
