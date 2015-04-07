@@ -90,21 +90,21 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (isDragged) {
+        if (isDragged) { // Si on déplace avec la souris
             int x = e.getX();
             int y = e.getY();
             Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
-            if (activite.isPresent() && getHeure(x) != 0.0d && getJour(y) != 0) {
+            if (activite.isPresent() && getHeure(x) != 0.0d && getJour(y) != 0 && getHeure(x) + activite.get().getDuree() <= 22) { // Si on a una activité présente et on a affecté un heure et un jour et la case ne dépasse pas de la grille
                 Point point = new Point(getXPosition(x), getYPosition(y));
-                if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) {
+                if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) { // Si on est en mode vérif auto
                     mainWindow.controleur.deplacerActiviteAvecVerification(activite.get(), point, getHeure(x), getJour(y), mainWindow.horairePanel.getInitialDimension());
                 } else {
                     mainWindow.controleur.deplacerActivite(activite.get(), point, getHeure(x), getJour(y));
                 }
-            } else if (activite.isPresent()) {
+            } else if (activite.isPresent()) { // Si on n'a pas affecté de jour ni d'heure (c'est que l'horaire n'est pas correct), on replace à l'endroit initial
                 mainWindow.controleur.resetPosition(activite.get(), mainWindow.horairePanel.getInitialDimension());
             }
-            isDragged = false;
+            isDragged = false; // La souris est relachée donc on ne drag plus
         }
     }
 
