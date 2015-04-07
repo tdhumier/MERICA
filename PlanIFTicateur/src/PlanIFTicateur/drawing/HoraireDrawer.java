@@ -127,9 +127,7 @@ public class HoraireDrawer {
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.LIGHT_GRAY);
-
         HashMap<Integer, List<Double>> source = mainWindow.controleur.getPlagesHoraireAGriser(activite);
-
         if (!source.isEmpty()) {
             Iterator<Integer> keySetIterator = source.keySet().iterator();
 
