@@ -37,8 +37,6 @@ public class CheminementDao {
 
     private GrilleCheminement formaterGrille(String[] tab, ListeActivites activites) { // retourne la grille de cheminement formatée
 
-        System.out.println("Dans CheminementDao / formaterGrille");
-
         GrilleCheminement grille = new GrilleCheminement();
         ArrayList<Activite> listeActivites = new ArrayList<>();
         Integer taille = tab.length;

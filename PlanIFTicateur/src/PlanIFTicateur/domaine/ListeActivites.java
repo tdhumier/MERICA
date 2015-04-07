@@ -6,8 +6,10 @@
 package PlanIFTicateur.domaine;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -58,5 +60,24 @@ public class ListeActivites {
 
     public List<Activite> getActiviteAssignees() {
         return listeActivites.stream().filter(x -> x.isAssignee()).collect(Collectors.toList());
+    }
+
+    public void modifierStatutSelectionActivite(int x, int y) {
+        for (Activite activite : listeActivites) {
+            activite.modifierStatutSelection(x, y);
+        }
+    }
+
+    public void setCoordonneesActivites(Dimension dimension) {
+        for (Activite activite : listeActivites) {
+            activite.setDimension(dimension);
+            if (activite.isAssignee()) {
+                activite.setPoint(dimension);
+            }
+        }
+    }
+
+    public Optional<Activite> getActiviteSelectionnee() {
+        return listeActivites.stream().filter(x -> x.isSelected()).findFirst();
     }
 }

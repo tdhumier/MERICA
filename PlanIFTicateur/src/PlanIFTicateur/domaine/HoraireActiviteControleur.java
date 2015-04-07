@@ -7,10 +7,11 @@ package PlanIFTicateur.domaine;
 
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
-import java.awt.Point;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -35,8 +36,12 @@ public class HoraireActiviteControleur {
         observers = new LinkedList<>();
     }
 
-    public void deplacerActivite(int idActivite, Point mousePoint) {
+    public void deplacerActivite(Activite activite, int x, int y) {
+        activite.deplacerActivite(x, y);
+    }
 
+    public Optional<Activite> getActiviteSelectionnee() {
+        return horaire.getListeActivite().getActiviteSelectionnee();
     }
 
     public List<Activite> getActivitesAssignees() {
@@ -47,13 +52,18 @@ public class HoraireActiviteControleur {
         return horaire.getListeActivite().getListeActivites().size();
     }
 
-    public void importerFichiers(String path) {
+    public void importerFichiers(String path, Dimension dimension) {
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         ListeActivites listeActivites = gestionnaireFichier.getListeActivites();
         ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites);
         horaire.setListeActivite(listeActivites);
         horaire.setGrillesCheminement(listeGrillesCheminement);
+        setCoordonneesActivite(dimension);
         notifyObserversForUpdatedItems();
+    }
+
+    public void setCoordonneesActivite(Dimension dimension) {
+        horaire.getListeActivite().setCoordonneesActivites(dimension);
     }
 
     public List<Activite> getActivitesNonAssignees() {
@@ -62,6 +72,11 @@ public class HoraireActiviteControleur {
 
     public ArrayList<Integer> getNbCoursSemaine() {
         return horaire.getStatistiques().getNbCoursSemaine(horaire);
+    }
+
+    public void modifierStatutSelectionActivite(int x, int y) {
+        horaire.getListeActivite().modifierStatutSelectionActivite(x, y);
+        notifyObserversForUpdatedItems();
     }
 
     public void registerObserver(HoraireControleurObserveur newListener) {

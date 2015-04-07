@@ -89,20 +89,23 @@ public class HoraireDrawer {
         List<Activite> activites = controleur.getActivitesAssignees();
         for (int i = 0; i < activites.size(); i++) {
             drawActivite(g, activites.get(i));
+            if (activites.get(i).isSelected()) {
+                drawSelection(g, activites.get(i));
+            }
         }
     }
 
     private void drawActivite(Graphics g, Activite activite) {
-        int largeurCase = initialDimension.width;
-        int hauteurCase = initialDimension.height;
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(activite.getCouleur());
-        int x = (int) (largeurCase * ((activite.getHeureDebut() - 8) * 2) + 80);
-        int y = hauteurCase * (activite.getJour() - 1) * 8 + 20;
-        int x1 = (int) (largeurCase * activite.getDuree() * 2);
-        g2.fill(new Rectangle.Double(x, y, x1, hauteurCase));
+        g2.fill(new Rectangle.Double(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight()));
         g2.setColor(Color.black);
-        g2.drawString(activite.getCode(), (int) (x + (activite.getDuree() - 1) * largeurCase), y + hauteurCase - 4);
+        g2.drawString(activite.getCode(), (int) (activite.getPoint().x + activite.getWidth() / 2), activite.getPoint().y + activite.getHeight() - 4);
+    }
+
+    private void drawSelection(Graphics g, Activite activite) {
+        g.setColor(Color.YELLOW);
+        g.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
     }
 
     private void disableCases(Graphics g, Activite activite) { // grise les cases qui ne respectent pas les contraintes
