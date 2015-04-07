@@ -19,6 +19,7 @@ public class Main {
         PlanIFTicateur.gui.MainWindow mainWindow = new PlanIFTicateur.gui.MainWindow();
         mainWindow.setVisible(true);
         mainWindow.bottomPanel.setText("Prêt");
+        mainWindow.controleur.importerFichiers("/Users/tristandhumieres/Desktop/test/casHiver2015.COU", mainWindow.horairePanel.getInitialDimension());
     }
-    
+
 }
