@@ -108,6 +108,7 @@ public class HoraireDrawer {
     private void drawSelection(Graphics g, Activite activite) {
         g.setColor(Color.YELLOW);
         g.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
+        disableCases(g, activite);
     }
 
     private void disableCases(Graphics g, Activite activite) { // grise les cases qui ne respectent pas les contraintes
@@ -121,7 +122,7 @@ public class HoraireDrawer {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.LIGHT_GRAY);
 
-        HashMap<Integer, List<Double>> source = new HashMap<Integer, List<Double>>();
+        HashMap<Integer, List<Double>> source = controleur.getPlagesHoraireAGriser(activite);
 
         if (!source.isEmpty()) {
             Iterator<Integer> keySetIterator = source.keySet().iterator();
