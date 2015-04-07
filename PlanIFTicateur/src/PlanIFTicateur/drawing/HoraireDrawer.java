@@ -5,8 +5,8 @@
  */
 package PlanIFTicateur.drawing;
 
-import PlanIFTicateur.domaine.HoraireActiviteControleur;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.gui.MainWindow;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,11 +24,11 @@ import java.util.List;
  */
 public class HoraireDrawer {
 
-    private HoraireActiviteControleur controleur;
+    private MainWindow mainWindow;
     private Dimension initialDimension;
 
-    public HoraireDrawer(HoraireActiviteControleur controleur, Dimension initialDimension) {
-        this.controleur = controleur;
+    public HoraireDrawer(MainWindow mainWindow, Dimension initialDimension) {
+        this.mainWindow = mainWindow;
         this.initialDimension = initialDimension;
     }
 
@@ -88,7 +88,7 @@ public class HoraireDrawer {
     }
 
     public void drawActivites(Graphics g) {
-        List<Activite> activites = controleur.getActivitesAssignees();
+        List<Activite> activites = mainWindow.controleur.getActivitesAssignees();
         for (int i = 0; i < activites.size(); i++) {
             drawActivite(g, activites.get(i));
             if (activites.get(i).isSelected()) {
@@ -108,7 +108,9 @@ public class HoraireDrawer {
     private void drawSelection(Graphics g, Activite activite) {
         g.setColor(Color.YELLOW);
         g.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
-        disableCases(g, activite);
+        if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) {
+            disableCases(g, activite);
+        }
     }
 
     private void disableCases(Graphics g, Activite activite) { // grise les cases qui ne respectent pas les contraintes
@@ -122,7 +124,7 @@ public class HoraireDrawer {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.LIGHT_GRAY);
 
-        HashMap<Integer, List<Double>> source = controleur.getPlagesHoraireAGriser(activite);
+        HashMap<Integer, List<Double>> source = mainWindow.controleur.getPlagesHoraireAGriser(activite);
 
         if (!source.isEmpty()) {
             Iterator<Integer> keySetIterator = source.keySet().iterator();
