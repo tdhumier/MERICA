@@ -14,6 +14,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Stroke;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -116,6 +118,24 @@ public class HoraireDrawer {
         int caseDebutMin;
         int caseFinMax;
 
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.LIGHT_GRAY);
+
+        HashMap<Integer, List<Double>> source = new HashMap<Integer, List<Double>>();
+
+        if (!source.isEmpty()) {
+            Iterator<Integer> keySetIterator = source.keySet().iterator();
+
+            while (keySetIterator.hasNext()) {
+                Integer key = keySetIterator.next();
+                int jour = key;
+                double heureDebut = source.get(key).get(0);
+                double duree = source.get(key).get(1);
+
+                g2.fillRect(80 + ((int) heureDebut - 8) * 2 * largeurCase, 20 + (jour - 1) * 8 * hauteurCase, (int) duree * 2 * largeurCase, 8 * hauteurCase);
+            }
+        }
+
         if ((int) heureDebutMinTest == heureDebutMinTest) {
             caseDebutMin = ((int) heureDebutMinTest - 8) * 2 + 1;
         } else {
@@ -128,8 +148,6 @@ public class HoraireDrawer {
             caseFinMax = ((int) heureFinMaxTest - 8) * 2 + 1;
         }
 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.LIGHT_GRAY);
         g2.fillRect(80, 20, largeurCase * (caseDebutMin - 1), hauteurCase * 48);
         g2.fillRect(80 + caseFinMax * largeurCase, 20, largeurCase * (28 - caseFinMax), hauteurCase * 48);
     }
