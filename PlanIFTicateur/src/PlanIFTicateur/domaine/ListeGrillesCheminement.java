@@ -42,7 +42,6 @@ public class ListeGrillesCheminement {
         grillesCheminement.stream().forEach((grilleCheminement) -> {
             activitesCheminement.addAll(grilleCheminement.activitesCheminementDejaAlHoraire(activite));
         });
-        System.out.println("Sortie ListeGrilles : " + activitesCheminement.toString());
         return activitesCheminement;
     }
 }

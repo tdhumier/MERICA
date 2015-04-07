@@ -141,9 +141,7 @@ public abstract class Activite {
     }
 
     public boolean horaireValide() {
-
-        //return !(getHeureDebut() < getHeureDebutMin() || getHeureDebut() > getHeureDebutMax() || (getHeureDebut() + getDuree()) > getHeureFinMax());
-        return false;
+        return !(getHeureDebut() < getHeureDebutMin() || (getHeureDebut() + getDuree()) > getHeureFinMax());
     }
 
     public boolean memeHoraire(Activite autreActivite) {
@@ -156,6 +154,10 @@ public abstract class Activite {
 
     public boolean isSelected() {
         return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
     public boolean contient(int x, int y) {

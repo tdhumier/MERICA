@@ -101,6 +101,10 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
+    public Boolean isHoraireValide() {
+        return horaire.estValide();
+    }
+
     public void registerObserver(HoraireControleurObserveur newListener) {
         observers.add(newListener);
     }
