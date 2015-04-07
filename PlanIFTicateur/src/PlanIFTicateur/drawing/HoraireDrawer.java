@@ -100,7 +100,7 @@ public class HoraireDrawer {
         g2.setColor(activite.getCouleur());
         g2.fill(new Rectangle.Double(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight()));
         g2.setColor(Color.black);
-        g2.drawString(activite.getCode(), (int) (activite.getPoint().x + activite.getWidth() / 2), activite.getPoint().y + activite.getHeight() - 4);
+        g2.drawString(activite.getCode(), (int) (activite.getPoint().x + (activite.getWidth() / 2 - activite.getWidth() / (activite.getDuree() * 2))), activite.getPoint().y + activite.getHeight() - 4);
     }
 
     private void drawSelection(Graphics g, Activite activite) {
