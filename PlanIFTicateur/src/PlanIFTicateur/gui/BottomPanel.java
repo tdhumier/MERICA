@@ -37,7 +37,7 @@ public class BottomPanel extends JPanel implements Serializable {
         setVisible(true);
     }
 
-    public void afficherJourHeure(String s) {
+    public void setText(String s) {
         labelBottomPanel.setText(s);
     }
 
