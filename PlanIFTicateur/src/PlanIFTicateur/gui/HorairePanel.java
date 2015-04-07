@@ -11,8 +11,16 @@ import PlanIFTicateur.gui.listeners.mouse.MouseHandleListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
+import javax.swing.TransferHandler;
 import javax.swing.border.BevelBorder;
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 /**
  *
@@ -23,6 +31,7 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     private Dimension initialDimension;
     private MainWindow mainWindow;
     private HoraireDrawer horaireDrawer;
+    private Point mouse;
 
     public HorairePanel() {
     }
@@ -53,6 +62,43 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
             super.paintComponent(g);
            horaireDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
             horaireDrawer.draw(g);
+            
+            setTransferHandler(new ImportTransferHandler());
+            
+        }
+    }
+    
+     private class ImportTransferHandler extends TransferHandler
+    {
+        public boolean canImport(TransferHandler.TransferSupport support)
+        {
+            if(!support.isDataFlavorSupported(DataFlavor.stringFlavor))
+            {
+                return false;
+            }
+            return true;
+        }
+        public boolean importData(TransferHandler.TransferSupport support)
+        {
+            Transferable t = support.getTransferable();
+            String data = "";
+            try
+            {
+                data = (String)t.getTransferData(DataFlavor.stringFlavor);
+                
+            } catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+                return true;
+            }
+            
+            //ENDROIT OU FAIRE LACTION
+            
+            
+            System.out.println(mouse);
+            mainWindow.horairePanel.getHoraireDrawer().ajouterActivite(mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue(),intValue(mouse.getX()), intValue(mouse.getY()));
+            mainWindow.horairePanel.repaint();
+            return true;
         }
     }
 
@@ -65,6 +111,15 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     {
         return horaireDrawer;
     }
+
+    public Point getMouse() {
+        return mouse;
+    }
+
+    public void setMouse(Point mouse) {
+        this.mouse = mouse;
+    }
+
     
     
 }

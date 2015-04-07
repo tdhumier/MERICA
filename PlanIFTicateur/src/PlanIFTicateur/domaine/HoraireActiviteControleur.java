@@ -8,6 +8,7 @@ package PlanIFTicateur.domaine;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,6 +39,17 @@ public class HoraireActiviteControleur {
 
     public void deplacerActivite(Activite activite, int x, int y) {
         activite.deplacerActivite(x, y);
+        notifyObserversForUpdatedItems();
+    }
+
+    public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
+        activite.deplacerActivite(point, heure, jour);
+        notifyObserversForUpdatedItems();
+    }
+
+    public void resetPosition(Activite activite, Dimension dimension) {
+        activite.setPoint(dimension);
+        notifyObserversForUpdatedItems();
     }
 
     public Optional<Activite> getActiviteSelectionnee() {

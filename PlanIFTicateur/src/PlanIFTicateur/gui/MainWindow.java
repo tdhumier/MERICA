@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 
+
 /**
  *
  * @author tristandhumieres
@@ -19,6 +20,7 @@ import javax.swing.JFileChooser;
 public class MainWindow extends javax.swing.JFrame  {
 
     public HoraireActiviteControleur controleur;
+  
 
     /**
      * Creates new form MainWindow
@@ -27,6 +29,7 @@ public class MainWindow extends javax.swing.JFrame  {
 
         controleur = new HoraireActiviteControleur();
         initComponents();
+       // this.addMouseMotionListener(new ListActiviteMouseListener());
 
         addWindowListener(new WindowAdapter() {
             public void windowOpened(WindowEvent e) {
@@ -97,11 +100,11 @@ public class MainWindow extends javax.swing.JFrame  {
         horairePanel.setLayout(horairePanelLayout);
         horairePanelLayout.setHorizontalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
+            .addGap(0, 949, Short.MAX_VALUE)
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addGap(0, 455, Short.MAX_VALUE)
         );
 
         jPanel1.add(horairePanel, java.awt.BorderLayout.CENTER);
@@ -166,6 +169,8 @@ public class MainWindow extends javax.swing.JFrame  {
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
+    
+    
     /**
      * @param args the command line arguments
      */

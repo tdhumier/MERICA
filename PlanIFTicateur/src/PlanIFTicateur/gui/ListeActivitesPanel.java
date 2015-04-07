@@ -8,14 +8,14 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
-import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.BorderLayout;
-import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.DropMode;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -42,9 +42,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         this.mainWindow = mainWindow;
         mainWindow.controleur.registerObserver(this);
         buildUp();
-        ListActiviteMouseListener listeActiviteMouseListener = new ListActiviteMouseListener(mainWindow);
-        this.listeActivites.addMouseListener(listeActiviteMouseListener);
-        this.listeActivites.addMouseMotionListener(listeActiviteMouseListener);
+       
     }
 
     private void buildUp() {
@@ -71,11 +69,26 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
        th = listeActivites.getTransferHandler();
        listeActivites.setDragEnabled(true);
        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       listeActivites.setDropMode(DropMode.ON);
+       listeActivites.setTransferHandler(new ExportTransferHandler());    
        
     }
     
     
+    private class ExportTransferHandler extends TransferHandler
+    {
+    @Override
+    public int getSourceActions(JComponent c)
+    {
+        return TransferHandler.MOVE;
+    }
+    
+    @Override
+    protected Transferable createTransferable(JComponent c)
+    {
+        return new StringSelection(listeActivites.getSelectedValue().getCode());
+    }
+    
+    }
  
 
     @Override
@@ -91,6 +104,5 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         return listeActivites;
     }
     
-    
-    
 }
+
