@@ -160,4 +160,11 @@ public class HoraireDrawer {
         g2.fillRect(80, 20, largeurCase * (caseDebutMin - 1), hauteurCase * 48);
         g2.fillRect(80 + caseFinMax * largeurCase, 20, largeurCase * (28 - caseFinMax), hauteurCase * 48);
     }
+    
+    public void ajouterActivite(Activite activite,int x, int y)
+    {
+        activite.setWidth(x);
+        activite.setHeight(y);
+        controleur.getActivitesAssignees().add(activite);
+    }
 }

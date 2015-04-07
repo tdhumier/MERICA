@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.Optional;
 
+
 /**
  *
  * @author tristandhumieres
@@ -22,12 +23,14 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
 
     private MainWindow mainWindow;
     private boolean isDragged;
+    private boolean nouveauDragged = false;
+
 
     public MouseHandleListener(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         this.isDragged = false;
     }
-
+    
     @Override
     public void mouseMoved(MouseEvent e) {
         Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
@@ -87,6 +90,7 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
             mainWindow.horairePanel.repaint();
         }
     }
+    
 
     @Override
     public void mouseReleased(MouseEvent e) {

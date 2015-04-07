@@ -8,6 +8,7 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.drawing.HoraireDrawer;
 import PlanIFTicateur.gui.listeners.mouse.MouseHandleListener;
+import PlanIFTicateur.gui.listeners.mouse.SecondMouseHandleListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -22,6 +23,7 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
 
     private Dimension initialDimension;
     private MainWindow mainWindow;
+    private boolean nouveauDragged;
 
     public HorairePanel() {
     }
@@ -44,13 +46,15 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
         MouseHandleListener mouseHandleListener = new MouseHandleListener(mainWindow);
         this.addMouseListener(mouseHandleListener);
         this.addMouseMotionListener(mouseHandleListener);
+        this.addMouseListener(new SecondMouseHandleListener(mainWindow));
+        this.addMouseMotionListener(new SecondMouseHandleListener(mainWindow));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         if (mainWindow != null) {
             super.paintComponent(g);
-            HoraireDrawer horaireDrawer = new HoraireDrawer(mainWindow, initialDimension);
+            horaireDrawer = new HoraireDrawer(mainWindow, initialDimension);
             horaireDrawer.draw(g);
         }
     }
@@ -59,4 +63,13 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     public void notifyUpdatedItems() {
         repaint();
     }
+
+    public boolean getNouveauDragged() {
+        return nouveauDragged;
+    }
+
+    public void setNouveauDragged(boolean nouveauDragged) {
+        this.nouveauDragged = nouveauDragged;
+    }
+
 }

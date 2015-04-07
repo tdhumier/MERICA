@@ -8,8 +8,10 @@ package PlanIFTicateur.gui.listeners.action;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.MainWindow;
 import javax.swing.JList;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 
 /**
  *
@@ -27,5 +29,12 @@ public class ListeSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
         JList listeActivites = (JList) e.getSource();
         mainWindow.rightPanel.updateDetailsActivitePanel((Activite) listeActivites.getSelectedValue());
+<<<<<<< HEAD
     }
+=======
+    } 
+    
+    
+
+>>>>>>> Interface3
 }
