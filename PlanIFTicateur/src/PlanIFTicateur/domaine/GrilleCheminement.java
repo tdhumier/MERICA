@@ -76,7 +76,6 @@ public class GrilleCheminement {
 
     public List<Activite> activitesCheminementDejaAlHoraire(Activite activite) {
         List<Activite> activitesCheminement = new ArrayList<>();
-        System.out.println("Boolean Value " + activitePresente(activite));
         if (activitePresente(activite)) {
             activitesCheminement = listeActivite.stream().filter(x -> x.isAssignee() && !x.equals(activite)).collect(Collectors.toList());
         }
