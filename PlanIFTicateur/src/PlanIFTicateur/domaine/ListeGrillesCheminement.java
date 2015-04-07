@@ -36,4 +36,12 @@ public class ListeGrillesCheminement {
         });
         return activitesAuMemeHoraire.stream().collect(Collectors.toList());
     }
+
+    public List<Activite> activitesCheminementsDejaALHoraire(Activite activite) {
+        List<Activite> activitesCheminement = new ArrayList<>();
+        grillesCheminement.stream().forEach((grilleCheminement) -> {
+            activitesCheminement.addAll(grilleCheminement.activitesCheminementDejaAlHoraire(activite));
+        });
+        return activitesCheminement;
+    }
 }

@@ -9,6 +9,8 @@ import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.conflit.Conflit;
 import PlanIFTicateur.domaine.conflit.ConflitCheminement;
 import PlanIFTicateur.domaine.conflit.ConflitHoraire;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -64,5 +66,17 @@ public class Horaire {
         activitesConflitCheminement.stream().map((activiteEnConflit) -> new ConflitCheminement(activite, activiteEnConflit)).forEach((conflitCheminement) -> {
             listeConflits.ajouterConflit(conflitCheminement);
         });
+    }
+
+    public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
+        HashMap<Integer, List<Double>> result = new HashMap<>();
+        List<Activite> activitesCheminement = grillesCheminement.activitesCheminementsDejaALHoraire(activite);
+        activitesCheminement.stream().forEach((item) -> {
+            List<Double> liste = new ArrayList<>();
+            liste.add(item.getHeureDebut());
+            liste.add(item.getDuree());
+            result.put(item.getJour(), liste);
+        });
+        return result;
     }
 }

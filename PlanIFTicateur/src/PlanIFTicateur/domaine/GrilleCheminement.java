@@ -8,6 +8,7 @@ package PlanIFTicateur.domaine;
 import PlanIFTicateur.domaine.activite.Activite;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -61,11 +62,23 @@ public class GrilleCheminement {
         return listeActivite;
     }
 
+    public boolean activitePresente(Activite activite) {
+        return listeActivite.stream().filter(x -> x.equals(x)).findFirst().isPresent();
+    }
+
     public List<Activite> activitesAuMemeHoraire(Activite activite) {
         List<Activite> activitesAuMemeHoraire = new ArrayList();
         listeActivite.stream().filter((autreActivite) -> (!activite.equals(autreActivite) && activite.memeHoraire(autreActivite))).forEach((autreActivite) -> {
             activitesAuMemeHoraire.add(autreActivite);
         });
         return activitesAuMemeHoraire;
+    }
+
+    public List<Activite> activitesCheminementDejaAlHoraire(Activite activite) {
+        List<Activite> activitesCheminement = new ArrayList<>();
+        if (activitePresente(activite)) {
+            activitesCheminement.stream().filter(x -> x.isAssignee()).collect(Collectors.toList());
+        }
+        return activitesCheminement;
     }
 }

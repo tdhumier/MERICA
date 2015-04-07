@@ -10,6 +10,7 @@ import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -80,6 +81,10 @@ public class HoraireActiviteControleur {
 
     public List<Activite> getActivitesNonAssignees() {
         return horaire.getListeActivite().getActivitesNonAssignees();
+    }
+
+    public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
+        return horaire.getPlagesHoraireAGriser(activite);
     }
 
     public ArrayList<Integer> getNbCoursSemaine() {
