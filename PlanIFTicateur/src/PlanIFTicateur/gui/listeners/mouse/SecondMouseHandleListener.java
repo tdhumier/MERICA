@@ -46,10 +46,14 @@ public class SecondMouseHandleListener extends MouseAdapter implements MouseMoti
         if (mainWindow.horairePanel.getNouveauDragged()) {
             Point point = new Point(getXPosition(x), getYPosition(y));
             Activite activite = mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue();
-            if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) { // Si on est en mode vérif auto
-                mainWindow.controleur.deplacerActiviteAvecVerification(activite, point, getHeure(x), getJour(y), mainWindow.horairePanel.getInitialDimension());
+            if (getHeure(x) != 0.0d && getJour(y) != 0 && getHeure(x) + activite.getDuree() <= 22) {
+                if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) { // Si on est en mode vérif auto
+                    mainWindow.controleur.deplacerActiviteAvecVerification(activite, point, getHeure(x), getJour(y), mainWindow.horairePanel.getInitialDimension());
+                } else {
+                    mainWindow.controleur.deplacerActivite(activite, point, getHeure(x), getJour(y));
+                }
             } else {
-                mainWindow.controleur.deplacerActivite(activite, point, getHeure(x), getJour(y));
+                mainWindow.controleur.unasignActivite(activite);
             }
             mainWindow.controleur.setActiviteSelectionnee(activite, false);
         }
