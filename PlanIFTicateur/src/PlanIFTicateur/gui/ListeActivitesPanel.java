@@ -8,6 +8,7 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
+import PlanIFTicateur.gui.listeners.mouse.MySecondMouseHandleListener;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -42,6 +43,11 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         setLayout(new BorderLayout());
         listeActivitesLabel = new JLabel("Liste Activites");
 
+        //C'est ici que ça ce passe
+        MySecondMouseHandleListener mouseHandleListener = new MySecondMouseHandleListener();
+        listeActivitesLabel.addMouseListener(mouseHandleListener);
+        listeActivitesLabel.addMouseMotionListener(mouseHandleListener);
+
         add(listeActivitesLabel, BorderLayout.NORTH);
 
         List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
@@ -55,9 +61,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         listeActivites.addListSelectionListener(new ListeSelectionListener(mainWindow));
-
         listeActivites.setDragEnabled(true);
-
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
     }
 

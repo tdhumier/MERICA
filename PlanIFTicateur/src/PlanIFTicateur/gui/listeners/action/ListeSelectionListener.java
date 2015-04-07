@@ -28,5 +28,4 @@ public class ListeSelectionListener implements ListSelectionListener {
         JList listeActivites = (JList) e.getSource();
         mainWindow.rightPanel.updateDetailsActivitePanel((Activite) listeActivites.getSelectedValue());
     }
-
 }
