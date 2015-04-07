@@ -9,6 +9,7 @@ import PlanIFTicateur.gui.MainWindow;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 /**
  *
@@ -34,15 +35,22 @@ public class SecondMouseHandleListener extends MouseAdapter implements MouseMoti
     @Override
     public void mouseExited(MouseEvent e) {
         super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("Je suis sortie");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         super.mouseEntered(e); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("Je suis entre");
-        mainWindow.horairePanel.setMouse(e.getPoint());
         
+        System.out.println("Ma position : " + e.getX() + ", " + e.getY());   
+        
+        if(mainWindow.horairePanel.getNouveauDragged())
+        {
+            System.out.println("Je suis entre");
+         mainWindow.horairePanel.getHoraireDrawer().ajouterActivite(mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue(),intValue(e.getX()), intValue(e.getY()));
+         mainWindow.horairePanel.repaint();
+         nouveauDragged = false;
+        }
+            
     }
     
 

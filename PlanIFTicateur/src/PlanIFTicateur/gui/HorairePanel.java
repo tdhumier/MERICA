@@ -32,8 +32,7 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     private Dimension initialDimension;
     private MainWindow mainWindow;
     private HoraireDrawer horaireDrawer;
-    private Point mouse;
-
+    private boolean nouveauDragged;
     public HorairePanel() {
     }
 
@@ -96,12 +95,9 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
             }
             
             //ENDROIT OU FAIRE LACTION
-            
-            
-            System.out.println("ici " + mouse);
-            mainWindow.horairePanel.getHoraireDrawer().ajouterActivite(mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue(),intValue(mouse.getX()), intValue(mouse.getY()));
-            mainWindow.horairePanel.repaint();
-            return true;
+            nouveauDragged = true;
+           
+           return true;
         }
     }
 
@@ -115,13 +111,14 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
         return horaireDrawer;
     }
 
-    public Point getMouse() {
-        return mouse;
-    }
-
-    public void setMouse(Point mouse) {
-        this.mouse = mouse;
-    }
+   public boolean getNouveauDragged()
+   {
+       return nouveauDragged;
+   }
+   public void setNouveauDragged(boolean nouveauDragged)
+   {
+       this.nouveauDragged = nouveauDragged;
+   }
 
     
     

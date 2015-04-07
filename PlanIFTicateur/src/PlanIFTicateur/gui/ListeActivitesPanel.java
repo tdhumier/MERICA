@@ -73,6 +73,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
        listeActivites.setTransferHandler(new ExportTransferHandler());    
        
        listeActivites.addMouseMotionListener(new SecondMouseHandleListener(mainWindow));
+       
     }
     
     
