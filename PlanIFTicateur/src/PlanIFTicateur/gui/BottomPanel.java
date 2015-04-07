@@ -5,8 +5,9 @@
  */
 package PlanIFTicateur.gui;
 
+import PlanIFTicateur.domaine.HoraireControleurObserveur;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.io.Serializable;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
@@ -15,10 +16,12 @@ import javax.swing.border.BevelBorder;
  *
  * @author tristandhumieres
  */
-public class BottomPanel extends JPanel implements Serializable {
+public class BottomPanel extends JPanel implements HoraireControleurObserveur {
 
     private MainWindow mainWindow;
     private JLabel labelBottomPanel;
+    private JLabel validiteHorraireLabel;
+    private Boolean isValide;
 
     public BottomPanel() {
     }
@@ -32,13 +35,27 @@ public class BottomPanel extends JPanel implements Serializable {
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension(width, 30));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
+        setLayout(new BorderLayout());
         labelBottomPanel = new JLabel("");
-        add(labelBottomPanel);
+        validiteHorraireLabel = new JLabel("");
+        add(labelBottomPanel, BorderLayout.WEST);
+        add(validiteHorraireLabel, BorderLayout.EAST);
         setVisible(true);
     }
 
     public void setText(String s) {
         labelBottomPanel.setText(s);
+    }
+
+    @Override
+    public void notifyUpdatedItems() {
+        //isValide = mainWindow.controleur.isHoraireValide();
+        if (isValide) {
+            validiteHorraireLabel.setText("Horaire valide");
+        } else {
+            validiteHorraireLabel.setText("Horaire non valide !");
+        }
+        repaint();
     }
 
 }

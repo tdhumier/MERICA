@@ -42,7 +42,9 @@ public class CheminementDao {
         Integer taille = tab.length;
 
         for (int i = 3; i < taille; i++) {
-            listeActivites.add(activites.getActiviteByCode(tab[i]));
+            if (activites.getActiviteByCode(tab[i]) != null) {
+                listeActivites.add(activites.getActiviteByCode(tab[i]));
+            }
         }
 
         grille.setNomProgramme(tab[0]);
