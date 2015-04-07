@@ -125,7 +125,7 @@ public class DetailsActivitePanel extends JPanel {
     }
 
     public String getNomJour(int i) {
-        String[] JourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+        String[] JourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
 
         return JourModes[i + 1];
     }
