@@ -8,6 +8,7 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
+import PlanIFTicateur.gui.listeners.mouse.SecondMouseHandleListener;
 import java.awt.BorderLayout;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -71,6 +72,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
        listeActivites.setTransferHandler(new ExportTransferHandler());    
        
+       listeActivites.addMouseMotionListener(new SecondMouseHandleListener(mainWindow));
     }
     
     

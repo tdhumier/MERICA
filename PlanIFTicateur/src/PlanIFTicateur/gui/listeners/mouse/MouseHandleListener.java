@@ -23,6 +23,7 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
 
     private MainWindow mainWindow;
     private boolean isDragged;
+    private boolean nouveauDragged = false;
 
 
     public MouseHandleListener(MainWindow mainWindow) {
@@ -89,6 +90,7 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
             mainWindow.horairePanel.repaint();
         }
     }
+    
 
     @Override
     public void mouseReleased(MouseEvent e) {
