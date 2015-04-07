@@ -6,6 +6,8 @@
 package PlanIFTicateur.domaine.activite;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 
 /**
  *
@@ -13,9 +15,7 @@ import java.awt.Color;
  */
 public abstract class Activite {
 
-    private int idActivite;
     private String code;
-
     private double duree;
     private int jour;
     private double heureDebut;
@@ -24,6 +24,10 @@ public abstract class Activite {
     private double heureFinMax;
     private String section;
     private String titre;
+    private boolean isSelected;
+    private Point point;
+    private int width;
+    private int height;
 
     public Activite(String code,
             String section,
@@ -44,34 +48,47 @@ public abstract class Activite {
         this.heureFinMax = heureFinMax;
         this.jour = jour;
         this.heureDebut = heureDebut;
+        this.isSelected = false;
+        this.point = new Point();
     }
 
-    public int getIdActivite() {
-        return idActivite;
+    public Point getPoint() {
+        return point;
     }
 
-    public void setIdActivite(int idActivite) {
-        this.idActivite = idActivite;
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public String getCode() {
         return code;
     }
-    public void setCode(String code)
-    {
+
+    public void setCode(String code) {
         this.code = code;
     }
-    
-    public String getTitre()
-    {
+
+    public String getTitre() {
         return titre;
     }
 
     public double getDuree() {
         return duree;
     }
-    public String getSection()
-    {
+
+    public String getSection() {
         return section;
     }
 
@@ -118,8 +135,9 @@ public abstract class Activite {
 
     public abstract String getType();
 
-    public void deplacerActivite(Activite activite) {
-
+    public void deplacerActivite(int x, int y) {
+        this.point.x = x;
+        this.point.y = y;
     }
 
     public boolean horaireValide() {
@@ -135,4 +153,35 @@ public abstract class Activite {
     public boolean isAssignee() {
         return (jour != 0 && heureDebut != 0.0d);
     }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public boolean contient(int x, int y) {
+        return (xEstDansLaLargeur(x) && yEstDansLaHauteur(y));
+    }
+
+    public boolean xEstDansLaLargeur(int x) {
+        return (x > point.x && x < point.x + width);
+    }
+
+    public boolean yEstDansLaHauteur(int y) {
+        return (y > point.y && y < point.y + height);
+    }
+
+    public void modifierStatutSelection(int x, int y) {
+        this.isSelected = this.contient(x, y);
+    }
+
+    public void setDimension(Dimension dimension) {
+        this.width = (int) (dimension.width * duree * 2);
+        this.height = dimension.height;
+    }
+
+    public void setPoint(Dimension dimension) {
+        this.point.x = (int) (dimension.width * ((getHeureDebut() - 8) * 2) + 80);
+        this.point.y = dimension.height * (getJour() - 1) * 8 + 20;
+    }
+
 }

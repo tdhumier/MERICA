@@ -89,6 +89,7 @@ public class MainWindow extends javax.swing.JFrame  {
         panel.add(rightPanel, java.awt.BorderLayout.EAST);
 
         horaireScrollPane.setPreferredSize(new java.awt.Dimension(700, 244));
+        horaireScrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -161,7 +162,7 @@ public class MainWindow extends javax.swing.JFrame  {
         File fichier;
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
-            controleur.importerFichiers(fichier.getAbsolutePath());
+            controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getInitialDimension());
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 

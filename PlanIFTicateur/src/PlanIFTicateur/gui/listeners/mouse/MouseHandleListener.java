@@ -5,34 +5,28 @@
  */
 package PlanIFTicateur.gui.listeners.mouse;
 
+import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.MainWindow;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.MouseInfo;
-import java.awt.Point;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import static oracle.jrockit.jfr.events.Bits.intValue;
+import java.util.Optional;
+
 
 /**
  *
- * @author martindeligny1
+ * @author tristandhumieres
  */
-public class MotionListener implements MouseMotionListener {
+public class MouseHandleListener extends MouseAdapter implements MouseMotionListener {
 
     private MainWindow mainWindow;
     
 
-    public MotionListener(MainWindow mainWindow) {
+    public MouseHandleListener(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
-
-    @Override
-    public void mouseDragged(MouseEvent e)
-    {
-       
-    }
-
+    
     @Override
     public void mouseMoved(MouseEvent e) {
         Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
@@ -73,13 +67,36 @@ public class MotionListener implements MouseMotionListener {
         }
 
         if (x > xo && x < (initialDimension.width * 28 + 80) && y > yo && y < (initialDimension.height * 48 + 20)) {
-            mainWindow.bottomPanel.afficherJourHeure(jour + ", " + heure);
+            mainWindow.bottomPanel.setText(jour + ", " + heure);
             mainWindow.bottomPanel.repaint();
         } else {
-            mainWindow.bottomPanel.afficherJourHeure("");
+            mainWindow.bottomPanel.setText("");
             mainWindow.bottomPanel.repaint();
         }
-
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
+        if (activite.isPresent()) {
+            mainWindow.controleur.deplacerActivite(activite.get(), x, y);
+            mainWindow.horairePanel.repaint();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        super.mouseReleased(e); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println("here i am in moussepressed");
+        mainWindow.controleur.modifierStatutSelectionActivite(x, y);
+        mainWindow.horairePanel.repaint();
+    }
 }

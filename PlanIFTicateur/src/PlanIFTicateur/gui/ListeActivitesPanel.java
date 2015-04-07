@@ -8,6 +8,7 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
+import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.BorderLayout;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -41,6 +42,9 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         this.mainWindow = mainWindow;
         mainWindow.controleur.registerObserver(this);
         buildUp();
+        ListActiviteMouseListener listeActiviteMouseListener = new ListActiviteMouseListener(mainWindow);
+        this.listeActivites.addMouseListener(listeActiviteMouseListener);
+        this.listeActivites.addMouseMotionListener(listeActiviteMouseListener);
     }
 
     private void buildUp() {
@@ -58,9 +62,10 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         listeActivites = new JList(listModel);
         listeActivites.setCellRenderer(new ActiviteRenderer());
 
+        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         listeActivites.addListSelectionListener(new ListeSelectionListener(mainWindow));
 
-        
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
         
        th = listeActivites.getTransferHandler();

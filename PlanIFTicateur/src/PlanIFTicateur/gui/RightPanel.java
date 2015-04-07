@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.Serializable;

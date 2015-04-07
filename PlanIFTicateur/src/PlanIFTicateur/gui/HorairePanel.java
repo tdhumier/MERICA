@@ -7,7 +7,8 @@ package PlanIFTicateur.gui;
 
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.drawing.HoraireDrawer;
-import PlanIFTicateur.gui.listeners.mouse.MotionListener;
+import PlanIFTicateur.gui.listeners.mouse.MouseHandleListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
 
     private Dimension initialDimension;
     private MainWindow mainWindow;
+    private HoraireDrawer horaireDrawer;
 
     public HorairePanel() {
     }
@@ -34,27 +36,34 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension((int) (width * 0.7), 800));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
+        setBackground(Color.WHITE);
         int largeurCase = (int) (width * 0.7 - 90) / 28;
         int hauteurCase = (int) 770 / 48;
         initialDimension = new Dimension(largeurCase, hauteurCase);
         mainWindow.controleur.registerObserver(this);
         setVisible(true);
-
+        MouseHandleListener mouseHandleListener = new MouseHandleListener(mainWindow);
+        this.addMouseListener(mouseHandleListener);
+        this.addMouseMotionListener(mouseHandleListener);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         if (mainWindow != null) {
             super.paintComponent(g);
-            HoraireDrawer horaireDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
+           horaireDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
             horaireDrawer.draw(g);
         }
-        this.addMouseMotionListener(new MotionListener(mainWindow));
     }
 
     @Override
     public void notifyUpdatedItems() {
         repaint();
+    }
+    
+    public HoraireDrawer getHoraireDrawer()
+    {
+        return horaireDrawer;
     }
     
     

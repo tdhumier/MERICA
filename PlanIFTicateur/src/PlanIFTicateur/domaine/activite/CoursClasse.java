@@ -7,14 +7,12 @@ package PlanIFTicateur.domaine.activite;
 
 import java.awt.Color;
 
-
 /**
  *
  * @author Alexandre
  */
 public class CoursClasse extends Activite {
 
-   
     private String type;
     private Color couleur = new Color(255, 0, 0, 50);
 
