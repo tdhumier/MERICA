@@ -54,7 +54,7 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     protected void paintComponent(Graphics g) {
         if (mainWindow != null) {
             super.paintComponent(g);
-            horaireDrawer = new HoraireDrawer(mainWindow, initialDimension);
+            HoraireDrawer horaireDrawer = new HoraireDrawer(mainWindow, initialDimension);
             horaireDrawer.draw(g);
         }
     }
