@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.gui.listeners.mouse;
 
+import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.MainWindow;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -40,14 +41,19 @@ public class SecondMouseHandleListener extends MouseAdapter implements MouseMoti
     @Override
     public void mouseEntered(MouseEvent e) {
         super.mouseEntered(e); //To change body of generated methods, choose Tools | Templates.
-
-        System.out.println("Ma position : " + e.getX() + ", " + e.getY());
-        System.out.println(mainWindow.horairePanel.getNouveauDragged());
+        int x = e.getX();
+        int y = e.getY();
         if (mainWindow.horairePanel.getNouveauDragged()) {
-            Point point = new Point(getXPosition(e.getX()), getYPosition(e.getY()));
-            mainWindow.controleur.deplacerActivite(mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue(), point, getHeure(e.getX()), getJour(e.getY()));
-            mainWindow.horairePanel.setNouveauDragged(false);
+            Point point = new Point(getXPosition(x), getYPosition(y));
+            Activite activite = mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue();
+            if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) { // Si on est en mode vérif auto
+                mainWindow.controleur.deplacerActiviteAvecVerification(activite, point, getHeure(x), getJour(y), mainWindow.horairePanel.getInitialDimension());
+            } else {
+                mainWindow.controleur.deplacerActivite(activite, point, getHeure(x), getJour(y));
+            }
+            mainWindow.controleur.setActiviteSelectionnee(activite, false);
         }
+        mainWindow.horairePanel.setNouveauDragged(false);
     }
 
     @Override

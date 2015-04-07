@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.gui.listeners.mouse;
 
+import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.ListeActivitesPanel;
 import PlanIFTicateur.gui.MainWindow;
 import java.awt.event.MouseAdapter;
@@ -28,6 +29,11 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     @Override
     public void mousePressed(MouseEvent e) {
         mainWindow.horairePanel.setNouveauDragged(true);
+        Activite activite = (Activite) mainWindow.rightPanel.getListeActivitesPanel().getListeActivites().getSelectedValue();
+        if (activite != null) {
+            mainWindow.controleur.setActiviteSelectionnee(activite, true);
+            mainWindow.horairePanel.repaint();
+        }
     }
 
     @Override

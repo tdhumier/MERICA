@@ -26,6 +26,9 @@ public class ListeSelectionListener implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         JList listeActivites = (JList) e.getSource();
-        mainWindow.rightPanel.updateDetailsActivitePanel((Activite) listeActivites.getSelectedValue());
+        Activite activite = (Activite) listeActivites.getSelectedValue();
+        if (activite != null) {
+            mainWindow.rightPanel.updateDetailsActivitePanel(activite);
+        }
     }
 }

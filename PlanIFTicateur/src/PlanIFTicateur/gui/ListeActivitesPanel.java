@@ -87,6 +87,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
     @Override
     public void notifyUpdatedItems() {
         List<Activite> activites = mainWindow.controleur.getActivitesNonAssignees();
+        listModel.removeAllElements();
         activites.stream().filter((activite) -> (!listModel.contains(activite))).forEach((activite) -> {
             listModel.addElement(activite);
         });

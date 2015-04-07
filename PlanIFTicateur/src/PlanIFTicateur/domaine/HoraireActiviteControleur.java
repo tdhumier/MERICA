@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -63,7 +64,13 @@ public class HoraireActiviteControleur {
     }
 
     public List<Activite> getActivitesAssignees() {
-        return horaire.getListeActivite().getActiviteAssignees();
+        List<Activite> activites = horaire.getListeActivite().getActiviteAssignees();
+        Optional<Activite> activite = horaire.getListeActivite().getActiviteSelectionnee();
+        if (activite.isPresent()) {
+            activites.add(activite.get());
+            return activites.stream().distinct().collect(Collectors.toList());
+        }
+        return activites;
     }
 
     public int getNombreActivite() {
@@ -103,6 +110,10 @@ public class HoraireActiviteControleur {
 
     public Boolean isHoraireValide() {
         return horaire.estValide();
+    }
+
+    public void setActiviteSelectionnee(Activite activite, Boolean state) {
+        activite.setIsSelected(state);
     }
 
     public void registerObserver(HoraireControleurObserveur newListener) {
