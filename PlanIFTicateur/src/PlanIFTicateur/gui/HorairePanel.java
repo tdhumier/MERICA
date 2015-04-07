@@ -12,16 +12,8 @@ import PlanIFTicateur.gui.listeners.mouse.SecondMouseHandleListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JPanel;
-import javax.swing.TransferHandler;
 import javax.swing.border.BevelBorder;
-import static oracle.jrockit.jfr.events.Bits.intValue;
 
 /**
  *
@@ -33,6 +25,7 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     private MainWindow mainWindow;
     private HoraireDrawer horaireDrawer;
     private boolean nouveauDragged;
+
     public HorairePanel() {
     }
 
@@ -62,42 +55,8 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     protected void paintComponent(Graphics g) {
         if (mainWindow != null) {
             super.paintComponent(g);
-           horaireDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
+            horaireDrawer = new HoraireDrawer(mainWindow.controleur, initialDimension);
             horaireDrawer.draw(g);
-            
-            setTransferHandler(new ImportTransferHandler());
-            
-        }
-    }
-    
-     private class ImportTransferHandler extends TransferHandler
-    {
-        public boolean canImport(TransferHandler.TransferSupport support)
-        {
-            if(!support.isDataFlavorSupported(DataFlavor.stringFlavor))
-            {
-                return false;
-            }
-            return true;
-        }
-        public boolean importData(TransferHandler.TransferSupport support)
-        {
-            Transferable t = support.getTransferable();
-            String data = "";
-            try
-            {
-                data = (String)t.getTransferData(DataFlavor.stringFlavor);
-                
-            } catch(Exception e)
-            {
-                System.out.println(e.getMessage());
-                return true;
-            }
-            
-            //ENDROIT OU FAIRE LACTION
-            nouveauDragged = true;
-           
-           return true;
         }
     }
 
@@ -105,21 +64,17 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     public void notifyUpdatedItems() {
         repaint();
     }
-    
-    public HoraireDrawer getHoraireDrawer()
-    {
+
+    public HoraireDrawer getHoraireDrawer() {
         return horaireDrawer;
     }
 
-   public boolean getNouveauDragged()
-   {
-       return nouveauDragged;
-   }
-   public void setNouveauDragged(boolean nouveauDragged)
-   {
-       this.nouveauDragged = nouveauDragged;
-   }
+    public boolean getNouveauDragged() {
+        return nouveauDragged;
+    }
 
-    
-    
+    public void setNouveauDragged(boolean nouveauDragged) {
+        this.nouveauDragged = nouveauDragged;
+    }
+
 }
