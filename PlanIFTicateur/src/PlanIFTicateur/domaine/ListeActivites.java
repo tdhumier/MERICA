@@ -6,6 +6,7 @@
 package PlanIFTicateur.domaine;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.CoursHorsDep;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,8 @@ public class ListeActivites {
         for (Activite activite : listeActivites) {
             if (activite.getCode().equals(code)) {
                 return activite;
+            } else {
+                return new CoursHorsDep(code, "NC", "NC", "NC", "NC", 3, 8, 22, 0, 0.0d);
             }
         }
         return null;
