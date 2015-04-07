@@ -118,7 +118,7 @@ public class DetailsActivitePanel extends JPanel {
         dureeLabel.setText("Durée : " + duree);
         debutMinLabel.setText("Début au plus tôt : " + debutMin);
         finMaxLabel.setText("Fin au plus tard : " + finMax);
-        if (activite.getJour() != 0 || activite.getHeureDebut() != 0) {
+        if (activite.getJour() != 0 || activite.getHeureDebut() != 0.0d) {
             jourLabel.setText("Jour : " + getNomJour(activite.getJour()));
             heureLabel.setText("Heure  : " + debut);
         }
