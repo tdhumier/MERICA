@@ -19,6 +19,12 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
 
     private MainWindow mainWindow;
     private JLabel statistiqueLabel;
+    private JLabel lundiLabel;
+    private JLabel mardiLabel;
+    private JLabel mercrediLabel;
+    private JLabel jeudiLabel;
+    private JLabel vendrediLabel;
+    private JLabel samediLabel;
 
     public StatistiquesPanel() {
     }
@@ -32,8 +38,20 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
     private void buildUp() {
         setLayout(new GridLayout(0, 1));
         statistiqueLabel = new JLabel("Statistiques");
+        lundiLabel = new JLabel("");
+        mardiLabel = new JLabel("");
+        mercrediLabel = new JLabel("");
+        jeudiLabel = new JLabel("");
+        vendrediLabel = new JLabel("");
+        samediLabel = new JLabel("");
 
         add(statistiqueLabel);
+        add(lundiLabel);
+        add(mardiLabel);
+        add(mercrediLabel);
+        add(jeudiLabel);
+        add(vendrediLabel);
+        add(samediLabel);
     }
 
     @Override
@@ -41,10 +59,12 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
 
         ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
         String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
-        for (int i = 0; i < 6; i++) {
-            JLabel statistiqueNbCoursParJourLabel = new JLabel(jourModes[i] + " : " + nbCoursParJour.get(i) + " cours");
-            add(statistiqueNbCoursParJourLabel);
-        }
+        lundiLabel.setText(jourModes[0] + " : " + nbCoursParJour.get(0) + "cours");
+        mardiLabel.setText(jourModes[1] + " : " + nbCoursParJour.get(1) + "cours");
+        mercrediLabel.setText(jourModes[2] + " : " + nbCoursParJour.get(2) + "cours");
+        jeudiLabel.setText(jourModes[3] + " : " + nbCoursParJour.get(3) + "cours");
+        vendrediLabel.setText(jourModes[4] + " : " + nbCoursParJour.get(4) + "cours");
+        samediLabel.setText(jourModes[5] + " : " + nbCoursParJour.get(5) + "cours");
 
         repaint();
     }
