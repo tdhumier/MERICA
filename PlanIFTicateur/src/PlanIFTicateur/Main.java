@@ -18,6 +18,7 @@ public class Main {
         // TODO code application logic here
         PlanIFTicateur.gui.MainWindow mainWindow = new PlanIFTicateur.gui.MainWindow();
         mainWindow.setVisible(true);
+        mainWindow.bottomPanel.setText("Prêt");
     }
-
+    
 }

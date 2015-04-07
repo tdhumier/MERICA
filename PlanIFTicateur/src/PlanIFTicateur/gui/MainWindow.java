@@ -163,6 +163,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
             controleur.importerFichiers(fichier.getAbsolutePath());
+            bottomPanel.setText("Chargement terminé.");
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
