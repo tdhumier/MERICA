@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.Optional;
 
-
 /**
  *
  * @author tristandhumieres
@@ -25,12 +24,11 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
     private boolean isDragged;
     private boolean nouveauDragged = false;
 
-
     public MouseHandleListener(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         this.isDragged = false;
     }
-    
+
     @Override
     public void mouseMoved(MouseEvent e) {
         Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
@@ -90,7 +88,6 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
             mainWindow.horairePanel.repaint();
         }
     }
-    
 
     @Override
     public void mouseReleased(MouseEvent e) {
@@ -106,7 +103,7 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
                     mainWindow.controleur.deplacerActivite(activite.get(), point, getHeure(x), getJour(y));
                 }
             } else if (activite.isPresent()) { // Si on n'a pas affecté de jour ni d'heure (c'est que l'horaire n'est pas correct), on replace à l'endroit initial
-                mainWindow.controleur.resetPosition(activite.get(), mainWindow.horairePanel.getInitialDimension());
+                mainWindow.controleur.unasignActivite(activite.get());
             }
             isDragged = false; // La souris est relachée donc on ne drag plus
         }

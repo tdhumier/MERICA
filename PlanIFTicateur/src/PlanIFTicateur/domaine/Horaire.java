@@ -105,7 +105,15 @@ public class Horaire {
         return result;
     }
 
-    public void resetPosition(Activite activite, Dimension dimension) {
+    void resetPosition(Activite activite) {
+
+        activite.setPoint(new Point());
+        activite.setIsSelected(false);
+        activite.setJour(0);
+        activite.setHeureDebut(0.0d);
+    }
+
+    void resetPosition(Activite activite, Dimension dimension) {
         activite.setPoint(dimension);
         activite.setIsSelected(false);
     }
