@@ -7,8 +7,12 @@ package PlanIFTicateur.gui.listeners.mouse;
 
 import PlanIFTicateur.gui.MainWindow;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 /**
  *
@@ -17,13 +21,16 @@ import java.awt.event.MouseMotionListener;
 public class MotionListener implements MouseMotionListener {
 
     private MainWindow mainWindow;
+    
 
     public MotionListener(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
+    public void mouseDragged(MouseEvent e)
+    {
+       
     }
 
     @Override

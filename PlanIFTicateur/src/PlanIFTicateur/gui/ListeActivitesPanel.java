@@ -9,13 +9,18 @@ import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
 import java.awt.BorderLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.DropMode;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.TransferHandler;
 
 /**
  *
@@ -27,6 +32,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
     private JLabel listeActivitesLabel;
     private JList<Activite> listeActivites;
     DefaultListModel<Activite> listModel;
+    TransferHandler th;
 
     public ListeActivitesPanel() {
     }
@@ -54,11 +60,18 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
 
         listeActivites.addListSelectionListener(new ListeSelectionListener(mainWindow));
 
-        listeActivites.setDragEnabled(true);
-        listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
+        
+       th = listeActivites.getTransferHandler();
+       listeActivites.setDragEnabled(true);
+       listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+       listeActivites.setDropMode(DropMode.ON);
+       
     }
+    
+    
+ 
 
     @Override
     public void notifyUpdatedItems() {
@@ -67,4 +80,12 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
             listModel.addElement(activite);
         });
     }
+    
+    public JList<Activite> getListeActivites()
+    {
+        return listeActivites;
+    }
+    
+    
+    
 }

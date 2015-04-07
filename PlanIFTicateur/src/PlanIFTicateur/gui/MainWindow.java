@@ -16,7 +16,7 @@ import javax.swing.JFileChooser;
  *
  * @author tristandhumieres
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame  {
 
     public HoraireActiviteControleur controleur;
 

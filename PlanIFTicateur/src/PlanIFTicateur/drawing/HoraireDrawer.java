@@ -103,4 +103,9 @@ public class HoraireDrawer {
         g2.setColor(Color.black);
         g2.drawString(activite.getCode(), (int) (x + (activite.getDuree() - 1) * largeurCase), y + hauteurCase - 4);
     }
+    
+    public void ajouterActivite(Activite activite)
+    {
+        controleur.getActivitesAssignees().add(activite);
+    }
 }

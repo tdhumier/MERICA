@@ -56,4 +56,6 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
     public void notifyUpdatedItems() {
         repaint();
     }
+    
+    
 }
