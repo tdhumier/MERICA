@@ -31,7 +31,7 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
+        Dimension initialDimension = mainWindow.horairePanel.getDimensionsCase();
         int x = e.getX();
         int y = e.getY();
         int xo = 80;
@@ -92,15 +92,17 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
     @Override
     public void mouseReleased(MouseEvent e) {
         if (isDragged) { // Si on déplace avec la souris
-            int x = e.getX();
-            int y = e.getY();
+            int x = mainWindow.horairePanel.getXPosition(e.getX());
+            int y = mainWindow.horairePanel.getYPosition(e.getY());
+            double heure = mainWindow.horairePanel.getHeure(e.getX());
+            int jour = mainWindow.horairePanel.getJour(e.getY());
             Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
-            if (activite.isPresent() && getHeure(x) != 0.0d && getJour(y) != 0 && getHeure(x) + activite.get().getDuree() <= 22) { // Si on a una activité présente et on a affecté un heure et un jour et la case ne dépasse pas de la grille
-                Point point = new Point(getXPosition(x), getYPosition(y));
+            if (activite.isPresent() && heure != 0.0d && jour != 0 && heure + activite.get().getDuree() <= 22) { // Si on a una activité présente et on a affecté un heure et un jour et la case ne dépasse pas de la grille
+                Point point = new Point(x, y);
                 if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) { // Si on est en mode vérif auto
-                    mainWindow.controleur.deplacerActiviteAvecVerification(activite.get(), point, getHeure(x), getJour(y), mainWindow.horairePanel.getInitialDimension());
+                    mainWindow.controleur.deplacerActiviteAvecVerification(activite.get(), point, heure, jour, mainWindow.horairePanel.getDimensionsCase());
                 } else {
-                    mainWindow.controleur.deplacerActivite(activite.get(), point, getHeure(x), getJour(y));
+                    mainWindow.controleur.deplacerActivite(activite.get(), point, heure, jour);
                 }
             } else if (activite.isPresent()) { // Si on n'a pas affecté de jour ni d'heure (c'est que l'horaire n'est pas correct), on replace à l'endroit initial
                 mainWindow.controleur.unasignActivite(activite.get());
@@ -114,65 +116,5 @@ public class MouseHandleListener extends MouseAdapter implements MouseMotionList
         int x = e.getX();
         int y = e.getY();
         mainWindow.controleur.modifierStatutSelectionActivite(x, y);
-    }
-
-    private double getHeure(int x) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
-        int xo = 80;
-        int xCase = (x - xo) / initialDimension.width + 1;
-        double heureCase = ((xCase - 1) / 2) + 8;
-        if (x < xo || x > (initialDimension.width * 28 + 80)) {
-            return 0.0d;
-        } else {
-            if (xCase % 2 == 0) {
-                double heureCaseBefore = heureCase;
-                return heureCaseBefore + 0.5;
-            } else {
-                return heureCase;
-            }
-        }
-    }
-
-    private int getJour(int y) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
-
-        int yo = 20;
-
-        int yCase = (y - yo) / initialDimension.height + 1;
-
-        if ((yCase - 1) / 8 == 0) {
-            return 1;
-        }
-        if ((yCase - 1) / 8 == 1) {
-            return 2;
-        }
-        if ((yCase - 1) / 8 == 2) {
-            return 3;
-        }
-        if ((yCase - 1) / 8 == 3) {
-            return 4;
-        }
-        if ((yCase - 1) / 8 == 4) {
-            return 5;
-        }
-        if ((yCase - 1) / 8 == 5) {
-            return 6;
-        }
-
-        return 0;
-    }
-
-    private int getXPosition(int x) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
-        int xo = 80;
-        int xCase = (x - xo) / initialDimension.width + 1;
-        return ((xCase - 1) * initialDimension.width + xo);
-    }
-
-    private int getYPosition(int y) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
-        int yo = 20;
-        int yCase = (y - yo) / initialDimension.height + 1;
-        return ((yCase - 1) * initialDimension.height + yo);
     }
 }

@@ -12,10 +12,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,10 +33,12 @@ public class HoraireDrawer {
     public void draw(Graphics g) {
         drawGrille(g);
         drawActivites(g);
-        //disableCases(g, new CoursClasse("NTM", "ZZZZ", "Supertest", "JoeyStarr", "Cours en classe", 3.0, 11.50, 17.50, 4, 12.50));
+        if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) {
+            disableCases(g);
+        }
     }
 
-    public void drawGrille(Graphics g) {
+    private void drawGrille(Graphics g) {
         int largeurCase = initialDimension.width;
         int hauteurCase = initialDimension.height;
         g.setColor(Color.LIGHT_GRAY);
@@ -87,79 +87,19 @@ public class HoraireDrawer {
         }
     }
 
-    public void drawActivites(Graphics g) {
+    private void drawActivites(Graphics g) {
         List<Activite> activites = mainWindow.controleur.getActivitesAssignees();
-        for (int i = 0; i < activites.size(); i++) {
-            if (activites.get(i).getPoint().x != 0) {
-                drawActivite(g, activites.get(i));
-            }
-            if (activites.get(i).isSelected()) {
-                drawSelection(g, activites.get(i));
-            }
-        }
+        activites.stream().map((activite) -> new ActiviteDrawer(activite)).forEach((activiteDrawer) -> {
+            activiteDrawer.drawActivite(g);
+        });
     }
 
-    private void drawActivite(Graphics g, Activite activite) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(activite.getCouleur());
-        g2.fill(new Rectangle.Double(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight()));
-        g2.setColor(Color.black);
-        g2.drawString(activite.getCode(), (int) (activite.getPoint().x + (activite.getWidth() / 2 - activite.getWidth() / (activite.getDuree() * 2))), activite.getPoint().y + activite.getHeight() - 4);
-    }
-
-    private void drawSelection(Graphics g, Activite activite) {
-        g.setColor(Color.YELLOW);
-        if (activite.getPoint().x != 0) {
-            g.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
+    private void disableCases(Graphics g) {
+        if (mainWindow.controleur.getActiviteSelectionnee().isPresent()) {
+            Activite activite = mainWindow.controleur.getActiviteSelectionnee().get();
+            HashMap<Integer, List<Double>> plagesHoraireAGriser = mainWindow.controleur.getPlagesHoraireAGriser(activite);
+            DisableCasesDrawer disableCasesDrawer = new DisableCasesDrawer(initialDimension, plagesHoraireAGriser, activite);
+            disableCasesDrawer.disableCases(g);
         }
-        if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) {
-            disableCases(g, activite);
-        }
-    }
-
-    private void disableCases(Graphics g, Activite activite) { // grise les cases qui ne respectent pas les contraintes
-        int largeurCase = initialDimension.width;
-        int hauteurCase = initialDimension.height;
-        double heureDebutMinTest = activite.getHeureDebutMin();
-        double heureFinMaxTest = activite.getHeureFinMax();
-        int caseDebutMin;
-        int caseFinMax;
-
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.LIGHT_GRAY);
-        HashMap<Integer, List<Double>> source = mainWindow.controleur.getPlagesHoraireAGriser(activite);
-        if (!source.isEmpty()) {
-            Iterator<Integer> keySetIterator = source.keySet().iterator();
-
-            while (keySetIterator.hasNext()) {
-                Integer key = keySetIterator.next();
-                int jour = key;
-                double heureDebutTest = source.get(key).get(0);
-                int caseDebut;
-                if ((int) heureDebutTest == heureDebutTest) {
-                    caseDebut = ((int) heureDebutTest - 8) * 2 * largeurCase;
-                } else {
-                    caseDebut = (((int) heureDebutTest - 8) * 2 + 1) * largeurCase;
-                }
-                double duree = source.get(key).get(1);
-
-                g2.fillRect(80 + caseDebut, 20 + (jour - 1) * 8 * hauteurCase, (int) duree * 2 * largeurCase, 8 * hauteurCase);
-            }
-        }
-
-        if ((int) heureDebutMinTest == heureDebutMinTest) {
-            caseDebutMin = ((int) heureDebutMinTest - 8) * 2 + 1;
-        } else {
-            caseDebutMin = ((int) heureDebutMinTest - 8) * 2 + 2;
-        }
-
-        if ((int) heureFinMaxTest == heureFinMaxTest) {
-            caseFinMax = ((int) heureFinMaxTest - 8) * 2;
-        } else {
-            caseFinMax = ((int) heureFinMaxTest - 8) * 2 + 1;
-        }
-
-        g2.fillRect(80, 20, largeurCase * (caseDebutMin - 1), hauteurCase * 48);
-        g2.fillRect(80 + caseFinMax * largeurCase, 20, largeurCase * (28 - caseFinMax), hauteurCase * 48);
     }
 }

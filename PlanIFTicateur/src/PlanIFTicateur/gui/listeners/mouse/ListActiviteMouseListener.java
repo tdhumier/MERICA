@@ -6,8 +6,8 @@
 package PlanIFTicateur.gui.listeners.mouse;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.gui.panels.ListeActivitesPanel;
 import PlanIFTicateur.gui.frames.MainWindow;
+import PlanIFTicateur.gui.panels.ListeActivitesPanel;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -79,7 +79,7 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     }
 
     private double getHeure(int x) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
+        Dimension initialDimension = mainWindow.horairePanel.getDimensionsCase();
         int xo = 80;
         int xCase = (x - xo) / initialDimension.width + 1;
         double heureCase = ((xCase - 1) / 2) + 8;
@@ -96,7 +96,7 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     }
 
     private int getJour(int y) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
+        Dimension initialDimension = mainWindow.horairePanel.getDimensionsCase();
 
         int yo = 20;
 
@@ -125,14 +125,14 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     }
 
     private int getXPosition(int x) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
+        Dimension initialDimension = mainWindow.horairePanel.getDimensionsCase();
         int xo = 80;
         int xCase = (x - xo) / initialDimension.width + 1;
         return ((xCase - 1) * initialDimension.width + xo);
     }
 
     private int getYPosition(int y) {
-        Dimension initialDimension = mainWindow.horairePanel.getInitialDimension();
+        Dimension initialDimension = mainWindow.horairePanel.getDimensionsCase();
         int yo = 20;
         int yCase = (y - yo) / initialDimension.height + 1;
         return ((yCase - 1) * initialDimension.height + yo);

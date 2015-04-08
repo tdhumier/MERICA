@@ -183,7 +183,7 @@ public class MainWindow extends javax.swing.JFrame {
         File fichier;
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
-            controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getInitialDimension());
+            controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
