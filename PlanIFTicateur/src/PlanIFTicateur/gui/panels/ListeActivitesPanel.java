@@ -7,10 +7,9 @@ package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.gui.renderers.ActiviteRenderer;
 import PlanIFTicateur.gui.frames.MainWindow;
-import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
 import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
+import PlanIFTicateur.gui.renderers.ActiviteRenderer;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -57,7 +56,6 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         listeActivites.setCellRenderer(new ActiviteRenderer());
 
         listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listeActivites.addListSelectionListener(new ListeSelectionListener(mainWindow));
 
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
 

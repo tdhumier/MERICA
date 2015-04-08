@@ -5,10 +5,12 @@
  */
 package PlanIFTicateur.gui.panels;
 
+import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Optional;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -17,7 +19,7 @@ import javax.swing.SwingConstants;
  *
  * @author tristandhumieres
  */
-public class DetailsActivitePanel extends JPanel {
+public class DetailsActivitePanel extends JPanel implements HoraireControleurObserveur {
 
     private MainWindow mainWindow;
     private JPanel detailsActivitePanel;
@@ -38,6 +40,7 @@ public class DetailsActivitePanel extends JPanel {
 
     public DetailsActivitePanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        mainWindow.controleur.registerObserver(this);
         buildUp();
     }
 
@@ -76,7 +79,7 @@ public class DetailsActivitePanel extends JPanel {
         add(detailsActivitePanel, BorderLayout.CENTER);
     }
 
-    public void updateLabel(Activite activite) {
+    private void updateLabel(Activite activite) {
         String duree;
         String debutMin;
         String finMax;
@@ -125,10 +128,18 @@ public class DetailsActivitePanel extends JPanel {
         }
     }
 
-    public String getNomJour(int i) {
+    private String getNomJour(int i) {
         String[] JourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
 
         return JourModes[i + 1];
+    }
+
+    @Override
+    public void notifyUpdatedItems() {
+        Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
+        if (activite.isPresent()) {
+            updateLabel(activite.get());
+        }
     }
 
 }

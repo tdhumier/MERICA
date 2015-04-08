@@ -8,6 +8,7 @@ package PlanIFTicateur.gui.panels;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.drawing.HoraireDrawer;
 import PlanIFTicateur.gui.frames.MainWindow;
+import PlanIFTicateur.gui.frames.MainWindow;
 import PlanIFTicateur.gui.listeners.mouse.MouseHandleListener;
 import java.awt.Color;
 import java.awt.Dimension;

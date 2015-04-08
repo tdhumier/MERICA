@@ -5,10 +5,8 @@
  */
 package PlanIFTicateur.gui.panels;
 
-import PlanIFTicateur.gui.panels.StatistiquesPanel;
-import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.frames.MainWindow;
-import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.Serializable;
@@ -55,12 +53,7 @@ public class RightPanel extends JPanel implements Serializable {
         setVisible(true);
     }
 
-    public void updateDetailsActivitePanel(Activite activite) {
-        detailsActivitePanel.updateLabel(activite);
-        detailsActivitePanel.repaint();
-    }
-    public ListeActivitesPanel getListeActivitesPanel()
-    {
+    public ListeActivitesPanel getListeActivitesPanel() {
         return listeActivitesPanel;
     }
 }

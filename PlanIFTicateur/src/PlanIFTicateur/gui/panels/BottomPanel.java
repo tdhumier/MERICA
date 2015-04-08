@@ -7,6 +7,7 @@ package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JLabel;
