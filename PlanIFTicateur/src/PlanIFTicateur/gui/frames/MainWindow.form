@@ -124,14 +124,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Container class="PlanIFTicateur.gui.BottomPanel" name="bottomPanel">
+                <Container class="PlanIFTicateur.gui.panels.BottomPanel" name="bottomPanel">
                   <Properties>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[1000, 30]"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.BottomPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.panels.BottomPanel(this)"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                   <Constraints>
@@ -142,14 +142,14 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                 </Container>
-                <Container class="PlanIFTicateur.gui.RightPanel" name="rightPanel">
+                <Container class="PlanIFTicateur.gui.panels.RightPanel" name="rightPanel">
                   <Properties>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 244]"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.RightPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.panels.RightPanel(this)"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                   <Constraints>
@@ -181,9 +181,9 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                       <SubComponents>
-                        <Container class="PlanIFTicateur.gui.HorairePanel" name="horairePanel">
+                        <Container class="PlanIFTicateur.gui.panels.HorairePanel" name="horairePanel">
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.HorairePanel(this)"/>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlanIFTicateur.gui.panels.HorairePanel(this)"/>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                           <Constraints>

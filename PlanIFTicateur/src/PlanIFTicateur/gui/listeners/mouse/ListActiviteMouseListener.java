@@ -6,8 +6,8 @@
 package PlanIFTicateur.gui.listeners.mouse;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.gui.ListeActivitesPanel;
-import PlanIFTicateur.gui.MainWindow;
+import PlanIFTicateur.gui.panels.ListeActivitesPanel;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;

@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        PlanIFTicateur.gui.MainWindow mainWindow = new PlanIFTicateur.gui.MainWindow();
+        PlanIFTicateur.gui.frames.MainWindow mainWindow = new PlanIFTicateur.gui.frames.MainWindow();
         mainWindow.setVisible(true);
         mainWindow.bottomPanel.setText("Prêt");
         mainWindow.controleur.importerFichiers("/Users/tristandhumieres/Desktop/test/casHiver2015.COU", mainWindow.horairePanel.getInitialDimension());

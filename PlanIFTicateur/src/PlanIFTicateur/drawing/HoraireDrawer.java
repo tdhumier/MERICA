@@ -6,7 +6,7 @@
 package PlanIFTicateur.drawing;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.gui.MainWindow;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;

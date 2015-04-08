@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui;
+package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.gui.renderers.ActiviteRenderer;
+import PlanIFTicateur.gui.frames.MainWindow;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
 import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.BorderLayout;

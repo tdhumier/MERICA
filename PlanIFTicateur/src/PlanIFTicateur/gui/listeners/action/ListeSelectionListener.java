@@ -6,7 +6,7 @@
 package PlanIFTicateur.gui.listeners.action;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.gui.MainWindow;
+import PlanIFTicateur.gui.frames.MainWindow;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;

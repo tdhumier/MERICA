@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui;
+package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;

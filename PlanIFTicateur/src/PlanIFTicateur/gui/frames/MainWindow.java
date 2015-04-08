@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui;
+package PlanIFTicateur.gui.frames;
 
 import PlanIFTicateur.domaine.HoraireActiviteControleur;
 import java.awt.FlowLayout;
@@ -61,11 +61,11 @@ public class MainWindow extends javax.swing.JFrame {
         verificationAutoBoutton = new javax.swing.JToggleButton();
         mainScrollPane = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
-        bottomPanel = new PlanIFTicateur.gui.BottomPanel(this);
-        rightPanel = new PlanIFTicateur.gui.RightPanel(this);
+        bottomPanel = new PlanIFTicateur.gui.panels.BottomPanel(this);
+        rightPanel = new PlanIFTicateur.gui.panels.RightPanel(this);
         horaireScrollPane = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        horairePanel = new PlanIFTicateur.gui.HorairePanel(this);
+        horairePanel = new PlanIFTicateur.gui.panels.HorairePanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         nouveauMenuItem = new javax.swing.JMenuItem();
@@ -242,9 +242,9 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public PlanIFTicateur.gui.BottomPanel bottomPanel;
+    public PlanIFTicateur.gui.panels.BottomPanel bottomPanel;
     private javax.swing.JPanel buttonTopPanel;
-    public PlanIFTicateur.gui.HorairePanel horairePanel;
+    public PlanIFTicateur.gui.panels.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -259,7 +259,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JMenuItem nouveauMenuItem;
     private javax.swing.JPanel panel;
-    public PlanIFTicateur.gui.RightPanel rightPanel;
+    public PlanIFTicateur.gui.panels.RightPanel rightPanel;
     private javax.swing.JToggleButton verificationAutoBoutton;
     // End of variables declaration//GEN-END:variables
 }
