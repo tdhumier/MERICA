@@ -10,17 +10,13 @@ import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.listeners.action.ListeSelectionListener;
 import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import java.awt.BorderLayout;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.TransferHandler;
 
 /**
  *
@@ -32,7 +28,6 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
     private JLabel listeActivitesLabel;
     private JList<Activite> listeActivites;
     DefaultListModel<Activite> listModel;
-    TransferHandler th;
 
     public ListeActivitesPanel() {
     }
@@ -60,27 +55,14 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
         listeActivites.setCellRenderer(new ActiviteRenderer());
 
         listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         listeActivites.addListSelectionListener(new ListeSelectionListener(mainWindow));
 
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
 
-        listeActivites.setDragEnabled(true);
-        listeActivites.addMouseListener(new ListActiviteMouseListener(mainWindow));
-
-    }
-
-    private class ExportTransferHandler extends TransferHandler {
-
-        @Override
-        public int getSourceActions(JComponent c) {
-            return TransferHandler.MOVE;
-        }
-
-        @Override
-        protected Transferable createTransferable(JComponent c) {
-            return new StringSelection(listeActivites.getSelectedValue().getCode());
-        }
+//        listeActivites.setDragEnabled(true);
+        ListActiviteMouseListener listActiviteMouseListener = new ListActiviteMouseListener(mainWindow);
+        listeActivites.addMouseMotionListener(listActiviteMouseListener);
+        listeActivites.addMouseListener(listActiviteMouseListener);
 
     }
 

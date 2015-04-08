@@ -8,7 +8,6 @@ package PlanIFTicateur.gui;
 import PlanIFTicateur.domaine.HoraireControleurObserveur;
 import PlanIFTicateur.drawing.HoraireDrawer;
 import PlanIFTicateur.gui.listeners.mouse.MouseHandleListener;
-import PlanIFTicateur.gui.listeners.mouse.SecondMouseHandleListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -46,8 +45,6 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
         MouseHandleListener mouseHandleListener = new MouseHandleListener(mainWindow);
         this.addMouseListener(mouseHandleListener);
         this.addMouseMotionListener(mouseHandleListener);
-        this.addMouseListener(new SecondMouseHandleListener(mainWindow));
-        this.addMouseMotionListener(new SecondMouseHandleListener(mainWindow));
     }
 
     @Override
