@@ -18,12 +18,12 @@ import java.util.Optional;
  *
  * @author tristandhumieres
  */
-public class MouseHandleListener extends MouseAdapter implements MouseMotionListener {
+public class HorairePanelMouseListener extends MouseAdapter implements MouseMotionListener {
 
     private MainWindow mainWindow;
     private boolean isDragged;
 
-    public MouseHandleListener(MainWindow mainWindow) {
+    public HorairePanelMouseListener(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         this.isDragged = false;
     }

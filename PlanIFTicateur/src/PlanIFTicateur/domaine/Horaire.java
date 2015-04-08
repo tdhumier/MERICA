@@ -70,6 +70,7 @@ public class Horaire {
             activite.setJour(oldJour);
             resetPosition(activite, dimension);
         }
+        activite.setIsSelected(false);
     }
 
     public void verifierHoraireActivite(Activite activite) {

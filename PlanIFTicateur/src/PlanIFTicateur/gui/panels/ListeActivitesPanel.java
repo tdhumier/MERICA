@@ -59,7 +59,6 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
 
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
 
-//        listeActivites.setDragEnabled(true);
         ListActiviteMouseListener listActiviteMouseListener = new ListActiviteMouseListener(mainWindow);
         listeActivites.addMouseMotionListener(listActiviteMouseListener);
         listeActivites.addMouseListener(listActiviteMouseListener);

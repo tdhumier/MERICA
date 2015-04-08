@@ -198,7 +198,6 @@ public class MainWindow extends javax.swing.JFrame {
         } else {
             this.verificationMode = VerificationMode.UNCHECKED;
         }
-        System.out.println(this.verificationMode.toString());
     }//GEN-LAST:event_verificationAutoBouttonActionPerformed
 
     /**

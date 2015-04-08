@@ -116,6 +116,7 @@ public class HoraireActiviteControleur {
     public void setActiviteSelectionnee(Activite activite, Boolean state) {
         horaire.getListeActivite().setActivitesANonSlectionnee();
         activite.setIsSelected(state);
+        notifyObserversForUpdatedItems();
     }
 
     public void registerObserver(HoraireControleurObserveur newListener) {
