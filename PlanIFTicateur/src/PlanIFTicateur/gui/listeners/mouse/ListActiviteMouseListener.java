@@ -54,9 +54,10 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     @Override
     public void mouseReleased(MouseEvent e) {
         Point pointHorairePanel = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), mainWindow.horairePanel);
-        Point point = new Point(mainWindow.horairePanel.getXPosition(pointHorairePanel.x), mainWindow.horairePanel.getYPosition(pointHorairePanel.y));
-        double heure = mainWindow.horairePanel.getHeure(pointHorairePanel.x);
-        int jour = mainWindow.horairePanel.getJour(pointHorairePanel.y);
+        MousePositionHelper mousePositionHelper = new MousePositionHelper(mainWindow.horairePanel.getDimensionsCase());
+        int jour = mousePositionHelper.getJour(pointHorairePanel.y);
+        double heure = mousePositionHelper.getHeure(pointHorairePanel.x);
+        Point point = new Point(mousePositionHelper.getXPosition(pointHorairePanel.x), mousePositionHelper.getYPosition(pointHorairePanel.y));
         if (isDragged) {
             if (mainWindow.getVerificationMode() == MainWindow.VerificationMode.CHECKED) { // Si on est en mode vérif auto
                 mainWindow.controleur.deplacerActiviteAvecVerification(activiteSelectionnee, point, heure, jour, mainWindow.horairePanel.getDimensionsCase());

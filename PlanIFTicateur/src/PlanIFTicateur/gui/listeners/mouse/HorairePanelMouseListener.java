@@ -45,10 +45,11 @@ public class HorairePanelMouseListener extends MouseAdapter implements MouseMoti
     @Override
     public void mouseReleased(MouseEvent e) {
         if (isDragged) { // Si on déplace avec la souris
-            int x = mainWindow.horairePanel.getXPosition(e.getX());
-            int y = mainWindow.horairePanel.getYPosition(e.getY());
-            double heure = mainWindow.horairePanel.getHeure(e.getX());
-            int jour = mainWindow.horairePanel.getJour(e.getY());
+            MousePositionHelper mousePositionHelper = new MousePositionHelper(mainWindow.horairePanel.getDimensionsCase());
+            int jour = mousePositionHelper.getJour(e.getY());
+            double heure = mousePositionHelper.getHeure(e.getX());
+            int x = mousePositionHelper.getXPosition(e.getX());
+            int y = mousePositionHelper.getYPosition(e.getY());
             Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
             if (activite.isPresent() && heure != 0.0d && jour != 0 && heure + activite.get().getDuree() <= 22) { // Si on a una activité présente et on a affecté un heure et un jour et la case ne dépasse pas de la grille
                 Point point = new Point(x, y);
