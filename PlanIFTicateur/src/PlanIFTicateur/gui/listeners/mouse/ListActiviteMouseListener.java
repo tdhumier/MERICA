@@ -41,6 +41,7 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
         Point point = e.getPoint();
         Point pointHorairePanel = SwingUtilities.convertPoint(e.getComponent(), point, mainWindow.horairePanel);
         if (activiteSelectionnee != null) {
+            updateBottomPanel(pointHorairePanel);
             isDragged = true;
             mainWindow.controleur.deplacerActivite(activiteSelectionnee, pointHorairePanel.x, pointHorairePanel.y);
         }
@@ -66,4 +67,12 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
         isDragged = false;
         e.getComponent().setEnabled(true);
     }
+
+    private void updateBottomPanel(Point mousePoint) {
+        MousePositionHelper mousePositionHelper = new MousePositionHelper(mainWindow.horairePanel.getDimensionsCase());
+        int jour = mousePositionHelper.getJour(mousePoint.y);
+        double heure = mousePositionHelper.getHeure(mousePoint.x);
+        mainWindow.bottomPanel.setHeureEtJour(jour, heure);
+    }
+
 }

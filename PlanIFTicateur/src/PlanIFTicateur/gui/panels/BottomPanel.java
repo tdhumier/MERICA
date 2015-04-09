@@ -7,8 +7,9 @@ package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
@@ -37,16 +38,39 @@ public class BottomPanel extends JPanel implements HoraireControleurObserveur {
         int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
         setPreferredSize(new Dimension(width, 30));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
-        setLayout(new BorderLayout());
-        labelBottomPanel = new JLabel("");
+        setLayout(new FlowLayout());
+        labelBottomPanel = new JLabel("Prêt");
         validiteHorraireLabel = new JLabel("");
-        add(labelBottomPanel, BorderLayout.WEST);
-        add(validiteHorraireLabel, BorderLayout.EAST);
+        add(labelBottomPanel);
+        add(new JLabel(" - "));
+        add(validiteHorraireLabel);
         setVisible(true);
     }
 
-    public void setText(String s) {
-        labelBottomPanel.setText(s);
+    public void setHeureEtJour(int jour, double heure) {
+        if (jour != 0 && heure != 0.0d) {
+            String heureLabel = convertHeureToString(heure);
+            String jourLabel = getNomJour(jour);
+            labelBottomPanel.setText(jourLabel + ", " + heureLabel);
+        } else {
+            labelBottomPanel.setText("Prêt");
+        }
+        repaint();
+    }
+
+    private String convertHeureToString(double heure) {
+        String heureLabel;
+        if (heure == (int) heure) {
+            heureLabel = ((int) heure) + "h00-" + ((int) heure) + "h30";
+        } else {
+            heureLabel = ((int) heure) + "h30-" + ((int) (heure + 1)) + "h00";
+        }
+        return heureLabel;
+    }
+
+    private String getNomJour(int i) {
+        String[] JourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+        return JourModes[i - 1];
     }
 
     @Override
@@ -54,8 +78,10 @@ public class BottomPanel extends JPanel implements HoraireControleurObserveur {
         isValide = mainWindow.controleur.isHoraireValide();
         if (isValide) {
             validiteHorraireLabel.setText("Horaire valide");
+            validiteHorraireLabel.setForeground(Color.GREEN);
         } else {
             validiteHorraireLabel.setText("Horaire non valide !");
+            validiteHorraireLabel.setForeground(Color.RED);
         }
         repaint();
     }

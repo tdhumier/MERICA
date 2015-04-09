@@ -7,7 +7,6 @@ package PlanIFTicateur.gui.listeners.mouse;
 
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.gui.frames.MainWindow;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,60 +29,16 @@ public class HorairePanelMouseListener extends MouseAdapter implements MouseMoti
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Dimension initialDimension = mainWindow.horairePanel.getDimensionsCase();
-        int x = e.getX();
-        int y = e.getY();
-        int xo = 80;
-        int yo = 20;
-        int xCase = (x - xo) / initialDimension.width + 1;
-        int yCase = (y - yo) / initialDimension.height + 1;
-        int heureCase = ((xCase - 1) / 2) + 8;
-        String jour = "";
-        String heure;
-        if (xCase % 2 == 0) {
-            int heureCaseBefore = heureCase;
-            heureCase++;
-            heure = heureCaseBefore + "h30-" + heureCase + "h00";
-        } else {
-            heure = heureCase + "h00-" + heureCase + "h30";
-        }
-
-        if ((yCase - 1) / 8 == 0) {
-            jour = "Lundi";
-        }
-        if ((yCase - 1) / 8 == 1) {
-            jour = "Mardi";
-        }
-        if ((yCase - 1) / 8 == 2) {
-            jour = "Mercredi";
-        }
-        if ((yCase - 1) / 8 == 3) {
-            jour = "Jeudi";
-        }
-        if ((yCase - 1) / 8 == 4) {
-            jour = "Vendredi";
-        }
-        if ((yCase - 1) / 8 == 5) {
-            jour = "Samedi";
-        }
-
-        if (x > xo && x < (initialDimension.width * 28 + 80) && y > yo && y < (initialDimension.height * 48 + 20)) {
-            mainWindow.bottomPanel.setText(jour + ", " + heure);
-            mainWindow.bottomPanel.repaint();
-        } else {
-            mainWindow.bottomPanel.setText("Prêt");
-            mainWindow.bottomPanel.repaint();
-        }
+        updateBottomPanel(e.getPoint());
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        updateBottomPanel(e.getPoint());
         Optional<Activite> activite = mainWindow.controleur.getActiviteSelectionnee();
         if (activite.isPresent()) {
             isDragged = true;
-            mainWindow.controleur.deplacerActivite(activite.get(), x, y);
+            mainWindow.controleur.deplacerActivite(activite.get(), e.getX(), e.getY());
         }
     }
 
@@ -114,5 +69,12 @@ public class HorairePanelMouseListener extends MouseAdapter implements MouseMoti
         int x = e.getX();
         int y = e.getY();
         mainWindow.controleur.modifierStatutSelectionActivite(x, y);
+    }
+
+    private void updateBottomPanel(Point mousePoint) {
+        MousePositionHelper mousePositionHelper = new MousePositionHelper(mainWindow.horairePanel.getDimensionsCase());
+        int jour = mousePositionHelper.getJour(mousePoint.y);
+        double heure = mousePositionHelper.getHeure(mousePoint.x);
+        mainWindow.bottomPanel.setHeureEtJour(jour, heure);
     }
 }
