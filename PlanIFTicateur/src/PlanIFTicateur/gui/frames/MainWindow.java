@@ -8,9 +8,15 @@ package PlanIFTicateur.gui.frames;
 import PlanIFTicateur.domaine.horaire.HoraireActiviteControleur;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JToggleButton;
 
@@ -58,9 +64,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         list1 = new java.awt.List();
         mainPanel = new javax.swing.JPanel();
-        buttonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
-        verificationAutoBoutton = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
+        boutonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
+        verificationAutoBouton = new javax.swing.JToggleButton();
+        statistiquesBouton = new javax.swing.JButton();
+        exportBouton = new javax.swing.JButton();
         bottomPanel = new PlanIFTicateur.gui.panels.BottomPanel(this);
         mainScrollPane = new javax.swing.JScrollPane();
         centerPanel = new javax.swing.JPanel();
@@ -68,14 +75,14 @@ public class MainWindow extends javax.swing.JFrame {
         horaireScrollPane = new javax.swing.JScrollPane();
         horairePanel = new PlanIFTicateur.gui.panels.HorairePanel(this
         );
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuBar = new javax.swing.JMenuBar();
+        menuFichier = new javax.swing.JMenu();
         nouveauMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        sauvegarderMenuItem = new javax.swing.JMenuItem();
+        sauvegarderSousMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        quitterMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -86,30 +93,38 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        buttonTopPanel.setPreferredSize(new java.awt.Dimension(567, 35));
+        boutonTopPanel.setPreferredSize(new java.awt.Dimension(567, 35));
 
-        verificationAutoBoutton.setText("Vérification Automatique");
-        verificationAutoBoutton.addChangeListener(new javax.swing.event.ChangeListener() {
+        verificationAutoBouton.setText("Vérification Automatique");
+        verificationAutoBouton.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                verificationAutoBouttonStateChanged(evt);
+                verificationAutoBoutonStateChanged(evt);
             }
         });
-        verificationAutoBoutton.addActionListener(new java.awt.event.ActionListener() {
+        verificationAutoBouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verificationAutoBouttonActionPerformed(evt);
+                verificationAutoBoutonActionPerformed(evt);
             }
         });
-        buttonTopPanel.add(verificationAutoBoutton);
+        boutonTopPanel.add(verificationAutoBouton);
 
-        jButton1.setText("Statistiques");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        statistiquesBouton.setText("Statistiques");
+        statistiquesBouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                statistiquesBoutonActionPerformed(evt);
             }
         });
-        buttonTopPanel.add(jButton1);
+        boutonTopPanel.add(statistiquesBouton);
 
-        mainPanel.add(buttonTopPanel, java.awt.BorderLayout.NORTH);
+        exportBouton.setText("Exporter comme image");
+        exportBouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportBoutonActionPerformed(evt);
+            }
+        });
+        boutonTopPanel.add(exportBouton);
+
+        mainPanel.add(boutonTopPanel, java.awt.BorderLayout.NORTH);
 
         bottomPanel.setPreferredSize(new java.awt.Dimension(1000, 30));
         mainPanel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
@@ -144,7 +159,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainPanel.add(mainScrollPane, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("Fichier");
+        menuFichier.setText("Fichier");
 
         nouveauMenuItem.setText("Nouveau");
         nouveauMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -152,22 +167,32 @@ public class MainWindow extends javax.swing.JFrame {
                 nouveauMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(nouveauMenuItem);
-        jMenu1.add(jSeparator1);
+        menuFichier.add(nouveauMenuItem);
+        menuFichier.add(jSeparator1);
 
-        jMenuItem2.setText("Sauvegarder");
-        jMenu1.add(jMenuItem2);
+        sauvegarderMenuItem.setText("Sauvegarder");
+        sauvegarderMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sauvegarderMenuItemActionPerformed(evt);
+            }
+        });
+        menuFichier.add(sauvegarderMenuItem);
 
-        jMenuItem3.setText("Sauvegarder Sous");
-        jMenu1.add(jMenuItem3);
-        jMenu1.add(jSeparator2);
+        sauvegarderSousMenuItem.setText("Sauvegarder Sous");
+        menuFichier.add(sauvegarderSousMenuItem);
+        menuFichier.add(jSeparator2);
 
-        jMenuItem4.setText("Quitter");
-        jMenu1.add(jMenuItem4);
+        quitterMenuItem.setText("Quitter");
+        quitterMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitterMenuItemActionPerformed(evt);
+            }
+        });
+        menuFichier.add(quitterMenuItem);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(menuFichier);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,23 +221,48 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
-    private void verificationAutoBouttonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_verificationAutoBouttonStateChanged
+    private void verificationAutoBoutonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_verificationAutoBoutonStateChanged
 
-    }//GEN-LAST:event_verificationAutoBouttonStateChanged
+    }//GEN-LAST:event_verificationAutoBoutonStateChanged
 
-    private void verificationAutoBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationAutoBouttonActionPerformed
+    private void verificationAutoBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationAutoBoutonActionPerformed
         JToggleButton boutton = (JToggleButton) evt.getSource();
         if (boutton.isSelected()) {
             this.verificationMode = VerificationMode.CHECKED;
         } else {
             this.verificationMode = VerificationMode.UNCHECKED;
         }
-    }//GEN-LAST:event_verificationAutoBouttonActionPerformed
+    }//GEN-LAST:event_verificationAutoBoutonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void statistiquesBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statistiquesBoutonActionPerformed
         StatistiquesWindow statistiquesWindow = new StatistiquesWindow(this);
         controleur.notifyObserversForUpdatedItems();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_statistiquesBoutonActionPerformed
+
+    private void sauvegarderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sauvegarderMenuItemActionPerformed
+
+    private void quitterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterMenuItemActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_quitterMenuItemActionPerformed
+
+    private void exportBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBoutonActionPerformed
+        JFileChooser dialogue = new JFileChooser(new File("/"));
+        dialogue.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            int w = horairePanel.getWidth();
+            int h = horairePanel.getHeight();
+            BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = bi.createGraphics();
+            horairePanel.paint(g);
+            try {
+                ImageIO.write(bi, "png", new File(dialogue.getSelectedFile() + "/horaire.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_exportBoutonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,23 +306,24 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public PlanIFTicateur.gui.panels.BottomPanel bottomPanel;
-    private javax.swing.JPanel buttonTopPanel;
+    private javax.swing.JPanel boutonTopPanel;
     private javax.swing.JPanel centerPanel;
+    private javax.swing.JButton exportBouton;
     public PlanIFTicateur.gui.panels.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private java.awt.List list1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuFichier;
     private javax.swing.JMenuItem nouveauMenuItem;
+    private javax.swing.JMenuItem quitterMenuItem;
     public PlanIFTicateur.gui.panels.RightPanel rightPanel;
-    private javax.swing.JToggleButton verificationAutoBoutton;
+    private javax.swing.JMenuItem sauvegarderMenuItem;
+    private javax.swing.JMenuItem sauvegarderSousMenuItem;
+    private javax.swing.JButton statistiquesBouton;
+    private javax.swing.JToggleButton verificationAutoBouton;
     // End of variables declaration//GEN-END:variables
 }
