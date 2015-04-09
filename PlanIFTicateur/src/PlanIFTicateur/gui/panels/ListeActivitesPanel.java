@@ -5,12 +5,13 @@
  */
 package PlanIFTicateur.gui.panels;
 
-import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import PlanIFTicateur.gui.listeners.mouse.ListActiviteMouseListener;
 import PlanIFTicateur.gui.renderers.ActiviteRenderer;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -42,6 +43,8 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
 
     private void buildUp() {
 
+        setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 250));
+        int height = (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 52) * 0.2);
         setLayout(new BorderLayout());
         listeActivitesLabel = new JLabel("Liste Activites");
 

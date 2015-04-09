@@ -7,7 +7,6 @@ package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
-import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JLabel;
@@ -30,6 +29,7 @@ public class BottomPanel extends JPanel implements HoraireControleurObserveur {
 
     public BottomPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        mainWindow.controleur.registerObserver(this);
         buildUp();
     }
 

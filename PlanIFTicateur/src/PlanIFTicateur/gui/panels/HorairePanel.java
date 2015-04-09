@@ -8,7 +8,6 @@ package PlanIFTicateur.gui.panels;
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.drawing.HoraireDrawer;
 import PlanIFTicateur.gui.frames.MainWindow;
-import PlanIFTicateur.gui.frames.MainWindow;
 import PlanIFTicateur.gui.listeners.mouse.HorairePanelMouseListener;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,7 +35,6 @@ public class HorairePanel extends JPanel implements HoraireControleurObserveur {
 
     private void buildUp() {
         int largeurEcran = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
-        setPreferredSize(new Dimension((int) (largeurEcran * 0.7), 800));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
         setBackground(Color.WHITE);
         int largeurCase = (int) (largeurEcran * 0.7 - 90) / 28;

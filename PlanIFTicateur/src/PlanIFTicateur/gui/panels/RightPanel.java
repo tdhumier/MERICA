@@ -6,11 +6,12 @@
 package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.gui.frames.MainWindow;
-import PlanIFTicateur.gui.frames.MainWindow;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.io.Serializable;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.border.BevelBorder;
 
 /**
@@ -22,7 +23,8 @@ public class RightPanel extends JPanel implements Serializable {
     private MainWindow mainWindow;
     protected ListeActivitesPanel listeActivitesPanel;
     private DetailsActivitePanel detailsActivitePanel;
-    private StatistiquesPanel statistiquesPanel;
+    private ConflitsPanel conflitsPanel;
+    private HistoriquePanel historiquePanel;
 
     public RightPanel() {
     }
@@ -33,22 +35,28 @@ public class RightPanel extends JPanel implements Serializable {
     }
 
     private void buildUp() {
-        int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
-        int height = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
-        setPreferredSize(new Dimension((int) (width * 0.3), (int) (height * 0.3)));
         setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
-        setLayout(new GridLayout(0, 1));
+        setLayout(new BorderLayout());
 
         listeActivitesPanel = new ListeActivitesPanel(mainWindow);
-        add(listeActivitesPanel);
+        add(listeActivitesPanel, BorderLayout.NORTH);
 
         detailsActivitePanel = new DetailsActivitePanel(mainWindow);
 
-        add(detailsActivitePanel);
+        add(detailsActivitePanel, BorderLayout.CENTER);
 
-        statistiquesPanel = new StatistiquesPanel(mainWindow);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 190));
 
-        add(statistiquesPanel);
+        conflitsPanel = new ConflitsPanel();
+
+        tabbedPane.add("Conflits", new JScrollPane(conflitsPanel));
+
+        historiquePanel = new HistoriquePanel();
+
+        tabbedPane.add("Historique", new JScrollPane(historiquePanel));
+
+        add(tabbedPane, BorderLayout.SOUTH);
 
         setVisible(true);
     }

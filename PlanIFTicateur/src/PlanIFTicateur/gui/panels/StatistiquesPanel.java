@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 public class StatistiquesPanel extends JPanel implements HoraireControleurObserveur {
 
     private MainWindow mainWindow;
-    private JLabel statistiqueLabel;
     private JLabel lundiLabel;
     private JLabel mardiLabel;
     private JLabel mercrediLabel;
@@ -38,7 +37,6 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
 
     private void buildUp() {
         setLayout(new GridLayout(0, 1));
-        statistiqueLabel = new JLabel("Statistiques");
         lundiLabel = new JLabel("");
         mardiLabel = new JLabel("");
         mercrediLabel = new JLabel("");
@@ -46,7 +44,6 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
         vendrediLabel = new JLabel("");
         samediLabel = new JLabel("");
 
-        add(statistiqueLabel);
         add(lundiLabel);
         add(mardiLabel);
         add(mercrediLabel);
@@ -57,7 +54,6 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
 
     @Override
     public void notifyUpdatedItems() {
-
         ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
         String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
         lundiLabel.setText(jourModes[0] + " : " + nbCoursParJour.get(0) + "cours");
@@ -66,7 +62,6 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
         jeudiLabel.setText(jourModes[3] + " : " + nbCoursParJour.get(3) + "cours");
         vendrediLabel.setText(jourModes[4] + " : " + nbCoursParJour.get(4) + "cours");
         samediLabel.setText(jourModes[5] + " : " + nbCoursParJour.get(5) + "cours");
-
         repaint();
     }
 }

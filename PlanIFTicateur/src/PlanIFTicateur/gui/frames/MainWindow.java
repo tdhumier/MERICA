@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui.frames;
 
 import PlanIFTicateur.domaine.horaire.HoraireActiviteControleur;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -31,6 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     public MainWindow() {
+        setTitle("PlanIFTicateur");
         this.verificationMode = VerificationMode.UNCHECKED;
         controleur = new HoraireActiviteControleur();
         initComponents();
@@ -58,13 +60,14 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         buttonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
         verificationAutoBoutton = new javax.swing.JToggleButton();
-        mainScrollPane = new javax.swing.JScrollPane();
-        panel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         bottomPanel = new PlanIFTicateur.gui.panels.BottomPanel(this);
+        mainScrollPane = new javax.swing.JScrollPane();
+        centerPanel = new javax.swing.JPanel();
         rightPanel = new PlanIFTicateur.gui.panels.RightPanel(this);
         horaireScrollPane = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        horairePanel = new PlanIFTicateur.gui.panels.HorairePanel(this);
+        horairePanel = new PlanIFTicateur.gui.panels.HorairePanel(this
+        );
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         nouveauMenuItem = new javax.swing.JMenuItem();
@@ -98,39 +101,46 @@ public class MainWindow extends javax.swing.JFrame {
         });
         buttonTopPanel.add(verificationAutoBoutton);
 
+        jButton1.setText("Statistiques");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        buttonTopPanel.add(jButton1);
+
         mainPanel.add(buttonTopPanel, java.awt.BorderLayout.NORTH);
 
-        panel.setLayout(new java.awt.BorderLayout());
-
         bottomPanel.setPreferredSize(new java.awt.Dimension(1000, 30));
-        panel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
+        mainPanel.add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
-        rightPanel.setPreferredSize(new java.awt.Dimension(300, 244));
-        panel.add(rightPanel, java.awt.BorderLayout.EAST);
+        centerPanel.setLayout(new java.awt.BorderLayout());
 
-        horaireScrollPane.setPreferredSize(new java.awt.Dimension(700, 244));
+        rightPanel.setMinimumSize(new java.awt.Dimension(300, 100));
+        rightPanel.setPreferredSize(new Dimension((int) ((int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 590));
+        centerPanel.add(rightPanel, java.awt.BorderLayout.EAST);
+
+        horaireScrollPane.setPreferredSize(new Dimension((int) ((int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.7), 244));
         horaireScrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        horairePanel.setPreferredSize(new Dimension((int) ((int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.69), 800));
 
         javax.swing.GroupLayout horairePanelLayout = new javax.swing.GroupLayout(horairePanel);
         horairePanel.setLayout(horairePanelLayout);
         horairePanelLayout.setHorizontalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addGap(0, 269, Short.MAX_VALUE)
         );
 
-        jPanel1.add(horairePanel, java.awt.BorderLayout.CENTER);
+        horaireScrollPane.setViewportView(horairePanel);
 
-        horaireScrollPane.setViewportView(jPanel1);
+        centerPanel.add(horaireScrollPane, java.awt.BorderLayout.CENTER);
 
-        panel.add(horaireScrollPane, java.awt.BorderLayout.CENTER);
-
-        mainScrollPane.setViewportView(panel);
+        mainScrollPane.setViewportView(centerPanel);
 
         mainPanel.add(mainScrollPane, java.awt.BorderLayout.CENTER);
 
@@ -163,11 +173,11 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
         );
 
         pack();
@@ -198,6 +208,11 @@ public class MainWindow extends javax.swing.JFrame {
             this.verificationMode = VerificationMode.UNCHECKED;
         }
     }//GEN-LAST:event_verificationAutoBouttonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        StatistiquesWindow statistiquesWindow = new StatistiquesWindow(this);
+        controleur.notifyObserversForUpdatedItems();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,21 +257,21 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public PlanIFTicateur.gui.panels.BottomPanel bottomPanel;
     private javax.swing.JPanel buttonTopPanel;
+    private javax.swing.JPanel centerPanel;
     public PlanIFTicateur.gui.panels.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private java.awt.List list1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JMenuItem nouveauMenuItem;
-    private javax.swing.JPanel panel;
     public PlanIFTicateur.gui.panels.RightPanel rightPanel;
     private javax.swing.JToggleButton verificationAutoBoutton;
     // End of variables declaration//GEN-END:variables

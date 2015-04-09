@@ -5,10 +5,11 @@
  */
 package PlanIFTicateur.gui.panels;
 
-import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Optional;
 import javax.swing.JLabel;
@@ -46,12 +47,13 @@ public class DetailsActivitePanel extends JPanel implements HoraireControleurObs
 
     private void buildUp() {
 
+        setPreferredSize(new Dimension((int) ((int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 190));
         setLayout(new BorderLayout());
 
-        detailsActiviteLabel = new JLabel("\t Détails Activité \n\n");
+        detailsActiviteLabel = new JLabel("\t Détails Activité");
         detailsActiviteLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        detailsActivitePanel = new JPanel(new GridLayout(10, 1));
+        detailsActivitePanel = new JPanel(new GridLayout(0, 1));
 
         codeLabel = new JLabel("Code activité : ");
         sectionLabel = new JLabel("Section : ");
@@ -61,8 +63,8 @@ public class DetailsActivitePanel extends JPanel implements HoraireControleurObs
         dureeLabel = new JLabel("Durée : ");
         debutMinLabel = new JLabel("Début au plus tôt : ");
         finMaxLabel = new JLabel("Fin au plus tard : ");
-        jourLabel = new JLabel("");
-        heureLabel = new JLabel("");
+        jourLabel = new JLabel("Jour : ");
+        heureLabel = new JLabel("Heure : ");
 
         detailsActivitePanel.add(codeLabel);
         detailsActivitePanel.add(titreLabel);
@@ -122,7 +124,10 @@ public class DetailsActivitePanel extends JPanel implements HoraireControleurObs
         dureeLabel.setText("Durée : " + duree);
         debutMinLabel.setText("Début au plus tôt : " + debutMin);
         finMaxLabel.setText("Fin au plus tard : " + finMax);
-        if (activite.getJour() != 0 || activite.getHeureDebut() != 0.0d) {
+        if (activite.getJour() == 0 || activite.getHeureDebut() == 0.0d) {
+            jourLabel.setText("Jour : ");
+            heureLabel.setText("Heure  : ");
+        } else {
             jourLabel.setText("Jour : " + getNomJour(activite.getJour()));
             heureLabel.setText("Heure  : " + debut);
         }

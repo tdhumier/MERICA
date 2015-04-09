@@ -5,10 +5,10 @@
  */
 package PlanIFTicateur.domaine.horaire;
 
+import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.conflit.ListeConflits;
-import PlanIFTicateur.domaine.activite.ListeActivites;
-import PlanIFTicateur.domaine.activite.Activite;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class Horaire {
         this.grillesCheminement = new ListeGrillesCheminement();
         this.listeConflits = new ListeConflits();
         this.statistique = new Statistique();
-
+        this.valide = true;
     }
 
     public ListeActivites getListeActivite() {
@@ -58,6 +58,7 @@ public class Horaire {
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
         activite.deplacerActivite(point, heure, jour);
         activite.setIsSelected(false);
+        verifierHoraireActivite(activite);
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
@@ -98,15 +99,16 @@ public class Horaire {
     }
 
     void resetPosition(Activite activite) {
-
         activite.setPoint(new Point());
         activite.setIsSelected(false);
         activite.setJour(0);
         activite.setHeureDebut(0.0d);
+        verifierHoraireActivite(activite);
     }
 
     void resetPosition(Activite activite, Dimension dimension) {
         activite.setPoint(dimension);
         activite.setIsSelected(false);
+        verifierHoraireActivite(activite);
     }
 }
