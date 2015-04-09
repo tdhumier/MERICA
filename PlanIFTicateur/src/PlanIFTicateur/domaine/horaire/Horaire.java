@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.domaine;
+package PlanIFTicateur.domaine.horaire;
 
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import PlanIFTicateur.domaine.conflit.ListeConflits;
+import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.activite.Activite;
 import java.awt.Dimension;
 import java.awt.Point;

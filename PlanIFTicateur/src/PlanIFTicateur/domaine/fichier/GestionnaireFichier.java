@@ -5,8 +5,8 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import PlanIFTicateur.domaine.ListeActivites;
-import PlanIFTicateur.domaine.ListeGrillesCheminement;
+import PlanIFTicateur.domaine.activite.ListeActivites;
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 
 /**
  *

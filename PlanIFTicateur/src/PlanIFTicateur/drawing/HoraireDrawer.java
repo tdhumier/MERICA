@@ -89,7 +89,7 @@ public class HoraireDrawer {
 
     private void drawActivites(Graphics g) {
         List<Activite> activites = mainWindow.controleur.getActivitesAssignees();
-        activites.stream().map((activite) -> new ActiviteDrawer(activite)).forEach((activiteDrawer) -> {
+        activites.stream().filter((activite) -> (activite.getPoint().x != 0 && activite.getPoint().y != 0)).map((activite) -> new ActiviteDrawer(activite)).forEach((activiteDrawer) -> {
             activiteDrawer.drawActivite(g);
         });
     }

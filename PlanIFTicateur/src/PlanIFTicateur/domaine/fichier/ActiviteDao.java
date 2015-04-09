@@ -5,7 +5,7 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import PlanIFTicateur.domaine.ListeActivites;
+import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.CoursClasse;
 import PlanIFTicateur.domaine.activite.CoursDistance;

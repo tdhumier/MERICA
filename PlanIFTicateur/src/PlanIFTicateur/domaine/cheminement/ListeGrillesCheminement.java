@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.domaine;
+package PlanIFTicateur.domaine.cheminement;
 
 import PlanIFTicateur.domaine.activite.Activite;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ListeGrillesCheminement {
         this.grillesCheminement = grilleCheminements;
     }
 
-    ListeGrillesCheminement() {
+    public ListeGrillesCheminement() {
     }
 
     public List<GrilleCheminement> getGrillesCheminement() {

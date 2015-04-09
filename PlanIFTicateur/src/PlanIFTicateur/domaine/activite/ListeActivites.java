@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.domaine;
+package PlanIFTicateur.domaine.activite;
 
-import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.domaine.activite.CoursHorsDep;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,7 @@ public class ListeActivites {
         this.listeActivites = listeActivites;
     }
 
-    ListeActivites() {
+    public ListeActivites() {
     }
 
     public List<Activite> getListeActivites() {

@@ -5,7 +5,7 @@
  */
 package PlanIFTicateur.gui.frames;
 
-import PlanIFTicateur.domaine.HoraireActiviteControleur;
+import PlanIFTicateur.domaine.horaire.HoraireActiviteControleur;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -34,7 +34,6 @@ public class MainWindow extends javax.swing.JFrame {
         this.verificationMode = VerificationMode.UNCHECKED;
         controleur = new HoraireActiviteControleur();
         initComponents();
-
         addWindowListener(new WindowAdapter() {
             public void windowOpened(WindowEvent e) {
                 setExtendedState(MAXIMIZED_BOTH);

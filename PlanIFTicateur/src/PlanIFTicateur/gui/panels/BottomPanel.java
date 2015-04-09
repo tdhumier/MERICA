@@ -5,7 +5,7 @@
  */
 package PlanIFTicateur.gui.panels;
 
-import PlanIFTicateur.domaine.HoraireControleurObserveur;
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;

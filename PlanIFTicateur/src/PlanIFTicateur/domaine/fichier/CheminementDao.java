@@ -5,9 +5,9 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import PlanIFTicateur.domaine.GrilleCheminement;
-import PlanIFTicateur.domaine.ListeActivites;
-import PlanIFTicateur.domaine.ListeGrillesCheminement;
+import PlanIFTicateur.domaine.cheminement.GrilleCheminement;
+import PlanIFTicateur.domaine.activite.ListeActivites;
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.activite.Activite;
 import java.util.ArrayList;
 import java.util.List;
