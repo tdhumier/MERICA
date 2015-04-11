@@ -145,7 +145,7 @@ public abstract class Activite {
     }
 
     public boolean estAuMemeHoraire(Activite autreActivite) {
-        return (autreActivite.isAssignee() && jour == autreActivite.getJour()) && (((heureDebut + duree) >= autreActivite.getHeureDebut() && heureDebut <= autreActivite.getHeureDebut()) || ((autreActivite.getHeureDebut() + autreActivite.getDuree()) >= heureDebut && autreActivite.getHeureDebut() <= heureDebut));
+        return (autreActivite.isAssignee() && jour == autreActivite.getJour()) && ((heureDebut <= autreActivite.getHeureDebut() && heureDebut + duree > autreActivite.getHeureDebut()) || (heureDebut >= autreActivite.getHeureDebut() && heureDebut < autreActivite.getHeureDebut() + autreActivite.getDuree()));
     }
 
     public boolean isAssignee() {
