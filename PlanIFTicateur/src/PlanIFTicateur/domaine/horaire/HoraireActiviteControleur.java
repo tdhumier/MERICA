@@ -71,7 +71,7 @@ public class HoraireActiviteControleur {
     }
 
     public List<Activite> getActivitesAssignees() {
-        List<Activite> activites = horaire.getListeActivite().getActiviteAssignees();
+        List<Activite> activites = horaire.getListeActivite().getActivitesAssignees();
         Optional<Activite> activite = horaire.getListeActivite().getActiviteSelectionnee();
         if (activite.isPresent()) {
             activites.add(activite.get());
@@ -111,7 +111,7 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
-    public Boolean isHoraireValide() {
+    public Boolean horaireEstValide() {
         return horaire.estValide();
     }
 

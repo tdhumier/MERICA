@@ -140,20 +140,12 @@ public abstract class Activite {
         this.point.y = y;
     }
 
-    public boolean horaireValide() {
-        return !(getHeureDebut() < getHeureDebutMin() || (getHeureDebut() + getDuree()) > getHeureFinMax());
+    public boolean horaireEstValide() {
+        return heureDebut >= heureDebutMin && (heureDebut + duree <= heureFinMax);
     }
 
-    public boolean memeHoraire(Activite autreActivite) {
-        if (autreActivite.isAssignee() && getJour() == autreActivite.getJour()) {
-            if ((getHeureDebut() + getDuree()) > autreActivite.getHeureDebut() && getHeureDebut() < autreActivite.getHeureDebut()) {
-                return true;
-            } else {
-                return (autreActivite.getHeureDebut() + autreActivite.getDuree()) > getHeureDebut() && autreActivite.getHeureDebut() < getHeureDebut();
-            }
-        } else {
-            return false;
-        }
+    public boolean estAuMemeHoraire(Activite autreActivite) {
+        return (autreActivite.isAssignee() && jour == autreActivite.getJour()) && (((heureDebut + duree) >= autreActivite.getHeureDebut() && heureDebut <= autreActivite.getHeureDebut()) || ((autreActivite.getHeureDebut() + autreActivite.getDuree()) >= heureDebut && autreActivite.getHeureDebut() <= heureDebut));
     }
 
     public boolean isAssignee() {

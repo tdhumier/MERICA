@@ -58,7 +58,6 @@ public class Horaire {
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
         activite.deplacerActivite(point, heure, jour);
         activite.setIsSelected(false);
-        verifierHoraireActivite(activite);
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
@@ -66,8 +65,7 @@ public class Horaire {
         int oldJour = activite.getJour();
         activite.setHeureDebut(heure);
         activite.setJour(jour);
-        verifierHoraireActivite(activite);
-        if (this.estValide()) {
+        if (horaireEstValide(activite)) {
             activite.deplacerActivite(point.x, point.y);
         } else {
             activite.setHeureDebut(oldHeure);
@@ -77,13 +75,14 @@ public class Horaire {
         activite.setIsSelected(false);
     }
 
-    public void verifierHoraireActivite(Activite activite) {
+    public boolean horaireEstValide(Activite activite) {
         List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
-        this.valide = !(!activite.horaireValide() || !activitesConflitCheminement.isEmpty());
+        return activite.horaireEstValide() && activitesConflitCheminement.isEmpty();
     }
 
     public boolean estValide() {
-        return this.valide;
+        List<Activite> activitesAssignees = listeActivite.getActivitesAssignees();
+        return activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
     }
 
     public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
@@ -98,17 +97,15 @@ public class Horaire {
         return result;
     }
 
-    void resetPosition(Activite activite) {
+    public void resetPosition(Activite activite) {
         activite.setPoint(new Point());
         activite.setIsSelected(false);
         activite.setJour(0);
         activite.setHeureDebut(0.0d);
-        verifierHoraireActivite(activite);
     }
 
-    void resetPosition(Activite activite, Dimension dimension) {
+    public void resetPosition(Activite activite, Dimension dimension) {
         activite.setPoint(dimension);
         activite.setIsSelected(false);
-        verifierHoraireActivite(activite);
     }
 }

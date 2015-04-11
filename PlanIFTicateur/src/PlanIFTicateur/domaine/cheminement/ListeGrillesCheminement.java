@@ -8,7 +8,6 @@ package PlanIFTicateur.domaine.cheminement;
 import PlanIFTicateur.domaine.activite.Activite;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -34,7 +33,7 @@ public class ListeGrillesCheminement {
         grillesCheminement.stream().forEach((grilleCheminement) -> {
             activitesAuMemeHoraire.addAll(grilleCheminement.activitesAuMemeHoraire(activite));
         });
-        return activitesAuMemeHoraire.stream().collect(Collectors.toList());
+        return activitesAuMemeHoraire;
     }
 
     public List<Activite> activitesCheminementsDejaALHoraire(Activite activite) {

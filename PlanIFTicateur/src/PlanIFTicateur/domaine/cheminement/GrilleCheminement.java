@@ -68,7 +68,7 @@ public class GrilleCheminement {
 
     public List<Activite> activitesAuMemeHoraire(Activite activite) {
         List<Activite> activitesAuMemeHoraire = new ArrayList();
-        listeActivite.stream().filter((autreActivite) -> (!activite.equals(autreActivite) && activite.memeHoraire(autreActivite))).forEach((autreActivite) -> {
+        listeActivite.stream().filter((autreActivite) -> (!activite.equals(autreActivite) && activite.estAuMemeHoraire(autreActivite))).forEach((autreActivite) -> {
             activitesAuMemeHoraire.add(autreActivite);
         });
         return activitesAuMemeHoraire;

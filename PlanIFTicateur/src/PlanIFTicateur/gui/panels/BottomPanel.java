@@ -75,7 +75,7 @@ public class BottomPanel extends JPanel implements HoraireControleurObserveur {
 
     @Override
     public void notifyUpdatedItems() {
-        isValide = mainWindow.controleur.isHoraireValide();
+        isValide = mainWindow.controleur.horaireEstValide();
         if (isValide) {
             validiteHorraireLabel.setText("Horaire valide");
             validiteHorraireLabel.setForeground(Color.GREEN);

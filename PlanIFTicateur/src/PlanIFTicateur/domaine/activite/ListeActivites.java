@@ -64,14 +64,14 @@ public class ListeActivites {
         return listeActivites.stream().filter(x -> !x.isAssignee()).collect(Collectors.toList());
     }
 
-    public List<Activite> getActiviteAssignees() {
+    public List<Activite> getActivitesAssignees() {
         return listeActivites.stream().filter(x -> x.isAssignee()).collect(Collectors.toList());
     }
 
     public void modifierStatutSelectionActivite(int x, int y) {
-        for (Activite activite : listeActivites) {
+        listeActivites.stream().forEach((activite) -> {
             activite.modifierStatutSelection(x, y);
-        }
+        });
     }
 
     public void setCoordonneesActivites(Dimension dimension) {
