@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui.listeners.mouse;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.gui.frames.ActiviteWindow;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -78,4 +79,18 @@ public class HorairePanelMouseListener extends MouseAdapter implements MouseMoti
         double heure = mousePositionHelper.getHeure(mousePoint.x);
         mainWindow.bottomPanel.setHeureEtJour(jour, heure);
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+       
+        if (e.getClickCount() == 2) {
+           if(mainWindow.controleur.getActiviteSelectionnee().isPresent())
+           {
+            String activiteWindowTitle = mainWindow.controleur.getActiviteSelectionnee().get().getCode() + " - " + mainWindow.controleur.getActiviteSelectionnee().get().getTitre();
+            new ActiviteWindow(activiteWindowTitle, mainWindow);
+           }
+
+        }
+    }
+    
 }

@@ -15,14 +15,21 @@ import javax.swing.JFrame;
 public class ActiviteWindow extends JFrame {
 
     private ActivitePanel activitePanel;
-
-    public ActiviteWindow(String title) {
-        super(title);
+    private MainWindow mainWindow;
+    private String title;
+    private ActiviteWindow activiteWindow;
+    
+    public ActiviteWindow(String title, MainWindow mainWindow) {
+      this.title = title;
+      this.mainWindow = mainWindow;
+      
         setSize(500, 500);
         setLocationRelativeTo(null);
-        activitePanel = new ActivitePanel();
+        activitePanel = new ActivitePanel(mainWindow, this);
+        setTitle(title);
         add(activitePanel);
         setVisible(true);
     }
+
 
 }

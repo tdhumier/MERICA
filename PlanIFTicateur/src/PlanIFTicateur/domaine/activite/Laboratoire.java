@@ -29,4 +29,7 @@ public class Laboratoire extends Activite {
     public String getType() {
         return type;
     }
+     public void setType(String type) {
+        this.type = type;
+    }
 }

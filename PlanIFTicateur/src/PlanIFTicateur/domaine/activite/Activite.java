@@ -80,6 +80,32 @@ public abstract class Activite {
         this.code = code;
     }
 
+    public void setDuree(double duree) {
+        this.duree = duree;
+    }
+
+    public void setProfesseur(String professeur) {
+        this.professeur = professeur;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setHeureDebutMin(double heureDebutMin) {
+        this.heureDebutMin = heureDebutMin;
+    }
+
+    public void setHeureFinMax(double heureFinMax) {
+        this.heureFinMax = heureFinMax;
+    }
+    
+    
+
     public String getTitre() {
         return titre;
     }
@@ -134,6 +160,8 @@ public abstract class Activite {
     public abstract Color getCouleur();
 
     public abstract String getType();
+    
+    public abstract void setType(String type);
 
     public void deplacerActivite(int x, int y) {
         this.point.x = x;
@@ -180,6 +208,7 @@ public abstract class Activite {
         this.width = (int) (dimension.width * duree * 2);
         this.height = dimension.height;
     }
+    
 
     public void setPoint(Dimension dimension) {
         this.point.x = (int) (dimension.width * ((getHeureDebut() - 8) * 2) + 80);

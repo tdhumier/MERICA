@@ -10,6 +10,7 @@ import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -76,17 +77,21 @@ public class HoraireDrawer {
         //Affiche les heures
         for (int i = 8; i <= 22; i++) {
             g2.setColor(Color.GRAY);
+            g2.setFont(new Font("TimesRoman", Font.BOLD, 16)); 
             g2.drawString(i + "h", 70 + 2 * largeurCase * (i - 8), 15);
         }
 
         //Affiche les jours
         for (int i = 0; i < 6; i++) {
+            
             String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
-            g2.setColor(Color.GRAY);
-            g2.drawString(jourModes[i], 20, 90 + i * hauteurCase * 8);
+            g2.setColor(Color.DARK_GRAY);
+            g2.setFont(new Font("TimesRoman", Font.BOLD, 13));
+            g2.drawString(jourModes[i], 17, 90 + i * hauteurCase * 8);
         }
     }
 
+    //Dessine les activités présentes dans la grille
     private void drawActivites(Graphics g) {
         List<Activite> activites = mainWindow.controleur.getActivitesAssignees();
         activites.stream().filter((activite) -> (activite.getPoint().x != 0 && activite.getPoint().y != 0)).map((activite) -> new ActiviteDrawer(activite)).forEach((activiteDrawer) -> {

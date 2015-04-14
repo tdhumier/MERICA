@@ -25,12 +25,15 @@ public class RightPanel extends JPanel implements Serializable {
     private DetailsActivitePanel detailsActivitePanel;
     private ConflitsPanel conflitsPanel;
     private HistoriquePanel historiquePanel;
+    private StatistiquesPanel statistiquesPanel;
 
     public RightPanel() {
     }
 
     public RightPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        statistiquesPanel = new StatistiquesPanel(mainWindow);
+        detailsActivitePanel = new DetailsActivitePanel(mainWindow);
         buildUp();
     }
 
@@ -41,12 +44,10 @@ public class RightPanel extends JPanel implements Serializable {
         listeActivitesPanel = new ListeActivitesPanel(mainWindow);
         add(listeActivitesPanel, BorderLayout.NORTH);
 
-        detailsActivitePanel = new DetailsActivitePanel(mainWindow);
-
         add(detailsActivitePanel, BorderLayout.CENTER);
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 190));
+        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 300));
 
         conflitsPanel = new ConflitsPanel();
 
@@ -55,6 +56,8 @@ public class RightPanel extends JPanel implements Serializable {
         historiquePanel = new HistoriquePanel();
 
         tabbedPane.add("Historique", new JScrollPane(historiquePanel));
+        
+        tabbedPane.add("Statistiques", statistiquesPanel);
 
         add(tabbedPane, BorderLayout.SOUTH);
 
@@ -64,4 +67,10 @@ public class RightPanel extends JPanel implements Serializable {
     public ListeActivitesPanel getListeActivitesPanel() {
         return listeActivitesPanel;
     }
+    
+    public DetailsActivitePanel getDetailsActivitePanel()
+    {
+        return detailsActivitePanel;
+    }
+    
 }
