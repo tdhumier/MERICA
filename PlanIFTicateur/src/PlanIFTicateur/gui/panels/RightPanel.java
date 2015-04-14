@@ -24,7 +24,7 @@ public class RightPanel extends JPanel implements Serializable {
     protected ListeActivitesPanel listeActivitesPanel;
     private DetailsActivitePanel detailsActivitePanel;
     private ConflitsPanel conflitsPanel;
-    private HistoriquePanel historiquePanel;
+    private NotesPanel notesPanel;
     private StatistiquesPanel statistiquesPanel;
 
     public RightPanel() {
@@ -53,9 +53,9 @@ public class RightPanel extends JPanel implements Serializable {
 
         tabbedPane.add("Conflits", new JScrollPane(conflitsPanel));
 
-        historiquePanel = new HistoriquePanel();
+        notesPanel = new NotesPanel(this);
 
-        tabbedPane.add("Historique", new JScrollPane(historiquePanel));
+        tabbedPane.add("Notes", new JScrollPane(notesPanel));
         
         tabbedPane.add("Statistiques", statistiquesPanel);
 

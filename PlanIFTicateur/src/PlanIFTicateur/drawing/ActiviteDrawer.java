@@ -24,12 +24,14 @@ public class ActiviteDrawer {
     }
 
     public void drawActivite(Graphics g) {
+        
+        activite.setCode(activite.getCode().toUpperCase());
+        
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(activite.getCouleur().getRed(), activite.getCouleur().getGreen(), activite.getCouleur().getBlue(), 150));
-        
         g2.fill(new Rectangle.Double(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight()));
         g2.setColor(Color.black);
-        g2.drawString(activite.getCode().toUpperCase(), (int) (activite.getPoint().x + (activite.getWidth() / 2 - activite.getWidth() / (activite.getDuree() * 2))), activite.getPoint().y + activite.getHeight() - 4);
+        g2.drawString(activite.getCode(), (int) (activite.getPoint().x + (activite.getWidth() / 2 - activite.getWidth() / (activite.getDuree() * 2))), activite.getPoint().y + activite.getHeight() - 4);
         g2.setColor(Color.YELLOW);
         if (activite.isSelected() && activite.getPoint().x != 0) {
             g2.drawRect(activite.getPoint().x, activite.getPoint().y, activite.getWidth(), activite.getHeight());
