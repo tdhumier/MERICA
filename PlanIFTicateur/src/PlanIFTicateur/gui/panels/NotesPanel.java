@@ -42,8 +42,9 @@ public class NotesPanel extends JPanel
         nomColonnes = new String[] {"Date", "Cours", "Version", "Description"};
        model = new DefaultTableModel(nomColonnes,200);
         table = new JTable(model);
-        //able = new JTable(200, 4);
+        //table = new JTable(200, 4);
         table.setFont(new Font( "TimesRoman", Font.PLAIN, 16));
+        
 
      /*   table.getModel().setValueAt("Date", 0, 0);
         table.getModel().setValueAt("Cours", 1, 0);
@@ -61,11 +62,10 @@ public class NotesPanel extends JPanel
         table.setRowHeight(20);
         
         table.getColumnModel().getColumn(3).setCellRenderer(new TableCellLongTextRenderer());
-        //table.getColumnModel().getColumn(1).setCel
-        
-        
         
         add(table);
+        
+        
     }
     
     

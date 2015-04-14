@@ -47,7 +47,7 @@ public class RightPanel extends JPanel implements Serializable {
         add(detailsActivitePanel, BorderLayout.CENTER);
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 300));
+        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().height) * 0.3)));
 
         conflitsPanel = new ConflitsPanel();
 
@@ -56,6 +56,7 @@ public class RightPanel extends JPanel implements Serializable {
         notesPanel = new NotesPanel(this);
 
         tabbedPane.add("Notes", new JScrollPane(notesPanel));
+        
         
         tabbedPane.add("Statistiques", statistiquesPanel);
 
