@@ -28,7 +28,6 @@ public class ActiviteDao {
 
     public ActiviteDao(String file) {
         this.lecteurCsv = new LecteurCsv(file);
-        this.ecritureCsv = new EcritureCsv(file);
     }
 
     // LECTURE
@@ -84,8 +83,8 @@ public class ActiviteDao {
     }
 
     // ECRITURE
-    public void writeFile(List<Activite> activites) {
-        System.out.println("Dans ActiviteDao / WriteFile 1");
+    public void writeFile(List<Activite> activites, String path) {
+        ecritureCsv = new EcritureCsv(path);
 
         if (activites == null) {
             throw new IllegalArgumentException("La liste d'activités ne peut pas être nulle");

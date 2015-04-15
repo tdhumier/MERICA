@@ -34,14 +34,12 @@ public class GestionnaireFichier {
     }
 
     public void enregistrerFichier(List<Activite> activites) {
-        System.out.println("Dans gestionnaireFichier / enregistrerFichier");
-
         ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
-        activiteDao.writeFile(activites);
+        activiteDao.writeFile(activites, adresseFichierCOU);
     }
 
     public void enregistrerFichier(List<Activite> activites, String fichier) {
-        ActiviteDao activiteDao = new ActiviteDao(fichier);
-        activiteDao.writeFile(activites);
+        ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
+        activiteDao.writeFile(activites, fichier);
     }
 }

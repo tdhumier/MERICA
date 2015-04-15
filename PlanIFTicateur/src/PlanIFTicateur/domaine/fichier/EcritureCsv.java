@@ -41,8 +41,6 @@ public class EcritureCsv {
 
     public void write(List<ArrayList<String>> mappedData) throws IOException {
 
-        System.out.println("Dans ActiviteDao / Write 1");
-
         if (mappedData == null) {
             throw new IllegalArgumentException("la liste ne peut pas être nulle");
         }
@@ -57,8 +55,6 @@ public class EcritureCsv {
     }
 
     public void write(List<ArrayList<String>> mappedData, String[] titles) throws IOException {
-
-        System.out.println("Dans ActiviteDao / Write 2");
 
         if (mappedData == null) {
             throw new IllegalArgumentException("la liste ne peut pas être nulle");
@@ -102,8 +98,6 @@ public class EcritureCsv {
 
     private void write(String value, BufferedWriter bw) throws IOException {
 
-        System.out.println("Dans ActiviteDao / Write 3");
-
         if (value == null) {
             value = "";
         }
@@ -126,7 +120,6 @@ public class EcritureCsv {
         if (needQuote) {
             value = "\"" + value + "\"";
         }
-        System.out.println(value);
         bw.write(value);
     }
 

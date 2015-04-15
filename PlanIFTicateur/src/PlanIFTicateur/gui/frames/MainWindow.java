@@ -285,12 +285,22 @@ public class MainWindow extends javax.swing.JFrame {
         dialogue.setApproveButtonText("Enregistrer");
 
         File fichier;
-        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+        if (dialogue.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
 
-            System.out.println("absolute path:" + fichier.getAbsolutePath());
-            System.out.println("filename:" + fichier.getName());
-            //controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath());
+            String fileName = fichier.getName();
+            int length = fileName.length();
+            String extension = fileName.substring(length - 4, length);
+
+            if (fichier.isFile() && extension.toLowerCase().equals(".cou")) {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath());
+            } else if (!fichier.isFile() && extension.toLowerCase().equals(".cou")) {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath());
+            } else if (!fichier.isFile()) {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath() + ".cou");
+            } else {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath() + "export.cou");
+            }
         }
     }//GEN-LAST:event_sauvegarderSousMenuItemActionPerformed
 

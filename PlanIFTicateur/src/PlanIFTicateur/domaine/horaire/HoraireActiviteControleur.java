@@ -52,12 +52,25 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
+    public void correctionSuperpositionActivite(Activite activite, Point point, double heure) {
+        List<Activite> activites = horaire.getListeActivite().getListeActivites();
+        for (Activite activiteItem : activites) {
+            // si on a deux activités à la même date à la même heure
+            if (activiteItem.getPoint().y == point.y && (activiteItem.getHeureDebut() + activiteItem.getDuree() > heure || activiteItem.getHeureDebut() < heure + activite.getDuree())) {
+                point.y = point.y + activite.getHeight();
+                correctionSuperpositionActivite(activite, point, heure);
+            }
+        }
+    }
+
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
+        correctionSuperpositionActivite(activite, point, heure);
         horaire.deplacerActivite(activite, point, heure, jour);
         notifyObserversForUpdatedItems();
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
+        correctionSuperpositionActivite(activite, point, heure);
         horaire.deplacerActiviteAvecVerification(activite, point, heure, jour, dimension);
         notifyObserversForUpdatedItems();
     }
@@ -98,15 +111,13 @@ public class HoraireActiviteControleur {
     }
 
     public void enregistrerFichier(List<Activite> activites) {
-
-        System.out.println("Dans controleur / enregistrerFichier");
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         gestionnaireFichier.enregistrerFichier(activites);
     }
 
-    public void enregistrerFichier(List<Activite> activites, String path) {
+    public void enregistrerFichier(List<Activite> activites, String file) {
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
-        gestionnaireFichier.enregistrerFichier(activites);
+        gestionnaireFichier.enregistrerFichier(activites, file);
     }
 
     public void setCoordonneesActivite(Dimension dimension) {
