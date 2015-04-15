@@ -9,8 +9,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -21,8 +21,8 @@ public class EcritureCsv {
     private File file;
     private char separator;
 
-    public EcritureCsv(File file) {
-        this(file, ';');
+    public EcritureCsv(String file) {
+        this(new File(file), ',');
     }
 
     private EcritureCsv() {
@@ -38,7 +38,7 @@ public class EcritureCsv {
         this.separator = separator;
     }
 
-    public void write(List<Map<String, String>> mappedData) throws IOException {
+    public void write(List<ArrayList<String>> mappedData) throws IOException {
 
         if (mappedData == null) {
             throw new IllegalArgumentException("la liste ne peut pas être nulle");
@@ -47,18 +47,13 @@ public class EcritureCsv {
         if (mappedData.isEmpty()) {
             //writeEmptyFile();
         }
-        final Map<String, String> oneData = mappedData.get(0);
 
-        final String[] titles = new String[oneData.size()];
+        final String[] titles = new String[]{"CodeActivité", "Section", "Titre", "PROF", "Type", "Durée", "DébutMin", "FinMax", "Jour", "Heure"};
 
-        int i = 0;
-        for (String key : oneData.keySet()) {
-            titles[i++] = key;
-        }
         write(mappedData, titles);
     }
 
-    public void write(List<Map<String, String>> mappedData, String[] titles) throws IOException {
+    public void write(List<ArrayList<String>> mappedData, String[] titles) throws IOException {
 
         if (mappedData == null) {
             throw new IllegalArgumentException("la liste ne peut pas être nulle");
@@ -88,17 +83,16 @@ public class EcritureCsv {
         bw.write("\n");
 
         // Les données
-        for (Map<String, String> oneData : mappedData) {
+        for (ArrayList<String> oneData : mappedData) {
             first = true;
-            for (String title : titles) {
+            for (String val : oneData) {
                 if (first) {
                     first = false;
                 } else {
                     bw.write(separator);
                 }
-                final String value = oneData.get(title);
+                final String value = val;
                 write(value, bw);
-
             }
             bw.write("\n");
 

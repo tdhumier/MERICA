@@ -5,8 +5,11 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
+import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -31,7 +34,13 @@ public class GestionnaireFichier {
         return cheminementDao.importerGrillesCheminement(listeActivites);
     }
 
-    public void enregistrerFichier() {
+    public void enregistrerFichier(List<Activite> activites) throws IOException {
+        ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
+        activiteDao.writeFile(activites);
+    }
 
+    public void enregistrerFichier(List<Activite> activites, String fichier) throws IOException {
+        ActiviteDao activiteDao = new ActiviteDao(fichier);
+        activiteDao.writeFile(activites);
     }
 }

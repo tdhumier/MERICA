@@ -11,14 +11,9 @@ import PlanIFTicateur.domaine.activite.CoursDistance;
 import PlanIFTicateur.domaine.activite.CoursHorsDep;
 import PlanIFTicateur.domaine.activite.Laboratoire;
 import PlanIFTicateur.domaine.activite.ListeActivites;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +26,7 @@ public class ActiviteDao {
 
     public ActiviteDao(String file) {
         this.lecteurCsv = new LecteurCsv(file);
+        this.ecritureCsv = new EcritureCsv(file);
     }
 
     // LECTURE
@@ -86,45 +82,35 @@ public class ActiviteDao {
     }
 
     // ECRITURE
-    public void writeFile(List<Activite> activites, File file) {
+    public void writeFile(List<Activite> activites) throws IOException {
         if (activites == null) {
             throw new IllegalArgumentException("La liste d'activités ne peut pas être nulle");
         }
 
-        if (file == null) {
-            throw new IllegalArgumentException("Le fichier ne peut pas être nul");
-        }
-
-        ecritureCsv = new EcritureCsv(file);
-
-        List<Map<String, String>> mappedData = new ArrayList<>();
+        List<ArrayList<String>> mappedData = new ArrayList<ArrayList<String>>();
         for (Activite activite : activites) {
-            Map<String, String> oneData = activiteToMap(activite);
-            mappedData.add(oneData);
+            List<String> oneData = activiteToList(activite);
+            mappedData.add((ArrayList<String>) oneData);
         }
-        try {
-            ecritureCsv.write(mappedData);
-        } catch (IOException ex) {
-            Logger.getLogger(CheminementDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        ecritureCsv.write(mappedData);
 
     }
 
-    private Map<String, String> activiteToMap(Activite activite) {
+    private List<String> activiteToList(Activite activite) {
 
-        Map<String, String> oneData = new HashMap<>();
+        List<String> oneData = new ArrayList<>();
 
-        oneData.put("Code", activite.getCode());
-        oneData.put("Section", activite.getSection());
-        oneData.put("Titre", activite.getTitre());
-        oneData.put("PROF", activite.getProfesseur());
-        oneData.put("Type", activite.getType());
-        oneData.put("Durée", String.valueOf(activite.getDuree()));
-        oneData.put("DébutMin", String.valueOf(activite.getHeureDebutMin()));
-        oneData.put("FinMax", String.valueOf(activite.getHeureFinMax()));
-        oneData.put("Jour", Integer.toString(activite.getJour()));
-        oneData.put("Heure", String.valueOf(activite.getHeureDebut()));
-
+        oneData.add(activite.getCode());
+        oneData.add(activite.getSection());
+        oneData.add(activite.getTitre());
+        oneData.add(activite.getProfesseur());
+        oneData.add(activite.getType());
+        oneData.add(String.valueOf(activite.getDuree()));
+        oneData.add(String.valueOf(activite.getHeureDebutMin()));
+        oneData.add(String.valueOf(activite.getHeureFinMax()));
+        oneData.add(Integer.toString(activite.getJour()));
+        oneData.add(String.valueOf(activite.getHeureDebut()));
         return oneData;
     }
 }

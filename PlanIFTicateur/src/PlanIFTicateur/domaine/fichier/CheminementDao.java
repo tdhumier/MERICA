@@ -9,14 +9,8 @@ import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.GrilleCheminement;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -60,48 +54,5 @@ public class CheminementDao {
         grille.setListeActivite(listeActivites);
 
         return grille;
-    }
-
-    // ECRITURE
-    public void writeFile(List<GrilleCheminement> grillesDeCheminement, File file) {
-        if (grillesDeCheminement == null) {
-            throw new IllegalArgumentException("La liste de grilles de cheminement ne peut pas être nulle");
-        }
-
-        if (file == null) {
-            throw new IllegalArgumentException("Le fichier ne peut pas être nul");
-        }
-
-        ecritureCsv = new EcritureCsv(file);
-
-        List<Map<String, String>> mappedData = new ArrayList<>();
-
-        for (GrilleCheminement grilleDeCheminement : grillesDeCheminement) {
-
-            Map<String, String> oneData = grilleDeCheminementToMap(grilleDeCheminement);
-            mappedData.add(oneData);
-        }
-        try {
-            ecritureCsv.write(mappedData);
-        } catch (IOException ex) {
-            Logger.getLogger(CheminementDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private Map<String, String> grilleDeCheminementToMap(GrilleCheminement grille) {
-
-        Map<String, String> oneData = new HashMap<>();
-        List<Activite> activites = grille.getListeActivites();
-
-        oneData.put("Programme", grille.getNomProgramme());
-        oneData.put("Version", grille.getVersion());
-        oneData.put("Session", grille.getSession());
-
-        for (Activite activite : activites) {
-            oneData.put("Cours", activite.getCode());
-        }
-
-        return oneData;
     }
 }
