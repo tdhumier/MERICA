@@ -179,6 +179,11 @@ public class MainWindow extends javax.swing.JFrame {
         menuFichier.add(sauvegarderMenuItem);
 
         sauvegarderSousMenuItem.setText("Sauvegarder Sous");
+        sauvegarderSousMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sauvegarderSousMenuItemActionPerformed(evt);
+            }
+        });
         menuFichier.add(sauvegarderSousMenuItem);
         menuFichier.add(jSeparator2);
 
@@ -240,7 +245,6 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_statistiquesBoutonActionPerformed
 
     private void sauvegarderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderMenuItemActionPerformed
-        System.out.println("Dans MainWindow / enregistrer Fichier");
         controleur.enregistrerFichier(controleur.getActivites());
     }//GEN-LAST:event_sauvegarderMenuItemActionPerformed
 
@@ -264,6 +268,21 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_exportBoutonActionPerformed
+
+    private void sauvegarderSousMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderSousMenuItemActionPerformed
+
+        JFileChooser dialogue = new JFileChooser(new File("/"));
+        dialogue.setDialogTitle("Enregistrer Sous");
+        dialogue.setApproveButtonText("Enregistrer");
+
+        File fichier;
+        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            fichier = dialogue.getSelectedFile();
+            System.out.println("absolute path:" + fichier.getAbsolutePath());
+            System.out.println("filename:" + fichier.getName());
+            controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath());
+        }
+    }//GEN-LAST:event_sauvegarderSousMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
