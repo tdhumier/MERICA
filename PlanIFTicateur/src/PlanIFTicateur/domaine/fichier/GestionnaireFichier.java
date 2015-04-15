@@ -30,4 +30,8 @@ public class GestionnaireFichier {
         CheminementDao cheminementDao = new CheminementDao(adresseCheminement);
         return cheminementDao.importerGrillesCheminement(listeActivites);
     }
+
+    public void enregistrerFichier() {
+
+    }
 }
