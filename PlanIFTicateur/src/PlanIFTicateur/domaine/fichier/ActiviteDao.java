@@ -94,7 +94,9 @@ public class ActiviteDao {
         List<ArrayList<String>> mappedData = new ArrayList<ArrayList<String>>();
         for (Activite activite : activites) {
             List<String> oneData = activiteToList(activite);
-            mappedData.add((ArrayList<String>) oneData);
+            if (oneData != null) {
+                mappedData.add((ArrayList<String>) oneData);
+            }
         }
 
         try {
@@ -108,27 +110,31 @@ public class ActiviteDao {
 
     private List<String> activiteToList(Activite activite) {
 
-        List<String> oneData = new ArrayList<>();
+        if (!activite.getType().equals("Hors département") || (activite.getType().equals("Hors département") && activite.getHeureDebut() != 0.0d && activite.getJour() != 0)) {
+            List<String> oneData = new ArrayList<>();
 
-        Integer jour = 0;
-        if (activite.getJour() != 0) {
-            jour = activite.getJour();
-        }
-        Double heureDeb = 0.0;
-        if (activite.getHeureDebut() != 0.0d) {
-            heureDeb = activite.getHeureDebut();
-        }
+            Integer jour = 0;
+            if (activite.getJour() != 0) {
+                jour = activite.getJour();
+            }
+            Double heureDeb = 0.0;
+            if (activite.getHeureDebut() != 0.0d) {
+                heureDeb = activite.getHeureDebut();
+            }
 
-        oneData.add(activite.getCode());
-        oneData.add(activite.getSection());
-        oneData.add(activite.getTitre());
-        oneData.add(activite.getProfesseur());
-        oneData.add(activite.getType());
-        oneData.add(String.valueOf(activite.getDuree()));
-        oneData.add(String.valueOf(activite.getHeureDebutMin()));
-        oneData.add(String.valueOf(activite.getHeureFinMax()));
-        oneData.add(Integer.toString(jour));
-        oneData.add(String.valueOf(heureDeb));
-        return oneData;
+            oneData.add(activite.getCode());
+            oneData.add(activite.getSection());
+            oneData.add(activite.getTitre());
+            oneData.add(activite.getProfesseur());
+            oneData.add(activite.getType());
+            oneData.add(String.valueOf(activite.getDuree()));
+            oneData.add(String.valueOf(activite.getHeureDebutMin()));
+            oneData.add(String.valueOf(activite.getHeureFinMax()));
+            oneData.add(Integer.toString(jour));
+            oneData.add(String.valueOf(heureDeb));
+            return oneData;
+        } else {
+            return null;
+        }
     }
 }
