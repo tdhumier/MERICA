@@ -5,9 +5,9 @@
  */
 package PlanIFTicateur.domaine.horaire;
 
-import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
-import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.ListeActivites;
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -26,6 +26,12 @@ public class HoraireActiviteControleur {
 
     private Horaire horaire;
     private List<HoraireControleurObserveur> observers;
+    private String path;
+
+    public List<Activite> getActivites() {
+        System.out.println("Dans controleur / getActivites");
+        return horaire.getListeActivite().getListeActivites();
+    }
 
     public enum ActiviteModes {
 
@@ -81,6 +87,7 @@ public class HoraireActiviteControleur {
     }
 
     public void importerFichiers(String path, Dimension dimension) {
+        this.path = path;
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         ListeActivites listeActivites = gestionnaireFichier.getListeActivites();
         ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites);
@@ -88,6 +95,18 @@ public class HoraireActiviteControleur {
         horaire.setGrillesCheminement(listeGrillesCheminement);
         setCoordonneesActivite(dimension);
         notifyObserversForUpdatedItems();
+    }
+
+    public void enregistrerFichier(List<Activite> activites) {
+
+        System.out.println("Dans controleur / enregistrerFichier");
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
+        gestionnaireFichier.enregistrerFichier(activites);
+    }
+
+    public void enregistrerFichier(List<Activite> activites, String path) {
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
+        gestionnaireFichier.enregistrerFichier(activites);
     }
 
     public void setCoordonneesActivite(Dimension dimension) {

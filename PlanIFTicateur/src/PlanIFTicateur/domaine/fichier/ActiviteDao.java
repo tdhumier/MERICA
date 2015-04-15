@@ -14,6 +14,8 @@ import PlanIFTicateur.domaine.activite.ListeActivites;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -82,7 +84,9 @@ public class ActiviteDao {
     }
 
     // ECRITURE
-    public void writeFile(List<Activite> activites) throws IOException {
+    public void writeFile(List<Activite> activites) {
+        System.out.println("Dans ActiviteDao / WriteFile 1");
+
         if (activites == null) {
             throw new IllegalArgumentException("La liste d'activités ne peut pas être nulle");
         }
@@ -93,13 +97,27 @@ public class ActiviteDao {
             mappedData.add((ArrayList<String>) oneData);
         }
 
-        ecritureCsv.write(mappedData);
+        try {
+
+            ecritureCsv.write(mappedData);
+        } catch (IOException ex) {
+            Logger.getLogger(ActiviteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     private List<String> activiteToList(Activite activite) {
 
         List<String> oneData = new ArrayList<>();
+
+        Integer jour = 0;
+        if (activite.getJour() != 0) {
+            jour = activite.getJour();
+        }
+        Double heureDeb = 0.0;
+        if (activite.getHeureDebut() != 0.0d) {
+            heureDeb = activite.getHeureDebut();
+        }
 
         oneData.add(activite.getCode());
         oneData.add(activite.getSection());
@@ -109,8 +127,8 @@ public class ActiviteDao {
         oneData.add(String.valueOf(activite.getDuree()));
         oneData.add(String.valueOf(activite.getHeureDebutMin()));
         oneData.add(String.valueOf(activite.getHeureFinMax()));
-        oneData.add(Integer.toString(activite.getJour()));
-        oneData.add(String.valueOf(activite.getHeureDebut()));
+        oneData.add(Integer.toString(jour));
+        oneData.add(String.valueOf(heureDeb));
         return oneData;
     }
 }

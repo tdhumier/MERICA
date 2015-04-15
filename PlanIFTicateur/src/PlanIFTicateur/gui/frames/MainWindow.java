@@ -240,7 +240,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_statistiquesBoutonActionPerformed
 
     private void sauvegarderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderMenuItemActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Dans MainWindow / enregistrer Fichier");
+        controleur.enregistrerFichier(controleur.getActivites());
     }//GEN-LAST:event_sauvegarderMenuItemActionPerformed
 
     private void quitterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterMenuItemActionPerformed

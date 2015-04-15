@@ -7,8 +7,9 @@ package PlanIFTicateur.domaine.fichier;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class EcritureCsv {
 
     public void write(List<ArrayList<String>> mappedData) throws IOException {
 
+        System.out.println("Dans ActiviteDao / Write 1");
+
         if (mappedData == null) {
             throw new IllegalArgumentException("la liste ne peut pas être nulle");
         }
@@ -55,20 +58,18 @@ public class EcritureCsv {
 
     public void write(List<ArrayList<String>> mappedData, String[] titles) throws IOException {
 
+        System.out.println("Dans ActiviteDao / Write 2");
+
         if (mappedData == null) {
             throw new IllegalArgumentException("la liste ne peut pas être nulle");
-        }
-
-        if (titles == null) {
-            throw new IllegalArgumentException("les titres ne peuvent pas être nuls");
         }
 
         if (mappedData.isEmpty()) {
             //writeEmptyFile();
         }
 
-        FileWriter fw = new FileWriter(file);
-        BufferedWriter bw = new BufferedWriter(fw);
+        FileOutputStream out = new FileOutputStream(file);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(out, "cp850"));
 
         // Les titres
         boolean first = true;
@@ -91,17 +92,17 @@ public class EcritureCsv {
                 } else {
                     bw.write(separator);
                 }
-                final String value = val;
-                write(value, bw);
+                write(val, bw);
             }
             bw.write("\n");
 
-            bw.close();
-            fw.close();
         }
+        bw.close();
     }
 
     private void write(String value, BufferedWriter bw) throws IOException {
+
+        System.out.println("Dans ActiviteDao / Write 3");
 
         if (value == null) {
             value = "";
@@ -125,7 +126,7 @@ public class EcritureCsv {
         if (needQuote) {
             value = "\"" + value + "\"";
         }
-
+        System.out.println(value);
         bw.write(value);
     }
 
