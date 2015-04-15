@@ -56,7 +56,7 @@ public class HoraireActiviteControleur {
         List<Activite> activites = horaire.getListeActivite().getListeActivites();
         for (Activite activiteItem : activites) {
             // si on a deux activités à la même date à la même heure
-            if (activiteItem.getPoint().y == point.y && (activiteItem.getHeureDebut() + activiteItem.getDuree() > heure || activiteItem.getHeureDebut() < heure + activite.getDuree())) {
+            if (activiteItem.getPoint().y == point.y && ((activiteItem.getHeureDebut() < heure && activiteItem.getHeureDebut() + activiteItem.getDuree() > heure) || (heure < activiteItem.getHeureDebut() && activiteItem.getHeureDebut() < heure + activite.getDuree()))) {
                 point.y = point.y + activite.getHeight();
                 correctionSuperpositionActivite(activite, point, heure);
             }
