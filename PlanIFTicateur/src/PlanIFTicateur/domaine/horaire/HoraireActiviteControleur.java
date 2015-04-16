@@ -5,9 +5,9 @@
  */
 package PlanIFTicateur.domaine.horaire;
 
-import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
-import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.ListeActivites;
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -26,6 +26,12 @@ public class HoraireActiviteControleur {
 
     private Horaire horaire;
     private List<HoraireControleurObserveur> observers;
+    private String path;
+
+    public List<Activite> getActivites() {
+        System.out.println("Dans controleur / getActivites");
+        return horaire.getListeActivite().getListeActivites();
+    }
 
     public enum ActiviteModes {
 
@@ -46,12 +52,25 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
+    public void correctionSuperpositionActivite(Activite activite, Point point, double heure) {
+        List<Activite> activites = horaire.getListeActivite().getListeActivites();
+        for (Activite activiteItem : activites) {
+            // si on a deux activités à la même date à la même heure
+            if (activiteItem.getPoint().y == point.y && ((activiteItem.getHeureDebut() <= heure && activiteItem.getHeureDebut() + activiteItem.getDuree() > heure) || (heure <= activiteItem.getHeureDebut() && activiteItem.getHeureDebut() < heure + activite.getDuree()))) {
+                point.y = point.y + activite.getHeight();
+                correctionSuperpositionActivite(activite, point, heure);
+            }
+        }
+    }
+
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
+        correctionSuperpositionActivite(activite, point, heure);
         horaire.deplacerActivite(activite, point, heure, jour);
         notifyObserversForUpdatedItems();
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
+        correctionSuperpositionActivite(activite, point, heure);
         horaire.deplacerActiviteAvecVerification(activite, point, heure, jour, dimension);
         notifyObserversForUpdatedItems();
     }
@@ -81,6 +100,7 @@ public class HoraireActiviteControleur {
     }
 
     public void importerFichiers(String path, Dimension dimension) {
+        this.path = path;
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         ListeActivites listeActivites = gestionnaireFichier.getListeActivites();
         ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites);
@@ -88,6 +108,16 @@ public class HoraireActiviteControleur {
         horaire.setGrillesCheminement(listeGrillesCheminement);
         setCoordonneesActivite(dimension);
         notifyObserversForUpdatedItems();
+    }
+
+    public void enregistrerFichier(List<Activite> activites) {
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
+        gestionnaireFichier.enregistrerFichier(activites);
+    }
+
+    public void enregistrerFichier(List<Activite> activites, String file) {
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
+        gestionnaireFichier.enregistrerFichier(activites, file);
     }
 
     public void setCoordonneesActivite(Dimension dimension) {

@@ -81,6 +81,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         sauvegarderMenuItem = new javax.swing.JMenuItem();
         sauvegarderSousMenuItem = new javax.swing.JMenuItem();
+        exportMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         quitterMenuItem = new javax.swing.JMenuItem();
 
@@ -179,7 +180,20 @@ public class MainWindow extends javax.swing.JFrame {
         menuFichier.add(sauvegarderMenuItem);
 
         sauvegarderSousMenuItem.setText("Sauvegarder Sous");
+        sauvegarderSousMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sauvegarderSousMenuItemActionPerformed(evt);
+            }
+        });
         menuFichier.add(sauvegarderSousMenuItem);
+
+        exportMenuItem.setText("Exporter au format image");
+        exportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportMenuItemActionPerformed(evt);
+            }
+        });
+        menuFichier.add(exportMenuItem);
         menuFichier.add(jSeparator2);
 
         quitterMenuItem.setText("Quitter");
@@ -240,7 +254,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_statistiquesBoutonActionPerformed
 
     private void sauvegarderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderMenuItemActionPerformed
-        // TODO add your handling code here:
+        controleur.enregistrerFichier(controleur.getActivites());
     }//GEN-LAST:event_sauvegarderMenuItemActionPerformed
 
     private void quitterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterMenuItemActionPerformed
@@ -263,6 +277,49 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_exportBoutonActionPerformed
+
+    private void sauvegarderSousMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderSousMenuItemActionPerformed
+
+        JFileChooser dialogue = new JFileChooser(new File("/"));
+        dialogue.setDialogTitle("Enregistrer Sous");
+        dialogue.setApproveButtonText("Enregistrer");
+
+        File fichier;
+        if (dialogue.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            fichier = dialogue.getSelectedFile();
+
+            String fileName = fichier.getName();
+            int length = fileName.length();
+            String extension = fileName.substring(length - 4, length);
+
+            if (fichier.isFile() && extension.toLowerCase().equals(".cou")) {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath());
+            } else if (!fichier.isFile() && extension.toLowerCase().equals(".cou")) {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath());
+            } else if (!fichier.isFile()) {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath() + ".cou");
+            } else {
+                controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath() + "export.cou");
+            }
+        }
+    }//GEN-LAST:event_sauvegarderSousMenuItemActionPerformed
+
+    private void exportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportMenuItemActionPerformed
+        JFileChooser dialogue = new JFileChooser(new File("/"));
+        dialogue.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            int w = horairePanel.getWidth();
+            int h = horairePanel.getHeight();
+            BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = bi.createGraphics();
+            horairePanel.paint(g);
+            try {
+                ImageIO.write(bi, "png", new File(dialogue.getSelectedFile() + "/horaire.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_exportMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +366,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel boutonTopPanel;
     private javax.swing.JPanel centerPanel;
     private javax.swing.JButton exportBouton;
+    private javax.swing.JMenuItem exportMenuItem;
     public PlanIFTicateur.gui.panels.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
     private javax.swing.JPopupMenu.Separator jSeparator1;

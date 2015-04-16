@@ -77,16 +77,16 @@ public class HoraireDrawer {
         //Affiche les heures
         for (int i = 8; i <= 22; i++) {
             g2.setColor(Color.GRAY);
-            g2.setFont(new Font("TimesRoman", Font.BOLD, 16)); 
+            g2.setFont(new Font("Helvetica", Font.BOLD, 16));
             g2.drawString(i + "h", 70 + 2 * largeurCase * (i - 8), 15);
         }
 
         //Affiche les jours
         for (int i = 0; i < 6; i++) {
-            
+
             String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
             g2.setColor(Color.DARK_GRAY);
-            g2.setFont(new Font("TimesRoman", Font.BOLD, 13));
+            g2.setFont(new Font("Helvetica", Font.BOLD, 13));
             g2.drawString(jourModes[i], 17, 90 + i * hauteurCase * 8);
         }
     }

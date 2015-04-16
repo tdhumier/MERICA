@@ -37,14 +37,10 @@ public class ListeActivites {
     public Activite getActiviteByCode(String code) {
         Activite act = null;
         for (Activite activite : listeActivites) {
-            if (activite.getCode().equals(code)) {
+
+            if (activite.getCode().toUpperCase().equals(code.toUpperCase())) {
                 act = activite;
             }
-        }
-        if (act == null) {
-            Activite coursHorsDep = new CoursHorsDep(code, "NC", "NC", "NC", "NC", 3, 8, 22, 0, 0.0d);
-            listeActivites.add(coursHorsDep);
-            act = coursHorsDep;
         }
 
         return act;
@@ -91,5 +87,9 @@ public class ListeActivites {
         listeActivites.stream().forEach((activite) -> {
             activite.setIsSelected(false);
         });
+    }
+
+    public void ajouterActivite(Activite activite) {
+        listeActivites.add(activite);
     }
 }

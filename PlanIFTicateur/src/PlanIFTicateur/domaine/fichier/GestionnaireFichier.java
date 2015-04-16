@@ -5,8 +5,10 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
+import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import java.util.List;
 
 /**
  *
@@ -29,5 +31,15 @@ public class GestionnaireFichier {
         String adresseCheminement = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
         CheminementDao cheminementDao = new CheminementDao(adresseCheminement);
         return cheminementDao.importerGrillesCheminement(listeActivites);
+    }
+
+    public void enregistrerFichier(List<Activite> activites) {
+        ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
+        activiteDao.writeFile(activites, adresseFichierCOU);
+    }
+
+    public void enregistrerFichier(List<Activite> activites, String fichier) {
+        ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
+        activiteDao.writeFile(activites, fichier);
     }
 }

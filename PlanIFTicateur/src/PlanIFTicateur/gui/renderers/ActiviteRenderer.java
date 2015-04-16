@@ -27,8 +27,7 @@ public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activit
     public Component getListCellRendererComponent(JList<? extends Activite> list, Activite activite, int index, boolean isSelected, boolean cellHasFocus) {
 
         String texteActivite = "";
-        activite.setCode(activite.getCode().toUpperCase());
-        texteActivite += activite.getCode() + "   " + activite.getTitre() + "   (" + activite.getType() + ")";
+        texteActivite += activite.getCode().toUpperCase() + "   " + activite.getTitre() + "   (" + activite.getType() + ")";
         texteActivite = Normalizer.normalize(texteActivite, Normalizer.Form.NFD);
         setText(texteActivite);
         setBackground(activite.getCouleur());

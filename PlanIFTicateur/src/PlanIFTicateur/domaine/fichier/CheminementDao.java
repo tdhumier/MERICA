@@ -5,10 +5,11 @@
  */
 package PlanIFTicateur.domaine.fichier;
 
-import PlanIFTicateur.domaine.cheminement.GrilleCheminement;
-import PlanIFTicateur.domaine.activite.ListeActivites;
-import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.CoursHorsDep;
+import PlanIFTicateur.domaine.activite.ListeActivites;
+import PlanIFTicateur.domaine.cheminement.GrilleCheminement;
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public class CheminementDao {
 
     private LecteurCsv lecteurCsv;
+    private EcritureCsv ecritureCsv;
+
     private String fichier;
 
     public CheminementDao(String file) {
@@ -26,6 +29,7 @@ public class CheminementDao {
         this.lecteurCsv = new LecteurCsv(file);
     }
 
+    // LECTURE
     ListeGrillesCheminement importerGrillesCheminement(ListeActivites listeActivites) {
         List<GrilleCheminement> grilles = new ArrayList<>();
         List<String[]> donnees = lecteurCsv.getData();
@@ -41,9 +45,12 @@ public class CheminementDao {
         ArrayList<Activite> listeActivites = new ArrayList<>();
         Integer taille = tab.length;
         for (int i = 3; i < taille; i++) {
-            if (activites.getActiviteByCode(tab[i]) != null) {
-                listeActivites.add(activites.getActiviteByCode(tab[i]));
+            Activite activite = activites.getActiviteByCode(tab[i]);
+            if (activite == null) {
+                activite = new CoursHorsDep(tab[i], "NC", "NC", "NC", "NC", 3, 8, 22, 0, 0.0d);
+                activites.ajouterActivite(activite);
             }
+            listeActivites.add(activite);
         }
         grille.setNomProgramme(tab[0]);
         grille.setVersion(tab[1]);
