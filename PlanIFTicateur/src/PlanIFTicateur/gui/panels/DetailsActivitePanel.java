@@ -136,7 +136,7 @@ public class DetailsActivitePanel extends JPanel implements HoraireControleurObs
     private String getNomJour(int i) {
         String[] JourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
 
-        return JourModes[i + 1];
+        return JourModes[i-1];
     }
 
     @Override

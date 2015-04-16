@@ -8,9 +8,11 @@ package PlanIFTicateur.gui.panels;
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.JButton;
+
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,28 +21,26 @@ import javax.swing.JPanel;
  *
  * @author tristandhumieres
  */
-public class StatistiquesPanel extends JPanel implements HoraireControleurObserveur {
+public class StatistiquesOngletPanel extends JPanel implements HoraireControleurObserveur {
 
     private MainWindow mainWindow;
     private JPanel statPanel;
-    private JPanel boutonStatPanel;
+ 
     private JLabel lundiLabel;
     private JLabel mardiLabel;
     private JLabel mercrediLabel;
     private JLabel jeudiLabel;
     private JLabel vendrediLabel;
     private JLabel samediLabel;
-    private JButton bCoursParJour;
-    private JButton bCongestion;
-    private boolean statParJour = false;
-    private boolean statIndiceCongestion = false;
+    private JComboBox comboBox;
 
-    public StatistiquesPanel() {
+
+    public StatistiquesOngletPanel() {
     }
 
-    public StatistiquesPanel(MainWindow maindow) {
-        this.mainWindow = maindow;
-        maindow.controleur.registerObserver(this);
+    public StatistiquesOngletPanel(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        mainWindow.controleur.registerObserver(this);
         buildUp();
     }
 
@@ -48,8 +48,8 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
         
         setLayout(new BorderLayout());
         
-        bCoursParJour = new JButton("Cours par jour");
-        bCongestion = new JButton("Indice de Congestion");
+        comboBox = new JComboBox();
+       
         lundiLabel = new JLabel("");
         mardiLabel = new JLabel("");
         mercrediLabel = new JLabel("");
@@ -58,13 +58,13 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
         samediLabel = new JLabel("");
         statPanel = new JPanel();
         statPanel.setLayout(new GridLayout(0,1));
-        boutonStatPanel = new JPanel();
         
         
         
-        boutonStatPanel.add(bCoursParJour);
-        boutonStatPanel.add(bCongestion);
-        add(boutonStatPanel, BorderLayout.NORTH);
+        comboBox.setBackground(Color.WHITE);
+        comboBox.addItem("Cours par jour");
+        comboBox.addItem("Indice de congestion");
+        add(comboBox, BorderLayout.NORTH);
       
         statPanel.add(lundiLabel);
         statPanel.add(mardiLabel);
@@ -75,47 +75,31 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
         
         add(statPanel, BorderLayout.CENTER);
         
-        bCoursParJour.addActionListener(new java.awt.event.ActionListener() {
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statistiqueCoursParJourActionPerformed(evt);
+              
+                statistiqueActionPerformed(evt);
+              
             }
-        });
-        bCongestion.addActionListener(new java.awt.event.ActionListener() 
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                statistiqueIndicesCongestionActionPerformed(evt);
-        }
-        });
-                
-                
-    }
-    private void statistiqueIndicesCongestionActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        statIndiceCongestion = true;
-        statParJour = false;
-        bCongestion.setBackground(java.awt.Color.LIGHT_GRAY);
-        bCoursParJour.setBackground(new JButton().getBackground());
-        mainWindow.controleur.notifyObserversForUpdatedItems();
+        });          
     }
     
-    private void statistiqueCoursParJourActionPerformed(java.awt.event.ActionEvent evt)
+    
+    private void statistiqueActionPerformed(java.awt.event.ActionEvent evt)
     {
-      statIndiceCongestion = false;
-      statParJour = true;
-       bCoursParJour.setBackground(java.awt.Color.LIGHT_GRAY);
-       bCongestion.setBackground(new JButton().getBackground());
-      mainWindow.controleur.notifyObserversForUpdatedItems();
+        mainWindow.controleur.notifyObserversForUpdatedItems();
     }
 
+    
     @Override
     public void notifyUpdatedItems() {
         
-        if(statParJour)
+        if(comboBox.getSelectedItem()== "Cours par jour")
         {
         ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
         String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+        
         lundiLabel.setText(jourModes[0] + " : " + nbCoursParJour.get(0) + " cours");
         mardiLabel.setText(jourModes[1] + " : " + nbCoursParJour.get(1) + " cours");
         mercrediLabel.setText(jourModes[2] + " : " + nbCoursParJour.get(2) + " cours");
@@ -124,7 +108,7 @@ public class StatistiquesPanel extends JPanel implements HoraireControleurObserv
         samediLabel.setText(jourModes[5] + " : " + nbCoursParJour.get(5) + " cours");
         repaint();
         }
-        else if(statIndiceCongestion)
+        else if(comboBox.getSelectedItem()== "Indice de congestion")
         {
              ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
         String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};

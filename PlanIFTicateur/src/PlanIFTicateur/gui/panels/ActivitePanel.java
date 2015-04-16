@@ -34,7 +34,6 @@ public class ActivitePanel extends JPanel {
       private ActiviteWindow activiteWindow;
       private JPanel detailsActivitePanel;
       private JPanel boutonPanel;
-      private JLabel detailsActiviteLabel;
       private JLabel codeLabel;
       private JLabel sectionLabel;
       private JLabel titreLabel;
@@ -120,19 +119,19 @@ public class ActivitePanel extends JPanel {
         detailsActivitePanel.add(codeLabel);
         detailsActivitePanel.add(codeText);
         detailsActivitePanel.add(titreLabel);
-         detailsActivitePanel.add(titreText);
+        detailsActivitePanel.add(titreText);
         detailsActivitePanel.add(sectionLabel);
-         detailsActivitePanel.add(sectionText);
+        detailsActivitePanel.add(sectionText);
         detailsActivitePanel.add(profLabel);
-         detailsActivitePanel.add(profText);
+        detailsActivitePanel.add(profText);
         detailsActivitePanel.add(typeLabel);
-         detailsActivitePanel.add(typeText);
+        detailsActivitePanel.add(typeText);
         detailsActivitePanel.add(dureeLabel);
-         detailsActivitePanel.add(dureeBox);
+        detailsActivitePanel.add(dureeBox);
         detailsActivitePanel.add(debutMinLabel);
-         detailsActivitePanel.add(debutMinBox);
+        detailsActivitePanel.add(debutMinBox);
         detailsActivitePanel.add(finMaxLabel);
-         detailsActivitePanel.add(finMaxBox);
+        detailsActivitePanel.add(finMaxBox);
         
          boutonPanel.add(boutonConfirmer);
          boutonPanel.add(boutonQuitter);

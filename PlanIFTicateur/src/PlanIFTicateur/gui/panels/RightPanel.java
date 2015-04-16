@@ -25,14 +25,14 @@ public class RightPanel extends JPanel implements Serializable {
     private DetailsActivitePanel detailsActivitePanel;
     private ConflitsPanel conflitsPanel;
     private NotesPanel notesPanel;
-    private StatistiquesPanel statistiquesPanel;
+    private StatistiquesOngletPanel statistiquesPanel;
 
     public RightPanel() {
     }
 
     public RightPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        statistiquesPanel = new StatistiquesPanel(mainWindow);
+        statistiquesPanel = new StatistiquesOngletPanel(mainWindow);
         detailsActivitePanel = new DetailsActivitePanel(mainWindow);
         buildUp();
     }
