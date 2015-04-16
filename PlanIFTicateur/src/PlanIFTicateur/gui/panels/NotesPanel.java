@@ -15,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 /**
@@ -25,13 +24,13 @@ import javax.swing.table.TableCellRenderer;
 public class NotesPanel extends JPanel
 {
     private JTable table;
-    private RightPanel rightPanel;
+  
     private DefaultTableModel model;
     private String[] nomColonnes;
     
-    public NotesPanel(RightPanel rightPanel)
+    public NotesPanel()
     {
-        this.rightPanel = rightPanel;
+       
     
         buildUp();
     }
@@ -40,22 +39,34 @@ public class NotesPanel extends JPanel
     {
         
         nomColonnes = new String[] {"Date", "Cours", "Version", "Description"};
-       model = new DefaultTableModel(nomColonnes,200);
+        model = new DefaultTableModel(nomColonnes,200)
+        {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(row == 0)
+                    return false; //To change body of generated methods, choose Tools | Templates.
+                else
+                    return true;
+            }
+            
+        };
         table = new JTable(model);
         //table = new JTable(200, 4);
         table.setFont(new Font( "TimesRoman", Font.PLAIN, 16));
         
 
-     /*   table.getModel().setValueAt("Date", 0, 0);
-        table.getModel().setValueAt("Cours", 1, 0);
-        table.getModel().setValueAt("Version", 2, 0);
-        table.getModel().setValueAt("Description", 3, 0);*/
+        table.getModel().setValueAt("Date", 0, 0);
+        table.getModel().setValueAt("Cours", 0, 1);
+        table.getModel().setValueAt("Version", 0, 2);
+        table.getModel().setValueAt("Description", 0, 3);
         
+       
         
         table.getColumnModel().getColumn(0).setPreferredWidth(90);
         table.getColumnModel().getColumn(1).setPreferredWidth(70);
-        table.getColumnModel().getColumn(2).setPreferredWidth(40);
-        table.getColumnModel().getColumn(3).setPreferredWidth(300);
+        table.getColumnModel().getColumn(2).setPreferredWidth(60);
+        table.getColumnModel().getColumn(3).setPreferredWidth(280);
      
       
 
@@ -80,7 +91,15 @@ private class TableCellLongTextRenderer extends JTextArea implements TableCellRe
         int nbLigne = 1;
         String cell = "";
         
-            setSize(table.getColumnModel().getColumn(column).getWidth(),getPreferredSize().height); 
+        setSize(table.getColumnModel().getColumn(column).getWidth(),getPreferredSize().height); 
+        setFont(table.getFont());
+        
+        if(isSelected)
+            setBackground(table.getSelectionBackground());
+        else
+            setBackground(table.getBackground());
+            
+    
         
         if(table.getModel().getValueAt(row, column) != null)
         {
@@ -88,18 +107,22 @@ private class TableCellLongTextRenderer extends JTextArea implements TableCellRe
             System.out.println(table.getSelectedRow() + " " + table.getRowHeight(row));
             
             if(nbLigne * (getPreferredSize().height + 4) < table.getRowHeight(row) && table.getRowHeight(row) > 20)
-             {  
-                 table.setRowHeight(row, 20); 
-                 nbLigne = 1;
-             }
+            {  
+                table.setRowHeight(row, 20); 
+                nbLigne = 1;
+            }
         }
         
- 
-        if (table.getRowHeight(row) < nbLigne * (getPreferredSize().height + 4) && table.getModel().getValueAt(row, column) != "")
+        
+        System.out.println(getFont().getSize() + "   " + getPreferredSize().height);
+        if (table.getRowHeight(row) < nbLigne * (getPreferredSize().height - 5) && table.getModel().getValueAt(row, column) != "")
         {  
             table.setRowHeight(row, 20 + table.getRowHeight(row)); 
             nbLigne++;
         }  
+        
+        
+        
         return this;  
     }  
 }

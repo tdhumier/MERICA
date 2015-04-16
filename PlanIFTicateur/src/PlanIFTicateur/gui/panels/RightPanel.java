@@ -53,7 +53,7 @@ public class RightPanel extends JPanel implements Serializable {
 
         tabbedPane.add("Conflits", new JScrollPane(conflitsPanel));
 
-        notesPanel = new NotesPanel(this);
+        notesPanel = new NotesPanel();
 
         tabbedPane.add("Notes", new JScrollPane(notesPanel));
         
