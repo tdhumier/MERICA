@@ -6,6 +6,7 @@
 package PlanIFTicateur.domaine.horaire;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class Statistique {
     private int nbMaxCoursEtudiantMemeJour;
     private int nbMoyenCoursEtudiantMemeJour;
     private float indiceCongestion;
+    private float indiceCovoiturage;
     private ArrayList<Integer> coursSemaine;
 
     public int getNbCoursParJour(Horaire horaire, int jour) {
@@ -35,9 +37,12 @@ public class Statistique {
         return coursSemaine;
     }
 
-    public int nbMaxCoursParJour(Horaire horaire)
+    public int nbMaxCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrilleCheminement,int jour)
     {
-        
+        int compteurCoursDebut = 0;
+       List<Activite> listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
+       
+       
         return nbMaxCoursEtudiantMemeJour;
     }
 
@@ -54,7 +59,6 @@ public class Statistique {
            {
                return 0;
            }
-       System.out.println(listeCoursJournee);
        for (int i = 0; i < listeCoursJournee.size(); i++)
        {
      
@@ -67,5 +71,23 @@ public class Statistique {
         
         return indiceCongestion;
     }
+    
+    public float indiceCovoiturage(Horaire horaire, int jour)
+    {
+        List<Activite> listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
+       
+          if(listeCoursJournee.isEmpty())
+           {
+               return 0;
+           }
+              for (int i = 0; i < listeCoursJournee.size(); i++)
+       {
+     
+          //Code de comparaison
+       }
+          
+        return indiceCovoiturage;
+    }
+    
 
 }
