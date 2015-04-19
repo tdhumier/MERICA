@@ -110,14 +110,19 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
         }
         else if(comboBox.getSelectedItem()== "Indice de congestion")
         {
-             ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
+             ArrayList<Float> indiceCongestionParJour = new ArrayList<Float>();
+             for(int i = 0; i < 7 ; i++)
+             {
+                 indiceCongestionParJour.add(mainWindow.controleur.getIndiceCongestion(i));
+             }
+             
         String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
-        lundiLabel.setText(jourModes[0] + " : " + nbCoursParJour.get(0) + " %");
-        mardiLabel.setText(jourModes[1] + " : " + nbCoursParJour.get(1) + " %");
-        mercrediLabel.setText(jourModes[2] + " : " + nbCoursParJour.get(2) + " %");
-        jeudiLabel.setText(jourModes[3] + " : " + nbCoursParJour.get(3) + " %");
-        vendrediLabel.setText(jourModes[4] + " : " + nbCoursParJour.get(4) + " %");
-        samediLabel.setText(jourModes[5] + " : " + nbCoursParJour.get(5) + " %");
+        lundiLabel.setText(jourModes[0] + " : " + indiceCongestionParJour.get(1) + " %");
+        mardiLabel.setText(jourModes[1] + " : " + indiceCongestionParJour.get(2) + " %");
+        mercrediLabel.setText(jourModes[2] + " : " + indiceCongestionParJour.get(3) + " %");
+        jeudiLabel.setText(jourModes[3] + " : " + indiceCongestionParJour.get(4) + " %");
+        vendrediLabel.setText(jourModes[4] + " : " + indiceCongestionParJour.get(5) + " %");
+        samediLabel.setText(jourModes[5] + " : " + indiceCongestionParJour.get(6) + " %");
         repaint();
         }
     }

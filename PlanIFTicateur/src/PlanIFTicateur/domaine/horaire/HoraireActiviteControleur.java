@@ -135,6 +135,9 @@ public class HoraireActiviteControleur {
     public ArrayList<Integer> getNbCoursSemaine() {
         return horaire.getStatistiques().getNbCoursSemaine(horaire);
     }
+      public float getIndiceCongestion(int jour) {
+        return horaire.getStatistiques().congestionCirculation(horaire, jour);
+    }
 
     public void modifierStatutSelectionActivite(int x, int y) {
         horaire.getListeActivite().modifierStatutSelectionActivite(x, y);
