@@ -6,7 +6,7 @@
 package PlanIFTicateur.gui.frames;
 
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
-import PlanIFTicateur.gui.panels.StatistiquesFenetrePanel;
+import PlanIFTicateur.gui.panels.StatistiquesPanels.StatistiquesFenetrePanel;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 

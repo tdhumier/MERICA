@@ -56,9 +56,10 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
             listModel.addElement(activite);
         }
         listeActivites = new JList(listModel);
-        listeActivites.setCellRenderer(new ActiviteRenderer());
-
         listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listeActivites.setCellRenderer(new ActiviteRenderer());
+        listeActivites.setSelectionBackground(new JList().getSelectionBackground());
+        listeActivites.setSelectionForeground(new JList().getSelectionForeground());
 
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
 

@@ -139,15 +139,21 @@ public class HoraireActiviteControleur {
     public ArrayList<Integer> getNbCoursSemaine() {
         return horaire.getStatistiques().getNbCoursSemaine(horaire);
     }
+    
       public float getIndiceCongestion(int jour) {
         return horaire.getStatistiques().congestionCirculation(horaire, jour);
     }
-      public float getIndiceCovoiturage(int jour){
-        return horaire.getStatistiques().indiceCovoiturage(horaire, jour);
-      }
+      
+      public float getIndiceCovoiturage(ListeGrillesCheminement listeGrilleCheminement, int jour){
+        return horaire.getStatistiques().indiceCovoiturage(horaire, listeGrilleCheminement, jour);
+    }
       
     public int getNbMaxCoursParJour(ListeGrillesCheminement listeGrilleCheminement,int jour){
         return horaire.getStatistiques().nbMaxCoursParJour(horaire, listeGrilleCheminement, jour);
+    }
+    
+     public float getNbMoyenCoursParJour(ListeGrillesCheminement listeGrilleCheminement,int jour){
+        return horaire.getStatistiques().nbMoyenCoursParJour(horaire, listeGrilleCheminement, jour);
     }
 
     public void modifierStatutSelectionActivite(int x, int y) {

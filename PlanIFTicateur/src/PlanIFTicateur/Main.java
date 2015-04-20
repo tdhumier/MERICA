@@ -18,7 +18,7 @@ public class Main {
         // TODO code application logic here
         PlanIFTicateur.gui.frames.MainWindow mainWindow = new PlanIFTicateur.gui.frames.MainWindow();
         mainWindow.setVisible(true);
-      //  mainWindow.controleur.importerFichiers("/Users/Alexandre/Desktop/test/casHiver2015.COU", mainWindow.horairePanel.getDimensionsCase());
+        mainWindow.controleur.importerFichiers("/Users/Alexandre/Desktop/test/casHiver2015.COU", mainWindow.horairePanel.getDimensionsCase());
     }
 
 }

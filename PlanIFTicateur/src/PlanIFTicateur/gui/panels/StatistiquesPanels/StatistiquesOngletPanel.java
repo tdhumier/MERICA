@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui.panels;
+package PlanIFTicateur.gui.panels.StatistiquesPanels;
 
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
@@ -69,6 +69,7 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
         comboBox.addItem("Cours par jour");
         comboBox.addItem("Indice de congestion");
         comboBox.addItem("Nombre maximal de cours");
+        comboBox.addItem("Nombre moyen de cours");
         comboBox.addItem("Indice de covoiturage");
         add(comboBox, BorderLayout.NORTH);
       
@@ -102,19 +103,13 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
     public void notifyUpdatedItems() 
     {
         JLabel[] labelModes  = {lundiLabel, mardiLabel, mercrediLabel, jeudiLabel, vendrediLabel, samediLabel};
+        ListeGrillesCheminement listeGrilleCheminement = mainWindow.controleur.getHoraire().getListeGrillesCheminement();
+             
    
         if(comboBox.getSelectedItem()== "Cours par jour")
         {
         ArrayList<Integer> nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
-        
-        
-        modificationIntegerLabel(labelModes, nbCoursParJour, " Cours");
-        /*lundiLabel.setText(jourModes[0] + " : " + nbCoursParJour.get(0) + " cours");
-        mardiLabel.setText(jourModes[1] + " : " + nbCoursParJour.get(1) + " cours");
-        mercrediLabel.setText(jourModes[2] + " : " + nbCoursParJour.get(2) + " cours");
-        jeudiLabel.setText(jourModes[3] + " : " + nbCoursParJour.get(3) + " cours");
-        vendrediLabel.setText(jourModes[4] + " : " + nbCoursParJour.get(4) + " cours");
-        samediLabel.setText(jourModes[5] + " : " + nbCoursParJour.get(5) + " cours");*/
+        mainWindow.controleur.getHoraire().getStatistiques().modificationIntegerLabel(jourModes,labelModes, nbCoursParJour, " Cours");
         repaint();
         }
         
@@ -126,35 +121,35 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
                  indiceCongestionParJour.add(mainWindow.controleur.getIndiceCongestion(i));
              }
              
-        modificationFloatLabel(labelModes, indiceCongestionParJour, " %");
-       /* lundiLabel.setText(jourModes[0] + " : " + indiceCongestionParJour.get(0) + " %");
-        mardiLabel.setText(jourModes[1] + " : " + indiceCongestionParJour.get(1) + " %");
-        mercrediLabel.setText(jourModes[2] + " : " + indiceCongestionParJour.get(2) + " %");
-        jeudiLabel.setText(jourModes[3] + " : " + indiceCongestionParJour.get(3) + " %");
-        vendrediLabel.setText(jourModes[4] + " : " + indiceCongestionParJour.get(4) + " %");
-        samediLabel.setText(jourModes[5] + " : " + indiceCongestionParJour.get(5) + " %");*/
-        repaint();
+            mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes,labelModes, indiceCongestionParJour, " %");
+            repaint();
         }
         
         
         else if(comboBox.getSelectedItem()== "Nombre maximal de cours")
         {
-             ArrayList<Integer> nbMaxCoursParJour = new ArrayList<Integer>();
-             ListeGrillesCheminement listeGrilleCheminement = mainWindow.controleur.getHoraire().getListeGrillesCheminement();
-             
+            ArrayList<Integer> nbMaxCoursParJour = new ArrayList<Integer>();
+            
              for(int i = 1; i < 7 ; i++)
              {
                  nbMaxCoursParJour.add(mainWindow.controleur.getNbMaxCoursParJour(listeGrilleCheminement, i));
              }
+       
+            mainWindow.controleur.getHoraire().getStatistiques().modificationIntegerLabel(jourModes,labelModes, nbMaxCoursParJour, " Cours");
+            repaint();
+        }
+        
+        else if(comboBox.getSelectedItem() == "Nombre moyen de cours")
+        {
+            ArrayList<Float> nbMoyenCoursParJour = new ArrayList<Float>();
+            
+             for(int i = 1; i < 7 ; i++)
+             {
+                 nbMoyenCoursParJour.add(mainWindow.controleur.getNbMoyenCoursParJour(listeGrilleCheminement, i));
+             }
              
-               modificationIntegerLabel(labelModes, nbMaxCoursParJour, " Cours");
-       /* lundiLabel.setText(jourModes[0] + " : " + nbMaxCoursParJour.get(0) + " Cours");
-        mardiLabel.setText(jourModes[1] + " : " + nbMaxCoursParJour.get(1) + " Cours");
-        mercrediLabel.setText(jourModes[2] + " : " + nbMaxCoursParJour.get(2) + " Cours");
-        jeudiLabel.setText(jourModes[3] + " : " + nbMaxCoursParJour.get(3) + " Cours");
-        vendrediLabel.setText(jourModes[4] + " : " + nbMaxCoursParJour.get(4) + " Cours");
-        samediLabel.setText(jourModes[5] + " : " + nbMaxCoursParJour.get(5) + " Cours");*/
-        repaint();
+            mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, labelModes, nbMoyenCoursParJour, " Cours");
+            repaint();
         }
         
         else if (comboBox.getSelectedItem() == "Indice de covoiturage")
@@ -163,25 +158,13 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
              
              for(int i = 1; i < 7; i++)
              {
-                 indiceCovoiturage.add(mainWindow.controleur.getIndiceCovoiturage(i));
+                 indiceCovoiturage.add(mainWindow.controleur.getIndiceCovoiturage(listeGrilleCheminement, i));
              }
+             
+             repaint();
         }
     }
     
-    public void modificationIntegerLabel(JLabel[] labelModes, ArrayList<Integer> list, String texte)
-    {    
-        
-        for(int i = 0; i < 6; i++)
-        {
-            labelModes[i].setText(jourModes[i] + " : " + list.get(i) + texte);
-        }
-    }
-       public void modificationFloatLabel(JLabel[] labelModes, ArrayList<Float> list, String texte)
-    {    
-        
-        for(int i = 0; i < 6; i++)
-        {
-            labelModes[i].setText(jourModes[i] + " : " + list.get(i) + texte);
-        }
-    }
+    
+ 
 }

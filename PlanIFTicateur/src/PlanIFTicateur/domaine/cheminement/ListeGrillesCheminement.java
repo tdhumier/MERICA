@@ -40,23 +40,12 @@ public class ListeGrillesCheminement {
         List<Activite> grilleActivite = grilleCheminement.getListeActivites();
         List<Activite> listeActivite = horaire.getListeActivite().getActivitesByJour(jour);
         
-   
-        for(int i = 0; i < listeActivite.size(); i ++)
-        {
-               
-            for(int j = 0; j < grilleActivite.size(); j ++)
-            {
-                if(listeActivite.get(i).getCode().equals(grilleActivite.get(j).getCode()) /*&& horaire.getSession().equals(grilleCheminement.getSession())*/)
-                {     
-                    nbCours++;
-                }
-            }
+        for (Activite listeActivite1 : listeActivite) {
+            nbCours = grilleActivite.stream().filter((grilleActivite1) -> (listeActivite1.getCode().equals(grilleActivite1.getCode()))).map((_item) -> 1).reduce(nbCours, Integer::sum);
         }
      
-        
         return nbCours;
     }
-    
     
     public int size()
     {
@@ -73,9 +62,9 @@ public class ListeGrillesCheminement {
 
     public List<Activite> activitesCheminementsDejaALHoraire(Activite activite) {
         List<Activite> activitesCheminement = new ArrayList<>();
-        for (GrilleCheminement grilleCheminement : grillesCheminement) {
+        grillesCheminement.stream().forEach((grilleCheminement) -> {
             activitesCheminement.addAll(grilleCheminement.activitesCheminementDejaAlHoraire(activite));
-        }
+        });
         return activitesCheminement;
     }
 }
