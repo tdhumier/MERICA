@@ -37,6 +37,10 @@ public class HoraireActiviteControleur {
      public List<Activite> getActivitesConflitCheminement() {
         return horaire.getActivitesConflitCheminement();
     }
+     
+    public List<Activite> getActivitesConflitCheminementAvec() {
+        return horaire.getActivitesConflitCheminementAvec();
+    }
 
     public enum ActiviteModes {
 

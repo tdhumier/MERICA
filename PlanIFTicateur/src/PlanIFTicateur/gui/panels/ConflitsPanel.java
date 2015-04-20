@@ -55,10 +55,11 @@ public class ConflitsPanel extends JPanel implements HoraireControleurObserveur{
         text.setText("");
         try{
         List<Activite> activitesConflitCheminement = mainWindow.controleur.getActivitesConflitCheminement();
-      
+        List<Activite> activitesConflitCheminementAvec = mainWindow.controleur.getActivitesConflitCheminementAvec();
         for (int i = 0; i< activitesConflitCheminement.size(); i++){
-            text.append("Il y a un conflit avec le cours : ");
-            text.append(activitesConflitCheminement.get(i).getCode() + "\n"); 
+            text.append("Il y a un conflit entre le cours : ");
+            text.append(activitesConflitCheminement.get(i).getCode() + " et ");
+            text.append(activitesConflitCheminementAvec.get(i).getCode() + "\n");
         }
         }catch (Exception e){
             System.out.println(e.getMessage());

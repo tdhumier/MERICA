@@ -25,6 +25,7 @@ public class Horaire {
     private ListeActivites listeActivite;
     private ListeGrillesCheminement grillesCheminement;
     private List<Activite> activitesConflitCheminement;
+    private List<Activite> activitesConflitCheminementAvec;
     private Statistique statistique;
 
     public Horaire() {
@@ -76,13 +77,17 @@ public class Horaire {
 
     public boolean horaireEstValide(Activite activite) {
         activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
-        System.out.println(activitesConflitCheminement.get(0).getCode());
         return activite.horaireEstValide() && activitesConflitCheminement.isEmpty();
     }
     
      public List<Activite> getActivitesConflitCheminement() {
         
         return activitesConflitCheminement;
+    }
+     
+    public List<Activite> getActivitesConflitCheminementAvec() {
+        
+        return activitesConflitCheminementAvec;
     }
 
     public boolean estValide() {
@@ -91,6 +96,7 @@ public class Horaire {
         returned = activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
         try{
             activitesConflitCheminement = grillesCheminement.getConflits();
+            activitesConflitCheminementAvec = grillesCheminement.getConflitsAvec();
         }catch (Exception e){
         }
         
