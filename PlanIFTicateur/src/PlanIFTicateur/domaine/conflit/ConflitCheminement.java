@@ -17,6 +17,7 @@ public class ConflitCheminement extends Conflit
     {
         super(activite);
         this.autreActivite = autreActivite;
+        System.out.println("cheminement");
     }
 
     public Activite getAutreActivite() {

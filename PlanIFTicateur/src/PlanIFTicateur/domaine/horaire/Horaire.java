@@ -25,13 +25,13 @@ public class Horaire {
     private String session;
     private ListeActivites listeActivite;
     private ListeGrillesCheminement grillesCheminement;
-    private ListeConflits listeConflits;
+    private List<Activite> activitesConflitCheminement;
+    private List<Activite> activitesConflitCheminementAvec;
     private Statistique statistique;
 
     public Horaire() {
         this.listeActivite = new ListeActivites();
         this.grillesCheminement = new ListeGrillesCheminement();
-        this.listeConflits = new ListeConflits();
         this.statistique = new Statistique();
         this.valide = true;
     }
@@ -88,13 +88,31 @@ public class Horaire {
     }
 
     public boolean horaireEstValide(Activite activite) {
-        List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
+        activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
         return activite.horaireEstValide() && activitesConflitCheminement.isEmpty();
+    }
+    
+     public List<Activite> getActivitesConflitCheminement() {
+        
+        return activitesConflitCheminement;
+    }
+     
+    public List<Activite> getActivitesConflitCheminementAvec() {
+        
+        return activitesConflitCheminementAvec;
     }
 
     public boolean estValide() {
+        boolean returned;
         List<Activite> activitesAssignees = listeActivite.getActivitesAssignees();
-        return activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
+        returned = activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
+        try{
+            activitesConflitCheminement = grillesCheminement.getConflits();
+            activitesConflitCheminementAvec = grillesCheminement.getConflitsAvec();
+        }catch (Exception e){
+        }
+        
+        return returned;
     }
 
     public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
