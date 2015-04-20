@@ -37,11 +37,23 @@ public class Statistique {
         return coursSemaine;
     }
 
-    public int nbMaxCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrilleCheminement,int jour)
+    public int nbMaxCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement,int jour)
     {
-        int compteurCoursDebut = 0;
+        
        List<Activite> listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
        
+   
+        int nbMaxCoursEtudiantMemeJour = 0;
+        int nombreEnCalculation = 0;
+        
+       
+        for(int i = 0; i < listeGrillesCheminement.size(); i++)
+        {
+            nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour );
+           
+            if(nombreEnCalculation > nbMaxCoursEtudiantMemeJour)
+                nbMaxCoursEtudiantMemeJour = nombreEnCalculation;
+        }
        
         return nbMaxCoursEtudiantMemeJour;
     }
@@ -76,15 +88,19 @@ public class Statistique {
     {
         List<Activite> listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
        
-          if(listeCoursJournee.isEmpty())
+        if(listeCoursJournee.isEmpty())
            {
                return 0;
            }
-              for (int i = 0; i < listeCoursJournee.size(); i++)
-       {
+        for (int i = 0; i < listeCoursJournee.size(); i++)
+        {
      
-          //Code de comparaison
-       }
+          //Code de comparison
+          //Si un cours d'une grille de cheminement commence en meme temps qu'un autre
+          //ET
+          //leur dernier cours fini en meme temps
+          //Compteur ++;
+        }
           
         return indiceCovoiturage;
     }

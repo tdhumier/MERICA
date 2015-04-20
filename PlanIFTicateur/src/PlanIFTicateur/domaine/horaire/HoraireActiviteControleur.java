@@ -46,6 +46,10 @@ public class HoraireActiviteControleur {
         horaire = new Horaire();
         observers = new LinkedList<>();
     }
+    
+    public Horaire getHoraire(){
+        return horaire;
+    }
 
     public void deplacerActivite(Activite activite, int x, int y) {
         horaire.deplacerActivite(activite, x, y);
@@ -137,6 +141,13 @@ public class HoraireActiviteControleur {
     }
       public float getIndiceCongestion(int jour) {
         return horaire.getStatistiques().congestionCirculation(horaire, jour);
+    }
+      public float getIndiceCovoiturage(int jour){
+        return horaire.getStatistiques().indiceCovoiturage(horaire, jour);
+      }
+      
+    public int getNbMaxCoursParJour(ListeGrillesCheminement listeGrilleCheminement,int jour){
+        return horaire.getStatistiques().nbMaxCoursParJour(horaire, listeGrilleCheminement, jour);
     }
 
     public void modifierStatutSelectionActivite(int x, int y) {

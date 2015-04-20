@@ -22,6 +22,7 @@ import java.util.List;
 public class Horaire {
 
     private boolean valide;
+    private String session;
     private ListeActivites listeActivite;
     private ListeGrillesCheminement grillesCheminement;
     private ListeConflits listeConflits;
@@ -33,6 +34,14 @@ public class Horaire {
         this.listeConflits = new ListeConflits();
         this.statistique = new Statistique();
         this.valide = true;
+    }
+    
+    public void setSession(String session)
+    {
+        this.session = session;
+    }
+    public String getSession(){
+        return session;
     }
 
     public ListeActivites getListeActivite() {
@@ -49,6 +58,9 @@ public class Horaire {
 
     public void setGrillesCheminement(ListeGrillesCheminement grillesCheminement) {
         this.grillesCheminement = grillesCheminement;
+    }
+    public ListeGrillesCheminement getListeGrillesCheminement(){
+        return grillesCheminement;
     }
 
     public void deplacerActivite(Activite activite, int x, int y) {

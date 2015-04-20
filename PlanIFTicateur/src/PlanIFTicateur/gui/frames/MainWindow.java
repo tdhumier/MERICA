@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -232,6 +233,15 @@ public class MainWindow extends javax.swing.JFrame {
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
             controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
+      
+        /*    if(controleur.getHoraire().getSession() == null)
+            {
+                 String[] choixSession = { "Automne", "Été", "Hiver"};
+                 String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
+                 controleur.getHoraire().setSession(session);
+            } */
+            
+            
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
