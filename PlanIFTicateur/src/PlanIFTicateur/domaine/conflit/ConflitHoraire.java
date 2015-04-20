@@ -16,5 +16,6 @@ public class ConflitHoraire extends Conflit
     public ConflitHoraire(Activite activite)
     {
         super(activite);
+        System.out.println("activite");
     }
 }

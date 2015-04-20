@@ -169,7 +169,9 @@ public abstract class Activite {
     }
 
     public boolean horaireEstValide() {
-        return heureDebut >= heureDebutMin && (heureDebut + duree <= heureFinMax);
+        boolean returned = (heureDebut >= heureDebutMin && (heureDebut + duree <= heureFinMax));
+        return returned;
+        
     }
 
     public boolean estAuMemeHoraire(Activite autreActivite) {

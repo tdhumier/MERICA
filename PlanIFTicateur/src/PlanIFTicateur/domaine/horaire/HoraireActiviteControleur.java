@@ -28,9 +28,14 @@ public class HoraireActiviteControleur {
     private List<HoraireControleurObserveur> observers;
     private String path;
 
+    
     public List<Activite> getActivites() {
         System.out.println("Dans controleur / getActivites");
         return horaire.getListeActivite().getListeActivites();
+    }
+    
+     public List<Activite> getActivitesConflitCheminement() {
+        return horaire.getActivitesConflitCheminement();
     }
 
     public enum ActiviteModes {

@@ -16,6 +16,7 @@ import java.util.List;
 public class ListeGrillesCheminement {
 
     List<GrilleCheminement> grillesCheminement = new ArrayList<>();
+    List<Activite> conflits;
 
     public ListeGrillesCheminement(List<GrilleCheminement> grilleCheminements) {
         this.grillesCheminement = grilleCheminements;
@@ -23,17 +24,26 @@ public class ListeGrillesCheminement {
 
     public ListeGrillesCheminement() {
     }
-
+    
+    public List<Activite> getConflits() {
+        return conflits;
+    }
+    
     public List<GrilleCheminement> getGrillesCheminement() {
         return grillesCheminement;
     }
 
     public List<Activite> activitesAuMemeHoraire(Activite activite) {
-        List<Activite> activitesAuMemeHoraire = new ArrayList();
+        conflits = new ArrayList();
         grillesCheminement.stream().forEach((grilleCheminement) -> {
-            activitesAuMemeHoraire.addAll(grilleCheminement.activitesAuMemeHoraire(activite));
+            for (int i = 0; i < grilleCheminement.activitesAuMemeHoraire(activite).size(); i++)
+            {
+                if (conflits.contains(grilleCheminement.activitesAuMemeHoraire(activite).get(i)) == false){
+                    conflits.add(grilleCheminement.activitesAuMemeHoraire(activite).get(i));
+                }
+            }
         });
-        return activitesAuMemeHoraire;
+        return conflits;
     }
 
     public List<Activite> activitesCheminementsDejaALHoraire(Activite activite) {
