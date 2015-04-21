@@ -6,6 +6,8 @@
 package PlanIFTicateur.gui.panels.StatistiquesPanels;
 
 import PlanIFTicateur.gui.frames.MainWindow;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author Alexandre
  */
-public class indiceCongestionPanel extends JPanel
+public class IndiceCongestionPanel extends JPanel
 {
     private MainWindow mainWindow;
     private JLabel indiceTitre;
@@ -26,13 +28,14 @@ public class indiceCongestionPanel extends JPanel
     private JLabel moyenneIndiceLabel; 
     
     
-    public indiceCongestionPanel(MainWindow mainWindow, JLabel[] listeLabel)
+    public IndiceCongestionPanel(MainWindow mainWindow, String[] jourModes)
     {
         this.mainWindow = mainWindow;
-        buildUp(listeLabel);
+        setLayout(new GridLayout(8,1));
+        buildUp(jourModes);
     }
     
-    private void buildUp(JLabel[] listeLabel)
+    private void buildUp(String[] jourModes)
     {
         indiceTitre = new JLabel("Nombre de cours par jour");
         lundiIndiceLabel = new JLabel();
@@ -43,26 +46,31 @@ public class indiceCongestionPanel extends JPanel
         samediIndiceLabel = new JLabel();
         moyenneIndiceLabel = new JLabel();
         
-        ajouterIndiceCongestion(listeLabel);
+      
+        JLabel[] listeLabel = {lundiIndiceLabel, mardiIndiceLabel, mercrediIndiceLabel, jeudiIndiceLabel, vendrediIndiceLabel, samediIndiceLabel};
+        
+        ajouterIndiceCongestion(listeLabel, jourModes);
     }
     
-     private void ajouterIndiceCongestion(JLabel[] listeLabel)
+     private void ajouterIndiceCongestion(JLabel[] listeLabel, String[] jourModes)
     {
-      /*  lundiIndiceLabel.setText(listeLabel[0].getText() + nbCoursParJour.get(0) + " %");
-        mardiIndiceLabel.setText(listeLabel[1].getText() + nbCoursParJour.get(1) + " %");
-        mercrediIndiceLabel.setText(listeLabel[2].getText() + nbCoursParJour.get(2) + " %");
-        jeudiIndiceLabel.setText(listeLabel[3].getText() + nbCoursParJour.get(3) + " %");
-        vendrediIndiceLabel.setText(listeLabel[4].getText() + nbCoursParJour.get(4) + " %");
-        samediIndiceLabel.setText(listeLabel[5].getText() + nbCoursParJour.get(5) + " %");
-        moyenneIndiceLabel.setText(listeLabel[6].getText() + " 10%");*/
         
-        add(indiceTitre);
-        add(lundiIndiceLabel);
-        add(mardiIndiceLabel);
-        add(mercrediIndiceLabel);
-        add(jeudiIndiceLabel);
-        add(vendrediIndiceLabel);
-        add(samediIndiceLabel);
+        
+          ArrayList<Float> indiceCongestionParJour = new ArrayList<Float>();
+             for(int i = 0; i < 6 ; i++)
+             {
+                 indiceCongestionParJour.add(mainWindow.controleur.getIndiceCongestion(i));
+             }
+           listeLabel = mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, listeLabel, indiceCongestionParJour, " %");
+         
+            add(indiceTitre);
+              
+            for(int j = 0; j < 6; j++)
+            {
+                add(listeLabel[j]);
+            }
+      
+       
        
     }
 }

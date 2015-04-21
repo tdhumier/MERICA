@@ -5,6 +5,7 @@
  */
 package PlanIFTicateur.gui.panels.StatistiquesPanels;
 
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author Alexandre
  */
-public class CoursParJourPanel extends JPanel{
+public class CoursParJourPanel extends JPanel implements HoraireControleurObserveur{
     
     private MainWindow mainWindow;
     private JLabel coursParJourTitre;
@@ -26,21 +27,24 @@ public class CoursParJourPanel extends JPanel{
     private JLabel vendrediCPJLabel;
     private JLabel samediCPJLabel;
     private JLabel moyenneCPJLabel;
+    private JLabel[] CPJLabel;
+    private String[] jourModes;
     
-    private int codeStat;
     private  ArrayList<Integer> nbCoursParJour;
     String moyenneText;
     
-    public CoursParJourPanel(MainWindow mainWindow, JLabel[] listeLabel, String[] jourModes)
+    public CoursParJourPanel(MainWindow mainWindow, String[] jourModes)
     {
         this.mainWindow = mainWindow;
+        this.jourModes = jourModes;
         setLayout(new GridLayout(8,1));
-        buildUp(listeLabel, jourModes);
+        buildUp();
     }
     
     
-    private void buildUp(JLabel[] listeLabel, String[] jourModes)
+    private void buildUp()
     {
+        System.out.println("Test de debut");
         coursParJourTitre = new JLabel("Nombre de cours par jour");
         lundiCPJLabel = new JLabel();
         mardiCPJLabel = new JLabel();
@@ -48,15 +52,17 @@ public class CoursParJourPanel extends JPanel{
         jeudiCPJLabel = new JLabel();
         vendrediCPJLabel = new JLabel();
         samediCPJLabel = new JLabel();
-        moyenneCPJLabel = new JLabel();
+        moyenneCPJLabel = new JLabel("Moyenne : ");
         
-        ajouterCoursParJour(listeLabel, jourModes);
+         
+        CPJLabel = new JLabel[]{lundiCPJLabel, mardiCPJLabel, mercrediCPJLabel, jeudiCPJLabel, vendrediCPJLabel, samediCPJLabel};
+       
+        ajouterCoursParJour(CPJLabel);
     }
     
-     private void ajouterCoursParJour(JLabel[] listeLabel, String[] jourModes)
+     private void ajouterCoursParJour(JLabel[] CPJLabel)
     {
-        codeStat = 0;
-        
+  
         float moyenne = 0;
         
         nbCoursParJour = mainWindow.controleur.getNbCoursSemaine();
@@ -64,27 +70,38 @@ public class CoursParJourPanel extends JPanel{
         {
             moyenne += nbCoursParJour.get(i);
         }
+         
         moyenne = moyenne/6;
         moyenneText = Float.toString(moyenne);
         
-        mainWindow.controleur.getHoraire().getStatistiques().modificationIntegerLabel(jourModes, listeLabel, nbCoursParJour, " Cours");
+        CPJLabel = mainWindow.controleur.getHoraire().getStatistiques().modificationIntegerLabel(jourModes, CPJLabel, nbCoursParJour, " Cours");
         
-        lundiCPJLabel.setText(listeLabel[0].getText() + nbCoursParJour.get(0) + " Cours");
+        
+      /*  lundiCPJLabel.setText(listeLabel[0].getText() + nbCoursParJour.get(0) + " Cours");
         mardiCPJLabel.setText(listeLabel[1].getText() + nbCoursParJour.get(1) + " Cours");
         mercrediCPJLabel.setText(listeLabel[2].getText() + nbCoursParJour.get(2) + " Cours");
         jeudiCPJLabel.setText(listeLabel[3].getText() + nbCoursParJour.get(3) + " Cours");
         vendrediCPJLabel.setText(listeLabel[4].getText() + nbCoursParJour.get(4) + " Cours");
-        samediCPJLabel.setText(listeLabel[5].getText() + nbCoursParJour.get(5) + " Cours");
+        samediCPJLabel.setText(listeLabel[5].getText() + nbCoursParJour.get(5) + " Cours");*/
         
-        moyenneCPJLabel.setText(listeLabel[6].getText() + moyenneText + " Cours");
+        moyenneCPJLabel.setText(moyenneCPJLabel.getText() + moyenneText + " Cours");
         
         add(coursParJourTitre);
-        add(lundiCPJLabel);
-        add(mardiCPJLabel);
-        add(mercrediCPJLabel);
-        add(jeudiCPJLabel);
-        add(vendrediCPJLabel);
-        add(samediCPJLabel);
-        add(moyenneCPJLabel);
+        
+         for(int j = 0; j < 6; j++)
+            {
+                add(CPJLabel[j]);
+            }
+         add(moyenneCPJLabel);
+      
     }
+
+    @Override
+    public void notifyUpdatedItems() 
+    {
+         ajouterCoursParJour(CPJLabel);
+         repaint();
+    }
+     
+
 }

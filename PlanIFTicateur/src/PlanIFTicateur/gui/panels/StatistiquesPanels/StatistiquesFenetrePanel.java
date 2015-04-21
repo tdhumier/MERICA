@@ -5,7 +5,6 @@
  */
 package PlanIFTicateur.gui.panels.StatistiquesPanels;
 
-import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -17,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author Alexandre
  */
-public class StatistiquesFenetrePanel extends JPanel implements HoraireControleurObserveur {
+public class StatistiquesFenetrePanel extends JPanel{
 
     
     private MainWindow mainWindow;
@@ -47,7 +46,6 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
     public StatistiquesFenetrePanel(MainWindow mainWindow)
     {
         this.mainWindow = mainWindow;
-        mainWindow.controleur.registerObserver(this);
         buildUp();
     }
     
@@ -66,24 +64,12 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
         samediLabel = new JLabel("Samedi : ");
         moyenneLabel = new JLabel("Moyenne : ");
         
-        JLabel[] listeLabel = {lundiLabel, mardiLabel, mercrediLabel, jeudiLabel, vendrediLabel, samediLabel, moyenneLabel};
-        
-        coursParJourPanel = new CoursParJourPanel(mainWindow, listeLabel, jourModes);
-          
-        indiceCongestionPanel = new JPanel();
-        indiceCongestionPanel.setLayout(new GridLayout(8,1));
-         
      
         
-     // CovoiturageTitre = new JLabel("Indice de covoiturage");
-       /* lundiIndiceLabel = new JLabel();
-        mardiIndiceLabel = new JLabel();
-        mercrediIndiceLabel = new JLabel();
-        jeudiIndiceLabel = new JLabel();
-        vendrediIndiceLabel = new JLabel();
-        samediIndiceLabel = new JLabel();
-        moyenneIndiceLabel = new JLabel();*/
- 
+        coursParJourPanel = new CoursParJourPanel(mainWindow, jourModes);
+          
+        indiceCongestionPanel = new IndiceCongestionPanel(mainWindow, jourModes );
+       
         
         statistiquePanel.add(coursParJourPanel);
         statistiquePanel.add(indiceCongestionPanel);
@@ -96,12 +82,5 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
    public String[] getJourModes()
         {
             return jourModes;
-        }
-
-    @Override
-    public void notifyUpdatedItems() {
-       
-        repaint();
-    }
-   
+        }   
 }

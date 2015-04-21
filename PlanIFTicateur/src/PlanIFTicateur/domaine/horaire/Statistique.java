@@ -140,22 +140,24 @@ public class Statistique {
             return indiceCovoiturage;
         }
     
-   public void modificationIntegerLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Integer> list, String texte)
+   public JLabel[] modificationIntegerLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Integer> list, String texte)
     {    
         
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < list.size(); i++)
         {
             labelModes[i].setText(jourModes[i] + " : " + list.get(i) + texte);
         }
+        return labelModes;
     }
    
-       public void modificationFloatLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Float> list, String texte)
+       public JLabel[] modificationFloatLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Float> list, String texte)
     {    
         
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < list.size(); i++)
         {
             labelModes[i].setText(jourModes[i] + " : " + list.get(i) + texte);
         }
+        return labelModes;
     }
     
 
