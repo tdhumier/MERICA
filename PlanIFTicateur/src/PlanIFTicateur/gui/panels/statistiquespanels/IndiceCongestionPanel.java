@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui.panels.StatistiquesPanels;
+package PlanIFTicateur.gui.panels.statistiquespanels;
 
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author Alexandre
  */
-public class IndiceCongestionPanel extends JPanel
+public class IndiceCongestionPanel extends JPanel implements HoraireControleurObserveur
 {
     private MainWindow mainWindow;
     private JLabel indiceTitre;
@@ -26,18 +28,23 @@ public class IndiceCongestionPanel extends JPanel
     private JLabel vendrediIndiceLabel;
     private JLabel samediIndiceLabel;
     private JLabel moyenneIndiceLabel; 
-    
+    private JLabel[] listeLabel;
+    private String[] jourModes;
+    private ArrayList<Float> indiceCongestionParJour;
     
     public IndiceCongestionPanel(MainWindow mainWindow, String[] jourModes)
     {
         this.mainWindow = mainWindow;
+        this.jourModes = jourModes;
+        mainWindow.controleur.registerObserver(this);
         setLayout(new GridLayout(8,1));
-        buildUp(jourModes);
+        buildUp();
     }
     
-    private void buildUp(String[] jourModes)
+    private void buildUp()
     {
-        indiceTitre = new JLabel("Nombre de cours par jour");
+        indiceTitre = new JLabel("Indice de congestion");
+        indiceTitre.setFont(new Font("Helvetica", Font.BOLD, 16));
         lundiIndiceLabel = new JLabel();
         mardiIndiceLabel = new JLabel();
         mercrediIndiceLabel = new JLabel();
@@ -47,30 +54,40 @@ public class IndiceCongestionPanel extends JPanel
         moyenneIndiceLabel = new JLabel();
         
       
-        JLabel[] listeLabel = {lundiIndiceLabel, mardiIndiceLabel, mercrediIndiceLabel, jeudiIndiceLabel, vendrediIndiceLabel, samediIndiceLabel};
+        listeLabel = new JLabel[]{lundiIndiceLabel, mardiIndiceLabel, mercrediIndiceLabel, jeudiIndiceLabel, vendrediIndiceLabel, samediIndiceLabel};
         
-        ajouterIndiceCongestion(listeLabel, jourModes);
+        ajouterIndiceCongestion(listeLabel);
     }
     
-     private void ajouterIndiceCongestion(JLabel[] listeLabel, String[] jourModes)
+     private void ajouterIndiceCongestion(JLabel[] listeLabel)
     {
+           int moyenne = 0;
         
-        
-          ArrayList<Float> indiceCongestionParJour = new ArrayList<Float>();
+           indiceCongestionParJour = new ArrayList<Float>();
              for(int i = 0; i < 6 ; i++)
              {
-                 indiceCongestionParJour.add(mainWindow.controleur.getIndiceCongestion(i));
+                 indiceCongestionParJour.add(mainWindow.controleur.getIndiceCongestion(i+1));
+                 moyenne += indiceCongestionParJour.get(i);
              }
+             
            listeLabel = mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, listeLabel, indiceCongestionParJour, " %");
          
+           moyenne = moyenne/6;
+           moyenneIndiceLabel.setText("Moyenne : " + moyenne + " %");
+            
             add(indiceTitre);
-              
             for(int j = 0; j < 6; j++)
             {
                 add(listeLabel[j]);
             }
-      
-       
-       
+            add(moyenneIndiceLabel);
+            
+            
     }
+
+    @Override
+    public void notifyUpdatedItems() {
+        ajouterIndiceCongestion(listeLabel);
+    }
+    
 }

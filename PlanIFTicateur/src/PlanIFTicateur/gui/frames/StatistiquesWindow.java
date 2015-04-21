@@ -5,9 +5,8 @@
  */
 package PlanIFTicateur.gui.frames;
 
-import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
-import PlanIFTicateur.gui.panels.StatistiquesPanels.StatistiquesFenetrePanel;
-import java.awt.GridLayout;
+import PlanIFTicateur.gui.panels.statistiquespanels.StatistiquesFenetrePanel;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 /**
@@ -25,10 +24,10 @@ public class StatistiquesWindow extends JFrame{
         setSize(800, 800);
         setTitle("Statistiques");
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(0,2));
+        setLayout(new BorderLayout());
         
-          statistiquesPanel = new StatistiquesFenetrePanel(mainWindow);
-        add(statistiquesPanel);
+        statistiquesPanel = new StatistiquesFenetrePanel(mainWindow);
+        add(statistiquesPanel, BorderLayout.CENTER);
         setVisible(true);
        
     }

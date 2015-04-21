@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui.panels.StatistiquesPanels;
+package PlanIFTicateur.gui.panels.statistiquespanels;
 
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -37,6 +38,7 @@ public class CoursParJourPanel extends JPanel implements HoraireControleurObserv
     {
         this.mainWindow = mainWindow;
         this.jourModes = jourModes;
+        mainWindow.controleur.registerObserver(this);
         setLayout(new GridLayout(8,1));
         buildUp();
     }
@@ -44,15 +46,15 @@ public class CoursParJourPanel extends JPanel implements HoraireControleurObserv
     
     private void buildUp()
     {
-        System.out.println("Test de debut");
         coursParJourTitre = new JLabel("Nombre de cours par jour");
+        coursParJourTitre.setFont(new Font("Helvetica", Font.BOLD, 16));
         lundiCPJLabel = new JLabel();
         mardiCPJLabel = new JLabel();
         mercrediCPJLabel = new JLabel();
         jeudiCPJLabel = new JLabel();
         vendrediCPJLabel = new JLabel();
         samediCPJLabel = new JLabel();
-        moyenneCPJLabel = new JLabel("Moyenne : ");
+        moyenneCPJLabel = new JLabel();
         
          
         CPJLabel = new JLabel[]{lundiCPJLabel, mardiCPJLabel, mercrediCPJLabel, jeudiCPJLabel, vendrediCPJLabel, samediCPJLabel};
@@ -75,16 +77,8 @@ public class CoursParJourPanel extends JPanel implements HoraireControleurObserv
         moyenneText = Float.toString(moyenne);
         
         CPJLabel = mainWindow.controleur.getHoraire().getStatistiques().modificationIntegerLabel(jourModes, CPJLabel, nbCoursParJour, " Cours");
-        
-        
-      /*  lundiCPJLabel.setText(listeLabel[0].getText() + nbCoursParJour.get(0) + " Cours");
-        mardiCPJLabel.setText(listeLabel[1].getText() + nbCoursParJour.get(1) + " Cours");
-        mercrediCPJLabel.setText(listeLabel[2].getText() + nbCoursParJour.get(2) + " Cours");
-        jeudiCPJLabel.setText(listeLabel[3].getText() + nbCoursParJour.get(3) + " Cours");
-        vendrediCPJLabel.setText(listeLabel[4].getText() + nbCoursParJour.get(4) + " Cours");
-        samediCPJLabel.setText(listeLabel[5].getText() + nbCoursParJour.get(5) + " Cours");*/
-        
-        moyenneCPJLabel.setText(moyenneCPJLabel.getText() + moyenneText + " Cours");
+           
+        moyenneCPJLabel.setText("Moyenne : " + moyenneText + " Cours");
         
         add(coursParJourTitre);
         
@@ -97,11 +91,8 @@ public class CoursParJourPanel extends JPanel implements HoraireControleurObserv
     }
 
     @Override
-    public void notifyUpdatedItems() 
-    {
-         ajouterCoursParJour(CPJLabel);
-         repaint();
+    public void notifyUpdatedItems() {
+        ajouterCoursParJour(CPJLabel); 
     }
-     
 
 }

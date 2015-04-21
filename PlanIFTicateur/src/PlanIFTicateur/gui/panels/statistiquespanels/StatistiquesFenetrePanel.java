@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui.panels.StatistiquesPanels;
+package PlanIFTicateur.gui.panels.statistiquespanels;
 
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -16,12 +18,15 @@ import javax.swing.JPanel;
  *
  * @author Alexandre
  */
-public class StatistiquesFenetrePanel extends JPanel{
+public class StatistiquesFenetrePanel extends JPanel implements HoraireControleurObserveur{
 
     
     private MainWindow mainWindow;
-    private JPanel coursParJourPanel;
-    private JPanel indiceCongestionPanel;
+    private CoursParJourPanel coursParJourPanel;
+    private IndiceCongestionPanel indiceCongestionPanel;
+    private IndiceCovoituragePanel indiceCovoituragePanel;
+    private MaxCoursParJourPanel maxCoursParJourPanel;
+    private MoyenCoursParJourPanel moyenCoursParJourPanel;
     private JPanel statistiquePanel;
     
     private JLabel lundiLabel;
@@ -46,6 +51,7 @@ public class StatistiquesFenetrePanel extends JPanel{
     public StatistiquesFenetrePanel(MainWindow mainWindow)
     {
         this.mainWindow = mainWindow;
+        mainWindow.controleur.registerObserver(this);
         buildUp();
     }
     
@@ -54,7 +60,8 @@ public class StatistiquesFenetrePanel extends JPanel{
         setLayout(new BorderLayout());
         
         statistiquePanel = new JPanel();
-        statistiquePanel.setLayout(new GridLayout(0,2));
+        statistiquePanel.setPreferredSize(new Dimension(800,800));
+        statistiquePanel.setLayout(new GridLayout(0,3));
       
         lundiLabel = new JLabel("Lundi : ");
         mardiLabel = new JLabel("Mardi : ");
@@ -67,20 +74,32 @@ public class StatistiquesFenetrePanel extends JPanel{
      
         
         coursParJourPanel = new CoursParJourPanel(mainWindow, jourModes);
-          
+        maxCoursParJourPanel = new MaxCoursParJourPanel(mainWindow, jourModes);  
         indiceCongestionPanel = new IndiceCongestionPanel(mainWindow, jourModes );
+        moyenCoursParJourPanel = new MoyenCoursParJourPanel(mainWindow, jourModes);
        
         
         statistiquePanel.add(coursParJourPanel);
         statistiquePanel.add(indiceCongestionPanel);
+        statistiquePanel.add(moyenCoursParJourPanel);
+        statistiquePanel.add(maxCoursParJourPanel);
         
         
         add(statistiquePanel);
-    
-        
+ 
     }
+   
+    
    public String[] getJourModes()
         {
             return jourModes;
         }   
+
+    @Override
+    public void notifyUpdatedItems() {
+    
+       repaint();
+     }
+    
+    
 }

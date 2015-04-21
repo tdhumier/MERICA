@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui.panels.StatistiquesPanels;
+package PlanIFTicateur.gui.panels.statistiquespanels;
 
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;

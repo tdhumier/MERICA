@@ -5,7 +5,7 @@
  */
 package PlanIFTicateur.gui.panels;
 
-import PlanIFTicateur.gui.panels.StatistiquesPanels.StatistiquesOngletPanel;
+import PlanIFTicateur.gui.panels.statistiquespanels.StatistiquesOngletPanel;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
