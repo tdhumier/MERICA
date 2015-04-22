@@ -342,13 +342,13 @@ public class MainWindow extends javax.swing.JFrame {
         JComboBox combo = (JComboBox) evt.getSource();
         switch (combo.getSelectedIndex()) {
             case 0:
-                controleur.getHoraire().setSession("Hiver");
+                controleur.getHoraire().setSession("H");
                 break;
             case 1:
-                controleur.getHoraire().setSession("Eté");
+                controleur.getHoraire().setSession("E");
                 break;
             case 2:
-                controleur.getHoraire().setSession("Automne");
+                controleur.getHoraire().setSession("A");
                 break;
         }
     }//GEN-LAST:event_selecteurSessionActionPerformed
