@@ -22,14 +22,17 @@ public class CoursHorsDep extends Activite {
         this.couleur = couleur;
     }
 
+    @Override
     public Color getCouleur() {
         return couleur;
     }
 
+    @Override
     public String getType() {
         return type;
     }
 
+    @Override
     public void setType(String type) {
         this.type = type;
     }

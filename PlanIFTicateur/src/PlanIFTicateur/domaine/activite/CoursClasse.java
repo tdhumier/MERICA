@@ -16,6 +16,7 @@ public class CoursClasse extends Activite {
     private String type;
     private Color couleur = new Color(255, 0, 0, 50);
 
+    @SuppressWarnings("SillyAssignment")
     public CoursClasse(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
         super(code, section, titre, professeur, type, duree, heureDebutMin, heureFinMax, jour, heureDebut);
         this.type = "Classe";
@@ -23,14 +24,17 @@ public class CoursClasse extends Activite {
         int i = 0;
     }
 
+    @Override
     public Color getCouleur() {
         return couleur;
     }
 
+    @Override
     public String getType() {
         return type;
     }
 
+    @Override
     public void setType(String type) {
         this.type = type;
     }

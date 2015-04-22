@@ -103,9 +103,7 @@ public abstract class Activite {
     public void setHeureFinMax(double heureFinMax) {
         this.heureFinMax = heureFinMax;
     }
-    
-    
-
+   
     public String getTitre() {
         return titre;
     }
