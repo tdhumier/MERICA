@@ -80,11 +80,9 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
-            System.out.println("Double clic");
             String activiteWindowTitle = activiteSelectionnee.getCode() + " - " + activiteSelectionnee.getTitre();
             new ActiviteWindow(activiteWindowTitle, mainWindow);
-
         }
     }
-   
+
 }
