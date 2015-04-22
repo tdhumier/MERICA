@@ -97,10 +97,8 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
     {
         mainWindow.controleur.notifyObserversForUpdatedItems();
     }
-
     
-    @Override
-    public void notifyUpdatedItems() 
+    public void updateOnglet()
     {
         JLabel[] labelModes  = {lundiLabel, mardiLabel, mercrediLabel, jeudiLabel, vendrediLabel, samediLabel};
         ListeGrillesCheminement listeGrilleCheminement = mainWindow.controleur.getHoraire().getListeGrillesCheminement();
@@ -163,6 +161,13 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
              
              repaint();
         }
+    }
+
+    
+    @Override
+    public void notifyUpdatedItems() 
+    {
+        updateOnglet();
     }
     
     
