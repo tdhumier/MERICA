@@ -29,7 +29,6 @@ public class HoraireActiviteControleur {
     private String path;
 
     public List<Activite> getActivites() {
-        System.out.println("Dans controleur / getActivites");
         return horaire.getListeActivite().getListeActivites();
     }
 
@@ -46,8 +45,8 @@ public class HoraireActiviteControleur {
         horaire = new Horaire();
         observers = new LinkedList<>();
     }
-    
-    public Horaire getHoraire(){
+
+    public Horaire getHoraire() {
         return horaire;
     }
 
@@ -139,20 +138,20 @@ public class HoraireActiviteControleur {
     public ArrayList<Integer> getNbCoursSemaine() {
         return horaire.getStatistiques().getNbCoursSemaine(horaire);
     }
-    
-      public float getIndiceCongestion(int jour) {
+
+    public float getIndiceCongestion(int jour) {
         return horaire.getStatistiques().congestionCirculation(horaire, jour);
     }
-      
-      public float getIndiceCovoiturage(ListeGrillesCheminement listeGrilleCheminement, int jour){
+
+    public float getIndiceCovoiturage(ListeGrillesCheminement listeGrilleCheminement, int jour) {
         return horaire.getStatistiques().indiceCovoiturage(horaire, listeGrilleCheminement, jour);
     }
-      
-    public int getNbMaxCoursParJour(ListeGrillesCheminement listeGrilleCheminement,int jour){
+
+    public int getNbMaxCoursParJour(ListeGrillesCheminement listeGrilleCheminement, int jour) {
         return horaire.getStatistiques().nbMaxCoursParJour(horaire, listeGrilleCheminement, jour);
     }
-    
-     public float getNbMoyenCoursParJour(ListeGrillesCheminement listeGrilleCheminement,int jour){
+
+    public float getNbMoyenCoursParJour(ListeGrillesCheminement listeGrilleCheminement, int jour) {
         return horaire.getStatistiques().nbMoyenCoursParJour(horaire, listeGrilleCheminement, jour);
     }
 
