@@ -6,10 +6,9 @@
 package PlanIFTicateur.domaine.horaire;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.domaine.cheminement.GrilleCheminement;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 
 /**
@@ -40,123 +39,108 @@ public class Statistique {
         return coursSemaine;
     }
 
-    public int nbMaxCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement,int jour)
-    {
-       nbMaxCoursEtudiantMemeJour = 0;
-       listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
-       
+    public int nbMaxCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour) {
+        nbMaxCoursEtudiantMemeJour = 0;
+        listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
+
         int nombreEnCalculation;
-        
-       
-        for(int i = 0; i < listeGrillesCheminement.size(); i++)
-        {
-            nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour );
-           
-            if(nombreEnCalculation > nbMaxCoursEtudiantMemeJour)
+
+        for (int i = 0; i < listeGrillesCheminement.size(); i++) {
+            nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour);
+
+            if (nombreEnCalculation > nbMaxCoursEtudiantMemeJour) {
                 nbMaxCoursEtudiantMemeJour = nombreEnCalculation;
+            }
         }
-       
+
         return nbMaxCoursEtudiantMemeJour;
     }
-    
 
-    public float nbMoyenCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour) 
-    { 
+    public float nbMoyenCoursParJour(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour) {
         int nombreEnCalculation;
         int nombreTotalActivites = 0;
         nbMoyenCoursEtudiantMemeJour = 0;
-        for(int i = 0; i < listeGrillesCheminement.size(); i++)
-        {
-          nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour );
-          if(nombreEnCalculation != 0)
-          {
-             nombreTotalActivites++;
-             nbMoyenCoursEtudiantMemeJour += nombreEnCalculation;
-          }
+        for (int i = 0; i < listeGrillesCheminement.size(); i++) {
+            nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour);
+            if (nombreEnCalculation != 0) {
+                nombreTotalActivites++;
+                nbMoyenCoursEtudiantMemeJour += nombreEnCalculation;
+            }
         }
-        
-        nbMoyenCoursEtudiantMemeJour = nbMoyenCoursEtudiantMemeJour/nombreTotalActivites;
-        if(nombreTotalActivites == 0)
+
+        nbMoyenCoursEtudiantMemeJour = nbMoyenCoursEtudiantMemeJour / nombreTotalActivites;
+        if (nombreTotalActivites == 0) {
             nbMoyenCoursEtudiantMemeJour = 0;
-        
-        
+        }
+
         return nbMoyenCoursEtudiantMemeJour;
     }
 
-    
-    public float congestionCirculation(Horaire horaire, int jour) 
-    {
-       int compteurCoursDebut = 0;
-      listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
-       
-             if(listeCoursJournee.isEmpty())
-           {
-               return 0;
-           }
-       for (int i = 0; i < listeCoursJournee.size(); i++)
-       {
-     
-           if(listeCoursJournee.get(i).getHeureDebut() == 8.5)
-           {
-               compteurCoursDebut++;
-           }
-       }
-       indiceCongestion = (compteurCoursDebut * 100) / listeCoursJournee.size();
-        
+    public float congestionCirculation(Horaire horaire, int jour) {
+        int compteurCoursDebut = 0;
+        listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
+
+        if (listeCoursJournee.isEmpty()) {
+            return 0;
+        }
+        for (int i = 0; i < listeCoursJournee.size(); i++) {
+
+            if (listeCoursJournee.get(i).getHeureDebut() == 8.5) {
+                compteurCoursDebut++;
+            }
+        }
+        indiceCongestion = (compteurCoursDebut * 100) / listeCoursJournee.size();
+
         return indiceCongestion;
     }
-    
-    /** Fonction qui calcul l'indice de covoiturage pour une journée donnée à partir de l'horaire et de la liste des grilles de cheminement
-     * 
+
+    /**
+     * Fonction qui calcul l'indice de covoiturage pour une journée donnée à
+     * partir de l'horaire et de la liste des grilles de cheminement
+     *
      * @param horaire
      * @param listeGrillesCheminement
      * @param jour
      * @return l'indice de covoiturage pour la journée donnée
      */
-    public float indiceCovoiturage(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour)
-    {
+    public float indiceCovoiturage(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour) {
         listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
-       
-        if(listeCoursJournee.isEmpty())
-           {
-               return 0;
-           }
-        for (int i = 0; i < listeCoursJournee.size(); i++) 
-        {
-          
+
+        if (listeCoursJournee.isEmpty()) {
+            return 0;
         }
-            /* for(int i = 0; i < listeGrillesCheminement.size(); i++)
-            {
-            for(int j = i+1; j < listeGrillesCheminement.size(); j++)
-            {
-            if(activitePlusTot(listeGrillesCheminement.getGrillesCheminement(i)) == activitePlusTot(listeGrillesCheminement.getGrillesCheminement(j))
-            && (activitePlusTard(listeGrillesCheminement.getGrillesCheminement(j)) ==  activitePlusTard(listeGrillesCheminement.getGrillesCheminement(j))))
-            {
-            indiceCovoiturage++;
-            }
-            }
-            }*/
-            
-            return indiceCovoiturage;
+        for (int i = 0; i < listeCoursJournee.size(); i++) {
+
         }
-    
-   public void modificationIntegerLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Integer> list, String texte)
-    {    
-        
-        for(int i = 0; i < 6; i++)
-        {
+        /* for(int i = 0; i < listeGrillesCheminement.size(); i++)
+         {
+         for(int j = i+1; j < listeGrillesCheminement.size(); j++)
+         {
+         if(activitePlusTot(listeGrillesCheminement.getGrillesCheminement(i)) == activitePlusTot(listeGrillesCheminement.getGrillesCheminement(j))
+         && (activitePlusTard(listeGrillesCheminement.getGrillesCheminement(j)) ==  activitePlusTard(listeGrillesCheminement.getGrillesCheminement(j))))
+         {
+         indiceCovoiturage++;
+         }
+         }
+         }*/
+
+        return indiceCovoiturage;
+    }
+
+    public JLabel[] modificationIntegerLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Integer> list, String texte) {
+
+        for (int i = 0; i < list.size(); i++) {
             labelModes[i].setText(jourModes[i] + " : " + list.get(i) + texte);
         }
+        return labelModes;
     }
-   
-       public void modificationFloatLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Float> list, String texte)
-    {    
-        
-        for(int i = 0; i < 6; i++)
-        {
+
+    public JLabel[] modificationFloatLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Float> list, String texte) {
+
+        for (int i = 0; i < list.size(); i++) {
             labelModes[i].setText(jourModes[i] + " : " + list.get(i) + texte);
         }
+        return labelModes;
     }
-    
 
 }

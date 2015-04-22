@@ -81,38 +81,38 @@ public class GrilleCheminement {
         }
         return activitesCheminement;
     }
-    
-    /** Fonction qui retourne l'activite de la grille de cheminement qui commence le plus tôt
-     * À modifier en conséquent afin d'être utile au calcul de l'indice de covoiturage
-     * 
+
+    /**
+     * Fonction qui retourne l'activite de la grille de cheminement qui commence
+     * le plus tôt À modifier en conséquent afin d'être utile au calcul de
+     * l'indice de covoiturage
+     *
      * @return l,activité qui commence le plus tôt
-     */ 
-    public Activite activitePlusTot()
-    {
+     */
+    public Activite activitePlusTot() {
         Activite activite = getListeActivites().get(0);
-          for(int i = 1; i < getListeActivites().size(); i++)
-                {
-                     if(getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut())
-                     {
-                         activite = getListeActivites().get(i);
-                     }
-                }
+        for (int i = 1; i < getListeActivites().size(); i++) {
+            if (getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut()) {
+                activite = getListeActivites().get(i);
+            }
+        }
         return activite;
     }
-    /** Fonction qui renvoie le cours de la grille de cheminement qui commence le plus tard
-     * À modifier en conséquent afin d'être utile au calcul de l'indice de covoiturage
+
+    /**
+     * Fonction qui renvoie le cours de la grille de cheminement qui commence le
+     * plus tard À modifier en conséquent afin d'être utile au calcul de
+     * l'indice de covoiturage
+     *
      * @return l'activié qui commence le plus tard
      */
-    public Activite activitePlusTard()
-    {
-         Activite activite = getListeActivites().get(0);
-          for(int i = 1; i < getListeActivites().size(); i++)
-                {
-                     if(getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut() )
-                     {
-                         activite = getListeActivites().get(i);
-                     }
-                }
+    public Activite activitePlusTard() {
+        Activite activite = getListeActivites().get(0);
+        for (int i = 1; i < getListeActivites().size(); i++) {
+            if (getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut()) {
+                activite = getListeActivites().get(i);
+            }
+        }
         return activite;
     }
 }

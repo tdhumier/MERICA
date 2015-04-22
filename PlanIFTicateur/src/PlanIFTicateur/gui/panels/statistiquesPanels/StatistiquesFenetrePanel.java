@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PlanIFTicateur.gui.panels.StatistiquesPanels;
+package PlanIFTicateur.gui.panels.statistiquesPanels;
 
 import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -19,12 +20,14 @@ import javax.swing.JPanel;
  */
 public class StatistiquesFenetrePanel extends JPanel implements HoraireControleurObserveur {
 
-    
     private MainWindow mainWindow;
-    private JPanel coursParJourPanel;
-    private JPanel indiceCongestionPanel;
+    private CoursParJourPanel coursParJourPanel;
+    private IndiceCongestionPanel indiceCongestionPanel;
+    private IndiceCovoituragePanel indiceCovoituragePanel;
+    private MaxCoursParJourPanel maxCoursParJourPanel;
+    private MoyenCoursParJourPanel moyenCoursParJourPanel;
     private JPanel statistiquePanel;
-    
+
     private JLabel lundiLabel;
     private JLabel mardiLabel;
     private JLabel mercrediLabel;
@@ -36,28 +39,25 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
     private String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
 
     private int codeStat;
-    private  ArrayList<Integer> nbCoursParJour;
+    private ArrayList<Integer> nbCoursParJour;
     private String moyenneText;
 
-
-    
-    public StatistiquesFenetrePanel()
-    {
+    public StatistiquesFenetrePanel() {
     }
-    public StatistiquesFenetrePanel(MainWindow mainWindow)
-    {
+
+    public StatistiquesFenetrePanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         mainWindow.controleur.registerObserver(this);
         buildUp();
     }
-    
-    private void buildUp()
-    {
+
+    private void buildUp() {
         setLayout(new BorderLayout());
-        
+
         statistiquePanel = new JPanel();
-        statistiquePanel.setLayout(new GridLayout(0,2));
-      
+        statistiquePanel.setPreferredSize(new Dimension(800, 800));
+        statistiquePanel.setLayout(new GridLayout(0, 3));
+
         lundiLabel = new JLabel("Lundi : ");
         mardiLabel = new JLabel("Mardi : ");
         mercrediLabel = new JLabel("Mercredi : ");
@@ -65,43 +65,29 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
         vendrediLabel = new JLabel("Vendredi : ");
         samediLabel = new JLabel("Samedi : ");
         moyenneLabel = new JLabel("Moyenne : ");
-        
-        JLabel[] listeLabel = {lundiLabel, mardiLabel, mercrediLabel, jeudiLabel, vendrediLabel, samediLabel, moyenneLabel};
-        
-        coursParJourPanel = new CoursParJourPanel(mainWindow, listeLabel, jourModes);
-          
-        indiceCongestionPanel = new JPanel();
-        indiceCongestionPanel.setLayout(new GridLayout(8,1));
-         
-     
-        
-     // CovoiturageTitre = new JLabel("Indice de covoiturage");
-       /* lundiIndiceLabel = new JLabel();
-        mardiIndiceLabel = new JLabel();
-        mercrediIndiceLabel = new JLabel();
-        jeudiIndiceLabel = new JLabel();
-        vendrediIndiceLabel = new JLabel();
-        samediIndiceLabel = new JLabel();
-        moyenneIndiceLabel = new JLabel();*/
- 
-        
+
+        coursParJourPanel = new CoursParJourPanel(mainWindow, jourModes);
+        maxCoursParJourPanel = new MaxCoursParJourPanel(mainWindow, jourModes);
+        indiceCongestionPanel = new IndiceCongestionPanel(mainWindow, jourModes);
+        moyenCoursParJourPanel = new MoyenCoursParJourPanel(mainWindow, jourModes);
+
         statistiquePanel.add(coursParJourPanel);
         statistiquePanel.add(indiceCongestionPanel);
-        
-        
+        statistiquePanel.add(moyenCoursParJourPanel);
+        statistiquePanel.add(maxCoursParJourPanel);
+
         add(statistiquePanel);
-    
-        
+
     }
-   public String[] getJourModes()
-        {
-            return jourModes;
-        }
+
+    public String[] getJourModes() {
+        return jourModes;
+    }
 
     @Override
     public void notifyUpdatedItems() {
-       
+
         repaint();
     }
-   
+
 }
