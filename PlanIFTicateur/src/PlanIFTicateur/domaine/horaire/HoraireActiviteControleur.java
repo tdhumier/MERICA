@@ -67,7 +67,6 @@ public class HoraireActiviteControleur {
                 point.y = point.y + activite.getHeight();
                 int positionTemoin = point.y - 20;
                 if ((positionTemoin / 8) % 16 == 0) {
-                    System.out.println("hors journée");
                     return false;
                 } else {
                     return correctionSuperpositionActivite(activite, point, heure);
