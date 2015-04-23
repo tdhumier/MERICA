@@ -50,6 +50,10 @@ public class HoraireActiviteControleur {
         return horaire;
     }
 
+    public String getPath() {
+        return path;
+    }
+
     public void deplacerActivite(Activite activite, int x, int y) {
         horaire.deplacerActivite(activite, x, y);
         notifyObserversForUpdatedItems();

@@ -374,6 +374,8 @@ public class MainWindow extends javax.swing.JFrame {
                 controleur.getHoraire().setSession("A");
                 break;
         }
+        controleur.enregistrerFichier(controleur.getActivites());
+        controleur.importerFichiers(controleur.getPath(), horairePanel.getDimensionsCase());
     }//GEN-LAST:event_selecteurSessionActionPerformed
 
     /**
