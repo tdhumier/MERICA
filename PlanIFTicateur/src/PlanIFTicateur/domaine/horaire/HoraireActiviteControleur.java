@@ -59,26 +59,42 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
-    public void correctionSuperpositionActivite(Activite activite, Point point, double heure) {
+    public boolean correctionSuperpositionActivite(Activite activite, Point point, double heure) {
         List<Activite> activites = horaire.getListeActivite().getListeActivites();
         for (Activite activiteItem : activites) {
             // si on a deux activités à la même date à la même heure
             if (activiteItem.getPoint().y == point.y && ((activiteItem.getHeureDebut() <= heure && activiteItem.getHeureDebut() + activiteItem.getDuree() > heure) || (heure <= activiteItem.getHeureDebut() && activiteItem.getHeureDebut() < heure + activite.getDuree()))) {
                 point.y = point.y + activite.getHeight();
-                correctionSuperpositionActivite(activite, point, heure);
+                int positionTemoin = point.y - 20;
+                if ((positionTemoin / 8) % 16 == 0) {
+                    System.out.println("hors journée");
+                    return false;
+                } else {
+                    return correctionSuperpositionActivite(activite, point, heure);
+                }
             }
         }
+        return true;
     }
 
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
-        correctionSuperpositionActivite(activite, point, heure);
-        horaire.deplacerActivite(activite, point, heure, jour);
+        boolean correct = correctionSuperpositionActivite(activite, point, heure);
+        if (correct) {
+            horaire.deplacerActivite(activite, point, heure, jour);
+        } else {
+            unasignActivite(activite);
+        }
+
         notifyObserversForUpdatedItems();
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
-        correctionSuperpositionActivite(activite, point, heure);
-        horaire.deplacerActiviteAvecVerification(activite, point, heure, jour, dimension);
+        boolean correct = correctionSuperpositionActivite(activite, point, heure);
+        if (correct) {
+            horaire.deplacerActiviteAvecVerification(activite, point, heure, jour, dimension);
+        } else {
+            unasignActivite(activite);
+        }
         notifyObserversForUpdatedItems();
     }
 
