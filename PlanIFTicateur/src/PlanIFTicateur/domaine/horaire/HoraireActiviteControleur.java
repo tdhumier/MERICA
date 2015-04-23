@@ -28,17 +28,8 @@ public class HoraireActiviteControleur {
     private List<HoraireControleurObserveur> observers;
     private String path;
 
-    
     public List<Activite> getActivites() {
         return horaire.getListeActivite().getListeActivites();
-    }
-    
-     public List<Activite> getActivitesConflitCheminement() {
-        return horaire.getActivitesConflitCheminement();
-    }
-     
-    public List<Activite> getActivitesConflitCheminementAvec() {
-        return horaire.getActivitesConflitCheminementAvec();
     }
 
     public enum ActiviteModes {
