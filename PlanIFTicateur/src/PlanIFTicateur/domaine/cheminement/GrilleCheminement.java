@@ -82,4 +82,66 @@ public class GrilleCheminement {
         }
         return activitesCheminement;
     }
+
+    /**
+     * Fonction qui retourne l'activite de la grille de cheminement qui commence
+     * le plus tôt À modifier en conséquent afin d'être utile au calcul de
+     * l'indice de covoiturage
+     *
+     * @return l,activité qui commence le plus tôt
+     */
+    public Activite activitePlusTot() {
+        Activite activite = getListeActivites().get(0);
+        for (int i = 1; i < getListeActivites().size(); i++) {
+            if (getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut()) {
+                activite = getListeActivites().get(i);
+            }
+        }
+        return activite;
+    }
+
+    /**
+     * Fonction qui renvoie le cours de la grille de cheminement qui commence le
+     * plus tard À modifier en conséquent afin d'être utile au calcul de
+     * l'indice de covoiturage
+     *
+     * @return l'activié qui commence le plus tard
+     */
+    public Activite activitePlusTard() {
+        Activite activite = getListeActivites().get(0);
+        for (int i = 1; i < getListeActivites().size(); i++) {
+            if (getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut()) {
+                activite = getListeActivites().get(i);
+            }
+        }
+        return activite;
+    }
+
+    // Pour avoir l'activite qui finit le plus tard en fonction du jour.
+    public Activite getActiviteFiniPlusTardParJour(int jour) {
+        Activite activitePlusTard = null;
+        double heureFin = 0;
+        List<Activite> activiteList = getListeActivites();
+        for (Activite activite : activiteList) {
+            if (activite.getJour() == jour && activite.getHeureDebut() != 0.0d && activite.getHeureDebut() + activite.getDuree() > heureFin) {
+                activitePlusTard = activite;
+                heureFin = activite.getHeureDebut() + activite.getDuree();
+            }
+        }
+        return activitePlusTard;
+    }
+
+    // Pour avoir l'activite qui finit le plus tard en fonction du jour.
+    public Activite getActiviteCommencePlusTotParJour(int jour) {
+        Activite activitePlusTot = null;
+        double heureDebut = 22;
+        List<Activite> activiteList = getListeActivites();
+        for (Activite activite : activiteList) {
+            if (activite.getJour() == jour && activite.getHeureDebut() != 0.0d && activite.getHeureDebut() < heureDebut) {
+                activitePlusTot = activite;
+                heureDebut = activite.getHeureDebut();
+            }
+        }
+        return activitePlusTot;
+    }
 }

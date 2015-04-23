@@ -92,4 +92,30 @@ public class ListeActivites {
     public void ajouterActivite(Activite activite) {
         listeActivites.add(activite);
     }
+
+    public Activite getActiviteFiniPlusTard() {
+        Activite activitePlusTard = null;
+        double heureFin = 0;
+        List<Activite> activiteList = getListeActivites();
+        for (Activite activite : activiteList) {
+            if (activite.getHeureDebut() != 0.0d && activite.getHeureDebut() + activite.getDuree() > heureFin) {
+                activitePlusTard = activite;
+                heureFin = activite.getHeureDebut();
+            }
+        }
+        return activitePlusTard;
+    }
+
+    public Activite activitePlusTot() {
+        Activite activitePlusTot = null;
+        double heureDebut = 22;
+        List<Activite> activiteList = getListeActivites();
+        for (Activite activite : activiteList) {
+            if (activite.getHeureDebut() != 0.0d && activite.getHeureDebut() < heureDebut) {
+                activitePlusTot = activite;
+                heureDebut = activite.getHeureDebut();
+            }
+        }
+        return activitePlusTot;
+    }
 }

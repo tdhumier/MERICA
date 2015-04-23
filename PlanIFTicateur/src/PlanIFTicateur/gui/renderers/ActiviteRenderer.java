@@ -17,8 +17,9 @@ import javax.swing.ListCellRenderer;
  *
  * @author tristandhumieres
  */
-public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activite> {
+public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activite>  {
 
+   
     public ActiviteRenderer() {
         setOpaque(true);
     }
@@ -30,18 +31,12 @@ public class ActiviteRenderer extends JLabel implements ListCellRenderer<Activit
         texteActivite += activite.getCode().toUpperCase() + "   " + activite.getTitre() + "   (" + activite.getType() + ")";
         texteActivite = Normalizer.normalize(texteActivite, Normalizer.Form.NFD);
         setText(texteActivite);
+       
+      
         setBackground(activite.getCouleur());
-
-        if (isSelected) {
-            setBackground(list.getSelectionBackground());
-            setForeground(list.getSelectionForeground());
-        } else {
-            setBackground(activite.getCouleur());
-            setForeground(Color.BLACK);
-
-        }
-
+        setForeground(Color.BLACK);
+         
         return this;
     }
-
+    
 }

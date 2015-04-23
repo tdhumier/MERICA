@@ -17,7 +17,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -47,6 +49,11 @@ public class MainWindow extends javax.swing.JFrame {
                 setExtendedState(MAXIMIZED_BOTH);
             }
         });
+
+        sauvegarderMenuItem.setEnabled(false);
+        sauvegarderSousMenuItem.setEnabled(false);
+        exportBouton.setEnabled(false);
+        exportMenuItem.setEnabled(false);
     }
 
     public VerificationMode getVerificationMode() {
@@ -65,6 +72,7 @@ public class MainWindow extends javax.swing.JFrame {
         list1 = new java.awt.List();
         mainPanel = new javax.swing.JPanel();
         boutonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
+        selecteurSession = new javax.swing.JComboBox();
         verificationAutoBouton = new javax.swing.JToggleButton();
         statistiquesBouton = new javax.swing.JButton();
         exportBouton = new javax.swing.JButton();
@@ -95,6 +103,14 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         boutonTopPanel.setPreferredSize(new java.awt.Dimension(567, 35));
+
+        selecteurSession.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Session d'hiver", "Session d'été", "Session d'automne" }));
+        selecteurSession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecteurSessionActionPerformed(evt);
+            }
+        });
+        boutonTopPanel.add(selecteurSession);
 
         verificationAutoBouton.setText("Vérification Automatique");
         verificationAutoBouton.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -145,7 +161,7 @@ public class MainWindow extends javax.swing.JFrame {
         horairePanel.setLayout(horairePanelLayout);
         horairePanelLayout.setHorizontalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 611, Short.MAX_VALUE)
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +228,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +247,31 @@ public class MainWindow extends javax.swing.JFrame {
         File fichier;
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
+
+            if (controleur.getHoraire().getSession() == null || controleur.getHoraire().getSession().equals("")) {
+                String[] choixSession = {"Automne", "Été", "Hiver"};
+                String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
+                switch (session) {
+                    case "Automne":
+                        controleur.getHoraire().setSession("A");
+                        selecteurSession.setSelectedIndex(2);
+                        break;
+                    case "Été":
+                        controleur.getHoraire().setSession("E");
+                        selecteurSession.setSelectedIndex(1);
+                        break;
+                    case "Hiver":
+                        controleur.getHoraire().setSession("H");
+                        selecteurSession.setSelectedIndex(0);
+                        break;
+                }
+            }
             controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
+            sauvegarderMenuItem.setEnabled(true);
+            sauvegarderSousMenuItem.setEnabled(true);
+            exportBouton.setEnabled(true);
+            exportMenuItem.setEnabled(true);
+
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
@@ -240,8 +280,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_verificationAutoBoutonStateChanged
 
     private void verificationAutoBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationAutoBoutonActionPerformed
-        JToggleButton boutton = (JToggleButton) evt.getSource();
-        if (boutton.isSelected()) {
+        JToggleButton bouton = (JToggleButton) evt.getSource();
+        if (bouton.isSelected()) {
             this.verificationMode = VerificationMode.CHECKED;
         } else {
             this.verificationMode = VerificationMode.UNCHECKED;
@@ -321,6 +361,23 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exportMenuItemActionPerformed
 
+    private void selecteurSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecteurSessionActionPerformed
+        JComboBox combo = (JComboBox) evt.getSource();
+        switch (combo.getSelectedIndex()) {
+            case 0:
+                controleur.getHoraire().setSession("H");
+                break;
+            case 1:
+                controleur.getHoraire().setSession("E");
+                break;
+            case 2:
+                controleur.getHoraire().setSession("A");
+                break;
+        }
+        controleur.enregistrerFichier(controleur.getActivites());
+        controleur.importerFichiers(controleur.getPath(), horairePanel.getDimensionsCase());
+    }//GEN-LAST:event_selecteurSessionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -381,6 +438,7 @@ public class MainWindow extends javax.swing.JFrame {
     public PlanIFTicateur.gui.panels.RightPanel rightPanel;
     private javax.swing.JMenuItem sauvegarderMenuItem;
     private javax.swing.JMenuItem sauvegarderSousMenuItem;
+    private javax.swing.JComboBox selecteurSession;
     private javax.swing.JButton statistiquesBouton;
     private javax.swing.JToggleButton verificationAutoBouton;
     // End of variables declaration//GEN-END:variables

@@ -30,7 +30,6 @@ public class HoraireActiviteControleur {
 
     
     public List<Activite> getActivites() {
-        System.out.println("Dans controleur / getActivites");
         return horaire.getListeActivite().getListeActivites();
     }
     
@@ -54,6 +53,14 @@ public class HoraireActiviteControleur {
     public HoraireActiviteControleur() {
         horaire = new Horaire();
         observers = new LinkedList<>();
+    }
+
+    public Horaire getHoraire() {
+        return horaire;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public void deplacerActivite(Activite activite, int x, int y) {
@@ -112,7 +119,8 @@ public class HoraireActiviteControleur {
         this.path = path;
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         ListeActivites listeActivites = gestionnaireFichier.getListeActivites();
-        ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites);
+        String session = horaire.getSession();
+        ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites, session);
         horaire.setListeActivite(listeActivites);
         horaire.setGrillesCheminement(listeGrillesCheminement);
         setCoordonneesActivite(dimension);
@@ -143,6 +151,22 @@ public class HoraireActiviteControleur {
 
     public ArrayList<Integer> getNbCoursSemaine() {
         return horaire.getStatistiques().getNbCoursSemaine(horaire);
+    }
+
+    public float getIndiceCongestion(int jour) {
+        return horaire.getStatistiques().congestionCirculation(horaire, jour);
+    }
+
+    public float getIndiceCovoiturage(ListeGrillesCheminement listeGrilleCheminement, int jour) {
+        return horaire.getStatistiques().indiceCovoiturage(horaire, listeGrilleCheminement, jour);
+    }
+
+    public int getNbMaxCoursParJour(ListeGrillesCheminement listeGrilleCheminement, int jour) {
+        return horaire.getStatistiques().nbMaxCoursParJour(horaire, listeGrilleCheminement, jour);
+    }
+
+    public float getNbMoyenCoursParJour(ListeGrillesCheminement listeGrilleCheminement, int jour) {
+        return horaire.getStatistiques().nbMoyenCoursParJour(horaire, listeGrilleCheminement, jour);
     }
 
     public void modifierStatutSelectionActivite(int x, int y) {

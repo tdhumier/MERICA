@@ -30,11 +30,14 @@ public class CheminementDao {
     }
 
     // LECTURE
-    ListeGrillesCheminement importerGrillesCheminement(ListeActivites listeActivites) {
+    ListeGrillesCheminement importerGrillesCheminement(ListeActivites listeActivites, String session) {
         List<GrilleCheminement> grilles = new ArrayList<>();
         List<String[]> donnees = lecteurCsv.getData();
         donnees.stream().map((donnee) -> formaterGrille(donnee, listeActivites)).forEach((grille) -> {
-            grilles.add(grille);
+            if (grille.getSession().equals(session)) {
+                grilles.add(grille);
+            }
+
         });
         return new ListeGrillesCheminement(grilles);
     }
@@ -54,7 +57,7 @@ public class CheminementDao {
         }
         grille.setNomProgramme(tab[0]);
         grille.setVersion(tab[1]);
-        grille.setSession(tab[2]);
+        grille.setSession(tab[2].substring(0, 1)); // récupère uniquement la session voulue, sans l'indice de la grille (A, H ou E)
         grille.setListeActivite(listeActivites);
 
         return grille;

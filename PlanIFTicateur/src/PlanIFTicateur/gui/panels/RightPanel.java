@@ -6,6 +6,7 @@
 package PlanIFTicateur.gui.panels;
 
 import PlanIFTicateur.gui.frames.MainWindow;
+import PlanIFTicateur.gui.panels.statistiquesPanels.StatistiquesOngletPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.Serializable;
@@ -48,7 +49,7 @@ public class RightPanel extends JPanel implements Serializable {
         add(detailsActivitePanel, BorderLayout.CENTER);
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().height) * 0.3)));
+        tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().height) * 0.25)));
 
        
 
@@ -57,8 +58,7 @@ public class RightPanel extends JPanel implements Serializable {
         notesPanel = new NotesPanel();
 
         tabbedPane.add("Notes", new JScrollPane(notesPanel));
-        
-        
+
         tabbedPane.add("Statistiques", statistiquesPanel);
 
         add(tabbedPane, BorderLayout.SOUTH);
@@ -69,10 +69,9 @@ public class RightPanel extends JPanel implements Serializable {
     public ListeActivitesPanel getListeActivitesPanel() {
         return listeActivitesPanel;
     }
-    
-    public DetailsActivitePanel getDetailsActivitePanel()
-    {
+
+    public DetailsActivitePanel getDetailsActivitePanel() {
         return detailsActivitePanel;
     }
-    
+
 }

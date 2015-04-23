@@ -43,7 +43,7 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
 
     private void buildUp() {
 
-        setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 250));
+        setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), 200));
         int height = (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 52) * 0.2);
         setLayout(new BorderLayout());
         listeActivitesLabel = new JLabel("Liste Activites");
@@ -56,9 +56,10 @@ public class ListeActivitesPanel extends JPanel implements HoraireControleurObse
             listModel.addElement(activite);
         }
         listeActivites = new JList(listModel);
-        listeActivites.setCellRenderer(new ActiviteRenderer());
-
         listeActivites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listeActivites.setCellRenderer(new ActiviteRenderer());
+        listeActivites.setSelectionBackground(new JList().getSelectionBackground());
+        listeActivites.setSelectionForeground(new JList().getSelectionForeground());
 
         add(new JScrollPane(listeActivites), BorderLayout.CENTER);
 
