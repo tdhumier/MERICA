@@ -6,6 +6,8 @@
 package PlanIFTicateur.domaine.horaire;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.ListeActivites;
+import PlanIFTicateur.domaine.cheminement.GrilleCheminement;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,37 +96,38 @@ public class Statistique {
         return indiceCongestion;
     }
 
-    /**
-     * Fonction qui calcul l'indice de covoiturage pour une journée donnée à
-     * partir de l'horaire et de la liste des grilles de cheminement
-     *
-     * @param horaire
-     * @param listeGrillesCheminement
-     * @param jour
-     * @return l'indice de covoiturage pour la journée donnée
-     */
     public float indiceCovoiturage(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour) {
-        listeCoursJournee = horaire.getListeActivite().getActivitesByJour(jour);
+        System.out.println("jour : " + jour);
+        ListeActivites listeCours = new ListeActivites(horaire.getListeActivite().getActivitesByJour(jour));
+        int tot = 0;
+        int cov = 0;
+        float indice = 0;
 
-        if (listeCoursJournee.isEmpty()) {
+        if (listeCours.getListeActivites().isEmpty()) {
+            System.out.println("vide jour : " + jour);
             return 0;
         }
-        for (int i = 0; i < listeCoursJournee.size(); i++) {
 
+        for (GrilleCheminement grilleCheminement : listeGrillesCheminement.getListeGrillesCheminement()) {
+            System.out.println("che plus tot :" + grilleCheminement.activitePlusTot().getCode());
+            System.out.println("che plus tard:" + grilleCheminement.getActiviteFiniPlusTard().getCode());
+            System.out.println("jours plus tot :" + listeCours.activitePlusTot().getCode());
+            System.out.println("jours plus tard:" + listeCours.activitePlusTot().getCode());
+
+            //Erreur dans les méthodes de retour des activites les plus tot et tard ...
+            if (listeCours.activitePlusTot() != grilleCheminement.activitePlusTot() && listeCours.activitePlusTot().getHeureDebut() == grilleCheminement.activitePlusTot().getHeureDebut() && grilleCheminement.getActiviteFiniPlusTard() != listeCours.getActiviteFiniPlusTard() && grilleCheminement.getActiviteFiniPlusTard().getHeureDebut() + grilleCheminement.getActiviteFiniPlusTard().getDuree() == listeCours.getActiviteFiniPlusTard().getHeureDebut() + listeCours.getActiviteFiniPlusTard().getDuree()) {
+                tot++;
+                cov++;
+                System.out.println("match jour" + jour);
+            } else {
+                tot++;
+                System.out.println("pas match jour" + jour);
+            }
         }
-        /* for(int i = 0; i < listeGrillesCheminement.size(); i++)
-         {
-         for(int j = i+1; j < listeGrillesCheminement.size(); j++)
-         {
-         if(activitePlusTot(listeGrillesCheminement.getGrillesCheminement(i)) == activitePlusTot(listeGrillesCheminement.getGrillesCheminement(j))
-         && (activitePlusTard(listeGrillesCheminement.getGrillesCheminement(j)) ==  activitePlusTard(listeGrillesCheminement.getGrillesCheminement(j))))
-         {
-         indiceCovoiturage++;
-         }
-         }
-         }*/
 
-        return indiceCovoiturage;
+        indice = cov / tot * 100;
+
+        return indice;
     }
 
     public JLabel[] modificationIntegerLabel(String[] jourModes, JLabel[] labelModes, ArrayList<Integer> list, String texte) {

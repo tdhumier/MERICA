@@ -115,4 +115,18 @@ public class GrilleCheminement {
         }
         return activite;
     }
+
+    // Pour avoir l'activite qui finit le plus tard.
+    public Activite getActiviteFiniPlusTard() {
+        Activite activitePlusTard = getListeActivites().get(0);
+        double heureFin = 0;
+        List<Activite> activiteList = getListeActivites();
+        for (Activite activite : activiteList) {
+            if (activite.getHeureDebut() != 0.0d && activite.getHeureDebut() + activite.getDuree() > heureFin) {
+                activitePlusTard = activite;
+                heureFin = activite.getHeureDebut();
+            }
+        }
+        return activitePlusTard;
+    }
 }

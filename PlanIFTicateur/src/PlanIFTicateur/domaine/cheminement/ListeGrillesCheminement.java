@@ -28,27 +28,24 @@ public class ListeGrillesCheminement {
     public List<GrilleCheminement> getListeGrillesCheminement() {
         return grillesCheminement;
     }
-    
-    public GrilleCheminement getGrillesCheminement(int index)
-    {
+
+    public GrilleCheminement getGrillesCheminement(int index) {
         return grillesCheminement.get(index);
     }
-    
-    public int nbActiviteDansGrilleCheminement(Horaire horaire, GrilleCheminement grilleCheminement,int jour)
-    {
+
+    public int nbActiviteDansGrilleCheminement(Horaire horaire, GrilleCheminement grilleCheminement, int jour) {
         int nbCours = 0;
         List<Activite> grilleActivite = grilleCheminement.getListeActivites();
         List<Activite> listeActivite = horaire.getListeActivite().getActivitesByJour(jour);
-        
+
         for (Activite listeActivite1 : listeActivite) {
             nbCours = grilleActivite.stream().filter((grilleActivite1) -> (listeActivite1.getCode().equals(grilleActivite1.getCode()))).map((_item) -> 1).reduce(nbCours, Integer::sum);
         }
-     
+
         return nbCours;
     }
-    
-    public int size()
-    {
+
+    public int size() {
         return grillesCheminement.size();
     }
 
