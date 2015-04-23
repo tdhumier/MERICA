@@ -103,8 +103,6 @@ public abstract class Activite {
     public void setHeureFinMax(double heureFinMax) {
         this.heureFinMax = heureFinMax;
     }
-    
-    
 
     public String getTitre() {
         return titre;
@@ -160,7 +158,7 @@ public abstract class Activite {
     public abstract Color getCouleur();
 
     public abstract String getType();
-    
+
     public abstract void setType(String type);
 
     public void deplacerActivite(int x, int y) {
@@ -169,9 +167,7 @@ public abstract class Activite {
     }
 
     public boolean horaireEstValide() {
-        boolean returned = (heureDebut >= heureDebutMin && (heureDebut + duree <= heureFinMax));
-        return returned;
-        
+        return heureDebut >= heureDebutMin && (heureDebut + duree <= heureFinMax);
     }
 
     public boolean estAuMemeHoraire(Activite autreActivite) {
@@ -210,7 +206,6 @@ public abstract class Activite {
         this.width = (int) (dimension.width * duree * 2);
         this.height = dimension.height;
     }
-    
 
     public void setPoint(Dimension dimension) {
         this.point.x = (int) (dimension.width * ((getHeureDebut() - 8) * 2) + 80);
