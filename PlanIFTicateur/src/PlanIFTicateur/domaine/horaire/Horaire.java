@@ -25,22 +25,22 @@ public class Horaire {
     private String session;
     private ListeActivites listeActivite;
     private ListeGrillesCheminement grillesCheminement;
-    private List<Activite> activitesConflitCheminement;
-    private List<Activite> activitesConflitCheminementAvec;
+    private ListeConflits listeConflits;
     private Statistique statistique;
 
     public Horaire() {
         this.listeActivite = new ListeActivites();
         this.grillesCheminement = new ListeGrillesCheminement();
+        this.listeConflits = new ListeConflits();
         this.statistique = new Statistique();
         this.valide = true;
     }
-    
-    public void setSession(String session)
-    {
+
+    public void setSession(String session) {
         this.session = session;
     }
-    public String getSession(){
+
+    public String getSession() {
         return session;
     }
 
@@ -59,7 +59,8 @@ public class Horaire {
     public void setGrillesCheminement(ListeGrillesCheminement grillesCheminement) {
         this.grillesCheminement = grillesCheminement;
     }
-    public ListeGrillesCheminement getListeGrillesCheminement(){
+
+    public ListeGrillesCheminement getListeGrillesCheminement() {
         return grillesCheminement;
     }
 
@@ -88,31 +89,13 @@ public class Horaire {
     }
 
     public boolean horaireEstValide(Activite activite) {
-        activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
+        List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
         return activite.horaireEstValide() && activitesConflitCheminement.isEmpty();
-    }
-    
-     public List<Activite> getActivitesConflitCheminement() {
-        
-        return activitesConflitCheminement;
-    }
-     
-    public List<Activite> getActivitesConflitCheminementAvec() {
-        
-        return activitesConflitCheminementAvec;
     }
 
     public boolean estValide() {
-        boolean returned;
         List<Activite> activitesAssignees = listeActivite.getActivitesAssignees();
-        returned = activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
-        try{
-            activitesConflitCheminement = grillesCheminement.getConflits();
-            activitesConflitCheminementAvec = grillesCheminement.getConflitsAvec();
-        }catch (Exception e){
-        }
-        
-        return returned;
+        return activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
     }
 
     public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
