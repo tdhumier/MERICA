@@ -4,20 +4,20 @@
  * and open the template in the editor.
  */
 package PlanIFTicateur.domaine.conflit;
+
 import PlanIFTicateur.domaine.activite.Activite;
+
 /**
  *
  * @author Alexandre
  */
-public class ConflitCheminement extends Conflit
-{
+public class ConflitCheminement extends Conflit {
+
     protected Activite autreActivite;
-    
-    public ConflitCheminement(Activite activite, Activite autreActivite)
-    {
+
+    public ConflitCheminement(Activite activite, Activite autreActivite) {
         super(activite);
         this.autreActivite = autreActivite;
-        System.out.println("cheminement");
     }
 
     public Activite getAutreActivite() {
@@ -27,5 +27,5 @@ public class ConflitCheminement extends Conflit
     public void setAutreActivite(Activite autreActivite) {
         this.autreActivite = autreActivite;
     }
-    
+
 }
