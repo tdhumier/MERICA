@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 package PlanIFTicateur.domaine.conflit;
+
 import PlanIFTicateur.domaine.activite.Activite;
+
 /**
  *
  * @author Alexandre
  */
-public class ConflitHoraire extends Conflit
-{
+public class ConflitHoraire extends Conflit {
+
     protected Activite activite;
-    
-    public ConflitHoraire(Activite activite)
-    {
+
+    public ConflitHoraire(Activite activite) {
         super(activite);
-        System.out.println("activite");
     }
 }
