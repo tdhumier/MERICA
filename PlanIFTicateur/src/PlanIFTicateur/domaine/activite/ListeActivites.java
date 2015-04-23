@@ -107,12 +107,15 @@ public class ListeActivites {
     }
 
     public Activite activitePlusTot() {
-        Activite activite = getListeActivites().get(0);
-        for (int i = 1; i < getListeActivites().size(); i++) {
-            if (getListeActivites().get(i).getHeureDebut() < activite.getHeureDebut()) {
-                activite = getListeActivites().get(i);
+        Activite activitePlusTot = null;
+        double heureDebut = 22;
+        List<Activite> activiteList = getListeActivites();
+        for (Activite activite : activiteList) {
+            if (activite.getHeureDebut() != 0.0d && activite.getHeureDebut() < heureDebut) {
+                activitePlusTot = activite;
+                heureDebut = activite.getHeureDebut();
             }
         }
-        return activite;
+        return activitePlusTot;
     }
 }

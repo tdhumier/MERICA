@@ -130,6 +130,7 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
             for (int i = 1; i < 7; i++) {
                 indiceCovoiturage.add(mainWindow.controleur.getIndiceCovoiturage(listeGrilleCheminement, i));
             }
+            mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, labelModes, indiceCovoiturage, " %");
 
             repaint();
         }

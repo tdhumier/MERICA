@@ -97,36 +97,33 @@ public class Statistique {
     }
 
     public float indiceCovoiturage(Horaire horaire, ListeGrillesCheminement listeGrillesCheminement, int jour) {
-        System.out.println("jour : " + jour);
         ListeActivites listeCours = new ListeActivites(horaire.getListeActivite().getActivitesByJour(jour));
+
+        if (listeCours.getListeActivites().isEmpty()) {
+            return 0;
+        }
+
+        Activite coursJourLePlusTot = listeCours.activitePlusTot();
+        Activite coursJourLePlusTard = listeCours.getActiviteFiniPlusTard();
+
         int tot = 0;
         int cov = 0;
         float indice = 0;
 
-        if (listeCours.getListeActivites().isEmpty()) {
-            System.out.println("vide jour : " + jour);
-            return 0;
-        }
-
         for (GrilleCheminement grilleCheminement : listeGrillesCheminement.getListeGrillesCheminement()) {
-            System.out.println("che plus tot :" + grilleCheminement.activitePlusTot().getCode());
-            System.out.println("che plus tard:" + grilleCheminement.getActiviteFiniPlusTard().getCode());
-            System.out.println("jours plus tot :" + listeCours.activitePlusTot().getCode());
-            System.out.println("jours plus tard:" + listeCours.activitePlusTot().getCode());
+            Activite coursLePlusTot = grilleCheminement.getActiviteCommencePlusTotParJour(jour);
+            Activite coursLePlusTard = grilleCheminement.getActiviteFiniPlusTardParJour(jour);
 
-            //Erreur dans les méthodes de retour des activites les plus tot et tard ...
-            if (listeCours.activitePlusTot() != grilleCheminement.activitePlusTot() && listeCours.activitePlusTot().getHeureDebut() == grilleCheminement.activitePlusTot().getHeureDebut() && grilleCheminement.getActiviteFiniPlusTard() != listeCours.getActiviteFiniPlusTard() && grilleCheminement.getActiviteFiniPlusTard().getHeureDebut() + grilleCheminement.getActiviteFiniPlusTard().getDuree() == listeCours.getActiviteFiniPlusTard().getHeureDebut() + listeCours.getActiviteFiniPlusTard().getDuree()) {
-                tot++;
-                cov++;
-                System.out.println("match jour" + jour);
-            } else {
-                tot++;
-                System.out.println("pas match jour" + jour);
+            if (coursLePlusTot != null && coursLePlusTard != null) {
+                if (coursLePlusTot != coursJourLePlusTot && coursJourLePlusTard != coursLePlusTard) {
+                    if (coursLePlusTot.getHeureDebut() == coursJourLePlusTot.getHeureDebut() && coursLePlusTard.getHeureDebut() + coursLePlusTard.getDuree() == coursJourLePlusTard.getHeureDebut() + coursJourLePlusTard.getDuree()) {
+                        cov++;
+                    }
+                }
             }
+            tot++;
         }
-
-        indice = cov / tot * 100;
-
+        indice = ((float) cov / (float) tot) * 100;
         return indice;
     }
 
