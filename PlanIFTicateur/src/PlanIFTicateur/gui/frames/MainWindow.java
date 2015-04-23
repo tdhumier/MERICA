@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -48,6 +49,11 @@ public class MainWindow extends javax.swing.JFrame {
                 setExtendedState(MAXIMIZED_BOTH);
             }
         });
+
+        sauvegarderMenuItem.setEnabled(false);
+        sauvegarderSousMenuItem.setEnabled(false);
+        exportBouton.setEnabled(false);
+        exportMenuItem.setEnabled(false);
     }
 
     public VerificationMode getVerificationMode() {
@@ -242,13 +248,28 @@ public class MainWindow extends javax.swing.JFrame {
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
             controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
-
-            /*    if(controleur.getHoraire().getSession() == null)
-             {
-             String[] choixSession = { "Automne", "Été", "Hiver"};
-             String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
-             controleur.getHoraire().setSession(session);
-             } */
+            if (controleur.getHoraire().getSession() == null || controleur.getHoraire().getSession().equals("")) {
+                String[] choixSession = {"Automne", "Été", "Hiver"};
+                String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
+                switch (session) {
+                    case "Automne":
+                        controleur.getHoraire().setSession("A");
+                        selecteurSession.setSelectedIndex(2);
+                        break;
+                    case "Été":
+                        controleur.getHoraire().setSession("E");
+                        selecteurSession.setSelectedIndex(1);
+                        break;
+                    case "Hiver":
+                        controleur.getHoraire().setSession("H");
+                        selecteurSession.setSelectedIndex(0);
+                        break;
+                }
+            }
+            sauvegarderMenuItem.setEnabled(true);
+            sauvegarderSousMenuItem.setEnabled(true);
+            exportBouton.setEnabled(true);
+            exportMenuItem.setEnabled(true);
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
