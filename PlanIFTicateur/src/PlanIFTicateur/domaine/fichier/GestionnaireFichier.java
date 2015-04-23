@@ -27,10 +27,10 @@ public class GestionnaireFichier {
         return activiteDao.importerActivites();
     }
 
-    public ListeGrillesCheminement getGrillesCheminement(ListeActivites listeActivites) {
+    public ListeGrillesCheminement getGrillesCheminement(ListeActivites listeActivites, String session) {
         String adresseCheminement = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".CHE"; // on retire les 4 derniers caractères (.COU) de l'adresse du fichier activite pour ajouter la fin du fichier .CHE
         CheminementDao cheminementDao = new CheminementDao(adresseCheminement);
-        return cheminementDao.importerGrillesCheminement(listeActivites);
+        return cheminementDao.importerGrillesCheminement(listeActivites, session);
     }
 
     public void enregistrerFichier(List<Activite> activites) {

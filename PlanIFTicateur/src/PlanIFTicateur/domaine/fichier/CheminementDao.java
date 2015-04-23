@@ -30,11 +30,14 @@ public class CheminementDao {
     }
 
     // LECTURE
-    ListeGrillesCheminement importerGrillesCheminement(ListeActivites listeActivites) {
+    ListeGrillesCheminement importerGrillesCheminement(ListeActivites listeActivites, String session) {
         List<GrilleCheminement> grilles = new ArrayList<>();
         List<String[]> donnees = lecteurCsv.getData();
         donnees.stream().map((donnee) -> formaterGrille(donnee, listeActivites)).forEach((grille) -> {
-            grilles.add(grille);
+            if (grille.getSession().equals(session)) {
+                grilles.add(grille);
+            }
+
         });
         return new ListeGrillesCheminement(grilles);
     }

@@ -247,7 +247,7 @@ public class MainWindow extends javax.swing.JFrame {
         File fichier;
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
-            controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
+
             if (controleur.getHoraire().getSession() == null || controleur.getHoraire().getSession().equals("")) {
                 String[] choixSession = {"Automne", "Été", "Hiver"};
                 String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
@@ -266,10 +266,12 @@ public class MainWindow extends javax.swing.JFrame {
                         break;
                 }
             }
+            controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
             sauvegarderMenuItem.setEnabled(true);
             sauvegarderSousMenuItem.setEnabled(true);
             exportBouton.setEnabled(true);
             exportMenuItem.setEnabled(true);
+
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 
