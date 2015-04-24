@@ -103,6 +103,11 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
+    public void desassignerActivites() {
+        horaire.desassignerActivites();
+        notifyObserversForUpdatedItems();
+    }
+
     public Optional<Activite> getActiviteSelectionnee() {
         return horaire.getListeActivite().getActiviteSelectionnee();
     }

@@ -76,6 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
         verificationAutoBouton = new javax.swing.JToggleButton();
         statistiquesBouton = new javax.swing.JButton();
         exportBouton = new javax.swing.JButton();
+        reinitialiserBouton = new javax.swing.JButton();
         bottomPanel = new PlanIFTicateur.gui.panels.BottomPanel(this);
         mainScrollPane = new javax.swing.JScrollPane();
         centerPanel = new javax.swing.JPanel();
@@ -141,6 +142,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
         boutonTopPanel.add(exportBouton);
 
+        reinitialiserBouton.setText("Rénitialiser");
+        reinitialiserBouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reinitialiserBoutonActionPerformed(evt);
+            }
+        });
+        boutonTopPanel.add(reinitialiserBouton);
+
         mainPanel.add(boutonTopPanel, java.awt.BorderLayout.NORTH);
 
         bottomPanel.setPreferredSize(new java.awt.Dimension(1000, 30));
@@ -161,7 +170,7 @@ public class MainWindow extends javax.swing.JFrame {
         horairePanel.setLayout(horairePanelLayout);
         horairePanelLayout.setHorizontalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addGap(0, 686, Short.MAX_VALUE)
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +237,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,6 +386,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_selecteurSessionActionPerformed
 
+    private void reinitialiserBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinitialiserBoutonActionPerformed
+        controleur.desassignerActivites();
+    }//GEN-LAST:event_reinitialiserBoutonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -434,6 +447,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu menuFichier;
     private javax.swing.JMenuItem nouveauMenuItem;
     private javax.swing.JMenuItem quitterMenuItem;
+    private javax.swing.JButton reinitialiserBouton;
     public PlanIFTicateur.gui.panels.RightPanel rightPanel;
     private javax.swing.JMenuItem sauvegarderMenuItem;
     private javax.swing.JMenuItem sauvegarderSousMenuItem;

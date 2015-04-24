@@ -136,11 +136,14 @@ public class Horaire {
     }
 
     public void desassignerActivite(Activite activite) {
-        activite.setPoint(new Point());
-        activite.setIsSelected(false);
-        activite.setJour(0);
-        activite.setHeureDebut(0.0d);
+        activite.desassigner();
         listeConflits.supprimerConflitsActivite(activite);
+    }
+
+    public void desassignerActivites() {
+        listeActivite.getActivitesAssignees().stream().forEach((activite) -> {
+            desassignerActivite(activite);
+        });
     }
 
     public void resetPosition(Activite activite, Dimension dimension) {

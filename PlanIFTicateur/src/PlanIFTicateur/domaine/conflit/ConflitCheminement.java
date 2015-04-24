@@ -31,7 +31,7 @@ public class ConflitCheminement implements Conflit {
 
     @Override
     public String afficherConflit() {
-        return activite.getCode() + " et " + autreActivite.getCode() + " sont en conflit";
+        return activite.getCode() + " et " + autreActivite.getCode() + " sont en conflit.";
     }
 
     @Override

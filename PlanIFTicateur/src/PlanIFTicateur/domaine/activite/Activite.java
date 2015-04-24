@@ -222,4 +222,11 @@ public abstract class Activite {
         this.jour = jour;
     }
 
+    public void desassigner() {
+        setPoint(new Point());
+        setIsSelected(false);
+        setJour(0);
+        setHeureDebut(0.0d);
+    }
+
 }
