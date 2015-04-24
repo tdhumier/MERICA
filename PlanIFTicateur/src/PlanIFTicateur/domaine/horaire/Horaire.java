@@ -8,6 +8,9 @@ package PlanIFTicateur.domaine.horaire;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import PlanIFTicateur.domaine.conflit.Conflit;
+import PlanIFTicateur.domaine.conflit.ConflitCheminement;
+import PlanIFTicateur.domaine.conflit.ConflitHoraire;
 import PlanIFTicateur.domaine.conflit.ListeConflits;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -52,6 +55,10 @@ public class Horaire {
         return statistique;
     }
 
+    public ListeConflits getListeConflits() {
+        return listeConflits;
+    }
+
     public void setListeActivite(ListeActivites listeActivite) {
         this.listeActivite = listeActivite;
     }
@@ -71,6 +78,7 @@ public class Horaire {
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
         activite.deplacerActivite(point, heure, jour);
         activite.setIsSelected(false);
+        verifierConflits(activite);
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
@@ -78,7 +86,7 @@ public class Horaire {
         int oldJour = activite.getJour();
         activite.setHeureDebut(heure);
         activite.setJour(jour);
-        if (horaireEstValide(activite)) {
+        if (deplacementEstValide(activite)) {
             activite.deplacerActivite(point.x, point.y);
         } else {
             activite.setHeureDebut(oldHeure);
@@ -86,16 +94,33 @@ public class Horaire {
             resetPosition(activite, dimension);
         }
         activite.setIsSelected(false);
+        verifierConflits(activite);
     }
 
-    public boolean horaireEstValide(Activite activite) {
+    public void verifierConflits(Activite activite) {
+        if (!activite.horaireEstValide()) {
+            Conflit conflitHoraire = new ConflitHoraire(activite);
+            listeConflits.ajouterConflit(conflitHoraire);
+        }
         List<Activite> activitesConflitCheminement = grillesCheminement.activitesAuMemeHoraire(activite);
-        return activite.horaireEstValide() && activitesConflitCheminement.isEmpty();
+        for (Activite activiteEnConflit : activitesConflitCheminement) {
+            Conflit conflitCheminement = new ConflitCheminement(activite, activiteEnConflit);
+            listeConflits.ajouterConflit(conflitCheminement);
+        }
+    }
+
+    public void verifierConflits() {
+        listeActivite.getActivitesAssignees().stream().forEach((activite) -> {
+            verifierConflits(activite);
+        });
+    }
+
+    public boolean deplacementEstValide(Activite activite) {
+        return activite.horaireEstValide() && grillesCheminement.aucuneActivitesEnConflitdeCheminement(activite);
     }
 
     public boolean estValide() {
-        List<Activite> activitesAssignees = listeActivite.getActivitesAssignees();
-        return activitesAssignees.stream().noneMatch((activite) -> (!activite.horaireEstValide() || !grillesCheminement.activitesAuMemeHoraire(activite).isEmpty()));
+        return listeConflits.getListeConflits().isEmpty();
     }
 
     public HashMap<Integer, List<Double>> getPlagesHoraireAGriser(Activite activite) {
@@ -110,11 +135,12 @@ public class Horaire {
         return result;
     }
 
-    public void resetPosition(Activite activite) {
+    public void desassignerActivite(Activite activite) {
         activite.setPoint(new Point());
         activite.setIsSelected(false);
         activite.setJour(0);
         activite.setHeureDebut(0.0d);
+        listeConflits.supprimerConflitsActivite(activite);
     }
 
     public void resetPosition(Activite activite, Dimension dimension) {

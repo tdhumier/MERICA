@@ -50,7 +50,7 @@ public class RightPanel extends JPanel implements Serializable {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setPreferredSize(new Dimension((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().width) * 0.29), (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().height) * 0.25)));
 
-        conflitsPanel = new ConflitsPanel();
+        conflitsPanel = new ConflitsPanel(mainWindow);
 
         tabbedPane.add("Conflits", new JScrollPane(conflitsPanel));
 

@@ -5,7 +5,7 @@
  */
 package PlanIFTicateur.domaine.conflit;
 
-import PlanIFTicateur.domaine.conflit.Conflit;
+import PlanIFTicateur.domaine.activite.Activite;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +22,14 @@ public class ListeConflits {
     }
 
     public void ajouterConflit(Conflit conflit) {
-        listeConflits.add(conflit);
+        if (!listeConflits.stream().anyMatch(x -> x.equals(conflit))) {
+            listeConflits.add(conflit);
+        }
+    }
+
+    public void supprimerConflitsActivite(Activite activite) {
+        listeConflits.stream().filter((conflit) -> (conflit.activitePresente(activite))).forEach((conflit) -> {
+            listeConflits.remove(conflit);
+        });
     }
 }

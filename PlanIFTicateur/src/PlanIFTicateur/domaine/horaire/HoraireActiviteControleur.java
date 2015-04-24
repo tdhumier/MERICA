@@ -8,6 +8,7 @@ package PlanIFTicateur.domaine.horaire;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import PlanIFTicateur.domaine.conflit.Conflit;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -81,7 +82,7 @@ public class HoraireActiviteControleur {
         if (correct) {
             horaire.deplacerActivite(activite, point, heure, jour);
         } else {
-            unasignActivite(activite);
+            desassignerActivite(activite);
         }
 
         notifyObserversForUpdatedItems();
@@ -92,18 +93,13 @@ public class HoraireActiviteControleur {
         if (correct) {
             horaire.deplacerActiviteAvecVerification(activite, point, heure, jour, dimension);
         } else {
-            unasignActivite(activite);
+            desassignerActivite(activite);
         }
         notifyObserversForUpdatedItems();
     }
 
-    public void resetPosition(Activite activite, Dimension dimension) {
-        horaire.resetPosition(activite, dimension);
-        notifyObserversForUpdatedItems();
-    }
-
-    public void unasignActivite(Activite activite) {
-        horaire.resetPosition(activite);
+    public void desassignerActivite(Activite activite) {
+        horaire.desassignerActivite(activite);
         notifyObserversForUpdatedItems();
     }
 
@@ -121,6 +117,10 @@ public class HoraireActiviteControleur {
         return activites;
     }
 
+    public List<Conflit> getConflits() {
+        return horaire.getListeConflits().getListeConflits();
+    }
+
     public void importerFichiers(String path, Dimension dimension) {
         this.path = path;
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
@@ -130,6 +130,7 @@ public class HoraireActiviteControleur {
         horaire.setListeActivite(listeActivites);
         horaire.setGrillesCheminement(listeGrillesCheminement);
         setCoordonneesActivite(dimension);
+        horaire.verifierConflits();
         notifyObserversForUpdatedItems();
     }
 

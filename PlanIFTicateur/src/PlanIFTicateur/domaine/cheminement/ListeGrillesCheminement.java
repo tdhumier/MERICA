@@ -57,6 +57,10 @@ public class ListeGrillesCheminement {
         return activitesAuMemeHoraire;
     }
 
+    public boolean aucuneActivitesEnConflitdeCheminement(Activite activite) {
+        return activitesAuMemeHoraire(activite).isEmpty();
+    }
+
     public List<Activite> activitesCheminementsDejaALHoraire(Activite activite) {
         List<Activite> activitesCheminement = new ArrayList<>();
         grillesCheminement.stream().forEach((grilleCheminement) -> {

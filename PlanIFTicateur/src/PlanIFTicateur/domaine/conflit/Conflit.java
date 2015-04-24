@@ -4,27 +4,16 @@
  * and open the template in the editor.
  */
 package PlanIFTicateur.domaine.conflit;
+
 import PlanIFTicateur.domaine.activite.Activite;
+
 /**
  *
- * @author Alexandre
+ * @author tristandhumieres
  */
-public abstract class Conflit 
-{
-    protected Activite activite;
+public interface Conflit {
 
-    public Activite getActivite() {
-        return activite;
-    }
+    public String afficherConflit();
 
-    
-    
-    public void setActivite(Activite activite) {
-        this.activite = activite;
-    }
-    
-    public Conflit(Activite activite)
-    {
-        this.activite = activite;
-    }
+    public boolean activitePresente(Activite activite);
 }

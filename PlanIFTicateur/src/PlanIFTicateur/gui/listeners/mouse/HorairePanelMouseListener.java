@@ -60,7 +60,7 @@ public class HorairePanelMouseListener extends MouseAdapter implements MouseMoti
                     mainWindow.controleur.deplacerActivite(activite.get(), point, heure, jour);
                 }
             } else if (activite.isPresent()) { // Si on n'a pas affecté de jour ni d'heure (c'est que l'horaire n'est pas correct), on replace à l'endroit initial
-                mainWindow.controleur.unasignActivite(activite.get());
+                mainWindow.controleur.desassignerActivite(activite.get());
             }
             isDragged = false; // La souris est relachée donc on ne drag plus
         }
