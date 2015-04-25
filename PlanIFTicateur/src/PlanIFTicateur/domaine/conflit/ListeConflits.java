@@ -8,6 +8,7 @@ package PlanIFTicateur.domaine.conflit;
 import PlanIFTicateur.domaine.activite.Activite;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -28,8 +29,9 @@ public class ListeConflits {
     }
 
     public void supprimerConflitsActivite(Activite activite) {
-        listeConflits.stream().filter((conflit) -> (conflit.activitePresente(activite))).forEach((conflit) -> {
-            listeConflits.remove(conflit);
-        });
+        Optional<Conflit> conflit = listeConflits.stream().filter(x -> x.activitePresente(activite)).findFirst();
+        if (conflit.isPresent()) {
+            listeConflits.remove(conflit.get());
+        }
     }
 }

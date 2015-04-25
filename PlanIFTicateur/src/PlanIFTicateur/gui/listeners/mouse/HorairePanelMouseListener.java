@@ -82,15 +82,14 @@ public class HorairePanelMouseListener extends MouseAdapter implements MouseMoti
 
     @Override
     public void mouseClicked(MouseEvent e) {
-       
+
         if (e.getClickCount() == 2) {
-           if(mainWindow.controleur.getActiviteSelectionnee().isPresent())
-           {
-            String activiteWindowTitle = mainWindow.controleur.getActiviteSelectionnee().get().getCode() + " - " + mainWindow.controleur.getActiviteSelectionnee().get().getTitre();
-            new ActiviteWindow(activiteWindowTitle, mainWindow);
-           }
+            if (mainWindow.controleur.getActiviteSelectionnee().isPresent()) {
+                String activiteWindowTitle = mainWindow.controleur.getActiviteSelectionnee().get().getCode() + " - " + mainWindow.controleur.getActiviteSelectionnee().get().getTitre();
+                new ActiviteWindow(activiteWindowTitle, mainWindow);
+            }
 
         }
     }
-    
+
 }

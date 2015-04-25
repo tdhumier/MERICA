@@ -43,6 +43,7 @@ public class ConflitsPanel extends JPanel implements HoraireControleurObserveur 
     public void notifyUpdatedItems() {
         this.removeAll();
         afficherConflits();
+        revalidate();
         repaint();
     }
 }

@@ -84,7 +84,6 @@ public class HoraireActiviteControleur {
         } else {
             desassignerActivite(activite);
         }
-
         notifyObserversForUpdatedItems();
     }
 

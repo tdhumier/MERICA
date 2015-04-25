@@ -98,6 +98,7 @@ public class Horaire {
     }
 
     public void verifierConflits(Activite activite) {
+        listeConflits.supprimerConflitsActivite(activite);
         if (!activite.horaireEstValide()) {
             Conflit conflitHoraire = new ConflitHoraire(activite);
             listeConflits.ajouterConflit(conflitHoraire);
