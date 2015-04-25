@@ -107,6 +107,9 @@ public class Horaire {
             Conflit conflitCheminement = new ConflitCheminement(activite, activiteEnConflit);
             listeConflits.ajouterConflit(conflitCheminement);
         }
+        if (deplacementEstValide(activite)) {
+            listeConflits.supprimerConflitsActivite(activite);
+        }
     }
 
     public void verifierConflits() {

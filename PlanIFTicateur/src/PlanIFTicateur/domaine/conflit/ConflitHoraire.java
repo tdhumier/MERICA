@@ -12,7 +12,7 @@ public class ConflitHoraire implements Conflit {
 
     @Override
     public String afficherConflit() {
-        return activite.getCode() + " ne respecte ses contraintes horaires.";
+        return activite.getCode() + " ne respecte pas ses contraintes horaires.";
     }
 
     @Override

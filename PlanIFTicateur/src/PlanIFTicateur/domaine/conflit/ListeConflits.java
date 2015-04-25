@@ -28,8 +28,12 @@ public class ListeConflits {
     }
 
     public void supprimerConflitsActivite(Activite activite) {
-        listeConflits.stream().filter((conflit) -> (conflit.activitePresente(activite))).forEach((conflit) -> {
-            listeConflits.remove(conflit);
+        ArrayList nouvelleListeConflits = new ArrayList();
+        // probleme d'itération : on ne peut pas modifier une liste sur laquelle on itère (notament avec le .stream())
+        // solution : créer une nouvelle liste dans laquelle on ne mettra pas les conflits de l'activite
+        listeConflits.stream().filter((conflit) -> (!conflit.activitePresente(activite))).forEach((conflit) -> {
+            nouvelleListeConflits.add(conflit);
         });
+        listeConflits = nouvelleListeConflits;
     }
 }
