@@ -156,6 +156,12 @@ public abstract class Activite {
      Methode abstraite obligatoire dans les differentes sortes d'activite.
      */
     public abstract Color getCouleur();
+    
+    public abstract void setCouleurSelectionner();
+    
+    public abstract void reinitCouleur();
+    
+    public abstract Activite clone();
 
     public abstract String getType();
 

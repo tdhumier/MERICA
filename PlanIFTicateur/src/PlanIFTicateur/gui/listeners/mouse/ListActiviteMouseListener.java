@@ -79,6 +79,12 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 1) {
+            activiteSelectionnee.setCouleurSelectionner();
+            mainWindow.controleur.reinitColor();
+            mainWindow.controleur.setActiviteClic(activiteSelectionnee);
+            
+        }
         if (e.getClickCount() == 2) {
             String activiteWindowTitle = activiteSelectionnee.getCode() + " - " + activiteSelectionnee.getTitre();
             new ActiviteWindow(activiteWindowTitle, mainWindow);
