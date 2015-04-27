@@ -137,6 +137,7 @@ public class HoraireActiviteControleur {
         ListeGrillesCheminement listeGrillesCheminement = gestionnaireFichier.getGrillesCheminement(listeActivites, session);
         horaire.setListeActivite(listeActivites);
         horaire.setGrillesCheminement(listeGrillesCheminement);
+        horaire.setNotes(gestionnaireFichier.getNotes());
         setCoordonneesActivite(dimension);
         List<Activite> list = horaire.getListeActivite().getActivitesAssignees();
         for (Activite a : list) {
@@ -146,6 +147,16 @@ public class HoraireActiviteControleur {
         notifyObserversForUpdatedItems();
     }
 
+    public void enregistrerNotes(ArrayList<String> notes){
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
+        gestionnaireFichier.enregisterNotes(notes);
+    }
+    public void enregistrerNotes(ArrayList<String> notes, String file){
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
+        gestionnaireFichier.enregisterNotes(notes, file);
+    }
+    
+    
     public void enregistrerFichier(List<Activite> activites) {
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         gestionnaireFichier.enregistrerFichier(activites);

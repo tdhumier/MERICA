@@ -30,6 +30,10 @@ public class RightPanel extends JPanel implements Serializable {
 
     public RightPanel() {
     }
+    
+    public NotesPanel getNotesPanel(){
+        return notesPanel;
+    }
 
     public RightPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -54,7 +58,7 @@ public class RightPanel extends JPanel implements Serializable {
 
         tabbedPane.add("Conflits", new JScrollPane(conflitsPanel));
 
-        notesPanel = new NotesPanel();
+        notesPanel = new NotesPanel(mainWindow);
 
         tabbedPane.add("Notes", new JScrollPane(notesPanel));
 
