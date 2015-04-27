@@ -284,11 +284,14 @@ public class MainWindow extends javax.swing.JFrame {
                         break;
                 }
             }
+            controleur.getHoraire().getNotes().clear();
+            rightPanel.getNotesPanel().clear();
             controleur.importerFichiers(fichier.getAbsolutePath(), horairePanel.getDimensionsCase());
             sauvegarderMenuItem.setEnabled(true);
             sauvegarderSousMenuItem.setEnabled(true);
             exportBouton.setEnabled(true);
             exportMenuItem.setEnabled(true);
+            
 
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed

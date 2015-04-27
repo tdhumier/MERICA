@@ -32,7 +32,13 @@ public class NotesPanel extends JPanel implements HoraireControleurObserveur {
         buildUp();
         mainWindow.controleur.registerObserver(this);
     }
-    
+    public void clear(){
+        for (int i = 1; i < table.getRowCount(); i++){
+            for (int j = 0; j < table.getColumnCount(); j++){
+               table.setValueAt(null,i, j);  
+            }
+        }
+    }
     public ArrayList<String> toStringList(){
         ArrayList<String> notes = new ArrayList();
         for (int i = 1; i < table.getRowCount(); i++){
@@ -49,15 +55,13 @@ public class NotesPanel extends JPanel implements HoraireControleurObserveur {
         for (int i = 1; i < notes.size()+1; i++){
             String ligne = notes.get(i-1);
             int positionTokenDebut = 0;
-            System.out.println("ligne:" +  ligne);
             for (int j = 0; j < 4; j++){
-                System.out.println(j);
                 int positionTokenFin = ligne.indexOf(';', positionTokenDebut);
-                
-                System.out.println("bob:" + positionTokenFin);
                 String valeur = ligne.substring(positionTokenDebut, positionTokenFin);
                 if (valeur.compareTo("null") != 0){
                     table.setValueAt(valeur, i, j);
+                } else {
+                    table.setValueAt(null, i, j);
                 }
                 positionTokenDebut = positionTokenFin + 1;
             }
