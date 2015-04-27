@@ -39,6 +39,7 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        activiteSelectionnee.reinitCouleur();
         Point point = e.getPoint();
         Point pointHorairePanel = SwingUtilities.convertPoint(e.getComponent(), point, mainWindow.horairePanel);
         if (activiteSelectionnee != null) {
@@ -81,7 +82,7 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) {
             activiteSelectionnee.setCouleurSelectionner();
-            mainWindow.controleur.getHoraire().reinitColor();
+            mainWindow.controleur.getHoraire().reinitColor(activiteSelectionnee);
             mainWindow.controleur.getHoraire().setActiviteClic(activiteSelectionnee);
             
         }

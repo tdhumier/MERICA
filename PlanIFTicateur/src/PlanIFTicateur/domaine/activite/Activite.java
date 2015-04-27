@@ -160,8 +160,6 @@ public abstract class Activite {
     public abstract void setCouleurSelectionner();
     
     public abstract void reinitCouleur();
-    
-    public abstract Activite clone();
 
     public abstract String getType();
 

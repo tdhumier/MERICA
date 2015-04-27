@@ -52,12 +52,17 @@ public class Horaire {
         return listeActivite;
     }
 
-     public void reinitColor(){
+     public void reinitColor(Activite a){
+        if (activiteClic != null && a != activiteClic){
+            activiteClic.reinitCouleur();
+        }
+    }
+    public void reinitColor(){
         if (activiteClic != null){
             activiteClic.reinitCouleur();
         }
     }
-    
+     
     public void setActiviteClic(Activite a){
         activiteClic = a;
     }

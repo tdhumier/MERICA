@@ -43,8 +43,4 @@ public class Laboratoire extends Activite {
         this.couleur = new Color(50, 255, 0, 50);    
     }
 
-    @Override
-    public Activite clone() {
-        return this.clone();
-    }
 }

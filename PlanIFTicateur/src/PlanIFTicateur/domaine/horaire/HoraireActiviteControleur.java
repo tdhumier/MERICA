@@ -64,13 +64,16 @@ public class HoraireActiviteControleur {
         List<Activite> activites = horaire.getListeActivite().getListeActivites();
         for (Activite activiteItem : activites) {
             // si on a deux activités à la même date à la même heure
-            if (activiteItem.getPoint().y == point.y && ((activiteItem.getHeureDebut() <= heure && activiteItem.getHeureDebut() + activiteItem.getDuree() > heure) || (heure <= activiteItem.getHeureDebut() && activiteItem.getHeureDebut() < heure + activite.getDuree()))) {
-                point.y = point.y + activite.getHeight();
-                int positionTemoin = point.y - 20;
-                if ((positionTemoin / 8) % 16 == 0) {
-                    return false;
-                } else {
-                    return correctionSuperpositionActivite(activite, point, heure);
+            if (activiteItem != activite){
+                if (activiteItem.getPoint().y == point.y && ((activiteItem.getHeureDebut() <= heure && activiteItem.getHeureDebut() + activiteItem.getDuree() > heure) || (heure <= activiteItem.getHeureDebut() && activiteItem.getHeureDebut() < heure + activite.getDuree()))) {
+                    point.y = point.y + activite.getHeight();
+                    System.out.println(activite.getCode());
+                    int positionTemoin = point.y - 20;
+                    if ((positionTemoin / 8) % 16 == 0) {
+                        return false;
+                    } else {
+                        return correctionSuperpositionActivite(activite, point, heure);
+                    }
                 }
             }
         }
@@ -135,6 +138,10 @@ public class HoraireActiviteControleur {
         horaire.setListeActivite(listeActivites);
         horaire.setGrillesCheminement(listeGrillesCheminement);
         setCoordonneesActivite(dimension);
+        List<Activite> list = horaire.getListeActivite().getActivitesAssignees();
+        for (Activite a : list) {
+            correctionSuperpositionActivite(a, a.getPoint(), a.getHeureDebut());
+        }
         horaire.verifierConflits();
         notifyObserversForUpdatedItems();
     }
