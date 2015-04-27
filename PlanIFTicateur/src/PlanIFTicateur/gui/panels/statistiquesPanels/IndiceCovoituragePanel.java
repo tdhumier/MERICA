@@ -60,16 +60,24 @@ public class IndiceCovoituragePanel extends JPanel implements HoraireControleurO
 
     private void ajouterIndiceCovoiturage(JLabel[] listeLabel) {
         ListeGrillesCheminement listeGrilleCheminement = mainWindow.controleur.getHoraire().getListeGrillesCheminement();
-        int moyenne = 0;
+        float moyenne = 0;
 
         indiceCovoiturageParJour = new ArrayList<Float>();
         for (int i = 0; i < 6; i++) {
-            indiceCovoiturageParJour.add(mainWindow.controleur.getIndiceCovoiturage(listeGrilleCheminement, i + i));
+            indiceCovoiturageParJour.add(mainWindow.controleur.getIndiceCovoiturage(listeGrilleCheminement, i+1));
             moyenne += indiceCovoiturageParJour.get(i);
         }
+        listeLabel = mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, listeLabel, indiceCovoiturageParJour, " %");
 
         moyenne = moyenne / 6;
         moyenneCovoiturageLabel.setText("Moyenne : " + moyenne + " %");
+        
+        add(covoiturageTitre);
+        for(int j = 0; j < 6; j++)
+        {
+            add(listeLabel[j]);
+        }
+        add(moyenneCovoiturageLabel);
     }
 
     @Override

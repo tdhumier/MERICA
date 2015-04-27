@@ -14,10 +14,9 @@ import javax.swing.JFrame;
  */
 public class ActiviteWindow extends JFrame {
 
-    private ActivitePanel activitePanel;
-    private MainWindow mainWindow;
-    private String title;
-    private ActiviteWindow activiteWindow;
+    private final ActivitePanel activitePanel;
+    private final MainWindow mainWindow;
+    private final String title;
     
     public ActiviteWindow(String title, MainWindow mainWindow) {
       this.title = title;

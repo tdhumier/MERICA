@@ -28,20 +28,17 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
     private MoyenCoursParJourPanel moyenCoursParJourPanel;
     private JPanel statistiquePanel;
 
-    private JLabel lundiLabel;
+    /*private JLabel lundiLabel;
     private JLabel mardiLabel;
     private JLabel mercrediLabel;
     private JLabel jeudiLabel;
     private JLabel vendrediLabel;
     private JLabel samediLabel;
-    private JLabel moyenneLabel;
+    private JLabel moyenneLabel;*/
 
     private String[] jourModes = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
 
-    private int codeStat;
-    private ArrayList<Integer> nbCoursParJour;
-    private String moyenneText;
-
+    
     public StatistiquesFenetrePanel() {
     }
 
@@ -58,23 +55,20 @@ public class StatistiquesFenetrePanel extends JPanel implements HoraireControleu
         statistiquePanel.setPreferredSize(new Dimension(800, 800));
         statistiquePanel.setLayout(new GridLayout(0, 3));
 
-        lundiLabel = new JLabel("Lundi : ");
-        mardiLabel = new JLabel("Mardi : ");
-        mercrediLabel = new JLabel("Mercredi : ");
-        jeudiLabel = new JLabel("Jeudi : ");
-        vendrediLabel = new JLabel("Vendredi : ");
-        samediLabel = new JLabel("Samedi : ");
-        moyenneLabel = new JLabel("Moyenne : ");
+
 
         coursParJourPanel = new CoursParJourPanel(mainWindow, jourModes);
         maxCoursParJourPanel = new MaxCoursParJourPanel(mainWindow, jourModes);
         indiceCongestionPanel = new IndiceCongestionPanel(mainWindow, jourModes);
         moyenCoursParJourPanel = new MoyenCoursParJourPanel(mainWindow, jourModes);
-
+        indiceCovoituragePanel = new IndiceCovoituragePanel(mainWindow, jourModes);
+        
+        
         statistiquePanel.add(coursParJourPanel);
         statistiquePanel.add(indiceCongestionPanel);
         statistiquePanel.add(moyenCoursParJourPanel);
         statistiquePanel.add(maxCoursParJourPanel);
+        statistiquePanel.add(indiceCovoituragePanel);
 
         add(statistiquePanel);
 

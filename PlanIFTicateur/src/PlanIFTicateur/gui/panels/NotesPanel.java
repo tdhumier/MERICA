@@ -87,15 +87,13 @@ public class NotesPanel extends JPanel {
 
             if (table.getModel().getValueAt(row, column) != null) {
                 cell = table.getModel().getValueAt(row, column).toString();
-                System.out.println(table.getSelectedRow() + " " + table.getRowHeight(row));
-
+              
                 if (nbLigne * (getPreferredSize().height + 4) < table.getRowHeight(row) && table.getRowHeight(row) > 20) {
                     table.setRowHeight(row, 20);
                     nbLigne = 1;
                 }
             }
 
-            System.out.println(getFont().getSize() + "   " + getPreferredSize().height);
             if (table.getRowHeight(row) < nbLigne * (getPreferredSize().height - 5) && table.getModel().getValueAt(row, column) != "") {
                 table.setRowHeight(row, 20 + table.getRowHeight(row));
                 nbLigne++;

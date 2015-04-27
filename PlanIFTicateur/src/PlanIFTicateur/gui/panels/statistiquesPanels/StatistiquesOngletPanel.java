@@ -124,11 +124,13 @@ public class StatistiquesOngletPanel extends JPanel implements HoraireControleur
 
             mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, labelModes, nbMoyenCoursParJour, " Cours");
             repaint();
-        } else if (comboBox.getSelectedItem() == "Indice de covoiturage") {
+        } 
+        else if (comboBox.getSelectedItem() == "Indice de covoiturage") {
             ArrayList<Float> indiceCovoiturage = new ArrayList<Float>();
-
+            float test;
             for (int i = 1; i < 7; i++) {
-                indiceCovoiturage.add(mainWindow.controleur.getIndiceCovoiturage(listeGrilleCheminement, i));
+                test = mainWindow.controleur.getIndiceCovoiturage(listeGrilleCheminement, i);
+                indiceCovoiturage.add(test);
             }
             mainWindow.controleur.getHoraire().getStatistiques().modificationFloatLabel(jourModes, labelModes, indiceCovoiturage, " %");
 

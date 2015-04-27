@@ -74,5 +74,6 @@ public class MousePositionHelper {
         int yCase = (y - yo) / dimensionsCase.height + 1;
         return ((yCase - 1) * dimensionsCase.height + yo);
     }
-
+    
+ 
 }

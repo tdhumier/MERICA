@@ -10,6 +10,7 @@ import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
 import PlanIFTicateur.domaine.conflit.Conflit;
 import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -203,5 +204,10 @@ public class HoraireActiviteControleur {
         for (HoraireControleurObserveur observer : observers) {
             observer.notifyUpdatedItems();
         }
+    }
+    public void planificationAutomatique(MainWindow mainWindow)
+    {
+       PlanificationAutomatique planif = new PlanificationAutomatique(mainWindow);
+       planif.genereAutomatique();
     }
 }

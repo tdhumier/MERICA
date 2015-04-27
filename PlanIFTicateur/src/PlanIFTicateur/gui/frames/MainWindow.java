@@ -74,6 +74,7 @@ public class MainWindow extends javax.swing.JFrame {
         boutonTopPanel = new javax.swing.JPanel(new FlowLayout(FlowLayout.LEFT));
         selecteurSession = new javax.swing.JComboBox();
         verificationAutoBouton = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
         statistiquesBouton = new javax.swing.JButton();
         exportBouton = new javax.swing.JButton();
         reinitialiserBouton = new javax.swing.JButton();
@@ -126,6 +127,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
         boutonTopPanel.add(verificationAutoBouton);
 
+        jButton1.setText("Planification Automatique");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        boutonTopPanel.add(jButton1);
+
         statistiquesBouton.setText("Statistiques");
         statistiquesBouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +151,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         boutonTopPanel.add(exportBouton);
 
-        reinitialiserBouton.setText("Rénitialiser");
+        reinitialiserBouton.setText("Réinitialiser");
         reinitialiserBouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reinitialiserBoutonActionPerformed(evt);
@@ -170,7 +179,7 @@ public class MainWindow extends javax.swing.JFrame {
         horairePanel.setLayout(horairePanelLayout);
         horairePanelLayout.setHorizontalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGap(0, 765, Short.MAX_VALUE)
         );
         horairePanelLayout.setVerticalGroup(
             horairePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +196,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuFichier.setText("Fichier");
 
-        nouveauMenuItem.setText("Nouveau");
+        nouveauMenuItem.setText("Ouvrir");
         nouveauMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nouveauMenuItemActionPerformed(evt);
@@ -237,7 +246,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,6 +399,12 @@ public class MainWindow extends javax.swing.JFrame {
         controleur.desassignerActivites();
     }//GEN-LAST:event_reinitialiserBoutonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        controleur.planificationAutomatique(this);
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -438,6 +453,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem exportMenuItem;
     public PlanIFTicateur.gui.panels.HorairePanel horairePanel;
     private javax.swing.JScrollPane horaireScrollPane;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private java.awt.List list1;
