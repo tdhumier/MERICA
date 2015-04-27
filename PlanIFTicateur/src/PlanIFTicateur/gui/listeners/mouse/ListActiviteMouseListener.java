@@ -81,8 +81,8 @@ public class ListActiviteMouseListener extends MouseAdapter implements MouseMoti
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) {
             activiteSelectionnee.setCouleurSelectionner();
-            mainWindow.controleur.reinitColor();
-            mainWindow.controleur.setActiviteClic(activiteSelectionnee);
+            mainWindow.controleur.getHoraire().reinitColor();
+            mainWindow.controleur.getHoraire().setActiviteClic(activiteSelectionnee);
             
         }
         if (e.getClickCount() == 2) {

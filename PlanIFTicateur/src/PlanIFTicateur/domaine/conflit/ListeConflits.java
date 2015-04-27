@@ -34,4 +34,8 @@ public class ListeConflits {
             listeConflits.remove(conflit.get());
         }
     }
+    
+    public void clear(){
+        listeConflits.clear();
+    }
 }

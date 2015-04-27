@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 public class HoraireActiviteControleur {
 
     private Horaire horaire;
-    private Activite activiteClic;
     private List<HoraireControleurObserveur> observers;
     private String path;
 
@@ -52,15 +51,6 @@ public class HoraireActiviteControleur {
         return horaire;
     }
 
-    public void reinitColor(){
-        if (activiteClic != null){
-            activiteClic.reinitCouleur();
-        }
-    }
-    
-    public void setActiviteClic(Activite a){
-        activiteClic = a;
-    }
     public String getPath() {
         return path;
     }
@@ -114,6 +104,7 @@ public class HoraireActiviteControleur {
 
     public void desassignerActivites() {
         horaire.desassignerActivites();
+        horaire.getListeConflits().clear();
         notifyObserversForUpdatedItems();
     }
 
