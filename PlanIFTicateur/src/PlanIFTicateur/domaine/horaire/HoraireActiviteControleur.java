@@ -105,6 +105,7 @@ public class HoraireActiviteControleur {
 
     public void desassignerActivites() {
         horaire.desassignerActivites();
+        horaire.getListeConflits().clear();
         notifyObserversForUpdatedItems();
     }
 

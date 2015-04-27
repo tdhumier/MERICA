@@ -34,4 +34,19 @@ public class CoursClasse extends Activite {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public void setCouleurSelectionner() {
+        this.couleur = Color.gray; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reinitCouleur() {
+        this.couleur = new Color(255, 0, 0, 50);    
+    }
+
+    @Override
+    public Activite clone() {
+       return this.clone();
+    }
 }

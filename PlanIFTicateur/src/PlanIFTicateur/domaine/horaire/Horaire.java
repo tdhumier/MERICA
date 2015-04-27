@@ -30,6 +30,7 @@ public class Horaire {
     private ListeGrillesCheminement grillesCheminement;
     private ListeConflits listeConflits;
     private Statistique statistique;
+    private Activite activiteClic;
 
     public Horaire() {
         this.listeActivite = new ListeActivites();
@@ -51,6 +52,16 @@ public class Horaire {
         return listeActivite;
     }
 
+     public void reinitColor(){
+        if (activiteClic != null){
+            activiteClic.reinitCouleur();
+        }
+    }
+    
+    public void setActiviteClic(Activite a){
+        activiteClic = a;
+    }
+    
     public Statistique getStatistiques() {
         return statistique;
     }
@@ -78,7 +89,9 @@ public class Horaire {
     public void deplacerActivite(Activite activite, Point point, double heure, int jour) {
         activite.deplacerActivite(point, heure, jour);
         activite.setIsSelected(false);
-        verifierConflits(activite);
+        if (heure != 0.0){
+            verifierConflits(activite);
+        }
     }
 
     public void deplacerActiviteAvecVerification(Activite activite, Point point, double heure, int jour, Dimension dimension) {
@@ -94,7 +107,9 @@ public class Horaire {
             resetPosition(activite, dimension);
         }
         activite.setIsSelected(false);
-        verifierConflits(activite);
+         if (heure != 0.0){
+            verifierConflits(activite);
+        }
     }
 
     public void verifierConflits(Activite activite) {
