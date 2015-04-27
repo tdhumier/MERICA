@@ -42,7 +42,6 @@ public class ListeActivites {
                 act = activite;
             }
         }
-
         return act;
     }
 
@@ -54,6 +53,10 @@ public class ListeActivites {
             }
         }
         return activites;
+    }
+    public Activite getActivite(int i)
+    {
+        return listeActivites.get(i);
     }
 
     public List<Activite> getActivitesNonAssignees() {

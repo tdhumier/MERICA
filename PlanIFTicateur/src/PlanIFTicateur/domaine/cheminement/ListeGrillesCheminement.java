@@ -6,6 +6,7 @@
 package PlanIFTicateur.domaine.cheminement;
 
 import PlanIFTicateur.domaine.activite.Activite;
+import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.horaire.Horaire;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,17 +35,53 @@ public class ListeGrillesCheminement {
     }
 
     public int nbActiviteDansGrilleCheminement(Horaire horaire, GrilleCheminement grilleCheminement, int jour) {
+       
         int nbCours = 0;
         List<Activite> grilleActivite = grilleCheminement.getListeActivites();
         List<Activite> listeActivite = horaire.getListeActivite().getActivitesByJour(jour);
-
-        for (Activite listeActivite1 : listeActivite) {
-            nbCours = grilleActivite.stream().filter((grilleActivite1) -> (listeActivite1.getCode().equals(grilleActivite1.getCode()))).map((_item) -> 1).reduce(nbCours, Integer::sum);
+        ListeActivites activiteCompteur = new ListeActivites();
+        
+        for (Activite listeActivite1 : listeActivite) 
+        { 
+            for (Activite activite : grilleActivite) 
+            {  
+                if (activite.getCode().equals(listeActivite1.getCode())) {
+                    nbCours++;
+                }  
+            }
         }
-
+           if(activiteGrilleIdentique(grilleActivite) || activiteHoraireIdentique(listeActivite))
+               nbCours = nbCours -1;
+   
         return nbCours;
     }
 
+    public boolean activiteGrilleIdentique(List<Activite> grilleActivite)
+    {
+        boolean identique = false;
+        
+        for (Activite activite1 : grilleActivite) {
+            for (Activite activite2 : grilleActivite) {
+                if(!activite1.equals(activite2) && activite1.getCode().equals(activite2.getCode()))
+                    identique = true;
+            }
+        }
+        return identique;
+    }
+    
+    public boolean activiteHoraireIdentique(List<Activite> grilleActivite)
+    {
+        boolean identique = false;
+        
+        for (Activite activite1 : grilleActivite) {
+            for (Activite activite2 : grilleActivite) {
+                if(!activite1.equals(activite2) && activite1.getCode().equals(activite2.getCode()))
+                    identique = true;
+            }
+        }
+        return identique;
+    }
+    
     public int size() {
         return grillesCheminement.size();
     }

@@ -145,6 +145,7 @@ public class ActivitePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 modifierValeursActivite();
+                mainWindow.controleur.getHoraire().verifierConflits(activite);
                 mainWindow.controleur.notifyObserversForUpdatedItems();
                 activiteWindow.dispose();
                 }

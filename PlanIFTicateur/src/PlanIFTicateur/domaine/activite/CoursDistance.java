@@ -36,7 +36,7 @@ public class CoursDistance extends Activite {
 
       @Override
     public void setCouleurSelectionner() {
-        this.couleur = Color.gray; //To change body of generated methods, choose Tools | Templates.
+        this.couleur = new Color(192, 192, 192, 180); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -25,7 +25,6 @@ public class PlanificationAutomatique
     private MousePositionHelper mousePositionHelper;
     private List<Activite> listeActivitesNonAssignees;
     private Dimension dimensionCase;
-    private Dimension dimensionActivite;
     private  Point position;
     private int jour;
     private double heure;
@@ -33,7 +32,6 @@ public class PlanificationAutomatique
     public PlanificationAutomatique(MainWindow mainWindow)
     {
       this.mainWindow = mainWindow;
-      //mousePositionHelper = new MousePositionHelper(mainWindow.horairePanel.getDimensionsCase());
       listeActivitesNonAssignees = mainWindow.controleur.getHoraire().getListeActivite().getActivitesNonAssignees();
       dimensionCase = mainWindow.horairePanel.getDimensionsCase();
     }
@@ -59,14 +57,13 @@ public class PlanificationAutomatique
             }
             if(compteur == 168)
                 JOptionPane.showMessageDialog(null, "Impossible d'ajouté ce cours sans créer de conflit.");
-            
+                
             compteur = 0;
         }
     }
     
     public Point getPosition(double heure, int jour)
     {
-        
         int xDepart = 80;
         int xCase = ((int)(heure*2 - 16) * dimensionCase.width) + xDepart;
         
@@ -81,19 +78,17 @@ public class PlanificationAutomatique
     public void avancerPosition()
     {
         if(heure < 22)
-        {
             heure = heure + 0.5;
-            position = getPosition(heure, jour);
-        }
         else
         {
            if(jour < 7)
-                jour = jour + 1; 
+                jour++; 
            else
-               jour = 1;
-               
+               jour = 1; 
+           
             heure = 8;
-            position = getPosition(heure, jour);
         }
+        position = getPosition(heure, jour);
     }
+   
 }

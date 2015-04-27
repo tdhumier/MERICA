@@ -68,7 +68,6 @@ public class HoraireActiviteControleur {
             if (activiteItem != activite){
                 if (activiteItem.getPoint().y == point.y && ((activiteItem.getHeureDebut() <= heure && activiteItem.getHeureDebut() + activiteItem.getDuree() > heure) || (heure <= activiteItem.getHeureDebut() && activiteItem.getHeureDebut() < heure + activite.getDuree()))) {
                     point.y = point.y + activite.getHeight();
-                    System.out.println(activite.getCode());
                     int positionTemoin = point.y - 20;
                     if ((positionTemoin / 8) % 16 == 0) {
                         return false;

@@ -13,7 +13,7 @@ import java.awt.Color;
  */
 public class CoursHorsDep extends Activite {
 
-    private Color couleur = new Color(0, 0, 255, 50);
+    private Color couleur = new Color(50, 255, 0, 50);
     private String type;
 
     public CoursHorsDep(String code, String section, String titre, String professeur, String type, double duree, double heureDebutMin, double heureFinMax, int jour, double heureDebut) {
@@ -36,12 +36,12 @@ public class CoursHorsDep extends Activite {
 
       @Override
     public void setCouleurSelectionner() {
-        this.couleur = Color.gray; //To change body of generated methods, choose Tools | Templates.
+        this.couleur = new Color(192, 192, 192, 180); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void reinitCouleur() {
-        this.couleur = new Color(0, 0, 255, 50);    
+        this.couleur = new Color(50, 255, 0, 50);    
     }
 
 }

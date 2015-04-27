@@ -45,7 +45,7 @@ public class MaxCoursParJourPanel extends JPanel implements HoraireControleurObs
     }
 
     private void buildUp() {
-        maxCoursParJourTitre = new JTextArea("Nombre maximal de cours \n par jours");
+        maxCoursParJourTitre = new JTextArea("Nombre maximal de cours \n par jour");
         maxCoursParJourTitre.setEditable(false);
         maxCoursParJourTitre.setBackground(this.getBackground());
         maxCoursParJourTitre.setFont(new Font("Helvetica", Font.BOLD, 16));

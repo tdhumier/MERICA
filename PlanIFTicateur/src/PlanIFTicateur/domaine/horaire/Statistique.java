@@ -48,10 +48,13 @@ public class Statistique {
         int nombreEnCalculation;
 
         for (int i = 0; i < listeGrillesCheminement.size(); i++) {
-            nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour);
+                if(listeGrillesCheminement.getGrillesCheminement(i).getSession().equals(horaire.getSession()))
+                {
+                    nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour);
 
-            if (nombreEnCalculation > nbMaxCoursEtudiantMemeJour) {
-                nbMaxCoursEtudiantMemeJour = nombreEnCalculation;
+                     if (nombreEnCalculation > nbMaxCoursEtudiantMemeJour) {
+                            nbMaxCoursEtudiantMemeJour = nombreEnCalculation;
+                }
             }
         }
 
@@ -85,9 +88,8 @@ public class Statistique {
         if (listeCoursJournee.isEmpty()) {
             return 0;
         }
-        for (int i = 0; i < listeCoursJournee.size(); i++) {
-
-            if (listeCoursJournee.get(i).getHeureDebut() == 8.5) {
+        for (Activite listeCoursJournee1 : listeCoursJournee) {
+            if (listeCoursJournee1.getHeureDebut() == 8.5 && !listeCoursJournee1.getType().equals("À distance")) {
                 compteurCoursDebut++;
             }
         }
@@ -108,7 +110,7 @@ public class Statistique {
 
         int tot = 0;
         int cov = 0;
-        float indice = 0;
+        float indice;
 
         for (GrilleCheminement grilleCheminement : listeGrillesCheminement.getListeGrillesCheminement()) {
             Activite coursLePlusTot = grilleCheminement.getActiviteCommencePlusTotParJour(jour);
