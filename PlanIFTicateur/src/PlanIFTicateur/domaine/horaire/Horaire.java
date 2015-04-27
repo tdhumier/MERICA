@@ -31,6 +31,7 @@ public class Horaire {
     private ListeConflits listeConflits;
     private Statistique statistique;
     private Activite activiteClic;
+    private ArrayList<String> notes;
 
     public Horaire() {
         this.listeActivite = new ListeActivites();
@@ -38,12 +39,18 @@ public class Horaire {
         this.listeConflits = new ListeConflits();
         this.statistique = new Statistique();
         this.valide = true;
+        this.notes = new ArrayList();
     }
 
     public void setSession(String session) {
         this.session = session;
     }
-
+    public void setNotes(ArrayList<String> notes){
+        this.notes = notes;
+    }
+    public ArrayList<String> getNotes(){
+        return notes;
+    }
     public String getSession() {
         return session;
     }

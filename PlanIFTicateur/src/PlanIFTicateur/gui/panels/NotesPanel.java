@@ -5,8 +5,11 @@
  */
 package PlanIFTicateur.gui.panels;
 
+import PlanIFTicateur.domaine.horaire.HoraireControleurObserveur;
+import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -17,17 +20,49 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author Alexandre Rivest
  */
-public class NotesPanel extends JPanel {
+public class NotesPanel extends JPanel implements HoraireControleurObserveur {
 
     private JTable table;
-
+    private MainWindow mainWindow;
     private DefaultTableModel model;
     private String[] nomColonnes;
 
-    public NotesPanel() {
+    public NotesPanel(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
         buildUp();
+        mainWindow.controleur.registerObserver(this);
     }
-
+    
+    public ArrayList<String> toStringList(){
+        ArrayList<String> notes = new ArrayList();
+        for (int i = 1; i < table.getRowCount(); i++){
+            String ligne = "";
+            for (int j = 0; j < table.getColumnCount(); j++){
+                ligne += table.getValueAt(i, j) + ";";  
+            }
+            notes.add(ligne);
+        }
+        return notes;
+    }
+    
+   public void setNotes(ArrayList<String> notes){
+        for (int i = 1; i < notes.size()+1; i++){
+            String ligne = notes.get(i-1);
+            int positionTokenDebut = 0;
+            System.out.println("ligne:" +  ligne);
+            for (int j = 0; j < 4; j++){
+                System.out.println(j);
+                int positionTokenFin = ligne.indexOf(';', positionTokenDebut);
+                
+                System.out.println("bob:" + positionTokenFin);
+                String valeur = ligne.substring(positionTokenDebut, positionTokenFin);
+                if (valeur.compareTo("null") != 0){
+                    table.setValueAt(valeur, i, j);
+                }
+                positionTokenDebut = positionTokenFin + 1;
+            }
+        }
+   }
     private void buildUp() {
 
         nomColonnes = new String[]{"Date", "Cours", "Version", "Description"};
@@ -60,9 +95,15 @@ public class NotesPanel extends JPanel {
         table.setRowHeight(20);
 
         table.getColumnModel().getColumn(3).setCellRenderer(new TableCellLongTextRenderer());
-
+        ArrayList<String> notes = mainWindow.controleur.getHoraire().getNotes();
+        setNotes(notes);
         add(table);
 
+    }
+
+    @Override
+    public void notifyUpdatedItems() {
+        setNotes(mainWindow.controleur.getHoraire().getNotes());
     }
 
     private class TableCellLongTextRenderer extends JTextArea implements TableCellRenderer {

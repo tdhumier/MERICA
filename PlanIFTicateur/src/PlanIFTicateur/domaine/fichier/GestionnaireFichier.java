@@ -8,6 +8,7 @@ package PlanIFTicateur.domaine.fichier;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,5 +42,23 @@ public class GestionnaireFichier {
     public void enregistrerFichier(List<Activite> activites, String fichier) {
         ActiviteDao activiteDao = new ActiviteDao(adresseFichierCOU);
         activiteDao.writeFile(activites, fichier);
+    }
+    
+    public ArrayList<String> getNotes(){
+        String adresseNotes = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".txt";
+        NotesDao notesDao = new NotesDao(adresseNotes);
+        return notesDao.importerNotes();
+    }
+    
+    public void enregisterNotes(ArrayList<String> notes){
+        String adresseNotes = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".txt";
+        NotesDao notesDao = new NotesDao(adresseNotes);
+        notesDao.sauvegarderNotes(notes);
+    }
+    
+    public void enregisterNotes(ArrayList<String> notes, String file){
+        String adresseNotes = file.substring(0, file.length() - 4) + ".txt";
+        NotesDao notesDao = new NotesDao(adresseNotes);
+        notesDao.sauvegarderNotes(notes);
     }
 }

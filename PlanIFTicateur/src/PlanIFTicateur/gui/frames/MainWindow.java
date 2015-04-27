@@ -313,6 +313,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sauvegarderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegarderMenuItemActionPerformed
         controleur.enregistrerFichier(controleur.getActivites());
+        controleur.enregistrerNotes(rightPanel.getNotesPanel().toStringList());
     }//GEN-LAST:event_sauvegarderMenuItemActionPerformed
 
     private void quitterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterMenuItemActionPerformed
@@ -359,6 +360,7 @@ public class MainWindow extends javax.swing.JFrame {
             } else {
                 controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath() + "export.cou");
             }
+            controleur.enregistrerNotes(rightPanel.getNotesPanel().toStringList(), fichier.getAbsolutePath());
         }
     }//GEN-LAST:event_sauvegarderSousMenuItemActionPerformed
 
