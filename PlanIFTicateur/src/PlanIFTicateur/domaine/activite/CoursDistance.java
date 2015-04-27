@@ -44,8 +44,4 @@ public class CoursDistance extends Activite {
         this.couleur = new Color(255, 175, 0, 180);    
     }
 
-    @Override
-    public Activite clone() {
-        return this.clone();
-    }
 }

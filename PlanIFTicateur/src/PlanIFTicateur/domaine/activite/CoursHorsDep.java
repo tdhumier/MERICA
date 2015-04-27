@@ -44,8 +44,4 @@ public class CoursHorsDep extends Activite {
         this.couleur = new Color(0, 0, 255, 50);    
     }
 
-    @Override
-    public Activite clone() {
-        return this.clone();
-    }
 }
