@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,7 +59,7 @@ public class NotesDao {
             }
             notesPW.close();
         } catch (Exception e){
-            System.out.println("fuck you");
+            JOptionPane.showMessageDialog(null, "Les notes n'ont pas été sauvegardées!");
         }
     }
 }
