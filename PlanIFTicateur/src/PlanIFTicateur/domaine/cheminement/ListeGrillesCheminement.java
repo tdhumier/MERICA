@@ -6,7 +6,6 @@
 package PlanIFTicateur.domaine.cheminement;
 
 import PlanIFTicateur.domaine.activite.Activite;
-import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.horaire.Horaire;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,19 +38,14 @@ public class ListeGrillesCheminement {
         int nbCours = 0;
         List<Activite> grilleActivite = grilleCheminement.getListeActivites();
         List<Activite> listeActivite = horaire.getListeActivite().getActivitesByJour(jour);
-        ListeActivites activiteCompteur = new ListeActivites();
+        
         
         for (Activite listeActivite1 : listeActivite) 
         { 
-            for (Activite activite : grilleActivite) 
-            {  
-                if (activite.getCode().equals(listeActivite1.getCode())) {
-                    nbCours++;
-                }  
-            }
+            nbCours = grilleActivite.stream().filter((activite) -> (activite.getCode().equals(listeActivite1.getCode()))).map((_item) -> 1).reduce(nbCours, Integer::sum);
         }
-           if(activiteGrilleIdentique(grilleActivite) || activiteHoraireIdentique(listeActivite))
-               nbCours = nbCours -1;
+           /*if(activiteGrilleIdentique(grilleActivite) || activiteHoraireIdentique(listeActivite))
+               nbCours = nbCours -1;*/
    
         return nbCours;
     }

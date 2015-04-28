@@ -33,7 +33,7 @@ public class Statistique {
     }
 
     public ArrayList<Integer> getNbCoursSemaine(Horaire horaire) {
-        coursSemaine = new ArrayList<Integer>();
+        coursSemaine = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
             coursSemaine.add(getNbCoursParJour(horaire, i));
         }
@@ -67,7 +67,7 @@ public class Statistique {
         nbMoyenCoursEtudiantMemeJour = 0;
         for (int i = 0; i < listeGrillesCheminement.size(); i++) {
             nombreEnCalculation = listeGrillesCheminement.nbActiviteDansGrilleCheminement(horaire, listeGrillesCheminement.getGrillesCheminement(i), jour);
-            if (nombreEnCalculation != 0) {
+            if (nombreEnCalculation > 0) {
                 nombreTotalActivites++;
                 nbMoyenCoursEtudiantMemeJour += nombreEnCalculation;
             }
@@ -88,11 +88,7 @@ public class Statistique {
         if (listeCoursJournee.isEmpty()) {
             return 0;
         }
-        for (Activite listeCoursJournee1 : listeCoursJournee) {
-            if (listeCoursJournee1.getHeureDebut() == 8.5 && !listeCoursJournee1.getType().equals("À distance")) {
-                compteurCoursDebut++;
-            }
-        }
+        compteurCoursDebut = listeCoursJournee.stream().filter((listeCoursJournee1) -> (listeCoursJournee1.getHeureDebut() == 8.5 && !listeCoursJournee1.getType().equals("À distance"))).map((_item) -> 1).reduce(compteurCoursDebut, Integer::sum);
         indiceCongestion = (compteurCoursDebut * 100) / listeCoursJournee.size();
 
         return indiceCongestion;
@@ -125,7 +121,11 @@ public class Statistique {
             }
             tot++;
         }
-        indice = ((float) cov / (float) tot) * 100;
+        if(tot != 0)
+            indice = ((float) cov / (float) tot) * 100;
+        else
+            indice = 0;
+        
         return indice;
     }
 
