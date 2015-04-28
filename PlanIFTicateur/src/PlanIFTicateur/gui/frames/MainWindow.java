@@ -294,7 +294,7 @@ public class MainWindow extends javax.swing.JFrame {
             exportBouton.setEnabled(true);
             exportMenuItem.setEnabled(true);
             
-
+            this.rightPanel.getNotesPanel().setNotes(this.controleur.getHoraire().getNotes());
         }
     }//GEN-LAST:event_nouveauMenuItemActionPerformed
 

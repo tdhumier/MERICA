@@ -107,7 +107,8 @@ public class NotesPanel extends JPanel implements HoraireControleurObserveur {
 
     @Override
     public void notifyUpdatedItems() {
-        setNotes(mainWindow.controleur.getHoraire().getNotes());
+      
+       // setNotes(mainWindow.controleur.getHoraire().getNotes());
     }
 
     private class TableCellLongTextRenderer extends JTextArea implements TableCellRenderer {

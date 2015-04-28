@@ -76,5 +76,9 @@ public class RightPanel extends JPanel implements Serializable {
     public DetailsActivitePanel getDetailsActivitePanel() {
         return detailsActivitePanel;
     }
+    public JPanel getNotePanel()
+    {
+        return notesPanel;
+    }
 
 }
