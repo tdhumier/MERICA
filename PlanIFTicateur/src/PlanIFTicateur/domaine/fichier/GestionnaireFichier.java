@@ -8,8 +8,12 @@ package PlanIFTicateur.domaine.fichier;
 import PlanIFTicateur.domaine.activite.Activite;
 import PlanIFTicateur.domaine.activite.ListeActivites;
 import PlanIFTicateur.domaine.cheminement.ListeGrillesCheminement;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
@@ -45,20 +49,29 @@ public class GestionnaireFichier {
     }
     
     public ArrayList<String> getNotes(){
-        String adresseNotes = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".txt";
+        String adresseNotes = adresseFichierCOU.substring(0, adresseFichierCOU.length()-4) + ".txt";
         NotesDao notesDao = new NotesDao(adresseNotes);
         return notesDao.importerNotes();
     }
     
     public void enregisterNotes(ArrayList<String> notes){
-        String adresseNotes = adresseFichierCOU.substring(0, adresseFichierCOU.length() - 4) + ".txt";
+        String adresseNotes = adresseFichierCOU.substring(0, adresseFichierCOU.length()-4) + ".txt";
         NotesDao notesDao = new NotesDao(adresseNotes);
         notesDao.sauvegarderNotes(notes);
     }
     
     public void enregisterNotes(ArrayList<String> notes, String file){
-        String adresseNotes = file.substring(0, file.length() - 4) + ".txt";
+        String adresseNotes = file/*.substring(0, file.length()-4)*/ + ".txt";
         NotesDao notesDao = new NotesDao(adresseNotes);
         notesDao.sauvegarderNotes(notes);
+    }
+    
+    public void copierCHE(String fichier, String path) throws IOException
+    {
+        String adresseCHE = path.substring(0, path.length()-4) + ".CHE";
+        File fileDebut = new File(adresseCHE);
+        String adresseOut = fichier + ".CHE";
+        File fileFin = new File(adresseOut);
+        Files.copy(fileDebut.toPath(), fileFin.toPath());
     }
 }

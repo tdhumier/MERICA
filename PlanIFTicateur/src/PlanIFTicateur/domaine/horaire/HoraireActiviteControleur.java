@@ -13,6 +13,7 @@ import PlanIFTicateur.domaine.fichier.GestionnaireFichier;
 import PlanIFTicateur.gui.frames.MainWindow;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -166,6 +167,12 @@ public class HoraireActiviteControleur {
         GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(path);
         gestionnaireFichier.enregistrerFichier(activites, file);
     }
+    
+    public void copierCHE(String fichier) throws IOException
+    {
+        GestionnaireFichier gestionnaireFichier = new GestionnaireFichier(fichier);
+        gestionnaireFichier.copierCHE(fichier, getPath());
+    }
 
     public void setCoordonneesActivite(Dimension dimension) {
         horaire.getListeActivite().setCoordonneesActivites(dimension);
@@ -228,4 +235,5 @@ public class HoraireActiviteControleur {
        PlanificationAutomatique planif = new PlanificationAutomatique(mainWindow);
        planif.genereAutomatique();
     }
+    
 }

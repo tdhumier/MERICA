@@ -266,10 +266,12 @@ public class MainWindow extends javax.swing.JFrame {
         if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
 
+            String[] choixSession = {"Automne", "Été", "Hiver"};
+            String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
+                
             if (controleur.getHoraire().getSession() == null || controleur.getHoraire().getSession().equals("")) {
-                String[] choixSession = {"Automne", "Été", "Hiver"};
-                String session = (String) JOptionPane.showInputDialog(null, "Choisir une session", "", JOptionPane.QUESTION_MESSAGE, null, choixSession, choixSession[0]);
-                switch (session) {
+            
+               switch (session) {
                     case "Automne":
                         controleur.getHoraire().setSession("A");
                         selecteurSession.setSelectedIndex(2);
@@ -346,10 +348,9 @@ public class MainWindow extends javax.swing.JFrame {
         dialogue.setDialogTitle("Enregistrer Sous");
         dialogue.setApproveButtonText("Enregistrer");
 
-        File fichier;
+        File fichier; //Nouvelle emplacement
         if (dialogue.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             fichier = dialogue.getSelectedFile();
-
             String fileName = fichier.getName();
             int length = fileName.length();
             String extension = fileName.substring(length - 4, length);
@@ -363,7 +364,17 @@ public class MainWindow extends javax.swing.JFrame {
             } else {
                 controleur.enregistrerFichier(controleur.getActivites(), fichier.getAbsolutePath() + "export.cou");
             }
+            
+           
             controleur.enregistrerNotes(rightPanel.getNotesPanel().toStringList(), fichier.getAbsolutePath());
+            
+            
+            try {
+                controleur.copierCHE(fichier.getAbsolutePath());
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_sauvegarderSousMenuItemActionPerformed
 
